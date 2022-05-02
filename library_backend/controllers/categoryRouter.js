@@ -27,9 +27,9 @@ categoryRouter.post('/categories', async (req, res, next) => {
   try {
     const { categoryName } = req.body;
     await categoryModel.create({ categoryName });
-    res.send({ succes: 'category  created successfully' });
+    res.send({ succes: 'category created successfully' });
   } catch (err) {
-    next(new customError(522, 'Server_Error', 'something went wrong'));
+    next(err);
   }
 });
 categoryRouter.patch('/categories/:id', async (req, res, next) => {
@@ -38,6 +38,6 @@ categoryRouter.patch('/categories/:id', async (req, res, next) => {
     const { categoryName } = req.params;
     await categoryModel.findByIdAndUpdate(_id, { $set: { categoryName } });
   } catch (err) {
-    next(new customError(522, 'Server_Error', 'something went wrong'));
+    next(err);
   }
 });
