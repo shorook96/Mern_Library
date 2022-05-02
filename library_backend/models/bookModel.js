@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
 const bookSchema = mongoose.Schema({
-  firstname: String,
-  lastname: String,
-  DOB: Date,
+  bookname: String,
   rating: Number,
+  photo: String,
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'category',
