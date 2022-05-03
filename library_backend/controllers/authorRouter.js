@@ -2,7 +2,6 @@ const express = require('express');
 const authorRouter = express.Router();
 const customError = require('../utils/customError');
 const authorModel = require('../models/authorModel');
-
 authorRouter.get('/authors', async (req, res, next) => {
   try {
     const authors = await authorModel.find({});
@@ -14,7 +13,6 @@ authorRouter.get('/authors', async (req, res, next) => {
 authorRouter.get('/authors/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
-
     const author = await authorModel.findById(id);
     if (!author) throw new customError(422, 'ID_NOT_FOUND', 'NO_SUCH_AUTHOR');
     res.send(author);
