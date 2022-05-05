@@ -1,9 +1,10 @@
 import './App.css';
-import { Routers } from 'react-router-dom';
+// import { Routers, Router } from 'react-router-dom';
+import NavComponent from './components.js/NavComponent';
 function App() {
   return (
     <div className="App">
-      <Routers></Routers>
+      <NavComponent />
     </div>
   );
 }
