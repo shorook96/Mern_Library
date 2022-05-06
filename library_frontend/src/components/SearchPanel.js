@@ -4,11 +4,11 @@ import React from 'react';
 const SearchPanel = () => {
   return (
     <>
-      <form className=" input-group">
+      <form className="input-group">
         <input
           type="search"
-          className="form-control form-rounded w-25"
-          placeholder="Type query"
+          className="form-control form-rounded "
+          placeholder="Search...."
           aria-label="Search"
         />
       </form>
