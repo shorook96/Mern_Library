@@ -1,31 +1,47 @@
 import React from 'react';
-import { Navbar, Container, NavDropdown, Nav } from 'react-bootstrap';
+import { Navbar, Container, Nav, Image } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+import SearchPanel from './SearchPanel';
+import UserLogoComponent from './UserLogoComponent';
+import booklogo from '../assets/images/booklogo.jpg';
+
 const NavComponent = () => {
   return (
     <>
-      <Navbar bg="light" expand="lg" className='sticky-top'>
-        <Container>
-          <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar bg="dark" variant="dark" expand="lg" className="navbar fixed-top">
+        <Container className="d-flex  align-content-around">
+          <LinkContainer to="">
+            <Navbar.Brand>
+              <Image
+                width={70}
+                height={40}
+                roundedCircle
+                className="App-logo "
+                src={booklogo}
+              />
+            </Navbar.Brand>
+          </LinkContainer>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#link">Link</Nav.Link>
-              <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                  Something
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
-                </NavDropdown.Item>
-              </NavDropdown>
+              <LinkContainer to="">
+                <Nav.Link>Home</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="">
+                <Nav.Link>Authors</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="">
+                <Nav.Link>Categories</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="">
+                <Nav.Link>Books</Nav.Link>
+              </LinkContainer>
             </Nav>
+            <Container>
+              <SearchPanel />
+            </Container>
           </Navbar.Collapse>
+          <UserLogoComponent />
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
         </Container>
       </Navbar>
     </>
