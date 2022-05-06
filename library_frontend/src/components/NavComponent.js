@@ -3,7 +3,7 @@ import { Navbar, Container, NavDropdown, Nav } from 'react-bootstrap';
 const NavComponent = () => {
   return (
     <>
-      <Navbar bg="light" expand="lg">
+      <Navbar bg="light" expand="lg" className='sticky-top'>
         <Container>
           <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
