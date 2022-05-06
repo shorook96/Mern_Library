@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .App {
   text-align: center;
 }
@@ -34,8 +33,10 @@
 .font-size {
   font-size: 2rem;
 }
-.btn_logging {
-  border-radius: 2rem;
+@media only screen and (min-width: 600px) {
+  .btn_logging {
+    width: 10rem;
+  }
 }
 .btn_logging:hover {
   transform: scaley(1.5);
@@ -48,13 +49,11 @@
     transform: rotate(360deg);
   }
 }
-=======
 /* ----------------------------------------------- Home Page Style ---------------------------------- */
- .bg {
-  background-image: url("../public/home.jpg");
+.bg {
+  background-image: url('../public/home.jpg');
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
- }
->>>>>>> d6ab78be62607fe581da064ddcfb1afc6648bbd8
+}
