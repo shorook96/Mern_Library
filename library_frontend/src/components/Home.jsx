@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
-import './home.css'
+import '../App.css';
 
 
 export default function HomeComponent(){
