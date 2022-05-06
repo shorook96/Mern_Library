@@ -59,4 +59,5 @@
 }
 .side-bar {
   height: 100vh;
+  overflow: scroll initial;
 }

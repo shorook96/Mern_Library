@@ -44,10 +44,6 @@ const SideBar = () => {
             </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>
-
-        <CDBSidebarFooter className="text-center">
-          <div className="p-3">Sidebar Footer</div>
-        </CDBSidebarFooter>
       </CDBSidebar>
     </div>
   );
