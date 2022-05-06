@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .App {
   text-align: center;
 }
@@ -47,3 +48,13 @@
     transform: rotate(360deg);
   }
 }
+=======
+/* ----------------------------------------------- Home Page Style ---------------------------------- */
+ .bg {
+  background-image: url("../public/home.jpg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+ }
+>>>>>>> d6ab78be62607fe581da064ddcfb1afc6648bbd8

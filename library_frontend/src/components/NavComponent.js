@@ -9,7 +9,7 @@ let loggedIn = true;
 const NavComponent = () => {
   return (
     <>
-      <Navbar bg="dark" variant="dark" expand="lg">
+      <Navbar bg="dark" variant="dark" expand="lg" className="navbar fixed-top">
         <Container className="d-flex  align-content-around">
           <LinkContainer to="">
             <Navbar.Brand>
