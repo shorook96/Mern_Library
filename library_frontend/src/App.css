@@ -33,7 +33,12 @@
 .font-size {
   font-size: 2rem;
 }
-
+.btn_logging {
+  border-radius: 2rem;
+}
+.btn_logging:hover {
+  transform: scaley(1.5);
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
