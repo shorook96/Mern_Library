@@ -4,7 +4,8 @@ import { LinkContainer } from 'react-router-bootstrap';
 import SearchPanel from './SearchPanel';
 import UserLogoComponent from './UserLogoComponent';
 import booklogo from '../assets/images/booklogo.jpg';
-
+import BeforeLogging from './BeforeLogging';
+let loggedIn = true;
 const NavComponent = () => {
   return (
     <>
@@ -36,11 +37,14 @@ const NavComponent = () => {
                 <Nav.Link>Books</Nav.Link>
               </LinkContainer>
             </Nav>
-            <Container>
-              <SearchPanel />
-            </Container>
+            {loggedIn ? (
+              <Container>
+                <SearchPanel />
+              </Container>
+            ) : null}
           </Navbar.Collapse>
-          <UserLogoComponent />
+          {loggedIn ? <UserLogoComponent /> : <BeforeLogging />}
+
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
         </Container>
       </Navbar>
