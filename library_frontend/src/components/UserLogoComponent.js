@@ -1,5 +1,4 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 import userlogo from '../assets/userimages/userlogo.png';
 const UserLogoComponent = () => {
