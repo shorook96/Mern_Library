@@ -1,3 +1,4 @@
+/**************************NavBar****************************/
 .App {
   text-align: center;
 }
@@ -39,7 +40,9 @@
 .navbar {
   width: 100%;
 }
-
+.nav-shadow {
+  box-shadow: 3px 3px 8px 10px #acacac;
+}
 @media only screen and (min-width: 600px) {
   .btn_logging {
     width: 10rem;
@@ -56,6 +59,8 @@
     transform: rotate(360deg);
   }
 }
+/******************************************************/
+
 /* ----------------------------------------------- Home Page Style ---------------------------------- */
 .bg {
   background-image: url('../public/home.jpg');
@@ -63,7 +68,14 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  z-index: 2;
 }
+/******************************************************/
+
+/**************************SideBar****************************/
+
 .side-bar {
   height: 100vh;
+  position: fixed;
+  top: 8rem;
 }

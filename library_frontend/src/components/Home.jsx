@@ -2,13 +2,16 @@ import React from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
 import '../App.css';
 import SideBar from './SideBar';
+let loggedIn = true;
 
 export default function HomeComponent() {
   return (
     <>
-      <div className=" d-flex position-fixed">
-        <SideBar />
-      </div>
+      {loggedIn ? (
+        <div className=" d-flex position-fixed">
+          <SideBar />
+        </div>
+      ) : null}
       <Container className="bg">
         <Row>
           <Col></Col>
