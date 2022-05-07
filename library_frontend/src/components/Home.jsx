@@ -6,12 +6,12 @@ import SideBar from './SideBar';
 export default function HomeComponent() {
   return (
     <>
-      <div className="mt-5 d-flex position-fixed">
+      <div className=" d-flex position-fixed">
         <SideBar />
       </div>
-      <Container>
+      <Container className="bg">
         <Row>
-          <Col sm={12} md={12} className="bg"></Col>
+          <Col></Col>
         </Row>
       </Container>
     </>

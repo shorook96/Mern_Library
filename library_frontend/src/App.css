@@ -33,6 +33,13 @@
 .font-size {
   font-size: 2rem;
 }
+.btn-logOut {
+  height: 5rem;
+}
+.navbar {
+  width: 100%;
+}
+
 @media only screen and (min-width: 600px) {
   .btn_logging {
     width: 10rem;
@@ -59,5 +66,4 @@
 }
 .side-bar {
   height: 100vh;
-  overflow: scroll initial;
 }

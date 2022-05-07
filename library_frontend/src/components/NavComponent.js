@@ -9,8 +9,8 @@ let loggedIn = true;
 const NavComponent = () => {
   return (
     <>
-      <Navbar bg="dark" variant="dark" expand="lg" className="navbar fixed-top">
-        <Container className="d-flex  align-content-around">
+      <Navbar bg="dark" variant="dark" expand="lg" className=" sticky-top ">
+        <div className="d-flex  align-content-around navbar">
           <LinkContainer to="">
             <Navbar.Brand>
               <Image
@@ -45,7 +45,7 @@ const NavComponent = () => {
           </Navbar.Collapse>
           {loggedIn ? <UserLogoComponent /> : <BeforeLogging />}
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        </Container>
+        </div>
       </Navbar>
     </>
   );
