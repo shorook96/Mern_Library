@@ -41,7 +41,7 @@
   width: 100%;
 }
 .nav-shadow {
-  box-shadow: 3px 3px 8px 10px #acacac;
+  box-shadow: 2px 2px 5px 8px #ededed;
 }
 @media only screen and (min-width: 600px) {
   .btn_logging {
@@ -68,7 +68,6 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  z-index: 2;
 }
 /******************************************************/
 
@@ -76,6 +75,7 @@
 
 .side-bar {
   height: 100vh;
-  position: fixed;
-  top: 8rem;
+}
+.side-bar-hover:hover {
+  color: rgb(236, 236, 75);
 }

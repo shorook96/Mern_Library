@@ -5,7 +5,7 @@ import SearchPanel from './SearchPanel';
 import UserLogoComponent from './UserLogoComponent';
 import booklogo from '../assets/images/booklogo.jpg';
 import BeforeLogging from './BeforeLogging';
-let loggedIn = true;
+let loggedIn = false;
 const NavComponent = () => {
   return (
     <>
@@ -13,7 +13,7 @@ const NavComponent = () => {
         bg="dark"
         variant="dark"
         expand="lg"
-        className=" sticky-top mb-3 nav-shadow  "
+        className=" sticky-top nav-shadow  "
       >
         <div className="d-flex  align-content-around navbar">
           <LinkContainer to="">

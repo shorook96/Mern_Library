@@ -12,27 +12,31 @@ const SideBar = () => {
     <div className="d-flex side-bar">
       <CDBSidebar backgroundColor="#333">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
-          <Link to="/" className="text-decoration-none text-white">
+          <Link to="/" className="text-decoration-none text-white ">
             Home
           </Link>
         </CDBSidebarHeader>
 
         <CDBSidebarContent>
           <CDBSidebarMenu>
-            <NavLink to="/">
+            <NavLink to="/" className="side-bar-hover">
               <CDBSidebarMenuItem icon="fa-solid fa-book-bookmark" title="All">
                 All
               </CDBSidebarMenuItem>
             </NavLink>
-            <NavLink to="/" title="Read">
+            <NavLink to="/" title="Read" className="side-bar-hover">
               <CDBSidebarMenuItem icon="book">Read</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink to="/" title="Currently Reading">
+            <NavLink
+              to="/"
+              title="Currently Reading"
+              className="side-bar-hover"
+            >
               <CDBSidebarMenuItem icon="fa-solid fa-book-open-reader">
                 Currently Reading
               </CDBSidebarMenuItem>
             </NavLink>
-            <NavLink to="/" title="Want To Read">
+            <NavLink to="/" title="Want To Read" className="side-bar-hover">
               <CDBSidebarMenuItem icon="fa-solid fa-book-open">
                 Want To Read
               </CDBSidebarMenuItem>
