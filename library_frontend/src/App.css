@@ -1,4 +1,5 @@
 /**************************NavBar****************************/
+
 .App {
   text-align: center;
 }
@@ -59,17 +60,6 @@
     transform: rotate(360deg);
   }
 }
-/******************************************************/
-
-/* ----------------------------------------------- Home Page Style ---------------------------------- */
-.bg {
-  background-image: url('../public/home.jpg');
-  height: 100vh;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-/******************************************************/
 
 /**************************SideBar****************************/
 
@@ -78,4 +68,14 @@
 }
 .side-bar-hover:hover {
   color: rgb(236, 236, 75);
+}
+
+
+/*********************************** forms *****************************/
+.form-control {
+  margin-bottom: 20px;
+}
+
+.error {
+  color: red;
 }
