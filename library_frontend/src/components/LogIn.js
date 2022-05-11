@@ -39,10 +39,18 @@ const LogIn = ({ clicked, handleLogInClose }) => {
       <Modal.Body>
         <Form onSubmit={formik.handleSubmit}>
           <Form.Group className="mb-3">
+
             <Form.Label htmlFor='email'>Email address</Form.Label>
             <Form.Control type="email" id='email' name='email' onChange={formik.handleChange} value={formik.values.email} onBlur={formik.handleBlur} placeholder="name@example.com" />
             {formik.touched.email && formik.errors.email ? <div className='error'>{formik.errors.email}</div> : null}
-        
+
+            <Form.Label>Email address</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="name@example.com"
+              autoFocus
+            />
+
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label htmlFor='password'>Password</Form.Label>
