@@ -6,7 +6,7 @@ const UserLogoComponent = () => {
     <div className="d-flex ">
       <Image roundedCircle src={userlogo} width={80} height={80} />
       <button className="btn btn-outline-success m-2" title="logout">
-        <i class="fa fa-sign-out " aria-hidden="true"></i>
+        <i className="fa fa-sign-out " aria-hidden="true"></i>
       </button>
     </div>
   );

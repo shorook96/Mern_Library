@@ -5,11 +5,11 @@ import SearchPanel from './SearchPanel';
 import UserLogoComponent from './UserLogoComponent';
 import booklogo from '../assets/images/booklogo.jpg';
 import BeforeLogging from './BeforeLogging';
-let loggedIn = true;
+let loggedIn = false;
 const NavComponent = () => {
   return (
     <>
-      <Navbar bg="dark" variant="dark" expand="lg" className="navbar fixed-top">
+      <Navbar bg="dark" variant="dark" expand="lg" className="navbar sticky-top mb-3">
         <Container className="d-flex  align-content-around">
           <LinkContainer to="">
             <Navbar.Brand>

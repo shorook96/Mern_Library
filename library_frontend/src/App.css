@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .App {
   text-align: center;
 }
@@ -48,13 +47,55 @@
     transform: rotate(360deg);
   }
 }
-=======
+
 /* ----------------------------------------------- Home Page Style ---------------------------------- */
- .bg {
-  background-image: url("assets/images/2.jpg");
+ .bgHome {
+  /* background-image: url("assets/images/1.jpg");
+  background-color: #363638;
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover; */
+  /* width: 100%; */
  }
->>>>>>> d6ab78be62607fe581da064ddcfb1afc6648bbd8
+.HomeStartImages
+{
+  background-color:#61dafb;
+  /* margin-left: 50%; */
+  display: table-cell;
+  
+  
+}
+.try{
+  /* background-color: blue;
+  width: 50%;
+  padding: 5rem;
+  box-sizing: border-box;
+  display: inline-block; */
+  /* margin:auto; */
+  /* align-items: center; */
+  
+}
+.quote
+{
+  background-color: aquamarine;
+  /* display: inline-block; */
+  display: table-cell;
+  width: 50%;
+  /* float: left; */
+}
+/* .imgRotate{
+  transform: rotateX(deg)
+} */
+
+.book-padding{
+  padding: 2rem;
+}
+
+/* @media only screen and (max-width: 990px) {
+  .book-sm-style {
+    width: 5rem;
+    height: 10rem;
+    padding: 0rem;    
+  }
+} */
