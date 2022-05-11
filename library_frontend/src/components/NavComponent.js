@@ -5,7 +5,7 @@ import SearchPanel from './SearchPanel';
 import UserLogoComponent from './UserLogoComponent';
 import booklogo from '../assets/images/booklogo.jpg';
 import BeforeLogging from './BeforeLogging';
-let loggedIn = false;
+let loggedIn = true;
 const NavComponent = () => {
   return (
     <>

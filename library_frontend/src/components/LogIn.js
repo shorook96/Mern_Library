@@ -10,7 +10,11 @@ const LogIn = ({ clicked, handleLogInClose }) => {
         <Form>
           <Form.Group className="mb-3">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="name@example.com" />
+            <Form.Control
+              type="email"
+              placeholder="name@example.com"
+              autoFocus
+            />
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Password</Form.Label>
