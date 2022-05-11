@@ -1,7 +1,15 @@
 const express = require('express');
 const app = express();
+const cors = require('cors')
 const port = 5000;
-app.use(express.json());
+require('./db');
+const userRouter = require('./models/User/userRouter');
+app.use(cors()) 
+app.use(express.json()); 
+   
+app.use('/user', userRouter)    
+
+
 app.use((err, req, res, next) => {
   if (!err.status) {
     res.status(522).send({ message: 'something went wrong' });

@@ -1,3 +1,5 @@
+/**************************NavBar****************************/
+
 .App {
   text-align: center;
 }
@@ -33,8 +35,19 @@
 .font-size {
   font-size: 2rem;
 }
-.btn_logging {
-  border-radius: 2rem;
+.btn-logOut {
+  height: 5rem;
+}
+.navbar {
+  width: 100%;
+}
+.nav-shadow {
+  box-shadow: 2px 2px 5px 8px #ededed;
+}
+@media only screen and (min-width: 600px) {
+  .btn_logging {
+    width: 10rem;
+  }
 }
 .btn_logging:hover {
   transform: scaley(1.5);
@@ -48,54 +61,21 @@
   }
 }
 
-/* ----------------------------------------------- Home Page Style ---------------------------------- */
- .bgHome {
-  /* background-image: url("assets/images/1.jpg");
-  background-color: #363638;
+/**************************SideBar****************************/
+
+.side-bar {
   height: 100vh;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover; */
-  /* width: 100%; */
- }
-.HomeStartImages
-{
-  background-color:#61dafb;
-  /* margin-left: 50%; */
-  display: table-cell;
-  
-  
 }
-.try{
-  /* background-color: blue;
-  width: 50%;
-  padding: 5rem;
-  box-sizing: border-box;
-  display: inline-block; */
-  /* margin:auto; */
-  /* align-items: center; */
-  
-}
-.quote
-{
-  background-color: aquamarine;
-  /* display: inline-block; */
-  display: table-cell;
-  width: 50%;
-  /* float: left; */
-}
-/* .imgRotate{
-  transform: rotateX(deg)
-} */
-
-.book-padding{
-  padding: 2rem;
+.side-bar-hover:hover {
+  color: rgb(236, 236, 75);
 }
 
-/* @media only screen and (max-width: 990px) {
-  .book-sm-style {
-    width: 5rem;
-    height: 10rem;
-    padding: 0rem;    
-  }
-} */
+
+/*********************************** forms *****************************/
+.form-control {
+  margin-bottom: 20px;
+}
+
+.error {
+  color: red;
+}
