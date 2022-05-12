@@ -2,7 +2,7 @@ const Joi = require('@hapi/joi');
 
 
 const categorySchema = Joi.object({
-    name: Joi.string().max(200).required()
+    categoryName: Joi.string().max(200).required()
 });
 
 
