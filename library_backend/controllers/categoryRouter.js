@@ -3,9 +3,11 @@ const customError = require('../utils/customError');
 const categoryRouter = express.Router();
 const categoryModel = require('../models/categoryModel');
 const {categoryJoiValidator_middleWare, uniqueCategoryNameValidator} = require('./../middle_wares/handling_category_middleware');
+const {adminTokenValidatorMiddleware} = require('./../middle_wares/adminTokenMiddleware_validator');
 const req = require('express/lib/request');
 
 
+categoryRouter.use(adminTokenValidatorMiddleware);
 categoryRouter.use(categoryJoiValidator_middleWare);
 categoryRouter.use(uniqueCategoryNameValidator);
 

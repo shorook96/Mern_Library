@@ -3,6 +3,7 @@ const adminRouter = require('./controllers/adminRouter');
 require('./db');
 const categoryRouter = require('./controllers/categoryRouter');
 const {errorHandling_middleware} = require('./middle_wares/errorHandling_middleware');
+
 const app = express();
 const cors = require('cors')
 const port = 5000;
@@ -12,6 +13,7 @@ app.use(cors())
 app.use(express.json()); 
    
 app.use('/user', userRouter)    
+
 
 
 app.use((err, req, res, next) => {
