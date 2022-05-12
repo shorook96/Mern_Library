@@ -3,9 +3,8 @@ import { Container, Col, Row } from 'react-bootstrap';
 import HomeStartImages from './HomeStartImages';
 import '../App.css';
 import SideBar from './SideBar';
+import HomeAuthorsComponent from './HomeAuthorsComponent';
 let loggedIn = true;
-
-
 
 // export default function HomeComponent(){
 //     return(
@@ -18,17 +17,16 @@ export default function HomeComponent() {
   return (
     <>
       {loggedIn ? (
-        <div className=" d-flex position-fixed">
-          {/* <SideBar /> */}
-        </div>
+        <div className=" d-flex position-fixed">{/* <SideBar /> */}</div>
       ) : null}
       <Container>
         {/* <Row>
           <Col></Col>
         </Row> */}
-        <HomeStartImages/>
+        <HomeStartImages />
+
+        <HomeAuthorsComponent />
       </Container>
     </>
   );
-
 }

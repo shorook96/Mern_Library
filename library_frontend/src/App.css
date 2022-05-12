@@ -70,7 +70,6 @@
   color: rgb(236, 236, 75);
 }
 
-
 /*********************************** forms *****************************/
 .form-control {
   margin-bottom: 20px;
@@ -78,4 +77,22 @@
 
 .error {
   color: red;
+}
+/**************************************HomeAuthors***************/
+.author-container-Home {
+  text-align: center;
+  width: 20rem;
+  height: 4rem;
+}
+
+.author-image-Home-right {
+  float: right;
+  margin-top: -2rem;
+  margin-right: -1rem;
+}
+
+.author-image-Home-left {
+  float: left;
+  margin-top: -2rem;
+  margin-left: -1rem;
 }
