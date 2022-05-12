@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bookSchema = mongoose.Schema({
-  bookname: String,
+  bookName: String,
   rating: Number,
   photo: String,
   category: {
