@@ -2,28 +2,36 @@ const express = require('express');
 const customError = require('../utils/customError');
 const categoryRouter = express.Router();
 const categoryModel = require('../models/categoryModel');
-categoryRouter.get('/categories', async (req, res, next) => {
+const {categoryJoiValidator_middleWare, uniqueCategoryNameValidator} = require('./../middle_wares/handling_category_middleware');
+const req = require('express/lib/request');
+
+
+categoryRouter.use(categoryJoiValidator_middleWare);
+categoryRouter.use(uniqueCategoryNameValidator);
+
+
+categoryRouter.get('/', async (req, res, next) => {
   try {
     const categories = await categoryModel.find({});
     res.send(categories);
   } catch (err) {
-    next(new customError(522, 'Server_Error', 'something went wrong'));
+    next(err);
   }
 });
-categoryRouter.get('/categories/:id', async (req, res, next) => {
+categoryRouter.get('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const category = await categoryModel.findById(id);
+    const category = await categoryModel.findById({_id: id});
     if (!category)
-      throw new customError(422, 'ID_NOT_FOUND', 'NO_SUCH_CATEGORY');
+      throw customError(422, 'ID_NOT_FOUND', 'NO_SUCH_CATEGORY');
     res.send(category);
   } catch (err) {
     next(err);
   }
 });
 
-categoryRouter.post('/categories', async (req, res, next) => {
+categoryRouter.post('/', async (req, res, next) => {
   try {
     const { categoryName } = req.body;
     await categoryModel.create({ categoryName });
@@ -32,13 +40,25 @@ categoryRouter.post('/categories', async (req, res, next) => {
     next(err);
   }
 });
-categoryRouter.patch('/categories/:id', async (req, res, next) => {
+categoryRouter.patch('/:id', async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const { categoryName } = req.params;
-    await categoryModel.findByIdAndUpdate(_id, { $set: { categoryName } });
+    const { id: _id } = req.params;
+    const { categoryName } = req.body;
+    await categoryModel.findByIdAndUpdate({_id}, { $set: { categoryName } });
+    res.status(200).send({success: 'Category Updated successfully'})
   } catch (err) {
     next(err);
   }
 });
+
+categoryRouter.delete('/:id', async (req, res, next) => {
+  const { id: _id } = req.params;
+  try{
+    await categoryModel.deleteOne({_id});
+    res.send({success: 'Category deleted successfully'})
+  }catch(error){
+    next(error);
+  }
+})
+
 module.exports = categoryRouter;
