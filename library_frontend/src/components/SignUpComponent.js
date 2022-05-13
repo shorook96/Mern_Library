@@ -14,17 +14,17 @@ const initialValues ={
 
 const onSubmit = (values,{resetForm}) =>{
   console.log(values)
-  // axios.post('http://localhost:5000/user/signup', values)
-  //       .then(response => {
-  //           console.log(response)
-  //           // this.setState({posts : response.data})
+  axios.post('http://localhost:5000/user/signup', values)
+        .then(response => {
+            console.log(response)
+            
 
-  //       })
-  //       .catch(error => {
-  //           console.log(error)
-  //           // this.setState({errorMsg : "error in retriving data"})
-  //       })
-        // console.log(this.state)
+        })
+        .catch(error => {
+            console.log(error)
+            
+        })
+        
         resetForm({values:""})
         
 }
@@ -35,9 +35,7 @@ const validate =  values =>{
   if (!values.Lname){errors.Lname = 'required'}
   if (!values.email){errors.email = 'required'}
   
-  // else if(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i.test(values.email)){
-  //     errors.email = "invalid email formate"
-  // }
+  
   if (!values.password){errors.password = 'required'}
   if (!values.Rpassword){errors.Rpassword = 'required'}
   // if (!values.img){errors.img = 'required'}

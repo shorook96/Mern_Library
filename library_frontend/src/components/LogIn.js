@@ -1,24 +1,34 @@
 import React from 'react';
 import { Form, Modal, Button } from 'react-bootstrap';
 import { Formik,Field,ErrorMessage,FieldArray,FastField, useFormik} from 'formik'
-
+import axios from 'axios';
 
 const initialValues ={
   email:"",
   password:""
 }
 
-const onSubmit = values =>{
+const onSubmit = (values,{resetForm}) =>{
   console.log(values)
+  axios.post('http://localhost:5000/user/login', values)
+  .then(response => {
+      console.log(response)
+      
+
+  })
+  .catch(error => {
+      console.log(error)
+      
+  })
+
+  resetForm({values:""})
 }
 
 const validate =  values =>{
   let errors = {}
 
   if (!values.email){errors.email = 'required'}
-  // else if(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i.test(values.email)){
-  //     errors.email = "invalid email formate"
-  // }
+  
   if (!values.password){errors.password = 'required'}
   return errors
   
@@ -29,8 +39,7 @@ const LogIn = ({ clicked, handleLogInClose }) => {
     onSubmit,
     validate
   })
-  // console.log(formik.values)
-  // console.log(formik.errors)
+  
   return (
     <Modal show={clicked} onHide={handleLogInClose} backdrop="static" centered>
       <Modal.Header closeButton>
@@ -40,16 +49,10 @@ const LogIn = ({ clicked, handleLogInClose }) => {
         <Form onSubmit={formik.handleSubmit}>
           <Form.Group className="mb-3">
 
-            <Form.Label htmlFor='email'>Email address</Form.Label>
+            <Form.Label htmlFor='email'>Username</Form.Label>
             <Form.Control type="email" id='email' name='email' onChange={formik.handleChange} value={formik.values.email} onBlur={formik.handleBlur} placeholder="name@example.com" />
             {formik.touched.email && formik.errors.email ? <div className='error'>{formik.errors.email}</div> : null}
 
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="name@example.com"
-              autoFocus
-            />
 
           </Form.Group>
           <Form.Group className="mb-3">
