@@ -15,7 +15,7 @@ const NavComponent = () => {
         expand="lg"
         className=" sticky-top nav-shadow  "
       >
-        <div className="d-flex  align-content-around navbar text-center">
+        <div className="d-flex align-content-around navbar text-center">
           <LinkContainer to="">
             <Navbar.Brand>
               <Image

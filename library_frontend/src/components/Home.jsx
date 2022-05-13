@@ -16,17 +16,19 @@ let loggedIn = true;
 export default function HomeComponent() {
   return (
     <>
-      {loggedIn ? (
-        <div className=" d-flex position-fixed">{/* <SideBar /> */}</div>
-      ) : null}
-      <Container>
-        {/* <Row>
-          <Col></Col>
-        </Row> */}
-        <HomeStartImages />
+      <div className="d-flex position-relative">
+        {loggedIn ? (
+          <div>
+            <SideBar />
+          </div>
+        ) : null}
 
-        <HomeAuthorsComponent />
-      </Container>
+        <Container>
+          <HomeStartImages />
+
+          <HomeAuthorsComponent />
+        </Container>
+      </div>
     </>
   );
 }
