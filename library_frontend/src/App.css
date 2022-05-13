@@ -60,7 +60,35 @@
     transform: rotate(360deg);
   }
 }
-
+/***************************Home ***********************************/
+.cover-home {
+  width: 100%;
+  /* background-color: #61dafb; */
+  background-image: url(./assets/images/HomeCover.jpg);
+  background-color: #d1c2c2;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.4;
+  height: 60vh;
+}
+.Header-Title {
+  font-family: Lobster;
+  font-weight: bolder;
+}
+.books-header {
+  padding-top: 10%;
+}
+.book-header-desc {
+  font-size: larger;
+  padding-top: 5%;
+}
+.authors-background-image {
+  background-image: url(./assets/images/AuthorsCover2.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 35rem;
+  height: 35rem;
+}
 /**************************SideBar****************************/
 
 .side-bar {
@@ -81,20 +109,23 @@
 /**************************************HomeAuthors***************/
 .author-container-Home {
   text-align: center;
-  width: 20rem;
-  height: 4rem;
+  width: 100%;
+  height: 5rem;
 }
 
 .author-image-Home-right {
-  float: right;
-  margin-top: -2rem;
-  margin-right: -1rem;
+  /* float: right; */
+  /* margin-top: -2rem;
+  margin-right: -1rem; */
 }
 
 .author-image-Home-left {
-  float: left;
-  margin-top: -2rem;
-  margin-left: -1rem;
+  /* float: left; */
+  /* margin-top: -2rem;
+  margin-left: -1rem; */
+}
+.authors-conten {
+  margin-top: 12%;
 }
 @media only screen and (max-width: 379px) {
   .hide-column {

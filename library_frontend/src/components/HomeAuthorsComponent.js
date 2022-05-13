@@ -6,48 +6,41 @@ import HomeStartImages from './HomeStartImages';
 const HomeAuthorsComponent = () => {
   return (
     <>
-      <Container className="bg-primary ">
+      <Container className=" ">
         <Row>
-          <Col md={7}></Col>
-          <Col md={5} className="bg-secondary">
-            <Row>
-              <Col className="p-3">
-                <AuthorHomePart isImgRight={false} />
-              </Col>
-              <Col className="hide-column"></Col>
-            </Row>
-            <Row>
-              <Col className="hide-column"></Col>
+          <Col
+            md={5}
+            className="bg-secondary rounded-circle authors-background-image"
+          >
+            <Container className="text-center authors-conten">
+              <Row>
+                <Col md={4} className="hide-column"></Col>
 
-              <Col className="p-3">
-                <AuthorHomePart isImgRight={true} />
-              </Col>
-            </Row>
-            <Row>
-              <Col className="p-3">
-                <AuthorHomePart isImgRight={false} />
-              </Col>
-              <Col className="hide-column"></Col>
-            </Row>
-            <Row>
-              <Col className="hide-column"></Col>
-              <Col className="p-3">
-                <AuthorHomePart isImgRight={true} />
-              </Col>
-            </Row>
-            <Row>
-              <Col className="p-3">
-                <AuthorHomePart isImgRight={false} />
-              </Col>
-              <Col className="hide-column"></Col>
-            </Row>
-            <Row>
-              <Col className="hide-column"></Col>
-              <Col className="p-3">
-                <AuthorHomePart isImgRight={true} />
-              </Col>
-            </Row>
+                <Col md={8} className="p-3">
+                  <AuthorHomePart isImgRight={true} />
+                </Col>
+              </Row>
+              <Row>
+                <Col md={8} className="p-3">
+                  <AuthorHomePart isImgRight={false} />
+                </Col>
+                <Col md={4} className="hide-column"></Col>
+              </Row>
+              <Row>
+                <Col md={4} className="hide-column"></Col>
+                <Col md={8} className="p-3">
+                  <AuthorHomePart isImgRight={true} />
+                </Col>
+              </Row>
+              <Row>
+                <Col md={8} className="p-3">
+                  <AuthorHomePart isImgRight={false} />
+                </Col>
+                <Col md={4} className="hide-column"></Col>
+              </Row>
+            </Container>
           </Col>
+          <Col md={7}></Col>
         </Row>
       </Container>
       <HomeStartImages />

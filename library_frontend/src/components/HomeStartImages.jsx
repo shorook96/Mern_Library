@@ -9,35 +9,67 @@ import book5 from '../assets/images/6.png';
 import book6 from '../assets/images/7.png';
 import shelf from '../assets/images/shelf.png';
 
-export default function HomeStartImages(){
-    return(
-          
-        <Container>
-            <Row>
-            
-            <Col md={7} ></Col>
-            <Col md={5} >
-                
-                <Row >
-                <Col sm={12} md={4}  className='text-center'><img src={book1} alt='img1' className='img-fluid'/></Col>
-                <Col sm={12} md={4} className='text-center'><img src={book2} alt='img2' className='img-fluid'/></Col>
-                <Col sm={12} md={4} className='text-center'><img src={book3} alt='img3' className='img-fluid'/></Col>
-                </Row>
-                <Row>
-                <Col   className=' '><img src={shelf} alt='img4' className='img-fluid align-text-top'/></Col>
-                </Row>
-                <Row >
-                <Col sm={12} md={4}  className=' text-center'><img src={book4} alt='img4' className='img-fluid'/></Col>
-                <Col sm={12} md={4} className=' text-center'><img src={book5} alt='img5' className='img-fluid'/></Col>
-                <Col sm={12} md={4} className=' text-center'><img src={book6} alt='img6' className='img-fluid'/></Col>
-                </Row>
-                <Row>
-                <Col ><img src={shelf} alt='img4' className='img-fluid align-text-top'/></Col>
-                </Row>
-                
+export default function HomeStartImages() {
+  return (
+    <Container>
+      <Row>
+        <Col md={7} className="p-5 ">
+          <div className="books-header">
+            <p className="font-weight-bolder Header-Title h1">
+              Top Rated Books
+            </p>
+            <Container className="text-center">
+              <p className="book-header-desc">
+                If you want the best of the best, these six star books won’t
+                disappoint . Here are 6 of all-time favorite books to our reader
+                to read.
+              </p>
+            </Container>
+          </div>
+        </Col>
+        <Col md={5}>
+          <Row>
+            <Col sm={12} md={4} className="text-center">
+              <img src={book1} alt="img1" className="img-fluid" />
             </Col>
-            </Row>
-        </Container>
-    )
+            <Col sm={12} md={4} className="text-center">
+              <img src={book2} alt="img2" className="img-fluid" />
+            </Col>
+            <Col sm={12} md={4} className="text-center">
+              <img src={book3} alt="img3" className="img-fluid" />
+            </Col>
+          </Row>
+          <Row>
+            <Col className=" ">
+              <img
+                src={shelf}
+                alt="img4"
+                className="img-fluid align-text-top"
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col sm={12} md={4} className=" text-center">
+              <img src={book4} alt="img4" className="img-fluid" />
+            </Col>
+            <Col sm={12} md={4} className=" text-center">
+              <img src={book5} alt="img5" className="img-fluid" />
+            </Col>
+            <Col sm={12} md={4} className=" text-center">
+              <img src={book6} alt="img6" className="img-fluid" />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <img
+                src={shelf}
+                alt="img4"
+                className="img-fluid align-text-top"
+              />
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+    </Container>
+  );
 }
-
