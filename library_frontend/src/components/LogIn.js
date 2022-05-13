@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Modal, Button } from 'react-bootstrap';
+
 import { Formik,Field,ErrorMessage,FieldArray,FastField, useFormik} from 'formik'
 import axios from 'axios';
 
@@ -33,13 +34,20 @@ const validate =  values =>{
   return errors
   
 }
+
+
+
+
 const LogIn = ({ clicked, handleLogInClose }) => {
   const formik = useFormik({
     initialValues,
     onSubmit,
+
     validate
   })
-  
+  // console.log(formik.values)
+  // console.log(formik.errors)
+
   return (
     <Modal show={clicked} onHide={handleLogInClose} backdrop="static" centered>
       <Modal.Header closeButton>
@@ -49,27 +57,38 @@ const LogIn = ({ clicked, handleLogInClose }) => {
         <Form onSubmit={formik.handleSubmit}>
           <Form.Group className="mb-3">
 
-            <Form.Label htmlFor='email'>Username</Form.Label>
+
+            <Form.Label htmlFor='email'>Email Address</Form.Label>
             <Form.Control type="email" id='email' name='email' onChange={formik.handleChange} value={formik.values.email} onBlur={formik.handleBlur} placeholder="name@example.com" />
             {formik.touched.email && formik.errors.email ? <div className='error'>{formik.errors.email}</div> : null}
-
-
           </Form.Group>
+
+           
           <Form.Group className="mb-3">
-            <Form.Label htmlFor='password'>Password</Form.Label>
-            <Form.Control type="password" id='password' name='password' onChange={formik.handleChange} value={formik.values.password} onBlur={formik.handleBlur} placeholder="" />
-            {formik.touched.password && formik.errors.password ? <div className='error'>{formik.errors.password}</div> : null}
-                
+            <Form.Label htmlFor="password">Password</Form.Label>
+            <Form.Control
+              type="password"
+              id="password"
+              name="password"
+              onChange={formik.handleChange}
+              value={formik.values.password}
+              onBlur={formik.handleBlur}
+              placeholder=""
+            />
+            {formik.touched.password && formik.errors.password ? (
+              <div className="error">{formik.errors.password}</div>
+            ) : null}
           </Form.Group>
-          <Button type='submit' variant="primary" onClick={handleLogInClose}>
-          LogIn
-        </Button>
+          <Button type="submit" variant="primary" onClick={handleLogInClose}>
+            LogIn
+          </Button>
         </Form>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleLogInClose}>
           Cancel
         </Button>
+
         {/* <Button  variant="primary" onClick={handleLogInClose}>
           LogIn
         </Button> */}
@@ -77,5 +96,4 @@ const LogIn = ({ clicked, handleLogInClose }) => {
     </Modal>
   );
 };
-
 export default LogIn;

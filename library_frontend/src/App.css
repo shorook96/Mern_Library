@@ -96,3 +96,8 @@
   margin-top: -2rem;
   margin-left: -1rem;
 }
+@media only screen and (max-width: 379px) {
+  .hide-column {
+    display: none;
+  }
+}

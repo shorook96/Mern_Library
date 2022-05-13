@@ -14,10 +14,10 @@ const HomeAuthorsComponent = () => {
               <Col className="p-3">
                 <AuthorHomePart isImgRight={false} />
               </Col>
-              <Col className=" d-inline-flex"></Col>
+              <Col className="hide-column"></Col>
             </Row>
             <Row>
-              <Col className="d-inline-flex"></Col>
+              <Col className="hide-column"></Col>
 
               <Col className="p-3">
                 <AuthorHomePart isImgRight={true} />
@@ -27,10 +27,10 @@ const HomeAuthorsComponent = () => {
               <Col className="p-3">
                 <AuthorHomePart isImgRight={false} />
               </Col>
-              <Col className="d-inline-flex"></Col>
+              <Col className="hide-column"></Col>
             </Row>
             <Row>
-              <Col className="d-inline-flex"></Col>
+              <Col className="hide-column"></Col>
               <Col className="p-3">
                 <AuthorHomePart isImgRight={true} />
               </Col>
@@ -39,10 +39,10 @@ const HomeAuthorsComponent = () => {
               <Col className="p-3">
                 <AuthorHomePart isImgRight={false} />
               </Col>
-              <Col className="d-inline-flex"></Col>
+              <Col className="hide-column"></Col>
             </Row>
             <Row>
-              <Col className="d-inline-flex"></Col>
+              <Col className="hide-column"></Col>
               <Col className="p-3">
                 <AuthorHomePart isImgRight={true} />
               </Col>
