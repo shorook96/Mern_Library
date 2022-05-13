@@ -46,7 +46,7 @@ authorRouter.delete('/:id', async (req, res, next) => {
           res.send(output);
         }
         else {
-          res.send()
+          res.send(err)
         }
       }
     )
