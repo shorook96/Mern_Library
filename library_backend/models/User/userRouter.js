@@ -26,4 +26,26 @@ userRouter.post('/signup', async (req, res, next) => {
     }
 });
 
+
+userRouter.post('/login', async (req, res, next)=> {
+    const { email, password } = req.body;
+    try {
+        const user = await UserModel.findOne({email});
+        // if(!user) throw authError;
+        const result = await bcrypt.compare(password, user.password);
+        // if(!result)throw authError;
+        const SecretKey = "zahra"
+        const token = await signAsync({
+            id: user.id,
+            admin: false
+        }, SecretKey);
+        // res.send(user)
+        res.send({ token });
+    } catch (error) {
+        next(error);
+    }
+     
+})
+
+
 module.exports = userRouter;
