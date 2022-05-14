@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Modal, Button } from 'react-bootstrap';
 
 import {
@@ -10,24 +10,11 @@ import {
   useFormik,
 } from 'formik';
 import axios from 'axios';
+import { UseAuth } from './Helpers/Auth';
 
 const initialValues = {
   email: '',
   password: '',
-};
-
-const onSubmit = (values, { resetForm }) => {
-  console.log(values);
-  axios
-    .post('http://localhost:5000/user/login', values)
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-
-  resetForm({ values: '' });
 };
 
 const validate = (values) => {
@@ -44,17 +31,36 @@ const validate = (values) => {
 };
 
 const LogIn = ({ clicked, handleLogInClose }) => {
+  const { login } = UseAuth();
   const formik = useFormik({
     initialValues,
-    onSubmit,
+    onSubmit(values, { resetForm }) {
+      console.log(values);
+      axios
+        .post('http://localhost:5000/user/login', values)
+        .then((response) => {
+          console.log(response);
+          login(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
 
+      resetForm({ values: '' });
+    },
     validate,
   });
-  // console.log(formik.values)
+
   // console.log(formik.errors)
 
   return (
-    <Modal show={clicked} onHide={handleLogInClose} backdrop="static" centered>
+    <Modal
+      show={clicked}
+      onHide={handleLogInClose}
+      backdrop="static"
+      className="text-dark"
+      centered
+    >
       <Modal.Header closeButton>
         <Modal.Title>Welcome Back</Modal.Title>
       </Modal.Header>

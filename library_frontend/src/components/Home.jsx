@@ -19,7 +19,7 @@ export default function HomeComponent() {
       <div className="mt-5">
         <Container className="bg-dark">
           <HomeStartImages />
-          <Container className="text-center m-5">
+          <Container className="text-center">
             <img src={leftarrow} width={200} height={200} />
           </Container>
 
