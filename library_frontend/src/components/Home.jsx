@@ -17,7 +17,7 @@ export default function HomeComponent() {
         <Container className="cover-home text-center"></Container>
       </div>
       <div className="mt-5">
-        <Container className="bg-dark">
+        <Container >
           <HomeStartImages />
           <Container className="text-center m-5">
             <img src={leftarrow} width={200} height={200} />
