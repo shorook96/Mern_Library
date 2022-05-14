@@ -64,12 +64,14 @@
 .cover-home {
   width: 100%;
   /* background-color: #61dafb; */
-  background-image: url(./assets/images/HomeCover.jpg);
-  background-color: #d1c2c2;
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(./assets/images/HomeCover.jpg);
+  /* background-image: url(./assets/images/HomeCover.jpg); */
+  background-color: black;
   background-repeat: no-repeat;
   background-size: cover;
-  opacity: 0.4;
-  height: 60vh;
+  opacity: 0.5;
+  height: 76vh;
+  
 }
 .Header-Title {
   font-family: Lobster;
@@ -83,6 +85,7 @@
   padding-top: 5%;
 }
 .authors-background-image {
+  /* background-image: url(./assets/images/HomeCover.jpg); */
   background-image: url(./assets/images/AuthorsCover2.jpg);
   background-size: cover;
   background-repeat: no-repeat;
