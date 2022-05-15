@@ -15,3 +15,12 @@ async function connectDb() {
 }
 
 connectDb();
+
+/* const createAdmin = async () => {
+  await connectDb();
+  const password = 'islamKortam';
+  const hashedPassword = await bcrypt.hash(password, 12);
+  await adminModel.create({username: 'imkortam', email: 'imkortam@gmail.com', hashedPassword});
+}
+
+createAdmin(); */

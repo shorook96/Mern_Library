@@ -2,26 +2,36 @@ const express = require('express');
 const authorRouter = express.Router();
 const customError = require('../utils/customError');
 const authorModel = require('../models/authorModel');
-authorRouter.get('/authors', async (req, res, next) => {
+const {adminTokenValidatorMiddleware} = require('../middle_wares/adminTokenMiddleware_validator');
+const {authorJoiValidator_middleWare} = require('../middle_wares/handling_author_middleware');
+
+
+authorRouter.use(adminTokenValidatorMiddleware);
+authorRouter.use(authorJoiValidator_middleWare);
+
+authorRouter.get('/', async (req, res, next) => {
   try {
     const authors = await authorModel.find({});
     res.send(authors);
   } catch (err) {
-    next(new customError(522, 'Server_Error', 'something went wrong'));
+    console.log(err);
+    next(customError(522, 'Server_Error', 'something went wrong'));
   }
 });
-authorRouter.get('/authors/:id', async (req, res, next) => {
+
+
+authorRouter.get('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
     const author = await authorModel.findById(id);
-    if (!author) throw new customError(422, 'ID_NOT_FOUND', 'NO_SUCH_AUTHOR');
+    if (!author) throw  customError(422, 'ID_NOT_FOUND', 'NO_SUCH_AUTHOR');
     res.send(author);
   } catch (err) {
     next(err);
   }
 });
 
-authorRouter.post('/authors', async (req, res, next) => {
+authorRouter.post('/', async (req, res, next) => {
   try {
     const { firstname, lastname, DOB, photo } = req.body;
     await authorModel.create({ firstname, lastname, DOB, photo });
@@ -30,4 +40,45 @@ authorRouter.post('/authors', async (req, res, next) => {
     next(err);
   }
 });
+
+authorRouter.delete('/:id', async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    authorModel.deleteOne(
+      {
+        _id: id,
+      }, (err, output) => {
+        if (!err) {
+          res.send(output);
+        }
+        else {
+          res.send(err)
+        }
+      }
+    )
+  } catch (err) {
+    next(err);
+  }
+})
+
+
+
+  
+  
+authorRouter.patch('/:id', async (req, res, next) => {
+  let _id = req.params.id;
+  const newAuthorData = req.body;
+  try{
+    const exists = await authorModel.findById({_id});
+    if(!exists){
+      throw customError(400, 'NOT_FOUND', 'No such Author');
+    }
+    
+    await authorModel.findOneAndUpdate({_id}, newAuthorData);
+    res.send({success: 'author updated successfully'});
+  }catch(error){
+    next(error);
+  }
+})
+
 module.exports = authorRouter;

@@ -6,4 +6,4 @@ const customError = (status, code, message) => {
 }
 
 
-exports.customError = customError;
+module.exports = customError;

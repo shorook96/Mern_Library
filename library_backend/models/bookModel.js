@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 const bookSchema = mongoose.Schema({
-  bookname: String,
+  _id:{
+    type: mongoose.Schema.Types.ObjectId,
+    index: true,
+    required: true,
+    auto: true
+  },
+  bookName: String,
   rating: Number,
   photo: String,
   category: {
@@ -14,3 +20,4 @@ const bookSchema = mongoose.Schema({
 });
 const bookModel = mongoose.model('book', bookSchema);
 module.exports = bookModel;
+
