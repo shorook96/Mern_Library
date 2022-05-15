@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-import {Formik,Form,Field,ErrorMessage,FieldArray,FastField,} from 'formik';
+import {
+  Formik,
+  Form,
+  Field,
+  ErrorMessage,
+  FieldArray,
+  FastField,
+} from 'formik';
 import axios from 'axios';
-import * as Yup from 'yup'
+import * as Yup from 'yup';
 import { UseAuth } from './Helpers/Auth';
 
 const initialValues = {
@@ -12,28 +19,26 @@ const initialValues = {
 };
 
 const validationSchema = Yup.object({
-  email:Yup.string().email('invalid Email Address').required('Required*'),
+  email: Yup.string().email('invalid Email Address').required('Required*'),
   password: Yup.string().required('Password is required'),
-})
-
-const onSubmit = (values, { resetForm }) => {
-  console.log(values);
-  axios
-    .post('http://localhost:5000/user/signup', values)
-    .then((response) => {
-
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-
-  resetForm({ values: '' });
-};
+});
 
 const LogIn = ({ clicked, handleLogInClose }) => {
-  // const { login } = UseAuth();
-  
+  const { login } = UseAuth();
+  const onSubmit = (values, { resetForm }) => {
+    console.log(values);
+    axios
+      .post('http://localhost:5000/user/login', values)
+      .then((response) => {
+        console.log(response.data);
+        login(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    resetForm({ values: '' });
+  };
 
   return (
     <Modal
@@ -48,36 +53,35 @@ const LogIn = ({ clicked, handleLogInClose }) => {
       </Modal.Header>
       <Modal.Body>
         <Formik
-            initialValues={initialValues}
-            onSubmit={onSubmit}
-            validationSchema={validationSchema}
+          initialValues={initialValues}
+          onSubmit={onSubmit}
+          validationSchema={validationSchema}
         >
-        <Form>
-          <div className="mb-3">
-            <label htmlFor="email">Email Address</label>
-            <Field
-              type="email"
-              id="email"
-              name="email"
-              placeholder="name@example.com"
-            />
-            <ErrorMessage name='email'>{error => <div className='error'>{error}</div>}</ErrorMessage>
-          </div>
+          <Form>
+            <div className="mb-3">
+              <label htmlFor="email">Email Address</label>
+              <Field
+                type="email"
+                id="email"
+                name="email"
+                placeholder="name@example.com"
+              />
+              <ErrorMessage name="email">
+                {(error) => <div className="error">{error}</div>}
+              </ErrorMessage>
+            </div>
 
-          <div className="mb-3">
-            <label htmlFor="password">Password</label>
-            <Field
-              type="password"
-              id="password"
-              name="password"
-              
-            />
-            <ErrorMessage name='password'>{error => <div className='error'>{error}</div>}</ErrorMessage>
-          </div>
-          <Button type="submit" variant="primary" onClick={handleLogInClose}>
-            LogIn
-          </Button>
-        </Form>
+            <div className="mb-3">
+              <label htmlFor="password">Password</label>
+              <Field type="password" id="password" name="password" />
+              <ErrorMessage name="password">
+                {(error) => <div className="error">{error}</div>}
+              </ErrorMessage>
+            </div>
+            <Button type="submit" variant="primary" onClick={handleLogInClose}>
+              LogIn
+            </Button>
+          </Form>
         </Formik>
       </Modal.Body>
       <Modal.Footer>

@@ -6,9 +6,12 @@ import UserLogoComponent from './UserLogoComponent';
 import booklogo from '../assets/images/booklogo.jpg';
 import BeforeLogging from './BeforeLogging';
 import goodreadslogo from '../assets/images/goodreadslogo.png';
+import { UseAuth } from './Helpers/Auth';
 
 let loggedIn = false;
 const NavComponent = () => {
+  const { user } = UseAuth();
+
   return (
     <>
       <Navbar
@@ -50,13 +53,13 @@ const NavComponent = () => {
                 <Nav.Link>Books</Nav.Link>
               </LinkContainer>
             </Nav>
-            {loggedIn ? (
+            {user ? (
               <Container>
                 <SearchPanel />
               </Container>
             ) : null}
           </Navbar.Collapse>
-          {loggedIn ? <UserLogoComponent /> : <BeforeLogging />}
+          {user ? <UserLogoComponent /> : <BeforeLogging />}
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
         </div>
       </Navbar>

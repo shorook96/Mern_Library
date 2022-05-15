@@ -2,18 +2,13 @@ import React from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
 import HomeStartImages from './HomeStartImages';
 import '../App.css';
-import SideBar from './SideBar';
-import rightarrow from '../assets/images/right-arrow.webp';
 import leftarrow from '../assets/images/left-arrow.webp';
 import HomeAuthorsComponent from './HomeAuthorsComponent';
-import cover from '../assets/images/hercover.jpg';
-let loggedIn = false;
 
 export default function HomeComponent() {
   return (
     <>
       <div className="d-flex container">
-        {loggedIn ? <div>{<SideBar />}</div> : null}
         <div className="cover-home ">
           <div className="cover-home-opacity m-0">
             <Row>
@@ -33,6 +28,7 @@ export default function HomeComponent() {
           </Container>
 
           <HomeAuthorsComponent />
+          {/* <BooksSlider /> */}
         </Container>
       </div>
     </>

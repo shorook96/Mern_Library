@@ -4,7 +4,7 @@ import userlogo from '../assets/userimages/userlogo.png';
 const AuthorHomePart = ({ isImgRight }) => {
   return (
     <>
-      <div className="bg-danger text-center rounded author-container-Home ">
+      <div className="bg-danger text-center rounded author-container-Home mt-3">
         <Row className="author-text-Home">
           <Col md={9}>
             <p>lormmmmm kmkmdm</p>

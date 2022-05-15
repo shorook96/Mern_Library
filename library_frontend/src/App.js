@@ -3,22 +3,19 @@ import Footer from './components/Footer';
 import NavComponent from './components/NavComponent';
 import HomeComponent from './components/Home';
 import React from 'react';
-
+import { UseAuth } from './components/Helpers/Auth';
+import UserHome from './components/LoggedUserComponents/UserHome';
 
 function App() {
+  const { user } = UseAuth();
+
   return (
-
     <React.Fragment>
-        <NavComponent />
-        <HomeComponent/>
-        {/* <Footer /> */}
-       
-       
+      <NavComponent />
+      {user ? <div>{<UserHome />}</div> : <HomeComponent />}
+
+      {/* <Footer /> */}
     </React.Fragment>
-    
-
-    
-
   );
 }
 
