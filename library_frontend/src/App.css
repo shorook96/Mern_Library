@@ -89,14 +89,7 @@
   font-size: larger;
   padding-top: 5%;
 }
-.authors-background-image {
-  /* background-image: url(./assets/images/HomeCover.jpg); */
-  background-image: url(./assets/images/AuthorsCover2.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  /* width: 35rem;
-  height: 35rem; */
-}
+
 /**************************SideBar****************************/
 
 .side-bar {
@@ -131,6 +124,14 @@
   /* float: left; */
   /* margin-top: -2rem;
   margin-left: -1rem; */
+}
+.authors-background-image {
+  /* background-image: url(./assets/images/HomeCover.jpg); */
+  background-image: url(./assets/images/AuthorsCover2.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 35rem;
+  height: 35rem;
 }
 .authors-conten {
   margin-top: 12%;
