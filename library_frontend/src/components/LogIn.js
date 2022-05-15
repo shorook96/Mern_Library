@@ -106,7 +106,6 @@ const LogIn = ({ clicked, handleLogInClose }) => {
         <Button variant="secondary" onClick={handleLogInClose}>
           Cancel
         </Button>
-
         {/* <Button  variant="primary" onClick={handleLogInClose}>
           LogIn
         </Button> */}

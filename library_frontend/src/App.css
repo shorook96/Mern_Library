@@ -5,7 +5,7 @@
 }
 
 .App-logo {
-  height: 10vmin;
+  height: 5vmin;
   pointer-events: none;
 }
 
@@ -64,14 +64,19 @@
 .cover-home {
   width: 100%;
   /* background-color: #61dafb; */
-  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(./assets/images/HomeCover.jpg);
+  background: url(./assets/images/HomeCover.jpg);
   /* background-image: url(./assets/images/HomeCover.jpg); */
   background-color: black;
   background-repeat: no-repeat;
   background-size: cover;
-  opacity: 0.5;
   height: 76vh;
-  
+}
+.cover-home-opacity {
+  background-color: black;
+  background-repeat: repeat-x;
+  height: 76vh;
+  opacity: 0.6;
+  width: 100%;
 }
 .Header-Title {
   font-family: Lobster;
@@ -89,8 +94,8 @@
   background-image: url(./assets/images/AuthorsCover2.jpg);
   background-size: cover;
   background-repeat: no-repeat;
-  width: 35rem;
-  height: 35rem;
+  /* width: 35rem;
+  height: 35rem; */
 }
 /**************************SideBar****************************/
 
@@ -128,7 +133,7 @@
   margin-left: -1rem; */
 }
 .authors-conten {
-  /* margin-top: 12%; */
+  margin-top: 12%;
 }
 @media only screen and (max-width: 379px) {
   .hide-column {

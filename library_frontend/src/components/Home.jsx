@@ -12,12 +12,21 @@ let loggedIn = false;
 export default function HomeComponent() {
   return (
     <>
-      <div className="d-flex">
+      <div className="d-flex container">
         {loggedIn ? <div>{<SideBar />}</div> : null}
-        <Container className="cover-home text-center"></Container>
+        <div className="cover-home ">
+          <div className="cover-home-opacity m-0">
+            <Row>
+              <Col>
+                <h1>Meet your next favorite book</h1>
+              </Col>
+              <Col></Col>
+            </Row>
+          </div>
+        </div>
       </div>
       <div className="mt-5">
-        <Container >
+        <Container>
           <HomeStartImages />
           <Container className="text-center">
             <img src={leftarrow} width={200} height={200} />

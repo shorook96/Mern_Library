@@ -15,15 +15,16 @@ userRouter.post('/signup', async (req, res, next) => {
   const { Fname, Lname, email, password } = req.body;
   try {
     const checkUserExisted = await UserModel.findOne({ email });
+    console.log('wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww');
     if (checkUserExisted) {
+      console.log('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm');
       const error = customError(
-        409,
+        200,
         'User Already Exist ',
         'User Already Exist'
       );
-      next(error);
+      throw error;
     }
-
     const saltRounds = 12;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 

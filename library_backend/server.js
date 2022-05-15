@@ -14,21 +14,23 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/user', userRouter);
-
+app.use('/admin', adminRouter);
+app.use('/categories', categoryRouter);
 app.use((error, req, res, next) => {
-  if (!error.status) {
+  console.log('aaaaaaaaaaaaaaaaaaaaaaaaa');
+  if (error.code) {
+    console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
+
     res.statusCode = 522;
     res.send({ message: 'something went wrong' });
     return next();
   }
+  console.log('ssssssssssssssssssssssssssssssss');
   console.log(error.message);
   res.statusCode = error.status;
   res.send({ message: error.errorMsg });
   return next();
 });
-
-app.use('/admin', adminRouter);
-app.use('/categories', categoryRouter);
 
 // app.use(errorHandling_middleware);
 

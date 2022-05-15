@@ -5,6 +5,8 @@ import SearchPanel from './SearchPanel';
 import UserLogoComponent from './UserLogoComponent';
 import booklogo from '../assets/images/booklogo.jpg';
 import BeforeLogging from './BeforeLogging';
+import goodreadslogo from '../assets/images/goodreadslogo.png';
+
 let loggedIn = false;
 const NavComponent = () => {
   return (
@@ -21,9 +23,15 @@ const NavComponent = () => {
               <Image
                 width={70}
                 height={40}
-                roundedCircle
                 className="App-logo "
+                roundedCircle
                 src={booklogo}
+              />
+              <Image
+                width={100}
+                height={20}
+                className="m-2"
+                src={goodreadslogo}
               />
             </Navbar.Brand>
           </LinkContainer>
