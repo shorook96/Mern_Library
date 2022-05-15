@@ -17,11 +17,11 @@ userRouter.post('/signup', async (req, res, next) => {
     const checkUserExisted = await UserModel.findOne({ email });
     if (checkUserExisted) {
       const error = customError(
-        409,
+        410,
         'User Already Exist ',
         'User Already Exist'
       );
-      next(error);
+      return next(error);
     }
 
     const saltRounds = 12;

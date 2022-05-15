@@ -14,6 +14,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/user', userRouter);
+// app.use('/admin', adminRouter);
+// app.use('/categories', categoryRouter);
 
 app.use((error, req, res, next) => {
   if (!error.status) {
@@ -27,8 +29,8 @@ app.use((error, req, res, next) => {
   return next();
 });
 
-app.use('/admin', adminRouter);
-app.use('/categories', categoryRouter);
+
+
 
 // app.use(errorHandling_middleware);
 
