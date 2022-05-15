@@ -59,7 +59,8 @@ const references_middleware_validator = async (req, res, next) =>  {
         }
         next();
     }catch(error){
-        console.log(error);
+        if(error.name === 'CastError')
+        error = customError(400, 'INVALID_OBJECT_ID', 'Invalid author or category id, id must be 24 chars');
         next(error);
     }
 }

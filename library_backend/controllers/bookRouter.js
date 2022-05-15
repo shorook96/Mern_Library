@@ -19,7 +19,6 @@ bookRouter.get('/', async (req, res, next) => {
         const books = await bookModel.find({});
         res.send(books);
     } catch (err) {
-        console.log(err);
         next(customError(522, 'Server_Error', 'something went wrong'));
     }
 });
@@ -68,10 +67,8 @@ bookRouter.delete("/:id", async (req, res, next) => {
 
 bookRouter.post('/', async (req, res, next) => {
     const bookData = req.body;
-    console.log(bookData);
     try{
-        const {bookName, rating, photo, author, category} = bookData;
-        console.log(bookData);
+        const {bookName, rating, photo, category, author} = bookData;
         await bookModel.create({bookName, rating, photo, category, author});
         res.send({success: 'book created successfully'});
         return;
