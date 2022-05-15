@@ -4,7 +4,6 @@ const customError = require('../utils/customError');
 const bookModel = require('../models/bookModel');
 
 
-
 bookRouter.get('/', async (req, res, next) => {
     try {
         const books = await bookModel.find({});
@@ -31,16 +30,17 @@ bookRouter.get('/:id', async (req, res, next) => {
 bookRouter.delete("/:id", async (req, res, next) => {
     try {
         const id = req.params.id;
-        await bookModel.deleteOne(
+        //await bookModel.deleteOne({_id: id});
+        //res.send({success: 'OK'})
+        bookModel.deleteOne(
             {
-                _id: id,
+                "_id": id
             },
             (err, output) => {
                 if (!err) {
                     res.send(output);
-                }
-                else {
-                    res.send(err);
+                }else{
+                    res.send(err)
                 }
             }
         );
@@ -48,5 +48,41 @@ bookRouter.delete("/:id", async (req, res, next) => {
         next(err);
     }
 });
+
+
+
+
+
+
+
+
+bookRouter.post('/', async (req, res, next) => {
+    const bookData = req.body;
+    console.log(bookData);
+    try{
+        await bookModel.create(bookData);
+        console.log("Success");
+        res.send({success: 'book created successfully'});
+        return;
+    }catch(error){
+        next(error);
+    }
+})
+
+bookRouter.patch('/:id', async (req, res, next) => {
+    let _id = req.params.id;
+    const newBookData = req.body;
+    try{
+        const exists = await bookModel.findById({_id});
+        if(!exists){
+            throw customError(400, 'NOT_FOUND', 'No such Book');
+        }
+        await bookModel.findByIdAndUpdate({_id}, newBookData);
+        res.send({success: 'book updated successfully'});
+    }catch(error){
+        next(error);
+    }
+})
+
 
 module.exports = bookRouter;

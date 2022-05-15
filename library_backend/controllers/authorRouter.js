@@ -38,7 +38,7 @@ authorRouter.post('/', async (req, res, next) => {
 authorRouter.delete('/:id', async (req, res, next) => {
   try {
     const id = req.params.id;
-    await authorModel.deleteOne(
+    authorModel.deleteOne(
       {
         _id: id,
       }, (err, output) => {

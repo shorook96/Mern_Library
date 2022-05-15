@@ -5,7 +5,7 @@ const authorSchema = Joi.object({
     firstName: Joi.string().max(50).required(),
     lastName: Joi.string().max(50).required(),
     DOB:Joi.date().iso().required(),
-    photo:Joi.string.max(100).required,
+    photo:Joi.string.max(500).required()
 });
 
 

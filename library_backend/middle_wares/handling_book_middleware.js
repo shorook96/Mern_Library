@@ -12,7 +12,7 @@ const bookJoiValidator_middleWare = async (req, res, next) => {
     const body = req.body;
     let validatedBody = {};
     try{
-        validatedBody = await authorSchema.validateAsync(body);
+        validatedBody = await bookSchema.validateAsync(body);
         req.body = validatedBody;
         next();
     }catch(err){
@@ -25,7 +25,7 @@ const bookJoiValidator_middleWare = async (req, res, next) => {
 
 const uniqueBookNameValidator = async (req, res, next) => {
     //Done on POST mehtod only
-    if(req.method !== 'POST'){
+    if(!(req.method === 'POST' ||  req.method === 'PATCH')){
         next();
         return; // Early return;
     }
