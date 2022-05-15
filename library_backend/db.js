@@ -7,7 +7,7 @@ const connectionString =
 async function connectDb() {
   try {
     await mongoose.connect(connectionString);
-    console.log("connected to Atlas DB successfuly")
+    console.log('connected to Atlas DB successfuly');
   } catch (e) {
     process.exit(1);
   }

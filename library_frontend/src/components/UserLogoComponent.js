@@ -4,7 +4,7 @@ import userlogo from '../assets/userimages/userlogo.png';
 const UserLogoComponent = () => {
   return (
     <div className="d-flex m-2">
-      <Image roundedCircle src={userlogo} width={80} height={80} />
+      <Image roundedCircle src={userlogo} width={50} height={50} />
       <button className="btn btn-outline-success m-2" title="logout">
         <i className="fa fa-sign-out " aria-hidden="true"></i>
       </button>

@@ -7,10 +7,11 @@ import {
   CDBSidebarMenuItem,
 } from 'cdbreact';
 import { Link, NavLink } from 'react-router-dom';
+
 const SideBar = () => {
   return (
     <>
-      <div className="side-bar">
+      <div className="side-bar sticky-top">
         <CDBSidebar backgroundColor="#333">
           <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
             <Link to="/" className="text-decoration-none text-white ">
