@@ -1,67 +1,84 @@
-import React from 'react';
-import { Form, Modal, Button } from 'react-bootstrap';
-import { Formik,Field,ErrorMessage,FieldArray,FastField, useFormik} from 'formik'
+import React, { useState } from 'react';
+import { Modal, Button } from 'react-bootstrap';
 
+import {Formik,Form,Field,ErrorMessage,FieldArray,FastField,} from 'formik';
+import axios from 'axios';
+import * as Yup from 'yup'
+import { UseAuth } from './Helpers/Auth';
 
-const initialValues ={
-  email:"",
-  password:""
-}
+const initialValues = {
+  email: '',
+  password: '',
+};
 
-const onSubmit = values =>{
-  console.log(values)
-}
+const validationSchema = Yup.object({
+  email:Yup.string().email('invalid Email Address').required('Required*'),
+  password: Yup.string().required('Password is required'),
+})
 
-const validate =  values =>{
-  let errors = {}
+const onSubmit = (values, { resetForm }) => {
+  console.log(values);
+  axios
+    .post('http://localhost:5000/user/signup', values)
+    .then((response) => {
 
-  if (!values.email){errors.email = 'required'}
-  // else if(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i.test(values.email)){
-  //     errors.email = "invalid email formate"
-  // }
-  if (!values.password){errors.password = 'required'}
-  return errors
-  
-}
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  resetForm({ values: '' });
+};
+
 const LogIn = ({ clicked, handleLogInClose }) => {
-  const formik = useFormik({
-    initialValues,
-    onSubmit,
-    validate
-  })
-  // console.log(formik.values)
-  // console.log(formik.errors)
+  // const { login } = UseAuth();
+  
+
   return (
-    <Modal show={clicked} onHide={handleLogInClose} backdrop="static" centered>
+    <Modal
+      show={clicked}
+      onHide={handleLogInClose}
+      backdrop="static"
+      className="text-dark"
+      centered
+    >
       <Modal.Header closeButton>
         <Modal.Title>Welcome Back</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form onSubmit={formik.handleSubmit}>
-          <Form.Group className="mb-3">
-
-            <Form.Label htmlFor='email'>Email address</Form.Label>
-            <Form.Control type="email" id='email' name='email' onChange={formik.handleChange} value={formik.values.email} onBlur={formik.handleBlur} placeholder="name@example.com" />
-            {formik.touched.email && formik.errors.email ? <div className='error'>{formik.errors.email}</div> : null}
-
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
+        <Formik
+            initialValues={initialValues}
+            onSubmit={onSubmit}
+            validationSchema={validationSchema}
+        >
+        <Form>
+          <div className="mb-3">
+            <label htmlFor="email">Email Address</label>
+            <Field
               type="email"
+              id="email"
+              name="email"
               placeholder="name@example.com"
-              autoFocus
             />
+            <ErrorMessage name='email'>{error => <div className='error'>{error}</div>}</ErrorMessage>
+          </div>
 
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label htmlFor='password'>Password</Form.Label>
-            <Form.Control type="password" id='password' name='password' onChange={formik.handleChange} value={formik.values.password} onBlur={formik.handleBlur} placeholder="" />
-            {formik.touched.password && formik.errors.password ? <div className='error'>{formik.errors.password}</div> : null}
-                
-          </Form.Group>
-          <Button type='submit' variant="primary" onClick={handleLogInClose}>
-          LogIn
-        </Button>
+          <div className="mb-3">
+            <label htmlFor="password">Password</label>
+            <Field
+              type="password"
+              id="password"
+              name="password"
+              
+            />
+            <ErrorMessage name='password'>{error => <div className='error'>{error}</div>}</ErrorMessage>
+          </div>
+          <Button type="submit" variant="primary" onClick={handleLogInClose}>
+            LogIn
+          </Button>
         </Form>
+        </Formik>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleLogInClose}>
@@ -74,5 +91,4 @@ const LogIn = ({ clicked, handleLogInClose }) => {
     </Modal>
   );
 };
-
 export default LogIn;

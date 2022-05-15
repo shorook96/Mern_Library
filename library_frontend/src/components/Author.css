@@ -1,0 +1,57 @@
+
+.parentContainer{
+    margin:20px;
+}
+
+.beside {
+    float:left;
+    color:brown;
+    margin-left:15px;
+    text-align: left;
+}
+.card{
+    float:left;
+    margin-bottom: 15px;
+}
+.description{
+    width: 750px;
+    height:130px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-color: #c56d32 #b69a88;
+    scrollbar-width: thin;
+    border:solid 0.5px;
+    border-radius:5px;
+}
+
+.authorbooks{
+    
+    height:350px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    
+    clear:both;
+    text-align:left;
+    border:solid 1px;
+    border-radius: 10px;
+    
+}
+h5{
+    color:brown;
+}
+.bookimg{
+    float:left;
+    margin-right: 10px;
+}
+
+.selectandrating{
+    float:right;
+    
+}
+
+.booksofauthor{
+    
+    margin:10px;
+}
+
+
