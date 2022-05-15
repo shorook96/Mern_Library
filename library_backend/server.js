@@ -14,8 +14,14 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/user', userRouter);
+<<<<<<< HEAD
 app.use('/admin', adminRouter);
 app.use('/categories', categoryRouter);
+=======
+// app.use('/admin', adminRouter);
+// app.use('/categories', categoryRouter);
+
+>>>>>>> 4e14e49d8b4835fa54b9df40992aee869eddcc22
 app.use((error, req, res, next) => {
   console.log('aaaaaaaaaaaaaaaaaaaaaaaaa');
   if (error.code) {
@@ -32,6 +38,12 @@ app.use((error, req, res, next) => {
   return next();
 });
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 4e14e49d8b4835fa54b9df40992aee869eddcc22
 // app.use(errorHandling_middleware);
 
 app.listen(port, () => {

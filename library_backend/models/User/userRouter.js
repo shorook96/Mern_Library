@@ -19,11 +19,19 @@ userRouter.post('/signup', async (req, res, next) => {
     if (checkUserExisted) {
       console.log('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm');
       const error = customError(
+<<<<<<< HEAD
         200,
         'User Already Exist ',
         'User Already Exist'
       );
       throw error;
+=======
+        410,
+        'User Already Exist ',
+        'User Already Exist'
+      );
+      return next(error);
+>>>>>>> 4e14e49d8b4835fa54b9df40992aee869eddcc22
     }
     const saltRounds = 12;
     const hashedPassword = await bcrypt.hash(password, saltRounds);

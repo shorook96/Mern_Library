@@ -1,15 +1,9 @@
 import React, { useState } from 'react';
-import { Form, Modal, Button } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 
-import {
-  Formik,
-  Field,
-  ErrorMessage,
-  FieldArray,
-  FastField,
-  useFormik,
-} from 'formik';
+import {Formik,Form,Field,ErrorMessage,FieldArray,FastField,} from 'formik';
 import axios from 'axios';
+import * as Yup from 'yup'
 import { UseAuth } from './Helpers/Auth';
 
 const initialValues = {
@@ -17,41 +11,29 @@ const initialValues = {
   password: '',
 };
 
-const validate = (values) => {
-  let errors = {};
+const validationSchema = Yup.object({
+  email:Yup.string().email('invalid Email Address').required('Required*'),
+  password: Yup.string().required('Password is required'),
+})
 
-  if (!values.email) {
-    errors.email = 'required';
-  }
+const onSubmit = (values, { resetForm }) => {
+  console.log(values);
+  axios
+    .post('http://localhost:5000/user/signup', values)
+    .then((response) => {
 
-  if (!values.password) {
-    errors.password = 'required';
-  }
-  return errors;
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  resetForm({ values: '' });
 };
 
 const LogIn = ({ clicked, handleLogInClose }) => {
-  const { login } = UseAuth();
-  const formik = useFormik({
-    initialValues,
-    onSubmit(values, { resetForm }) {
-      console.log(values);
-      axios
-        .post('http://localhost:5000/user/login', values)
-        .then((response) => {
-          console.log(response);
-          login(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-
-      resetForm({ values: '' });
-    },
-    validate,
-  });
-
-  // console.log(formik.errors)
+  // const { login } = UseAuth();
+  
 
   return (
     <Modal
@@ -65,42 +47,38 @@ const LogIn = ({ clicked, handleLogInClose }) => {
         <Modal.Title>Welcome Back</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form onSubmit={formik.handleSubmit}>
-          <Form.Group className="mb-3">
-            <Form.Label htmlFor="email">Email Address</Form.Label>
-            <Form.Control
+        <Formik
+            initialValues={initialValues}
+            onSubmit={onSubmit}
+            validationSchema={validationSchema}
+        >
+        <Form>
+          <div className="mb-3">
+            <label htmlFor="email">Email Address</label>
+            <Field
               type="email"
               id="email"
               name="email"
-              onChange={formik.handleChange}
-              value={formik.values.email}
-              onBlur={formik.handleBlur}
               placeholder="name@example.com"
             />
-            {formik.touched.email && formik.errors.email ? (
-              <div className="error">{formik.errors.email}</div>
-            ) : null}
-          </Form.Group>
+            <ErrorMessage name='email'>{error => <div className='error'>{error}</div>}</ErrorMessage>
+          </div>
 
-          <Form.Group className="mb-3">
-            <Form.Label htmlFor="password">Password</Form.Label>
-            <Form.Control
+          <div className="mb-3">
+            <label htmlFor="password">Password</label>
+            <Field
               type="password"
               id="password"
               name="password"
-              onChange={formik.handleChange}
-              value={formik.values.password}
-              onBlur={formik.handleBlur}
-              placeholder=""
+              
             />
-            {formik.touched.password && formik.errors.password ? (
-              <div className="error">{formik.errors.password}</div>
-            ) : null}
-          </Form.Group>
+            <ErrorMessage name='password'>{error => <div className='error'>{error}</div>}</ErrorMessage>
+          </div>
           <Button type="submit" variant="primary" onClick={handleLogInClose}>
             LogIn
           </Button>
         </Form>
+        </Formik>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleLogInClose}>

@@ -1,7 +1,9 @@
-function customError(status, code, errorMsg) {
-  const error = new Error(errorMsg);
-  error.status = status;
+const customError = (status, code, message) => {
+  const error = new Error(message);
   error.code = code;
+  error.status = status;
   return error;
 }
-module.exports = customError;
+
+
+exports.customError = customError;

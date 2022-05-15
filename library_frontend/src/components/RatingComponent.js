@@ -1,31 +1,46 @@
-import React, { useState } from 'react';
-import { MDBContainer, MDBRating } from 'mdbreact';
+import StarRatings from 'react-star-ratings';
+import React , {Component} from 'react';
 
-const RatingPage = () => {
-  const [basic] = useState([
+export default class StarRating extends Component {
+    
+    constructor(props)
     {
-      tooltip: 'Very Bad'
-    },
-    {
-      tooltip: 'Poor'
-    },
-    {
-      tooltip: 'Ok',
-      choosed: true
-    },
-    {
-      tooltip: 'Good'
-    },
-    {
-      tooltip: 'Excellent'
+        super(props);
+
+        this.state = {Average:5}
+        this.state = {Rate : 5}
+
+        this.changeRating = this.changeRating.bind(this)
+        this.changeNormalRating = this.changeNormalRating.bind(this)
     }
-  ]);
 
-  return (
-    <MDBContainer>
-      <MDBRating data={basic} />
-    </MDBContainer>
-  );
-};
+    changeRating( newRating, name ) {
+        console.log(newRating);
+        this.setState({
+            Average : newRating
+        });
 
-export default RatingPage;
+    }
+
+    changeNormalRating( NormalRating, name ) {
+        this.setState({
+            Average : NormalRating
+        });
+    }
+
+    render() {
+        return (
+            <>
+            <StarRatings
+                rating={this.state.Average}
+                starRatedColor="blue"
+                changeRating={this.changeRating}
+                numberOfStars={5}
+                starDimension="20px"
+                starSpacing="3px"
+                name='Average'
+            />
+           </>
+        );
+    }
+}
