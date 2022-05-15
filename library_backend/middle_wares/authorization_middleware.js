@@ -10,7 +10,6 @@ exports.authorizedUser = async (req, res, next) => {
   const { id } = req.params;
   try {
     const payload = await verifyAsync(authorization, secretKey);
-    console.log('payloaaaaaaaaaaaaad', payload);
     if (id !== payload.id)
       throw customError(403, 'NOT AUTHORIZED', 'Not Authorized User');
   } catch (error) {
