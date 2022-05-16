@@ -6,23 +6,26 @@ const path = require('path');
 const { customError } = require('../../utils/customError');
 const UserModel = require('./userModel');
 const jwt = require('jsonwebtoken');
-// const { authorizeUser } = require('./middlewares');
 const signAsync = util.promisify(jwt.sign);
 // const secretKey = process.env.SECRET_KEY;
-const secretKey = 'zahra';
+const {
+  authorizedUser,
+} = require('../../middle_wares/authorization_middleware');
+const { appendFile } = require('fs');
 
+const secretKey = 'zahra';
 userRouter.post('/signup', async (req, res, next) => {
   const { Fname, Lname, email, password } = req.body;
   try {
     const checkUserExisted = await UserModel.findOne({ email });
-    console.log('wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww');
     if (checkUserExisted) {
-      console.log('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm');
       const error = customError(
         410,
         'User Already Exist ',
         'User Already Exist'
       );
+      throw error;
+
       return next(error);
     }
     const saltRounds = 12;
@@ -56,10 +59,12 @@ userRouter.post('/login', async (req, res, next) => {
       SecretKey
     );
     const userInfo = {
+      id: user._id,
       fname: user.firstname,
       lastname: user.lastname,
       email: user.email,
-      token,
+      image: user.image,
+      authorization: token,
     };
     // res.send(user)
     res.send({ userInfo });
@@ -68,4 +73,28 @@ userRouter.post('/login', async (req, res, next) => {
   }
 });
 
+userRouter.get(
+  '/:id/search/:searchField',
+  authorizedUser,
+  async (req, res, next) => {
+    try {
+      const searchField = req.params.searchField;
+
+      let searchResults = [];
+
+      booksResults = await UserModel.find({
+        firstname: { $regex: searchField, $options: '$i' },
+      });
+      authorsResults = await UserModel.find({
+        firstname: { $regex: 'z', $options: '$i' },
+      });
+      searchResults = [...booksResults, ...authorsResults];
+
+      console.log(searchResults);
+      res.send(searchResults);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 module.exports = userRouter;

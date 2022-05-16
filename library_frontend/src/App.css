@@ -130,14 +130,17 @@
   background-image: url(./assets/images/AuthorsCover2.jpg);
   background-size: cover;
   background-repeat: no-repeat;
-  width: 35rem;
   height: 35rem;
 }
 .authors-conten {
-  margin-top: 12%;
+  margin-top: 5%;
 }
 @media only screen and (max-width: 379px) {
   .hide-column {
     display: none;
   }
+}
+/*****************************************************/
+.card-item {
+  width: 18rem;
 }

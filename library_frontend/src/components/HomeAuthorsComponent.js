@@ -6,11 +6,11 @@ import HomeStartImages from './HomeStartImages';
 const HomeAuthorsComponent = () => {
   return (
     <>
-      <Container className="m-5 ">
+      <Container>
         <Row>
           <Col
             md={5}
-            className="bg-secondary rounded-circle authors-background-image"
+            className="bg-secondary rounded-circle authors-background-image "
           >
             <Container className="text-center authors-conten p-1">
               <Row>
@@ -40,7 +40,7 @@ const HomeAuthorsComponent = () => {
               </Row>
             </Container>
           </Col>
-          <Col md={6}>
+          <Col md={7}>
             <div className="books-header text-white">
               <p className="font-weight-bolder Header-Title h1">
                 Famous Authors
