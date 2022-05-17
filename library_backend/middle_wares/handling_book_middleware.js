@@ -47,6 +47,13 @@ const uniqueBookNameValidator = async (req, res, next) => {
 }
 
 const references_middleware_validator = async (req, res, next) =>  {
+    //Done on POST mehtod only
+    if(!(req.method === 'POST' ||  req.method === 'PATCH')){
+        next();
+        return; // Early return;
+    }
+
+    
     const bookData = req.body;
     try{
         const author = await authorModel.findOne({_id: bookData.author});
