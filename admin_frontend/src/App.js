@@ -5,6 +5,7 @@ import AdminPanel from './admin_module/admin_panel/AdminPanel'
 
 function App() {
   return (
+    
     <AdminPanel/>
   );
 }
