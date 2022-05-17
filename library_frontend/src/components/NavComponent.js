@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Navbar, Container, Nav, Image } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import SearchPanel from './SearchPanel';
@@ -7,21 +7,37 @@ import booklogo from '../assets/images/booklogo.jpg';
 import BeforeLogging from './BeforeLogging';
 import goodreadslogo from '../assets/images/goodreadslogo.png';
 import { UseAuth } from './Helpers/Auth';
-
-let loggedIn = false;
 const NavComponent = () => {
   const { user } = UseAuth();
-
+  const [navBackground, setNavBackground] = useState(false);
+  const navRef = useRef();
+  navRef.current = navBackground;
+  useEffect(() => {
+    const handleScroll = () => {
+      const show = window.scrollY < 50;
+      if (navRef.current !== show) {
+        setNavBackground(show);
+      }
+    };
+    document.addEventListener('scroll', handleScroll);
+    return () => {
+      document.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   return (
     <>
       <Navbar
-        bg="dark"
         variant="dark"
         expand="lg"
-        className=" sticky-top nav-shadow  "
+        className=" sticky-top nav-shadow "
+        fixed="top"
+        style={{
+          transition: '1s ease',
+          backgroundColor: navBackground ? 'transparent' : 'black',
+        }}
       >
-        <div className="d-flex align-content-around navbar text-center">
-          <LinkContainer to="">
+        <div className=" navbar text-center">
+          <LinkContainer to="" className="mb-2">
             <Navbar.Brand>
               <Image
                 width={70}
@@ -39,18 +55,18 @@ const NavComponent = () => {
             </Navbar.Brand>
           </LinkContainer>
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <LinkContainer to="">
-                <Nav.Link>Home</Nav.Link>
+            <Nav className="me-auto ">
+              <LinkContainer to="" className="custom-nav-link">
+                <Nav.Link className="h5">Home</Nav.Link>
               </LinkContainer>
-              <LinkContainer to="">
-                <Nav.Link>Authors</Nav.Link>
+              <LinkContainer to="" className="custom-nav-link">
+                <Nav.Link className="h5">Authors</Nav.Link>
               </LinkContainer>
-              <LinkContainer to="">
-                <Nav.Link>Categories</Nav.Link>
+              <LinkContainer to="" className="custom-nav-link">
+                <Nav.Link className="h5">Categories</Nav.Link>
               </LinkContainer>
-              <LinkContainer to="">
-                <Nav.Link>Books</Nav.Link>
+              <LinkContainer to="" className="custom-nav-link">
+                <Nav.Link className="h5">Books</Nav.Link>
               </LinkContainer>
             </Nav>
             {user ? (

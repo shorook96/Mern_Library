@@ -3,8 +3,10 @@ import { Container, Col, Row } from 'react-bootstrap';
 import HomeStartImages from './HomeStartImages';
 import '../App.css';
 import leftarrow from '../assets/images/left-arrow.webp';
+import rightarrow from '../assets/images/right-arrow.webp';
 import HomeAuthorsComponent from './HomeAuthorsComponent';
-
+import HomeCategoriesComponent from './HomeCategoriesComponent';
+import Footer from './Footer';
 export default function HomeComponent() {
   return (
     <>
@@ -12,9 +14,7 @@ export default function HomeComponent() {
         <div className="cover-home ">
           <div className="cover-home-opacity m-0">
             <Row>
-              <Col>
-                <h1>Meet your next favorite book</h1>
-              </Col>
+              <Col>{/* <h1>Meet your next favorite book</h1> */}</Col>
               <Col></Col>
             </Row>
           </div>
@@ -22,14 +22,20 @@ export default function HomeComponent() {
       </div>
       <div className="mt-5">
         <Container>
+          <HomeCategoriesComponent />
+        </Container>
+        <Container className="text-center mt-2">
+          <img src={rightarrow} width={200} height={200} />
+        </Container>
+        <Container>
           <HomeStartImages />
           <Container className="text-center">
             <img src={leftarrow} width={200} height={200} />
           </Container>
 
           <HomeAuthorsComponent />
-          {/* <BooksSlider /> */}
         </Container>
+        <Footer />
       </div>
     </>
   );

@@ -4,25 +4,32 @@ import PaginationComponent from './PaginationComponent';
 import ItemComponent from './ItemComponent';
 
 const BooksSlider = () => {
-  const [books, setBooks] = useState([]);
+  const totalPageCount = 0;
+  const BooksCount = 0;
   useEffect(() => {
     axios
-      .get('https://jsonplaceholder.typicode.com/photos')
+      .get('http://localhost:5000/user/books/count')
       .then((response) => {
-        setBooks(response.data);
+        BooksCount = response.data;
+        totalPageCount = Math.ceil(BooksCount / 6);
       })
       .catch((response) => {});
   }, []);
 
   return (
     <>
-      <PaginationComponent
-        data={books}
+      {/* <PaginationComponent
+        itemsCount={books.length}
         RenderComponent={ItemComponent}
+        contentPerPage={6}
         title="books"
         buttonConst={3}
-        contentPerPage={6}
-        siblingCount={3}
+        siblingCount={6}
+      /> */}
+      <PaginationComponent
+        itemsCount={BooksCount}
+        totalPageCount={totalPageCount}
+        RenderComponent={ItemComponent}
       />
     </>
   );

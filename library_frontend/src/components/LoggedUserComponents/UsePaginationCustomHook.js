@@ -7,7 +7,6 @@ const range = (start, end) => {
 
 export const usePaginationRange = ({
   totalPageCount,
-  contentPerPage,
   buttonConst,
   siblingCount,
   currentPage,

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { UseAuth } from './Helpers/Auth';
+import userlogo from '../assets/userimages/userlogo.png';
 
 // import { MDBCol, MDBIcon } from 'mdb-react-ui-kit';
 
@@ -32,7 +33,7 @@ const SearchPanel = () => {
   }, [searchField]);
 
   return (
-    <div className="d-flex flex-column">
+    <div className="d-flex ">
       <form className="input-group ">
         <input
           type="search"
@@ -41,17 +42,26 @@ const SearchPanel = () => {
           aria-label="Search"
           value={searchField}
           onChange={(e) => setSearchField(e.target.value)}
+          onBlur={(e) => setFilteredData([])}
         />
         {filteredData.length > 0 ? (
-          <ul className="d-flex dropdown-menu">
-            {filteredData.map((field, index) => {
+          <div className="d-flex  dropdown-menu  mt-5 w-100">
+            {filteredData[0].map((field, index) => {
               return (
-                <li key={index} className="dropdown-item">
-                  <Link to="">{field.firstname}</Link>
-                </li>
+                <div key={index} className="dropdown-item w-100 p-1">
+                  <Link to="" className="w-100 p-0">
+                    <span className="search-name"> {field.bookName}</span>
+                    <img
+                      src={field.photo}
+                      width={30}
+                      height={30}
+                      className="search-img"
+                    />
+                  </Link>
+                </div>
               );
             })}
-          </ul>
+          </div>
         ) : null}
       </form>
     </div>

@@ -44,6 +44,65 @@
 .nav-shadow {
   box-shadow: 2px 2px 5px 8px #ededed;
 }
+/*************************/
+.custom-nav-link,
+.custom-nav-link:after,
+.custom-nav-link:before {
+  transition: all 0.5s;
+  position: relative;
+}
+.custom-nav-link:hover {
+  color: #555;
+}
+.custom-nav-link:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: '.';
+  color: transparent;
+  background: #aaa;
+  height: 1px;
+}
+.custom-nav-link {
+  transition: all 2s;
+}
+
+.custom-nav-link:after {
+  text-align: left;
+  content: '.';
+  margin: 0;
+  opacity: 0;
+}
+.custom-nav-link:hover {
+  color: #fff;
+  z-index: 1;
+}
+.custom-nav-link:hover:after {
+  z-index: -10;
+  animation: fill 1s forwards;
+  opacity: 1;
+}
+@keyframes fill {
+  0% {
+    width: 0%;
+    height: 1px;
+  }
+  50% {
+    width: 100%;
+    height: 1px;
+  }
+  100% {
+    width: 100%;
+    height: 100%;
+    background: rgb(255, 171, 82);
+    border-radius: 20%;
+  }
+}
+
+/************************/
 @media only screen and (min-width: 600px) {
   .btn_logging {
     width: 10rem;
@@ -89,7 +148,14 @@
   font-size: larger;
   padding-top: 5%;
 }
+/**********************************SearchBar******************/
+.search-name {
+  float: left;
+}
 
+.search-img {
+  float: right;
+}
 /**************************SideBar****************************/
 
 .side-bar {
