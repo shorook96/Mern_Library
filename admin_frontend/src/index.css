@@ -13,6 +13,10 @@ code {
 }
 
 
-.navListHover :hover{
+.navListHover:hover{
+  cursor: pointer;
+}
+
+.hoverableImage:hover{
   cursor: pointer;
 }

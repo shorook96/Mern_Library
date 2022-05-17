@@ -25,7 +25,7 @@ export default function AdminNavBar({activeSubPanelID, changeTab}) {
                             )
                         })
                     }
-                    <button type="button" className="btn btn-darkt"> Logout </button>
+                    <button type="button" className="btn btn-dark"> Logout </button>
             </ul>
         </>
     );

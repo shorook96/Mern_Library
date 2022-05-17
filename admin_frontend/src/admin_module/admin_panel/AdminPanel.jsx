@@ -43,7 +43,9 @@ export default function (){
     return (
         <>
             <AdminNavBar activeSubPanelID = {activeSubPanelID} changeTab = {handleSubPanelChange} />
-            {getCurrentActivePanel()}
+            <div className='container'>
+                {getCurrentActivePanel()}
+            </div>
         </>
     )
 }
