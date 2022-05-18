@@ -46,7 +46,6 @@ const validationSchema = Yup.object({
 
 const SignUpComponent = ({ clicked, handleSignUpClose }) => {
   const [image, setImage] = useState({});
-  const [uploaded, setUploaded] = useState(false);
 
   const handleUpload = () => {
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
