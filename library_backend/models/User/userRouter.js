@@ -5,6 +5,9 @@ const bcrypt = require('bcrypt');
 const path = require('path');
 const { customError } = require('../../utils/customError');
 const UserModel = require('./userModel');
+const BookModel = require('../bookModel');
+const AuthorModel = require('../authorModel');
+
 const jwt = require('jsonwebtoken');
 const signAsync = util.promisify(jwt.sign);
 // const secretKey = process.env.SECRET_KEY;
@@ -64,6 +67,7 @@ userRouter.post('/login', async (req, res, next) => {
       lastname: user.lastname,
       email: user.email,
       image: user.image,
+      books: user.books,
       authorization: token,
     };
     // res.send(user)
@@ -82,14 +86,13 @@ userRouter.get(
 
       let searchResults = [];
 
-      booksResults = await UserModel.find({
-        firstname: { $regex: searchField, $options: '$i' },
+      booksResults = await BookModel.find({
+        bookName: { $regex: searchField, $options: '$i' },
       });
-      authorsResults = await UserModel.find({
+      authorsResults = await AuthorModel.find({
         firstname: { $regex: 'z', $options: '$i' },
       });
-      searchResults = [...booksResults, ...authorsResults];
-
+      searchResults = [booksResults, authorsResults];
       console.log(searchResults);
       res.send(searchResults);
     } catch (error) {
@@ -97,4 +100,26 @@ userRouter.get(
     }
   }
 );
+
+userRouter.get(
+  '/:id/books/:pageNumber',
+  authorizedUser,
+  async (req, res, next) => {
+    try {
+      const { pageNumber } = req.params;
+      console.log(`page numnber is ${pageNumber}`);
+
+      const skipNumber =
+        Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
+      const books = (await BookModel.find({}).skip(skipNumber).limit(2)) || [];
+      const booksCount = await BookModel.find({}).count();
+      console.log(`page numnber is ${books}`);
+
+      res.send({ books, booksCount });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
 module.exports = userRouter;

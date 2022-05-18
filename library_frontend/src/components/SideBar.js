@@ -11,7 +11,7 @@ import { Link, NavLink } from 'react-router-dom';
 const SideBar = () => {
   return (
     <>
-      <div className="side-bar sticky-top">
+      <div className="side-bar ">
         <CDBSidebar backgroundColor="#333">
           <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
             <Link to="/" className="text-decoration-none text-white ">
@@ -21,7 +21,7 @@ const SideBar = () => {
 
           <CDBSidebarContent>
             <CDBSidebarMenu>
-              <NavLink to="/" className="side-bar-hover">
+              <NavLink to="/" className="side-bar-hover custom-nav-link">
                 <CDBSidebarMenuItem
                   icon="fa-solid fa-book-bookmark"
                   title="All"
@@ -29,19 +29,27 @@ const SideBar = () => {
                   All
                 </CDBSidebarMenuItem>
               </NavLink>
-              <NavLink to="/" title="Read" className="side-bar-hover">
+              <NavLink
+                to="/"
+                title="Read"
+                className="side-bar-hover custom-nav-link"
+              >
                 <CDBSidebarMenuItem icon="book">Read</CDBSidebarMenuItem>
               </NavLink>
               <NavLink
                 to="/"
                 title="Currently Reading"
-                className="side-bar-hover"
+                className="side-bar-hover custom-nav-link"
               >
                 <CDBSidebarMenuItem icon="fa-solid fa-book-open-reader">
                   Currently Reading
                 </CDBSidebarMenuItem>
               </NavLink>
-              <NavLink to="/" title="Want To Read" className="side-bar-hover">
+              <NavLink
+                to="/"
+                title="Want To Read"
+                className="side-bar-hover custom-nav-link"
+              >
                 <CDBSidebarMenuItem icon="fa-solid fa-book-open">
                   Want To Read
                 </CDBSidebarMenuItem>

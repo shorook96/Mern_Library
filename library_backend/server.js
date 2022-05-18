@@ -34,14 +34,10 @@ app.use(['/books', '/book'], bookRouter);
 app.use('/admin', adminRouter);
 app.use('/categories', categoryRouter);
 
-/* app.use((err, req, res, next) => {
-  if (!err.status) {
-    res.status(522).send({ message: 'something went wrong' });
->>>>>>> d1629f0d911ad55633c563df6894396abfd0caf7
 app.use((error, req, res, next) => {
   if (error.code) {
-    res.statusCode = 522;
-    res.send({ message: 'something went wrong' });
+    res.statusCode = 500;
+    res.send({ message: 'something went wrong mina' });
     return next();
   }
   console.log(error.message);
@@ -51,9 +47,8 @@ app.use((error, req, res, next) => {
 });
 
 // app.use(errorHandling_middleware);
-}); */
 
-app.use(errorHandling_middleware);
+// app.use(errorHandling_middleware);
 
 app.listen(port, () => {
   console.log(`Server at http://localhost:${port}`);

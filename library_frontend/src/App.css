@@ -44,6 +44,65 @@
 .nav-shadow {
   box-shadow: 2px 2px 5px 8px #ededed;
 }
+/*************************/
+.custom-nav-link,
+.custom-nav-link:after,
+.custom-nav-link:before {
+  transition: all 0.5s;
+  position: relative;
+}
+.custom-nav-link:hover {
+  color: #555;
+}
+.custom-nav-link:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: '.';
+  color: transparent;
+  background: #aaa;
+  height: 1px;
+}
+.custom-nav-link {
+  transition: all 2s;
+}
+
+.custom-nav-link:after {
+  text-align: left;
+  content: '.';
+  margin: 0;
+  opacity: 0;
+}
+.custom-nav-link:hover {
+  color: #fff;
+  z-index: 1;
+}
+.custom-nav-link:hover:after {
+  z-index: -10;
+  animation: fill 0.5s forwards;
+  opacity: 1;
+}
+@keyframes fill {
+  0% {
+    width: 0%;
+    height: 1px;
+  }
+  50% {
+    width: 100%;
+    height: 1px;
+  }
+  100% {
+    width: 100%;
+    height: 100%;
+    background: rgb(255, 171, 82);
+    border-radius: 20%;
+  }
+}
+
+/************************/
 @media only screen and (min-width: 600px) {
   .btn_logging {
     width: 10rem;
@@ -89,7 +148,14 @@
   font-size: larger;
   padding-top: 5%;
 }
+/**********************************SearchBar******************/
+.search-name {
+  float: left;
+}
 
+.search-img {
+  float: right;
+}
 /**************************SideBar****************************/
 
 .side-bar {
@@ -144,3 +210,55 @@
 .card-item {
   width: 18rem;
 }
+
+/*****************************************************/
+.wrapper {
+  height: 300px;
+  width: 300px;
+  position: relative;
+  border: 5px solid rgb(229, 149, 20);
+  border-radius: 50%;
+  background: url(./assets/userimages/userlogo.png);
+  background-size: 100% 100%;
+  overflow: hidden;
+}
+.file-input {
+  position: absolute;
+  bottom: 0;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px 120px;
+  cursor: pointer;
+  transition: 0.5s;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+}
+.file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.file-input::before {
+  content: '\f030';
+  font-family: fontAwesome;
+  font-size: 50px;
+  color: rgb(229, 149, 20);
+  display: inline-block;
+  -webkit-user-select: none;
+}
+.file-input::after {
+  content: 'Upload';
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  display: block;
+  font-size: larger;
+}
+.file-input:hover {
+  opacity: 1;
+}
+
+.modal-background {
+  /* background: url('./assets/images/44.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%; */
+}
+/****************************************************/

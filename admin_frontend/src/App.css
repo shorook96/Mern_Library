@@ -37,3 +37,11 @@
   }
 }
 
+
+.addNewItemButton{
+  margin: 3%;
+}
+
+.addNewItemButton:hover{
+  cursor: pointer;
+}

@@ -2,28 +2,56 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PaginationComponent from './PaginationComponent';
 import ItemComponent from './ItemComponent';
+import { UseAuth } from '../Helpers/Auth';
+
 
 const BooksSlider = () => {
-  const [books, setBooks] = useState([]);
+  
+  const [res, setRes] =useState({})
+  
+  const [currentPage, setCurrentPage] =useState(1)
+  const { user } = UseAuth();
+  
+
+  const changeCurrent =(pageNumber)=>{
+    
+    setCurrentPage(pageNumber)
+  }
   useEffect(() => {
     axios
-      .get('https://jsonplaceholder.typicode.com/photos')
-      .then((response) => {
-        setBooks(response.data);
+      .get(`http://localhost:5000/user/${user.userInfo.id}/books/${currentPage}`, {
+        headers: {
+          authorization: user.userInfo.authorization,
+        },
       })
-      .catch((response) => {});
-  }, []);
+      .then((response) => {
+        
+        // console.log(response.data)
+        setRes(response.data)
+        
+
+        
+        
+      })
+      .catch((error) => {
+        console.log('errrrrrrrrrrrrrrrrrrrrrrr ' + error);
+      });
+  },[currentPage]);
 
   return (
     <>
-      <PaginationComponent
-        data={books}
-        RenderComponent={ItemComponent}
-        title="books"
-        buttonConst={3}
-        contentPerPage={6}
-        siblingCount={3}
-      />
+      {res.books && res.booksCount? (
+        <PaginationComponent
+          Data={res.books}
+          itemsCount={Number(res.booksCount)}
+          totalPageCount={Math.ceil(Number(res.booksCount) / 2)}
+          RenderComponent={ItemComponent}
+          changeCurrent ={changeCurrent}
+          currentPageNumber = {currentPage}
+        />
+    
+        // <h1>Data</h1>
+      ) :<h1>loading...</h1>}
     </>
   );
 };
