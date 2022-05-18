@@ -7,7 +7,7 @@ const UserHome = () => {
   return (
     <>
       <div className="d-flex">
-        <SideBar />
+        {/* <SideBar /> */}
         <Container>
           <BooksSlider />
         </Container>
