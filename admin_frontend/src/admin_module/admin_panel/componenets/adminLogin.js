@@ -5,6 +5,7 @@ import "./adminLogin.css"
 // import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './../../../App.css';
+import axios from 'axios';
 
 
 
@@ -35,9 +36,29 @@ const AdminLogin = ({ updateLoggedInStatus }) => {
     setValues({ ...values, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(values)
+    console.log(values);
+    try{
+      const res = await axios({
+          method: 'post',
+          url: 'http://localhost:5000/admin/login',
+          responseType: 'json',
+          data: values,
+         
+      });
+      console.log(res);
+      if(res.status === 200){
+          // reloadList();
+          // alert('Success');
+          // closeAddingMode();
+      }else{
+          alert(res.data.message);
+      }
+      
+  }catch(error){
+      alert(error.response.data.message);
+  }
   }
 
   const resetForm = () => {
