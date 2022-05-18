@@ -100,15 +100,7 @@ userRouter.get(
     }
   }
 );
-userRouter.get('/:id/books/count', authorizedUser, async (req, res, next) => {
-  try {
-    const booksCount = await BookModel.find({}).count();
-    console.log(' books ooooooooooooooooooooooo' + booksCount);
-    res.send({ booksCount });
-  } catch (error) {
-    next(error);
-  }
-});
+
 
 userRouter.get(
   '/:id/books/:pageNumber',
@@ -117,12 +109,15 @@ userRouter.get(
     try {
       const { pageNumber } = req.params;
       console.log(`page numnber is ${pageNumber}`);
+
       const skipNumber = Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
       const books = (await BookModel.find({}).skip(skipNumber).limit(2)) || [];
       const booksCount = await BookModel.find({}).count();
       console.log(`page numnber is ${books}`)
       
       res.send({books,booksCount});
+
+
     } catch (error) {
       next(error);
     }
