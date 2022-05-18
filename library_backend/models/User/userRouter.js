@@ -17,8 +17,9 @@ const {
 const { appendFile } = require('fs');
 
 const secretKey = 'zahra';
+
 userRouter.post('/signup', async (req, res, next) => {
-  const { Fname, Lname, email, password } = req.body;
+  const { Fname, Lname, email, password,URL } = req.body;
   try {
     const checkUserExisted = await UserModel.findOne({ email });
     if (checkUserExisted) {
@@ -27,7 +28,7 @@ userRouter.post('/signup', async (req, res, next) => {
         'User Already Exist ',
         'User Already Exist'
       );
-      throw error;
+      // throw error;
 
       return next(error);
     }
@@ -39,6 +40,7 @@ userRouter.post('/signup', async (req, res, next) => {
       lastname: Lname,
       email: email,
       password: hashedPassword,
+      image:URL
     });
     res.send({ success: true });
   } catch (error) {
@@ -101,7 +103,6 @@ userRouter.get(
   }
 );
 
-
 userRouter.get(
   '/:id/books/:pageNumber',
   authorizedUser,
@@ -110,14 +111,13 @@ userRouter.get(
       const { pageNumber } = req.params;
       console.log(`page numnber is ${pageNumber}`);
 
-      const skipNumber = Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
+      const skipNumber =
+        Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
       const books = (await BookModel.find({}).skip(skipNumber).limit(2)) || [];
       const booksCount = await BookModel.find({}).count();
-      console.log(`page numnber is ${books}`)
-      
-      res.send({books,booksCount});
+      console.log(`page numnber is ${books}`);
 
-
+      res.send({ books, booksCount });
     } catch (error) {
       next(error);
     }

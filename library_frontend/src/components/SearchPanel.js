@@ -45,11 +45,11 @@ const SearchPanel = () => {
           onBlur={(e) => setFilteredData([])}
         />
         {filteredData.length > 0 ? (
-          <div className="d-flex  dropdown-menu  mt-5 w-100">
+          <div className="d-flex  flex-column dropdown-menu  mt-5 w-100">
             {filteredData[0].map((field, index) => {
               return (
-                <div key={index} className="dropdown-item w-100 p-1">
-                  <Link to="" className="w-100 p-0">
+                <Link to="" className="dropdown-item w-100 p-1" key={index}>
+                  <div className=" w-100 p-1">
                     <span className="search-name"> {field.bookName}</span>
                     <img
                       src={field.photo}
@@ -57,8 +57,8 @@ const SearchPanel = () => {
                       height={30}
                       className="search-img"
                     />
-                  </Link>
-                </div>
+                  </div>
+                </Link>
               );
             })}
           </div>
