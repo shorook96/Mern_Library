@@ -37,7 +37,7 @@ app.use('/categories', categoryRouter);
 app.use((error, req, res, next) => {
   if (error.code) {
     res.statusCode = 500;
-    res.send({ message: 'something went wrong' });
+    res.send({ message: 'something went wrong mina' });
     return next();
   }
   console.log(error.message);
@@ -48,7 +48,7 @@ app.use((error, req, res, next) => {
 
 // app.use(errorHandling_middleware);
 
-app.use(errorHandling_middleware);
+// app.use(errorHandling_middleware);
 
 app.listen(port, () => {
   console.log(`Server at http://localhost:${port}`);

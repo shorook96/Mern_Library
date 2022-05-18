@@ -101,7 +101,6 @@ userRouter.get(
   }
 );
 
-
 userRouter.get(
   '/:id/books/:pageNumber',
   authorizedUser,
@@ -110,14 +109,13 @@ userRouter.get(
       const { pageNumber } = req.params;
       console.log(`page numnber is ${pageNumber}`);
 
-      const skipNumber = Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
+      const skipNumber =
+        Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
       const books = (await BookModel.find({}).skip(skipNumber).limit(2)) || [];
       const booksCount = await BookModel.find({}).count();
-      console.log(`page numnber is ${books}`)
-      
-      res.send({books,booksCount});
+      console.log(`page numnber is ${books}`);
 
-
+      res.send({ books, booksCount });
     } catch (error) {
       next(error);
     }

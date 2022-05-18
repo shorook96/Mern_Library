@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import userlogo from '../assets/userimages/userlogo.png';
 import * as Yup from 'yup';
 import axios from 'axios';
-
+import { storage } from './Helpers/FirebaseHelper';
 const initialValues = {
   Fname: '',
   Lname: '',
   email: '',
   password: '',
   confirmPassword: '',
-  // img:"
+  img: '',
 };
 
 const onSubmit = (values, { resetForm }) => {
@@ -44,6 +45,32 @@ const validationSchema = Yup.object({
 });
 
 const SignUpComponent = ({ clicked, handleSignUpClose }) => {
+  const [image, setImage] = useState({});
+  const [uploaded, setUploaded] = useState(false);
+
+  const handleUpload = () => {
+    const uploadTask = storage.ref(`images/${image.name}`).put(image);
+    uploadTask.on(
+      'state_change',
+      (snapshot) => {}, //current progress
+      (error) => {},
+      () => {
+        storage
+          .ref('images')
+          .child(image.name)
+          .getDownloadURL()
+          .then((url) => {
+            console.log(url);
+          });
+      }
+    );
+  };
+  const changBackGround = (e) => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
+      console.log(e.target.files[0]);
+    }
+  };
   return (
     <Modal
       show={clicked}
@@ -62,12 +89,20 @@ const SignUpComponent = ({ clicked, handleSignUpClose }) => {
         >
           <Form>
             <div className="mb-3">
-              <div className="wrapper">
+              <div
+                className="wrapper"
+                style={{
+                  backgroundImage: image.name
+                    ? `url(${window.URL.createObjectURL(image)})`
+                    : `url(${userlogo})`,
+                }}
+              >
                 <input
                   type="file"
-                  id="Fname"
-                  name="Fname"
+                  id="img"
+                  name="img"
                   className="file-input"
+                  onChange={changBackGround}
                 />
               </div>
             </div>

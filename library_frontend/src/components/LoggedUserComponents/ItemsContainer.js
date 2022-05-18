@@ -9,7 +9,7 @@ const ItemsContainer = ({ currentPageContent }) => {
       <Row>
         {currentPageContent.map((item, idx) => (
           <Col key={idx}>
-             <ItemComponent data={item}/>
+            <ItemComponent data={item} />
           </Col>
         ))}
       </Row>

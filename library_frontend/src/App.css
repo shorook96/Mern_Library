@@ -82,7 +82,7 @@
 }
 .custom-nav-link:hover:after {
   z-index: -10;
-  animation: fill 1s forwards;
+  animation: fill 0.5s forwards;
   opacity: 1;
 }
 @keyframes fill {
@@ -214,5 +214,51 @@
 /*****************************************************/
 .wrapper {
   height: 300px;
+  width: 300px;
+  position: relative;
+  border: 5px solid rgb(229, 149, 20);
+  border-radius: 50%;
+  background: url(./assets/userimages/userlogo.png);
+  background-size: 100% 100%;
+  overflow: hidden;
+}
+.file-input {
+  position: absolute;
+  bottom: 0;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px 120px;
+  cursor: pointer;
+  transition: 0.5s;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+}
+.file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.file-input::before {
+  content: '\f030';
+  font-family: fontAwesome;
+  font-size: 50px;
+  color: rgb(229, 149, 20);
+  display: inline-block;
+  -webkit-user-select: none;
+}
+.file-input::after {
+  content: 'Upload';
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  display: block;
+  font-size: larger;
+}
+.file-input:hover {
+  opacity: 1;
+}
+
+.modal-background {
+  /* background: url('./assets/images/44.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%; */
 }
 /****************************************************/

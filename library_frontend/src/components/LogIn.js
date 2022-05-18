@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-import {
-  Formik,
-  Form,
-  Field,
-  ErrorMessage
-} from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
 import * as Yup from 'yup';
 import { UseAuth } from './Helpers/Auth';
@@ -44,15 +39,12 @@ const LogIn = ({ clicked, handleLogInClose }) => {
       onHide={handleLogInClose}
       backdrop="static"
       className="text-dark "
-      
       centered
     >
-      {/* <Modal.Header closeButton>
+      <Modal.Header closeButton className="modal-background">
         <Modal.Title>Welcome Back</Modal.Title>
-      </Modal.Header> */}
-      <Modal.Body
-      
-      >
+      </Modal.Header>
+      <Modal.Body className="modal-background" closeButton>
         <Formik
           initialValues={initialValues}
           onSubmit={onSubmit}
