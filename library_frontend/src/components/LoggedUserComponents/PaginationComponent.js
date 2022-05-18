@@ -1,103 +1,108 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { UseAuth } from '../Helpers/Auth';
+import ItemsContainer from './ItemsContainer';
 import { usePaginationRange } from './UsePaginationCustomHook';
-export const DOTS = '...';
 
 const PaginationComponent = ({
-  data,
+  Data,
+  itemsCount,
+  totalPageCount,
   RenderComponent,
-  title,
-  buttonConst,
-  contentPerPage,
-  siblingCount,
+  changeCurrent,
+  currentPageNumber
 }) => {
-  const [totalPageCount] = useState(Math.ceil(data.length / contentPerPage));
-  const [currentPage, setCurrentPage] = useState(1);
+  // const [currentPage, setCurrentPage] = useState(currentPageNumber);
+  // const [currentPageContent, setCurrentPageContent] = useState(Data);
+  
+  console.log(`zzzz${currentPageNumber}`)
+  // console.log(`zzzz${Data[0]._id}`)
+  // console.log(`aaaaaa${currentPage}`)
+  
 
-  const paginationRange = usePaginationRange({
-    totalPageCount,
-    contentPerPage,
-    buttonConst,
-    siblingCount,
-    currentPage,
-  });
-
-  useEffect(() => {
-    // window.scrollTo({
-    //   behavior: 'smooth',
-    //   top: '0px',
-    // });
-  }, [currentPage]);
-
+  const buttonConst = 3;
+  const siblingCount = 1;
   function goToNextPage() {
-    setCurrentPage((page) => page + 1);
+    
+    // changeCurrent(currentPage +1)
+    // setCurrentPage(currentPageNumber)
+    changeCurrent(currentPageNumber +1)
+   
+    
   }
   function gotToPreviousPage() {
-    setCurrentPage((page) => page - 1);
+    
+    // changeCurrent(currentPage -1)
+    // setCurrentPage(currentPageNumber)
+    changeCurrent(currentPageNumber -1)
+    
   }
-  function changePage(event) {
-    const pageNumber = Number(event.target.textContent);
-    setCurrentPage(pageNumber);
-  }
-  const getPaginatedData = () => {
-    const startIndex = currentPage * contentPerPage - contentPerPage;
-    const endIndex = startIndex + contentPerPage;
-    return data.slice(startIndex, endIndex);
-  };
+  
+  // function setCurrent(e){
+  //   if (e.target.value === '...') {}
+  //   else{
+  //     changeCurrent(Number(e.target.value))
+  //     // setCurrentPage(currentPageNumber)
+  //   };
+    
+    
+  // useEffect(() => {
+  //   setCurrentPage(currentPageNumber)
+  // }) 
 
+  const pageRange = usePaginationRange({
+    totalPageCount,  //2
+    buttonConst,
+    siblingCount,
+    currentPageNumber,
+  });
+  
   return (
-    <div>
-      <h1>{title}</h1>
-      <div className="container">
-        <Row>
-          {getPaginatedData().map((dataItem, index) => (
-            <Col md={4}>
-              <RenderComponent key={index} data={dataItem} />
-            </Col>
-          ))}
-        </Row>
-      </div>
-
-      <div className="pagination">
-        <button
-          onClick={gotToPreviousPage}
-          className={` page-item page-link" ${
-            currentPage === 1 ? 'disabled' : ''
-          }`}
-        >
-          prev
-        </button>
-        {paginationRange.map((item, index) => {
-          if (item === DOTS) {
-            return (
-              <button key={index} className={`page-item page-link`}>
-                &#8230;
-              </button>
-            );
-          }
-          return (
+    <>
+      <ItemsContainer currentPageContent={Data} />
+      <nav aria-label="Page navigation example">
+        <ul className="pagination">
+          <li className="page-item">
             <button
-              key={index}
-              onClick={changePage}
-              className={`page-item page-link ${
-                currentPage === item ? 'active' : null
-              }`}
+              className="page-link"
+              href="#"
+              aria-label="Previous"
+              disabled={currentPageNumber === 1}
+              onClick={gotToPreviousPage}
             >
-              <span>{item}</span>
+              <span aria-hidden="true">&laquo;</span>
+              <span className="sr-only">Previous</span>
             </button>
-          );
-        })}
-        <button
-          onClick={goToNextPage}
-          className={`page-item page-link ${
-            currentPage === totalPageCount ? 'disabled' : ''
-          }`}
-        >
-          next
-        </button>
-      </div>
-    </div>
-  );
-};
+          </li>
+          {pageRange.map((val) => {
+            
+            return(<li className="page-item" key={val}>
+              <button 
+                className={currentPageNumber === val  ? 'active btn-primary page-link': 'page-link' }
+                onClick={()=>changeCurrent(val)}
+                
+              >
+                {val}
+              </button>
+            </li>)
+          })}
+
+          <li className="page-item">
+            <button
+              className="page-link"
+              href="#"
+              aria-label="Next"
+              disabled={currentPageNumber === totalPageCount}
+              onClick={goToNextPage}
+            >
+              <span aria-hidden="true">&raquo;</span>
+              <span className="sr-only">Next</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </>
+  );}
+
 
 export default PaginationComponent;

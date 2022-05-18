@@ -6,7 +6,6 @@ const BeforeLogging = () => {
   const [showSignUp, setSignUpShow] = useState(false);
   const handleSignUpClose = () => setSignUpShow(false);
   const handleSignUpShow = () => setSignUpShow(true);
-
   const [showLogIn, setLogInShow] = useState(false);
   const handleLogInClose = () => setLogInShow(false);
   const handleLogInShow = () => setLogInShow(true);

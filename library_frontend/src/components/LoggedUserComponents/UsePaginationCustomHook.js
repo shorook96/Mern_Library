@@ -6,8 +6,7 @@ const range = (start, end) => {
 };
 
 export const usePaginationRange = ({
-  totalPageCount,
-  contentPerPage,
+  totalPageCount,  
   buttonConst,
   siblingCount,
   currentPage,
@@ -16,6 +15,7 @@ export const usePaginationRange = ({
     const totalPageNumbers = buttonConst + 2 + siblingCount;
 
     if (totalPageNumbers >= totalPageCount) {
+      
       return range(1, totalPageCount);
     }
 

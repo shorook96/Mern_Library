@@ -1,10 +1,14 @@
 import React from 'react';
 import SideBar from '../SideBar';
+import BooksSlider from './BooksSlider';
 
 const UserHome = () => {
   return (
     <>
-      <div>{<SideBar />}</div>
+      <div>
+        {/* {<SideBar />} */}
+        <BooksSlider />
+      </div>
     </>
   );
 };

@@ -11,22 +11,8 @@ import shelf from '../assets/images/shelf.png';
 
 export default function HomeStartImages() {
   return (
-    <Container>
+    <Container className="mt-5">
       <Row>
-        <Col md={7} className="p-5 ">
-          <div className="books-header">
-            <p className="font-weight-bolder Header-Title h1">
-              Top Rated Books
-            </p>
-            <Container className="text-center">
-              <p className="book-header-desc">
-                If you want the best of the best, these six star books won’t
-                disappoint . Here are 6 of all-time favorite books to our reader
-                to read.
-              </p>
-            </Container>
-          </div>
-        </Col>
         <Col md={5}>
           <Row>
             <Col sm={12} md={4} className="text-center">
@@ -68,6 +54,20 @@ export default function HomeStartImages() {
               />
             </Col>
           </Row>
+        </Col>
+        <Col md={7} className="p-5 ml-1 ">
+          <div className="books-header">
+            <p className="font-weight-bolder Header-Title h1">
+              Top Rated Books
+            </p>
+            <Container className="text-center">
+              <p className="book-header-desc">
+                If you want the best of the best, these six star books won’t
+                disappoint . Here are 6 of all-time favorite books to our reader
+                to read.
+              </p>
+            </Container>
+          </div>
         </Col>
       </Row>
     </Container>
