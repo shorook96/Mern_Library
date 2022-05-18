@@ -6,7 +6,7 @@ const UserHome = () => {
   return (
     <>
       <div>
-        {<SideBar />}
+        {/* {<SideBar />} */}
         <BooksSlider />
       </div>
     </>

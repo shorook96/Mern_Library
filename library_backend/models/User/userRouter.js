@@ -117,11 +117,12 @@ userRouter.get(
     try {
       const { pageNumber } = req.params;
       console.log(`page numnber is ${pageNumber}`);
-      const skipNumber = +pageNumber === 1 ? 0 : Number(pageNumber) * 6 - 6;
-      const books = (await BookModel.find({}).skip(skipNumber).limit(6)) || [];
-      console.log(`Books are ${books}`);
-      console.log(searchResults);
-      res.send(books);
+      const skipNumber = Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
+      const books = (await BookModel.find({}).skip(skipNumber).limit(2)) || [];
+      const booksCount = await BookModel.find({}).count();
+      console.log(`page numnber is ${books}`)
+      
+      res.send({books,booksCount});
     } catch (error) {
       next(error);
     }

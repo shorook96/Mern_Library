@@ -210,3 +210,9 @@
 .card-item {
   width: 18rem;
 }
+
+/********************************* Form style **************************************/
+.modal-login{
+  /* background-image: url(./assets/images/AuthorsCover2.jpg); */
+  background-color: #555;
+}

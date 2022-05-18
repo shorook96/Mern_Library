@@ -4,45 +4,54 @@ import PaginationComponent from './PaginationComponent';
 import ItemComponent from './ItemComponent';
 import { UseAuth } from '../Helpers/Auth';
 
-const BooksSlider = () => {
-  let totalPageCount = 0;
-  let BooksCount = 0;
-  const { user } = UseAuth();
 
+const BooksSlider = () => {
+  
+  const [res, setRes] =useState({})
+  
+  const [currentPage, setCurrentPage] =useState(1)
+  const { user } = UseAuth();
+  
+
+  const changeCurrent =(pageNumber)=>{
+    
+    setCurrentPage(pageNumber)
+  }
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/user/${user.userInfo.id}/books/count`, {
+      .get(`http://localhost:5000/user/${user.userInfo.id}/books/${currentPage}`, {
         headers: {
           authorization: user.userInfo.authorization,
         },
       })
       .then((response) => {
-        BooksCount = response.data.booksCount;
-        totalPageCount = Math.ceil(BooksCount / 6);
-        console.log('hhhhhhhhhhhhh ' + BooksCount + ' ' + totalPageCount);
+        
+        // console.log(response.data)
+        setRes(response.data)
+        
+
+        
+        
       })
       .catch((error) => {
         console.log('errrrrrrrrrrrrrrrrrrrrrrr ' + error);
       });
-  }, []);
+  },[currentPage]);
 
   return (
     <>
-      {/* <PaginationComponent
-        itemsCount={books.length}
-        RenderComponent={ItemComponent}
-        contentPerPage={6}
-        title="books"
-        buttonConst={3}
-        siblingCount={6}
-      /> */}
-      {BooksCount ? (
+      {res.books && res.booksCount? (
         <PaginationComponent
-          itemsCount={BooksCount}
-          totalPageCount={totalPageCount}
+          Data={res.books}
+          itemsCount={Number(res.booksCount)}
+          totalPageCount={Math.ceil(Number(res.booksCount) / 2)}
           RenderComponent={ItemComponent}
+          changeCurrent ={changeCurrent}
+          currentPageNumber = {currentPage}
         />
-      ) : null}
+    
+        // <h1>Data</h1>
+      ) :<h1>loading...</h1>}
     </>
   );
 };

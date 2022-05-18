@@ -5,53 +5,61 @@ import ItemsContainer from './ItemsContainer';
 import { usePaginationRange } from './UsePaginationCustomHook';
 
 const PaginationComponent = ({
+  Data,
   itemsCount,
   totalPageCount,
   RenderComponent,
+  changeCurrent,
+  currentPageNumber
 }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [currentPageContent, setCurrentPageContent] = useState([]);
-  const { user } = UseAuth();
+  // const [currentPage, setCurrentPage] = useState(currentPageNumber);
+  // const [currentPageContent, setCurrentPageContent] = useState(Data);
+  
+  console.log(`zzzz${currentPageNumber}`)
+  // console.log(`zzzz${Data[0]._id}`)
+  // console.log(`aaaaaa${currentPage}`)
+  
 
   const buttonConst = 3;
   const siblingCount = 1;
   function goToNextPage() {
-    setCurrentPage((page) => page + 1);
+    
+    // changeCurrent(currentPage +1)
+    // setCurrentPage(currentPageNumber)
+    changeCurrent(currentPageNumber +1)
+   
+    
   }
   function gotToPreviousPage() {
-    setCurrentPage((page) => page - 1);
+    
+    // changeCurrent(currentPage -1)
+    // setCurrentPage(currentPageNumber)
+    changeCurrent(currentPageNumber -1)
+    
   }
-  useEffect(() => {
-    window.scrollTo({
-      behavior: 'smooth',
-      top: '0px',
-    });
-    axios
-      .get(
-        `http://localhost:5000/user/${user.userInfo.id}/books/:${currentPage}`,
-        {
-          headers: {
-            authorization: user.userInfo.authorization,
-          },
-        }
-      )
-      .then((response) => {
-        setCurrentPageContent(response.data);
-      })
-      .catch((error) => {
-        console.log('myerrrrrrrrrrrrrrrrrrrrrrrr ' + error);
-      });
-  }, [currentPage]);
+  
+  // function setCurrent(e){
+  //   if (e.target.value === '...') {}
+  //   else{
+  //     changeCurrent(Number(e.target.value))
+  //     // setCurrentPage(currentPageNumber)
+  //   };
+    
+    
+  // useEffect(() => {
+  //   setCurrentPage(currentPageNumber)
+  // }) 
 
   const pageRange = usePaginationRange({
-    totalPageCount,
+    totalPageCount,  //2
     buttonConst,
     siblingCount,
-    currentPage,
+    currentPageNumber,
   });
+  
   return (
     <>
-      <ItemsContainer currentPageContent={currentPageContent} />
+      <ItemsContainer currentPageContent={Data} />
       <nav aria-label="Page navigation example">
         <ul className="pagination">
           <li className="page-item">
@@ -59,7 +67,7 @@ const PaginationComponent = ({
               className="page-link"
               href="#"
               aria-label="Previous"
-              disabled={currentPage === 1}
+              disabled={currentPageNumber === 1}
               onClick={gotToPreviousPage}
             >
               <span aria-hidden="true">&laquo;</span>
@@ -67,16 +75,16 @@ const PaginationComponent = ({
             </button>
           </li>
           {pageRange.map((val) => {
-            <li className="page-item">
-              <button
-                className="page-link"
-                href="#"
-                classNameName={currentPage === val ? 'active' : ''}
-                onClick={(e) => (e === '...' ? null : setCurrentPage(val))}
+            
+            return(<li className="page-item" key={val}>
+              <button 
+                className={currentPageNumber === val  ? 'active btn-primary page-link': 'page-link' }
+                onClick={()=>changeCurrent(val)}
+                
               >
                 {val}
               </button>
-            </li>;
+            </li>)
           })}
 
           <li className="page-item">
@@ -84,7 +92,7 @@ const PaginationComponent = ({
               className="page-link"
               href="#"
               aria-label="Next"
-              disabled={currentPage === 1}
+              disabled={currentPageNumber === totalPageCount}
               onClick={goToNextPage}
             >
               <span aria-hidden="true">&raquo;</span>
@@ -94,7 +102,7 @@ const PaginationComponent = ({
         </ul>
       </nav>
     </>
-  );
-};
+  );}
+
 
 export default PaginationComponent;
