@@ -11,10 +11,7 @@ const initialValues = {
   email: '',
   password: '',
   confirmPassword: '',
-  
 };
-
-
 
 const validationSchema = Yup.object({
   Fname: Yup.string().required('Required*'),
@@ -27,12 +24,11 @@ const validationSchema = Yup.object({
     [Yup.ref('password'), null],
     'Passwords must match'
   ),
-  
 });
 
 const SignUpComponent = ({ clicked, handleSignUpClose }) => {
   const [image, setImage] = useState({});
-  const [URL , setURL] = useState("")
+  const [URL, setURL] = useState('');
 
   const handleUpload = () => {
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
@@ -47,7 +43,7 @@ const SignUpComponent = ({ clicked, handleSignUpClose }) => {
           .getDownloadURL()
           .then((url) => {
             console.log(url);
-            setURL(url)
+            setURL(url);
           });
       }
     );
@@ -61,9 +57,9 @@ const SignUpComponent = ({ clicked, handleSignUpClose }) => {
 
   const onSubmit = (values, { resetForm }) => {
     // console.log(values);
-    handleUpload()
-    const data = {...values, URL}
-    console.log(data)
+    handleUpload();
+    const data = { ...values, URL };
+    console.log(data);
     axios
       .post('http://localhost:5000/user/signup', data)
       .then((response) => {
@@ -74,8 +70,8 @@ const SignUpComponent = ({ clicked, handleSignUpClose }) => {
         console.log('entered error');
         console.log(error);
       });
-    setImage({})
-    setURL("")
+    setImage({});
+    setURL('');
     resetForm({ values: '' });
   };
   return (
@@ -158,7 +154,7 @@ const SignUpComponent = ({ clicked, handleSignUpClose }) => {
                 {(error) => <div className="error">{error}</div>}
               </ErrorMessage>
             </div>
-            
+
             <Button type="submit" variant="primary" onClick={handleSignUpClose}>
               SignUp
             </Button>
