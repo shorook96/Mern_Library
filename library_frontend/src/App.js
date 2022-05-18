@@ -6,6 +6,8 @@ import React from 'react';
 import { UseAuth } from './components/Helpers/Auth';
 import UserHome from './components/LoggedUserComponents/UserHome';
 import UserProfile from './components/LoggedUserComponents/UserProfile';
+import { Route, Routes } from 'react-router-dom';
+import PageNotFoundComponent from './components/PageNotFoundComponent';
 
 function App() {
   const { user } = UseAuth();
@@ -13,8 +15,11 @@ function App() {
   return (
     <React.Fragment>
       <NavComponent />
-      {user ? <div>{<UserHome />}</div> : <HomeComponent />}
-
+      {/* {user ? <div>{<UserHome />}</div> : <HomeComponent />} */}
+      <Routes>
+        <Route path="*" element={<PageNotFoundComponent />} />
+        <Route path="/" element={user ? <UserHome /> : <HomeComponent />} />
+      </Routes>
       {/* <Footer /> */}
     </React.Fragment>
   );

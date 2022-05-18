@@ -119,9 +119,10 @@ userRouter.get(
       console.log(`page numnber is ${pageNumber}`);
       const skipNumber = +pageNumber === 1 ? 0 : Number(pageNumber) * 6 - 6;
       const books = (await BookModel.find({}).skip(skipNumber).limit(6)) || [];
+      const booksCount = await BookModel.find({}).count();
       console.log(`Books are ${books}`);
       console.log(searchResults);
-      res.send(books);
+      res.send({ books, booksCount });
     } catch (error) {
       next(error);
     }

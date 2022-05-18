@@ -1,18 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { UseAuth } from '../Helpers/Auth';
 import ItemsContainer from './ItemsContainer';
+import UseGetBooks from './UseGetBooks';
 import { usePaginationRange } from './UsePaginationCustomHook';
 
-const PaginationComponent = ({
-  itemsCount,
-  totalPageCount,
-  RenderComponent,
-}) => {
+const PaginationComponent = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [currentPageContent, setCurrentPageContent] = useState([]);
-  const { user } = UseAuth();
-
+  const [PageContent, totalBooksCount] = UseGetBooks(currentPage);
+  const totalPageCount = Math.ceil(totalBooksCount / 6);
   const buttonConst = 3;
   const siblingCount = 1;
   function goToNextPage() {
@@ -26,21 +21,6 @@ const PaginationComponent = ({
       behavior: 'smooth',
       top: '0px',
     });
-    axios
-      .get(
-        `http://localhost:5000/user/${user.userInfo.id}/books/:${currentPage}`,
-        {
-          headers: {
-            authorization: user.userInfo.authorization,
-          },
-        }
-      )
-      .then((response) => {
-        setCurrentPageContent(response.data);
-      })
-      .catch((error) => {
-        console.log('myerrrrrrrrrrrrrrrrrrrrrrrr ' + error);
-      });
   }, [currentPage]);
 
   const pageRange = usePaginationRange({
@@ -51,7 +31,7 @@ const PaginationComponent = ({
   });
   return (
     <>
-      <ItemsContainer currentPageContent={currentPageContent} />
+      <ItemsContainer currentPageContent={PageContent} />
       <nav aria-label="Page navigation example">
         <ul className="pagination">
           <li className="page-item">
