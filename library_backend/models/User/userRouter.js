@@ -100,26 +100,32 @@ userRouter.get(
     }
   }
 );
-userRouter.get('/books/count', authorizedUser, async (req, res, next) => {
+userRouter.get('/:id/books/count', authorizedUser, async (req, res, next) => {
   try {
     const booksCount = await BookModel.find({}).count();
-    console.log(booksCount);
-    res.send(booksCount);
+    console.log(' books ooooooooooooooooooooooo' + booksCount);
+    res.send({ booksCount });
   } catch (error) {
     next(error);
   }
 });
 
-userRouter.get('/books/:pageNumber', authorizedUser, async (req, res, next) => {
-  try {
-    const { pageNumber } = req.params;
-    const skipNumber = +pageNumber === 1 ? 0 : Number(pageNumber) * 6 - 6;
-    const books = await BookModel.find({}).skip(skipNumber).limit(6);
-    console.log(searchResults);
-    res.send(books);
-  } catch (error) {
-    next(error);
+userRouter.get(
+  '/:id/books/:pageNumber',
+  authorizedUser,
+  async (req, res, next) => {
+    try {
+      const { pageNumber } = req.params;
+      console.log(`page numnber is ${pageNumber}`);
+      const skipNumber = +pageNumber === 1 ? 0 : Number(pageNumber) * 6 - 6;
+      const books = (await BookModel.find({}).skip(skipNumber).limit(6)) || [];
+      console.log(`Books are ${books}`);
+      console.log(searchResults);
+      res.send(books);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 module.exports = userRouter;

@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { UseAuth } from '../Helpers/Auth';
+import ItemsContainer from './ItemsContainer';
 import { usePaginationRange } from './UsePaginationCustomHook';
 
 const PaginationComponent = ({
@@ -9,6 +11,7 @@ const PaginationComponent = ({
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentPageContent, setCurrentPageContent] = useState([]);
+  const { user } = UseAuth();
 
   const buttonConst = 3;
   const siblingCount = 1;
@@ -24,11 +27,20 @@ const PaginationComponent = ({
       top: '0px',
     });
     axios
-      .get(`http://localhost:5000/user/books/:${currentPage}`)
+      .get(
+        `http://localhost:5000/user/${user.userInfo.id}/books/:${currentPage}`,
+        {
+          headers: {
+            authorization: user.userInfo.authorization,
+          },
+        }
+      )
       .then((response) => {
         setCurrentPageContent(response.data);
       })
-      .catch((response) => {});
+      .catch((error) => {
+        console.log('myerrrrrrrrrrrrrrrrrrrrrrrr ' + error);
+      });
   }, [currentPage]);
 
   const pageRange = usePaginationRange({
@@ -39,26 +51,27 @@ const PaginationComponent = ({
   });
   return (
     <>
+      <ItemsContainer currentPageContent={currentPageContent} />
       <nav aria-label="Page navigation example">
-        <ul class="pagination">
-          <li class="page-item">
+        <ul className="pagination">
+          <li className="page-item">
             <button
-              class="page-link"
+              className="page-link"
               href="#"
               aria-label="Previous"
               disabled={currentPage === 1}
               onClick={gotToPreviousPage}
             >
               <span aria-hidden="true">&laquo;</span>
-              <span class="sr-only">Previous</span>
+              <span className="sr-only">Previous</span>
             </button>
           </li>
           {pageRange.map((val) => {
-            <li class="page-item">
+            <li className="page-item">
               <button
-                class="page-link"
+                className="page-link"
                 href="#"
-                className={currentPage === val ? 'active' : ''}
+                classNameName={currentPage === val ? 'active' : ''}
                 onClick={(e) => (e === '...' ? null : setCurrentPage(val))}
               >
                 {val}
@@ -66,16 +79,16 @@ const PaginationComponent = ({
             </li>;
           })}
 
-          <li class="page-item">
+          <li className="page-item">
             <button
-              class="page-link"
+              className="page-link"
               href="#"
               aria-label="Next"
               disabled={currentPage === 1}
               onClick={goToNextPage}
             >
               <span aria-hidden="true">&raquo;</span>
-              <span class="sr-only">Next</span>
+              <span className="sr-only">Next</span>
             </button>
           </li>
         </ul>

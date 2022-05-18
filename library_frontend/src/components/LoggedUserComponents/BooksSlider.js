@@ -2,18 +2,28 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PaginationComponent from './PaginationComponent';
 import ItemComponent from './ItemComponent';
+import { UseAuth } from '../Helpers/Auth';
 
 const BooksSlider = () => {
-  const totalPageCount = 0;
-  const BooksCount = 0;
+  let totalPageCount = 0;
+  let BooksCount = 0;
+  const { user } = UseAuth();
+
   useEffect(() => {
     axios
-      .get('http://localhost:5000/user/books/count')
-      .then((response) => {
-        BooksCount = response.data;
-        totalPageCount = Math.ceil(BooksCount / 6);
+      .get(`http://localhost:5000/user/${user.userInfo.id}/books/count`, {
+        headers: {
+          authorization: user.userInfo.authorization,
+        },
       })
-      .catch((response) => {});
+      .then((response) => {
+        BooksCount = response.data.booksCount;
+        totalPageCount = Math.ceil(BooksCount / 6);
+        console.log('hhhhhhhhhhhhh ' + BooksCount + ' ' + totalPageCount);
+      })
+      .catch((error) => {
+        console.log('errrrrrrrrrrrrrrrrrrrrrrr ' + error);
+      });
   }, []);
 
   return (
@@ -26,11 +36,13 @@ const BooksSlider = () => {
         buttonConst={3}
         siblingCount={6}
       /> */}
-      <PaginationComponent
-        itemsCount={BooksCount}
-        totalPageCount={totalPageCount}
-        RenderComponent={ItemComponent}
-      />
+      {BooksCount ? (
+        <PaginationComponent
+          itemsCount={BooksCount}
+          totalPageCount={totalPageCount}
+          RenderComponent={ItemComponent}
+        />
+      ) : null}
     </>
   );
 };

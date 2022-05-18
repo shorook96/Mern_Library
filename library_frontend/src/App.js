@@ -13,7 +13,7 @@ function App() {
   return (
     <React.Fragment>
       <NavComponent />
-      {user ? <div>{<UserProfile />}</div> : <HomeComponent />}
+      {user ? <div>{<UserHome />}</div> : <HomeComponent />}
 
       {/* <Footer /> */}
     </React.Fragment>
