@@ -5,6 +5,7 @@ const bookRouter = require('./controllers/bookRouter');
 const homeRouter = require('./controllers/HomeRouter');
 
 require('./db');
+const BookModel = require('./models/bookModel');
 const categoryRouter = require('./controllers/categoryRouter');
 const {
   errorHandling_middleware,
@@ -19,7 +20,23 @@ const userRouter = require('./models/User/userRouter');
 app.use(cors());
 app.use(express.json());
 
+<<<<<<< HEAD
 app.use('/', homeRouter);
+=======
+
+
+app.get('/topRated', async (req, res, next) => {
+  try{
+    const books = (await BookModel.find({}).sort({rating:-1}).limit(8).populate("category").populate("author"));
+    res.send({ books})
+  } catch (error) {
+    next(error);
+  }
+  
+})
+
+
+>>>>>>> 22313cbfbedc594e3cb9175eafbfa0e86cf67a7e
 app.use('/user', userRouter);
 app.use('/admin', adminRouter);
 app.use('/categories', categoryRouter);
