@@ -1,11 +1,29 @@
-import React from 'react';
+import {React, useState, useEffect} from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import AuthorHomePart from './AuthorHomePart';
 import HomeStartImages from './HomeStartImages';
+import axios from 'axios';
 
 const HomeAuthorsComponent = () => {
+
+  const [data, setData] = useState([])
+  useEffect(() => {
+    axios
+      .get('http://localhost:5000/topRatedcategories', {
+  
+      })
+      .then((response) => {
+        console.log(response)
+        setData(response.data.books)
+        
+      })
+      .catch((error) => {
+        console.log('errrrrrrrrrrrrrrrrrrrrrrr ' + error);
+      });
+  },[])
   return (
     <>
+      {data.length? (
       <Container>
         <Row>
           <Col md={7}>
@@ -31,24 +49,24 @@ const HomeAuthorsComponent = () => {
                 <Col sm={3} className="hide-column"></Col>
 
                 <Col sm={9} className="p-3">
-                  <AuthorHomePart isImgRight={true} />
+                  <AuthorHomePart isImgRight={true} author={data[0].author}/>
                 </Col>
               </Row>
               <Row>
                 <Col sm={9} className="p-3">
-                  <AuthorHomePart isImgRight={false} />
+                  <AuthorHomePart isImgRight={false} author={data[1].author}/>
                 </Col>
                 <Col sm={3} className="hide-column"></Col>
               </Row>
               <Row>
                 <Col sm={3} className="hide-column"></Col>
                 <Col sm={9} className="p-3">
-                  <AuthorHomePart isImgRight={true} />
+                  <AuthorHomePart isImgRight={true} author={data[2].author}/>
                 </Col>
               </Row>
               <Row>
                 <Col sm={9} className="p-3">
-                  <AuthorHomePart isImgRight={false} />
+                  <AuthorHomePart isImgRight={false} author={data[0].author}/>
                 </Col>
                 <Col sm={3} className="hide-column"></Col>
               </Row>
@@ -56,7 +74,8 @@ const HomeAuthorsComponent = () => {
           </Col>
         </Row>
       </Container>
-    </>
+   ) :<h1>loading...</h1>}
+   </>
   );
 };
 

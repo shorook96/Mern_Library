@@ -20,15 +20,40 @@ app.use(express.json());
 
 
 
-app.get('/topRated', async (req, res, next) => {
+app.get('/topRatedbooks', async (req, res, next) => {
   try{
     const books = (await BookModel.find({}).sort({rating:-1}).limit(8).populate("category").populate("author"));
+
     res.send({ books})
   } catch (error) {
     next(error);
   }
   
 })
+app.get('/topRatedcategories', async (req, res, next) => {
+  try{
+    const books = (await BookModel.find({}).sort({rating:-1}).limit(8).populate("category").populate("author"));
+
+
+    res.send({ books})
+  } catch (error) {
+    next(error);
+  }
+  
+})
+
+app.get('/topRatedauthors', async (req, res, next) => {
+  try{
+    const books = (await BookModel.find({}).sort({rating:-1}).limit(8).populate("category").populate("author"));
+
+
+    res.send({ books})
+  } catch (error) {
+    next(error);
+  }
+  
+})
+
 
 
 app.use('/user', userRouter);
