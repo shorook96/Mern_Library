@@ -38,20 +38,29 @@ function App() {
   return (
     <React.Fragment>
       <NavComponent />
-      {user ? <UserHome /> : <HomeComponent />}
+      {/* {user ? <UserHome /> : <HomeComponent />} */}
       <Routes>
-        {/* <Route path="*" element={<PageNotFoundComponent />} /> */}
+        <Route path="*" element={<PageNotFoundComponent />} />
+
         <Route
           path="/login"
           element={
-            <LogIn
-              clicked={showLogIn}
-              handleLogInClose={handleLogInClose}
-              changeUrl={changeUrl}
-              state={{ path: Location.pathname }}
-            />
+            user ? (
+              <UserHome />
+            ) : (
+              <>
+                <HomeComponent />
+                <LogIn
+                  clicked={showLogIn}
+                  handleLogInClose={handleLogInClose}
+                  changeUrl={changeUrl}
+                  state={{ path: Location.pathname }}
+                />
+              </>
+            )
           }
         />
+
         <Route
           path="/books/:pagenumber"
           element={
@@ -68,9 +77,8 @@ function App() {
             </CheckAuth>
           }
         />
-        =======
         <Route path="*" element={<PageNotFoundComponent />} />
-        <Route path="/" element={user ? <UserHome /> : <HomeComponent />} />
+        {/* <Route path="/" element={user ? <UserHome /> : <HomeComponent />} /> */}
         {/* <Route path="/" element={user ? <AllAuthors /> : <HomeComponent />} /> */}
         {/* <Route path="/" element={user ? <AllCategories /> : <HomeComponent />} /> */}
         {/* <Route path="/author" element={<Author/>}></Route>
