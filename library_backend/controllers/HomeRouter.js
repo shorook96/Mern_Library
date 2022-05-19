@@ -3,6 +3,7 @@ const homeRouter = express.Router();
 const bookModel = require('../models/bookModel');
 const categoryModel = require('../models/categoryModel');
 const authorModel = require('../models/authorModel');
+const BookModel = require('../models/bookModel');
 const mongoose = require('mongoose');
 homeRouter.get('/topRatedCategories', async (req, res, next) => {
   try {
@@ -42,6 +43,18 @@ homeRouter.get('/topRatedAuthors', async (req, res, next) => {
     res.send(result);
   } catch (error) {
     return next(error);
+  }
+});
+app.get('/topRated', async (req, res, next) => {
+  try {
+    const books = await BookModel.find({})
+      .sort({ rating: -1 })
+      .limit(8)
+      .populate('category')
+      .populate('author');
+    res.send({ books });
+  } catch (error) {
+    next(error);
   }
 });
 module.exports = homeRouter;
