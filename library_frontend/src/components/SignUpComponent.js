@@ -1,32 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import userlogo from '../assets/userimages/userlogo.png';
 import * as Yup from 'yup';
 import axios from 'axios';
-
+import { storage } from './Helpers/FirebaseHelper';
 const initialValues = {
   Fname: '',
   Lname: '',
   email: '',
   password: '',
   confirmPassword: '',
-  // img:"
-};
-
-const onSubmit = (values, { resetForm }) => {
-  console.log(values);
-  axios
-    .post('http://localhost:5000/user/signup', values)
-    .then((response) => {
-      console.log('entered response');
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log('entered error');
-      console.log(error);
-    });
-
-  resetForm({ values: '' });
 };
 
 const validationSchema = Yup.object({
@@ -40,10 +24,55 @@ const validationSchema = Yup.object({
     [Yup.ref('password'), null],
     'Passwords must match'
   ),
-  // img:
 });
 
 const SignUpComponent = ({ clicked, handleSignUpClose }) => {
+  const [image, setImage] = useState({});
+  const [URL, setURL] = useState('');
+
+  const handleUpload = (values, resetForm) => {
+    const uploadTask = storage.ref(`images/${image.name}`).put(image);
+    uploadTask.on(
+      'state_change',
+      (snapshot) => {}, //current progress
+      (error) => {},
+      () => {
+        storage
+          .ref('images')
+          .child(image.name)
+          .getDownloadURL()
+          .then((URL) => {
+            console.log(URL);
+            const data = { ...values, URL };
+            console.log(data);
+            axios
+              .post('http://localhost:5000/user/signup', data)
+              .then((response) => {
+                console.log('entered response');
+                console.log(response);
+              })
+              .catch((error) => {
+                console.log('entered error');
+                console.log(error);
+              });
+            setImage({});
+            setURL('');
+            resetForm({ values: '' });
+          });
+      }
+    );
+  };
+  const changBackGround = (e) => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
+      console.log(e.target.files[0]);
+    }
+  };
+
+  const onSubmit = (values, { resetForm }) => {
+    // console.log(values);
+    handleUpload(values, resetForm);
+  };
   return (
     <Modal
       show={clicked}
@@ -62,12 +91,20 @@ const SignUpComponent = ({ clicked, handleSignUpClose }) => {
         >
           <Form>
             <div className="mb-3">
-              <div className="wrapper">
+              <div
+                className="wrapper"
+                style={{
+                  backgroundImage: image.name
+                    ? `url(${window.URL.createObjectURL(image)})`
+                    : `url(${userlogo})`,
+                }}
+              >
                 <input
                   type="file"
-                  id="Fname"
-                  name="Fname"
+                  id="img"
+                  name="img"
                   className="file-input"
+                  onChange={changBackGround}
                 />
               </div>
             </div>
@@ -116,12 +153,7 @@ const SignUpComponent = ({ clicked, handleSignUpClose }) => {
                 {(error) => <div className="error">{error}</div>}
               </ErrorMessage>
             </div>
-            {/* <div className="mb-3">
-            <label htmlFor='img'>Upload Image</label>
-            <Field className="" type="file" id='img' name='img' />
-            <ErrorMessage name='img'>{error => <div className='error'>{error}</div>}</ErrorMessage>
-        
-          </div> */}
+
             <Button type="submit" variant="primary" onClick={handleSignUpClose}>
               SignUp
             </Button>
