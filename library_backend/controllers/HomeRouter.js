@@ -45,7 +45,7 @@ homeRouter.get('/topRatedAuthors', async (req, res, next) => {
     return next(error);
   }
 });
-app.get('/topRated', async (req, res, next) => {
+homeRouter.get('/topRated', async (req, res, next) => {
   try {
     const books = await BookModel.find({})
       .sort({ rating: -1 })
