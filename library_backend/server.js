@@ -2,6 +2,8 @@ const express = require('express');
 const adminRouter = require('./controllers/adminRouter');
 const authorRouter = require('./controllers/authorRouter');
 const bookRouter = require('./controllers/bookRouter');
+const homeRouter = require('./controllers/HomeRouter');
+
 require('./db');
 const categoryRouter = require('./controllers/categoryRouter');
 const {
@@ -17,6 +19,7 @@ const userRouter = require('./models/User/userRouter');
 app.use(cors());
 app.use(express.json());
 
+app.use('/', homeRouter);
 app.use('/user', userRouter);
 app.use('/admin', adminRouter);
 app.use('/categories', categoryRouter);
