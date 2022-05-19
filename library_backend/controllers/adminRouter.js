@@ -39,7 +39,7 @@ adminRouter.post('/login', async (req, res, next) => {
   const authized = await bcrypt.compare(password, admin.hashedPassword);
   if (!authized) {
     //Return not authrized
-    res.send({ success: false });
+    res.status(403).send({ success: false });
     return;
   }
 

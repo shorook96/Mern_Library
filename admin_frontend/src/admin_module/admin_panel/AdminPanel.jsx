@@ -14,7 +14,7 @@ const adminSubPanelsIDs = {
 }
 
 
-export default function (){
+export default function ({logOut}){
     const [activeSubPanelID, setActiveSubPanelID] = useState(adminSubPanelsIDs.categories);
     
     const getCurrentActivePanel = () => {
@@ -42,7 +42,7 @@ export default function (){
 
     return (
         <>
-            <AdminNavBar activeSubPanelID = {activeSubPanelID} changeTab = {handleSubPanelChange} />
+            <AdminNavBar logOut = {logOut} activeSubPanelID = {activeSubPanelID} changeTab = {handleSubPanelChange} />
             <div className='container'>
                 {getCurrentActivePanel()}
             </div>

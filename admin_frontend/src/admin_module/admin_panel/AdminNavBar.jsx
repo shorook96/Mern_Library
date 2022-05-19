@@ -1,6 +1,6 @@
 
 
-export default function AdminNavBar({activeSubPanelID, changeTab}) {
+export default function AdminNavBar({activeSubPanelID, changeTab, logOut}) {
     const navItems = [
         {tabID: 0, name: 'Categories'},
         {tabID: 1, name: 'Books'},
@@ -25,7 +25,7 @@ export default function AdminNavBar({activeSubPanelID, changeTab}) {
                             )
                         })
                     }
-                    <button type="button" className="btn btn-dark"> Logout </button>
+                    <button type="button" className="btn btn-dark" onClick={logOut}> Logout </button>
             </ul>
         </>
     );

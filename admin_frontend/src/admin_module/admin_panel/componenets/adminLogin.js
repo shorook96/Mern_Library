@@ -6,7 +6,7 @@ import "./adminLogin.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './../../../App.css';
 import axios from 'axios';
-
+import {adminTokenKey} from '../../globalVariables'
 
 
 
@@ -26,7 +26,7 @@ const validate = values => {
 }
 
 
-const AdminLogin = ({ updateLoggedInStatus }) => {
+const AdminLogin = ({ logIn }) => {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState(initialValues);
 
@@ -47,13 +47,14 @@ const AdminLogin = ({ updateLoggedInStatus }) => {
           data: values,
          
       });
-      console.log(res);
+      console.log(res.data);
       if(res.status === 200){
-          // reloadList();
-          // alert('Success');
-          // closeAddingMode();
+        const adminToken = res.data;
+        sessionStorage.setItem(adminTokenKey, adminToken);
+        resetForm();
+        logIn();
       }else{
-          alert(res.data.message);
+          alert('Wrong email or Password');
       }
       
   }catch(error){
@@ -151,20 +152,21 @@ const AdminLogin = ({ updateLoggedInStatus }) => {
       </div> */}
 
       {/* **********************************form************************************************** */}
-      <div className="login-box">
-        <h1>login</h1>
-        <form action="#">
-          <input type="text" name='email'
-            value={values.email}
-            onChange={handleChange}
-            placeholder='example@gmail.com'></input>
-          <input type="password" name="password" placeholder="Password" 
-          value={values.password}
-          onChange={handleChange}></input><br></br>
-          <input type="submit" value="Log in" onClick={handleSubmit}></input>
-        </form>
+      <div className='loginContainer'>
+        <div className="login-box">
+          <h1>login</h1>
+          <form action="#">
+            <input type="text" name='email'
+              value={values.email}
+              onChange={handleChange}
+              placeholder='example@gmail.com'></input>
+            <input type="password" name="password" placeholder="Password" 
+            value={values.password}
+            onChange={handleChange}></input><br></br>
+            <input type="submit" value="Log in" onClick={handleSubmit}></input>
+          </form>
+        </div>
       </div>
-
 
 
     </>
