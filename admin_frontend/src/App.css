@@ -13,6 +13,24 @@
   }
 }
 
+.controlBar{
+  width: 100%;
+}
+
+.controlBarContainer{
+  width: 80%;
+  justify-content: center;
+  margin: auto;
+}
+
+.controlBarBadge{
+  margin: 10px;
+}
+
+.controlBarButton{
+  width: 10%;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

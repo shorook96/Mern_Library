@@ -35,8 +35,8 @@ authorRouter.get('/:id', async (req, res, next) => {
 
 authorRouter.post('/', async (req, res, next) => {
   try {
-    const { firstname, lastname, DOB, photo } = req.body;
-    await authorModel.create({ firstname, lastname, DOB, photo });
+    const { firstname, lastname, DOB, photo, bio } = req.body;
+    await authorModel.create({ firstname, lastname, DOB, photo, bio });
     res.send({ succes: 'author added successfully' });
   } catch (err) {
     next(err);

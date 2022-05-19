@@ -43,6 +43,7 @@ export default function ({logOut}){
     return (
         <>
             <AdminNavBar logOut = {logOut} activeSubPanelID = {activeSubPanelID} changeTab = {handleSubPanelChange} />
+            <br />
             <div className='container'>
                 {getCurrentActivePanel()}
             </div>

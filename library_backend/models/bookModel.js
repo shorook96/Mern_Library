@@ -7,6 +7,7 @@ const bookSchema = mongoose.Schema({
     auto: true
   },
   bookName: String,
+  brief: String,
   rating: Number,
   photo: String,
   category: {

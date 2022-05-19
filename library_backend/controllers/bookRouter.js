@@ -63,8 +63,8 @@ bookRouter.delete('/:id', async (req, res, next) => {
 bookRouter.post('/', async (req, res, next) => {
   const bookData = req.body;
   try {
-    const { bookName, rating, photo, category, author } = bookData;
-    await bookModel.create({ bookName, rating, photo, category, author });
+    const { bookName, rating, photo, category, author, brief } = bookData;
+    await bookModel.create({ bookName, rating, photo, category, author, brief});
     res.send({ success: 'book created successfully' });
     return;
   } catch (error) {

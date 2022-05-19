@@ -3,8 +3,10 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import CategoryItem from './CategoryItem';
 import CategoryNewItem from './CategoryNewItem';
+import ControlBar from './ControlBar'
 import React from 'react';
 import axios from 'axios';
+import {numberOfRowsPerPage} from '../../globalVariables'
 
 
 const itemAttributes = ['categoryName'];
@@ -13,7 +15,8 @@ const itemAttributes = ['categoryName'];
 export default function CategoriesPanel(){
     const [categoriesList, setCategoriesList] = useState([]);
     const [editedItemID, setEditedItemID] = useState('');
-    const [addingNewItem, setAddingNewItem] = useState(false)
+    const [addingNewItem, setAddingNewItem] = useState(false);
+    const [displayedPage, setDisplayedPage] = useState(0);
 
     const reloadList = () => {
         fetch('http://localhost:5000/categories').then((res) => res.json()).then((resCat) => {
@@ -149,6 +152,10 @@ export default function CategoriesPanel(){
         
     }
 
+    const changeDisplayedPage = (pageNumber) => {
+        setDisplayedPage(pageNumber);
+    }
+
 
     const getTableBody = () => {
         if(addingNewItem){
@@ -160,13 +167,19 @@ export default function CategoriesPanel(){
                 />
             );
         }else{
+            const diplayedList = [];
+            for(let i = displayedPage * numberOfRowsPerPage; i < Math.min(categoriesList.length, (displayedPage + 1) * numberOfRowsPerPage); i++){
+                diplayedList.push(categoriesList[i]);
+            }
+            
             return(
                 //{categoryData, editedItemID, index, closeEditMode, editAction, deleteAction}
-                categoriesList.map((category, index) => (
+                
+                diplayedList.map((category, index) => (
                     <CategoryItem  
                         key={category._id}
                         categoryData={category}
-                        index = {index}
+                        index = {index + displayedPage * numberOfRowsPerPage}
                         editedItemID = {editedItemID}
                         closeEditMode = {closeEditMode}
                         editAction = {editAction}
@@ -200,6 +213,9 @@ export default function CategoriesPanel(){
 
                 </tbody>
             </table>
+            {addingNewItem? <></> : 
+                <ControlBar pagesCount = {Math.ceil(categoriesList.length / numberOfRowsPerPage)} changeDisplayedPage = {changeDisplayedPage} reloadList = {reloadList}/>
+            }
             <img className="position-fixed bottom-0 end-0 addNewItemButton" src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" alt="Add New Item" width={70} onClick = {enterAddingMode}/>
         </>
             

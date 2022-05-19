@@ -9,6 +9,7 @@ const authorSchema = new mongoose.Schema({
   firstname: String,
   lastname: String,
   DOB: Date,
+  bio: String,
   photo: String,
 });
 const authorModel = mongoose.model('author', authorSchema);
