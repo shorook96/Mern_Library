@@ -33,7 +33,7 @@ export default class StarRating extends Component {
             <>
             <StarRatings
                 rating={this.state.Average}
-                starRatedColor="blue"
+                starRatedColor="yellow"
                 changeRating={this.changeRating}
                 numberOfStars={5}
                 starDimension="20px"

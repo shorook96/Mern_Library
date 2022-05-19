@@ -7,7 +7,7 @@ export default function Card(props) {
   return (
 
       <div class="Card">
-    <MDBCard style={{ width: '18rem' }}>
+    <MDBCard style={{ width: '18rem'}}>
       <MDBCardImage src={props.im} alt='...' position='top' />
       <MDBCardBody>
         <MDBCardText>
