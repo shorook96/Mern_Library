@@ -33,7 +33,9 @@ const BooksSlider = () => {
 
   return (
     <>
+
       {res.books && res.booksCount ? (
+        
         <PaginationComponent
           Data={res.books}
           itemsCount={Number(res.booksCount)}

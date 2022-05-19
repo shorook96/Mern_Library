@@ -13,7 +13,7 @@ import CheckAuth from './components/Helpers/CheckAuth';
 import LogIn from './components/LogIn';
 import AllAuthors from './components/LoggedUserComponents/AllAuthors';
 import AllCategories from './components/LoggedUserComponents/AllCategories';
-
+import SideBar from './components/SideBar';
 // import Author from './components/Author';
 // import Book from './components/Book';
 
@@ -38,7 +38,8 @@ function App() {
   return (
     <React.Fragment>
       <NavComponent />
-      {/* {user ? <UserHome /> : <HomeComponent />} */}
+      <div className='d-flex'>
+      {user ?  <SideBar /> : null}
       <Routes>
         <Route path="*" element={<PageNotFoundComponent />} />
 
@@ -69,6 +70,24 @@ function App() {
             </CheckAuth>
           }
         />
+
+      <Route
+          path="/authors/:pagenumber"
+          element={
+            <CheckAuth>
+              <AllAuthors />
+            </CheckAuth>
+          }
+        />
+
+      <Route
+          path="/categories/:pagenumber"
+          element={
+            <CheckAuth>
+              <AllCategories />
+            </CheckAuth>
+          }
+        />
         <Route
           path="/myprofile"
           element={
@@ -77,14 +96,12 @@ function App() {
             </CheckAuth>
           }
         />
-        <Route path="*" element={<PageNotFoundComponent />} />
-        {/* <Route path="/" element={user ? <UserHome /> : <HomeComponent />} /> */}
-        {/* <Route path="/" element={user ? <AllAuthors /> : <HomeComponent />} /> */}
-        {/* <Route path="/" element={user ? <AllCategories /> : <HomeComponent />} /> */}
-        {/* <Route path="/author" element={<Author/>}></Route>
-        <Route path="/book" element={<Book/>}></Route> */}
+    
+        <Route path="/" element={user ? <UserHome /> : <HomeComponent />} />
+        
       </Routes>
-      <Footer />
+      </div>
+      {/* <Footer /> */}
     </React.Fragment>
   );
 }

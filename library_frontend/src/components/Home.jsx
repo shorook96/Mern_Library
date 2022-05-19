@@ -10,18 +10,7 @@ import Footer from './Footer';
 import axios from 'axios';
 
 export default function HomeComponent() {
-  const [data, setData] = useState({});
-  useEffect(() => {
-    axios
-      .get('http://localhost:5000/topRated', {})
-      .then((response) => {
-        console.log(response.data);
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.log('errrrrrrrrrrrrrrrrrrrrrrr ' + error);
-      });
-  }, []);
+ 
 
   return (
     <>
