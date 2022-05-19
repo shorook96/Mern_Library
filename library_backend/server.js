@@ -3,6 +3,7 @@ const adminRouter = require('./controllers/adminRouter');
 const authorRouter = require('./controllers/authorRouter');
 const bookRouter = require('./controllers/bookRouter');
 require('./db');
+const BookModel = require('./models/bookModel');
 const categoryRouter = require('./controllers/categoryRouter');
 const {
   errorHandling_middleware,
@@ -16,6 +17,19 @@ const userRouter = require('./models/User/userRouter');
 
 app.use(cors());
 app.use(express.json());
+
+
+
+app.get('/topRated', async (req, res, next) => {
+  try{
+    const books = (await BookModel.find({}).sort({rating:-1}).limit(8).populate("category").populate("author"));
+    res.send({ books})
+  } catch (error) {
+    next(error);
+  }
+  
+})
+
 
 app.use('/user', userRouter);
 app.use('/admin', adminRouter);
