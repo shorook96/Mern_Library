@@ -8,7 +8,7 @@ const UserModel = require('./userModel');
 const BookModel = require('../bookModel');
 const AuthorModel = require('../authorModel');
 const categoryModel = require('../categoryModel')
-
+const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const signAsync = util.promisify(jwt.sign);
 // const secretKey = process.env.SECRET_KEY;
@@ -201,8 +201,20 @@ userRouter.post(
     try {
       const { id } = req.params;
       const { _id, state }= req.body
-
-      res.send( books );
+      console.log(_id)
+      const book = _id
+      await UserModel.findByIdAndUpdate(
+        id, 
+        { $push: { books: {book, state}} },
+        function (error, success) {
+          if (error) {
+              console.log(error);
+          } else {
+              console.log(success);
+          }
+      }
+    );
+      res.send({success: true});
     } catch (error) {
       next(error);
     }
