@@ -20,7 +20,9 @@ const userRouter = require('./models/User/userRouter');
 app.use(cors());
 app.use(express.json());
 
+
 app.use('/', homeRouter);
+
 
 app.use('/user', userRouter);
 app.use('/admin', adminRouter);

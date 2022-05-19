@@ -1,15 +1,16 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import ItemComponent from './ItemComponent';
 
-const ItemsContainer = ({ currentPageContent }) => {
+
+const ItemsContainer = ({ currentPageContent , RenderComponent}) => {
   return (
     <Container>
       <Row>
         {currentPageContent.map((item, idx) => (
           <Col key={idx}>
-            <ItemComponent data={item} />
+            
+            <RenderComponent data={item} />
           </Col>
         ))}
       </Row>

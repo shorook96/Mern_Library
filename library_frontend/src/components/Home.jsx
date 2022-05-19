@@ -7,8 +7,9 @@ import rightarrow from '../assets/images/right-arrow.webp';
 import HomeAuthorsComponent from './HomeAuthorsComponent';
 import HomeCategoriesComponent from './HomeCategoriesComponent';
 import Footer from './Footer';
-import axios from 'axios';
+
 export default function HomeComponent() {
+<<<<<<< HEAD
   const [data, setData] = useState({});
   useEffect(() => {
     axios
@@ -21,9 +22,14 @@ export default function HomeComponent() {
         console.log('errrrrrrrrrrrrrrrrrrrrrrr ' + error);
       });
   }, []);
+=======
+
+  
+>>>>>>> 3ec26e8d533e8c356aca0302acd3da8dd28f7218
   return (
-    <>
-      <div className="d-flex container">
+    
+        <>
+        <div className="d-flex container">
         <div className="cover-home ">
           <div className="cover-home-opacity m-0">
             <Row>
@@ -36,7 +42,7 @@ export default function HomeComponent() {
       <div className="mt-5">
         <Container>
           <Container className='mt-5"'>
-            <HomeCategoriesComponent />
+            <HomeCategoriesComponent/>
           </Container>
           <Container className="text-center mt-5">
             <img src={leftarrow} width={200} height={200} />
@@ -52,7 +58,22 @@ export default function HomeComponent() {
             <HomeAuthorsComponent />
           </Container>
         </Container>
+<<<<<<< HEAD
       </div>
     </>
+=======
+
+        <Footer />
+      </div> </>
+        // <h1>Data</h1>
+      
+>>>>>>> 3ec26e8d533e8c356aca0302acd3da8dd28f7218
   );
-}
+};
+
+
+
+
+
+
+

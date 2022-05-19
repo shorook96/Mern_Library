@@ -4,8 +4,9 @@ import Select from './SelectComponent';
 import StarRating from './RatingComponent';
 import './Author.css';
 
-export default function Author() {
+export default function Author(props) {
     // state = { im : "https://prod-images.tcm.com/Master-Profile-Images/WaltDisney.jpg" }
+        // const author =props.match.params.id
         var list=[{
             url:"https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1582759969i/40097951.jpg",
             alt:"-"

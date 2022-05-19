@@ -1,8 +1,28 @@
-import React from 'react';
+import {React, useState, useEffect} from 'react';
 import { Carousel, Col, Container, Row } from 'react-bootstrap';
+import axios from 'axios';
 
 const HomeCategoriesComponent = () => {
+  
+
+  const [data, setData] = useState([])
+  useEffect(() => {
+    axios
+      .get('http://localhost:5000/topRatedcategories', {
+  
+      })
+      .then((response) => {
+        // console.log(response)
+        setData(response.data)
+        
+      })
+      .catch((error) => {
+        console.log('errrrrrrrrrrrrrrrrrrrrrrr ' + error);
+      });
+  },[])
   return (
+    <>
+      {data.length? (
     <Container>
       <Row>
         <Col md={7} className="">
@@ -28,10 +48,8 @@ const HomeCategoriesComponent = () => {
                 alt="First slide"
               />
               <Carousel.Caption>
-                <h3>First slide label</h3>
-                <p>
-                  Nulla vitae elit libero, a pharetra augue mollis interdum.
-                </p>
+                <h3>{data[0].categoryName}</h3>
+                
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item interval={1100}>
@@ -41,8 +59,8 @@ const HomeCategoriesComponent = () => {
                 alt="Second slide"
               />
               <Carousel.Caption>
-                <h3>Second slide label</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <h3>{data[0].categoryName}</h3>
+                
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item interval={1100}>
@@ -52,17 +70,16 @@ const HomeCategoriesComponent = () => {
                 alt="Third slide"
               />
               <Carousel.Caption>
-                <h3>Third slide label</h3>
-                <p>
-                  Praesent commodo cursus magna, vel scelerisque nisl
-                  consectetur.
-                </p>
+                <h3>{data[0].categoryName}</h3>
+                
               </Carousel.Caption>
             </Carousel.Item>
           </Carousel>
         </Col>
       </Row>
     </Container>
+    ) :<h1>loading...</h1>}
+    </>
   );
 };
 

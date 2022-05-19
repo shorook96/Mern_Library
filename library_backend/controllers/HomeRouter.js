@@ -5,6 +5,9 @@ const categoryModel = require('../models/categoryModel');
 const authorModel = require('../models/authorModel');
 const BookModel = require('../models/bookModel');
 const mongoose = require('mongoose');
+
+
+
 homeRouter.get('/topRatedCategories', async (req, res, next) => {
   try {
     const categoriesIds = await bookModel
@@ -25,6 +28,8 @@ homeRouter.get('/topRatedCategories', async (req, res, next) => {
     return next(error);
   }
 });
+
+
 homeRouter.get('/topRatedAuthors', async (req, res, next) => {
   try {
     const authorIds = await bookModel
@@ -45,14 +50,14 @@ homeRouter.get('/topRatedAuthors', async (req, res, next) => {
     return next(error);
   }
 });
-homeRouter.get('/topRated', async (req, res, next) => {
+homeRouter.get('/topRatedbooks', async (req, res, next) => {
   try {
     const books = await BookModel.find({})
       .sort({ rating: -1 })
-      .limit(8)
+      .limit(6)
       .populate('category')
       .populate('author');
-    res.send({ books });
+    res.send( books );
   } catch (error) {
     next(error);
   }

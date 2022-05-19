@@ -8,9 +8,18 @@ import UserHome from './components/LoggedUserComponents/UserHome';
 import UserProfile from './components/LoggedUserComponents/UserProfile';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import PageNotFoundComponent from './components/PageNotFoundComponent';
+<<<<<<< HEAD
 import BooksSlider from './components/LoggedUserComponents/BooksSlider';
 import CheckAuth from './components/Helpers/CheckAuth';
 import LogIn from './components/LogIn';
+=======
+import AllAuthors from './components/LoggedUserComponents/AllAuthors';
+import AllCategories from './components/LoggedUserComponents/AllCategories';
+
+// import Author from './components/Author';
+// import Book from './components/Book';
+
+>>>>>>> 3ec26e8d533e8c356aca0302acd3da8dd28f7218
 
 function App() {
   const { user } = UseAuth();
@@ -35,6 +44,7 @@ function App() {
       <NavComponent />
       {user ? <UserHome /> : <HomeComponent />}
       <Routes>
+<<<<<<< HEAD
         {/* <Route path="*" element={<PageNotFoundComponent />} /> */}
 
         <Route
@@ -64,6 +74,18 @@ function App() {
             </CheckAuth>
           }
         />
+=======
+        <Route path="*" element={<PageNotFoundComponent />} />
+        <Route path="/" element={user ? <UserHome /> : <HomeComponent />} />
+
+        {/* <Route path="/" element={user ? <AllAuthors /> : <HomeComponent />} /> */}
+        {/* <Route path="/" element={user ? <AllCategories /> : <HomeComponent />} /> */}
+
+        {/* <Route path="/author" element={<Author/>}></Route>
+        <Route path="/book" element={<Book/>}></Route> */}
+        
+
+>>>>>>> 3ec26e8d533e8c356aca0302acd3da8dd28f7218
       </Routes>
       <Footer />
     </React.Fragment>
