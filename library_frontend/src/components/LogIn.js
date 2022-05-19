@@ -33,6 +33,7 @@ const LogIn = ({ clicked, handleLogInClose, changeUrl }) => {
       })
       .catch((error) => {
         console.log(error);
+        changeUrl('/');
       });
 
     resetForm({ values: '' });

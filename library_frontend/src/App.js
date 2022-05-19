@@ -38,10 +38,7 @@ function App() {
   return (
     <React.Fragment>
       <NavComponent />
-      {/* {user ? <UserHome /> : <HomeComponent />} */}
       <Routes>
-        <Route path="*" element={<PageNotFoundComponent />} />
-
         <Route
           path="/login"
           element={
@@ -78,7 +75,7 @@ function App() {
           }
         />
         <Route path="*" element={<PageNotFoundComponent />} />
-        {/* <Route path="/" element={user ? <UserHome /> : <HomeComponent />} /> */}
+        <Route path="/" element={user ? <UserHome /> : <HomeComponent />} />
         {/* <Route path="/" element={user ? <AllAuthors /> : <HomeComponent />} /> */}
         {/* <Route path="/" element={user ? <AllCategories /> : <HomeComponent />} /> */}
         {/* <Route path="/author" element={<Author/>}></Route>
