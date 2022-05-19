@@ -15,8 +15,8 @@ export default function HomeStartImages() {
   
       })
       .then((response) => {
-        console.log(response)
-        setData(response.data.books)
+        // console.log(response)
+        setData(response.data)
         
       })
       .catch((error) => {

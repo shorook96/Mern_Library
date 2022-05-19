@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PaginationComponent from './PaginationComponent';
-import BookItemComponent from './BookItemComponent';
+import AuthorItemComponent from './AuthorItemComponent';
 import { UseAuth } from '../Helpers/Auth';
 
 
-const BooksSlider = () => {
+const AuthorsSlider = () => {
   
   const [res, setRes] =useState({})
   
@@ -19,14 +19,13 @@ const BooksSlider = () => {
   }
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/user/${user.userInfo.id}/books/${currentPage}`, {
+      .get(`http://localhost:5000/user/${user.userInfo.id}/authors/${currentPage}`, {
         headers: {
           authorization: user.userInfo.authorization,
         },
       })
       .then((response) => {
-        
-        
+        console.log(response.data)
         setRes(response.data)
         
 
@@ -40,12 +39,12 @@ const BooksSlider = () => {
 
   return (
     <>
-      {res.books && res.booksCount? (
+      {res.authorsCount? (
         <PaginationComponent
-          Data={res.books}
-          itemsCount={Number(res.booksCount)}
-          totalPageCount={Math.ceil(Number(res.booksCount) / 2)}
-          RenderComponent={BookItemComponent}
+          Data={res.authors}
+          itemsCount={Number(res.authorsCount)}
+          totalPageCount={Math.ceil(Number(res.authorsCount) / 2)}
+          RenderComponent={AuthorItemComponent}
           changeCurrent ={changeCurrent}
           currentPageNumber = {currentPage}
         />
@@ -56,4 +55,4 @@ const BooksSlider = () => {
   );
 };
 
-export default BooksSlider;
+export default AuthorsSlider;

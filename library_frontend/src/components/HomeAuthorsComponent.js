@@ -9,12 +9,12 @@ const HomeAuthorsComponent = () => {
   const [data, setData] = useState([])
   useEffect(() => {
     axios
-      .get('http://localhost:5000/topRatedcategories', {
+      .get('http://localhost:5000/topRatedAuthors', {
   
       })
       .then((response) => {
-        console.log(response)
-        setData(response.data.books)
+        // console.log(response)
+        setData(response.data)
         
       })
       .catch((error) => {
@@ -49,24 +49,24 @@ const HomeAuthorsComponent = () => {
                 <Col sm={3} className="hide-column"></Col>
 
                 <Col sm={9} className="p-3">
-                  <AuthorHomePart isImgRight={true} author={data[0].author}/>
+                  <AuthorHomePart isImgRight={true} author={data[0]}/>
                 </Col>
               </Row>
               <Row>
                 <Col sm={9} className="p-3">
-                  <AuthorHomePart isImgRight={false} author={data[1].author}/>
+                  <AuthorHomePart isImgRight={false} author={data[0]}/>
                 </Col>
                 <Col sm={3} className="hide-column"></Col>
               </Row>
               <Row>
                 <Col sm={3} className="hide-column"></Col>
                 <Col sm={9} className="p-3">
-                  <AuthorHomePart isImgRight={true} author={data[2].author}/>
+                  <AuthorHomePart isImgRight={true} author={data[0]}/>
                 </Col>
               </Row>
               <Row>
                 <Col sm={9} className="p-3">
-                  <AuthorHomePart isImgRight={false} author={data[0].author}/>
+                  <AuthorHomePart isImgRight={false} author={data[0]}/>
                 </Col>
                 <Col sm={3} className="hide-column"></Col>
               </Row>

@@ -12,8 +12,8 @@ const HomeCategoriesComponent = () => {
   
       })
       .then((response) => {
-        console.log(response)
-        setData(response.data.books)
+        // console.log(response)
+        setData(response.data)
         
       })
       .catch((error) => {
@@ -48,7 +48,7 @@ const HomeCategoriesComponent = () => {
                 alt="First slide"
               />
               <Carousel.Caption>
-                <h3>{data[0].category.categoryName}</h3>
+                <h3>{data[0].categoryName}</h3>
                 
               </Carousel.Caption>
             </Carousel.Item>
@@ -59,7 +59,7 @@ const HomeCategoriesComponent = () => {
                 alt="Second slide"
               />
               <Carousel.Caption>
-                <h3>{data[1].category.categoryName}</h3>
+                <h3>{data[0].categoryName}</h3>
                 
               </Carousel.Caption>
             </Carousel.Item>
@@ -70,7 +70,7 @@ const HomeCategoriesComponent = () => {
                 alt="Third slide"
               />
               <Carousel.Caption>
-                <h3>{data[2].category.categoryName}</h3>
+                <h3>{data[0].categoryName}</h3>
                 
               </Carousel.Caption>
             </Carousel.Item>

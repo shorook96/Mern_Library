@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button, Card } from 'react-bootstrap';
-const ItemComponent = ({ data }) => {
+
+
+const BookItemComponent = ({ data }) => {
   return (
     <>
       <Card style={{ width: '18rem' }} className="text-black">
@@ -15,4 +17,4 @@ const ItemComponent = ({ data }) => {
   );
 };
 
-export default ItemComponent;
+export default BookItemComponent;

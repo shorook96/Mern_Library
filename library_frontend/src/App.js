@@ -8,6 +8,8 @@ import UserHome from './components/LoggedUserComponents/UserHome';
 import UserProfile from './components/LoggedUserComponents/UserProfile';
 import { Route, Routes } from 'react-router-dom';
 import PageNotFoundComponent from './components/PageNotFoundComponent';
+import AllAuthors from './components/LoggedUserComponents/AllAuthors';
+import AllCategories from './components/LoggedUserComponents/AllCategories';
 
 function App() {
   const { user } = UseAuth();
@@ -19,6 +21,8 @@ function App() {
       <Routes>
         <Route path="*" element={<PageNotFoundComponent />} />
         <Route path="/" element={user ? <UserHome /> : <HomeComponent />} />
+        {/* <Route path="/" element={user ? <AllAuthors /> : <HomeComponent />} /> */}
+        {/* <Route path="/" element={user ? <AllCategories /> : <HomeComponent />} /> */}
       </Routes>
       {/* <Footer /> */}
     </React.Fragment>
