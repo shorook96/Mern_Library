@@ -128,12 +128,12 @@
   background-color: black;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 76vh;
+  height: 82vh;
 }
 .cover-home-opacity {
   background-color: black;
   background-repeat: repeat-x;
-  height: 76vh;
+  height: 82vh;
   opacity: 0.6;
   width: 100%;
 }
