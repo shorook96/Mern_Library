@@ -1,4 +1,4 @@
-import {React, useState, useEffect} from 'react';
+import { React, useState, useEffect } from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
 import HomeStartImages from './HomeStartImages';
 import '../App.css';
@@ -9,22 +9,18 @@ import HomeCategoriesComponent from './HomeCategoriesComponent';
 import Footer from './Footer';
 import axios from 'axios';
 export default function HomeComponent() {
-
-  const [data, setData] = useState({})
+  const [data, setData] = useState({});
   useEffect(() => {
     axios
-      .get('http://localhost:5000/topRated', {
-  
-      })
+      .get('http://localhost:5000/topRated', {})
       .then((response) => {
-        console.log(response.data)
-        setData(response.data)
-        
+        console.log(response.data);
+        setData(response.data);
       })
       .catch((error) => {
         console.log('errrrrrrrrrrrrrrrrrrrrrrr ' + error);
       });
-  },[])
+  }, []);
   return (
     <>
       <div className="d-flex container">
@@ -56,8 +52,6 @@ export default function HomeComponent() {
             <HomeAuthorsComponent />
           </Container>
         </Container>
-
-        <Footer />
       </div>
     </>
   );

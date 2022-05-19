@@ -5,6 +5,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
 import * as Yup from 'yup';
 import { UseAuth } from './Helpers/Auth';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const initialValues = {
   email: '',
@@ -16,7 +17,9 @@ const validationSchema = Yup.object({
   password: Yup.string().required('Password is required'),
 });
 
-const LogIn = ({ clicked, handleLogInClose }) => {
+const LogIn = ({ clicked, handleLogInClose, changeUrl }) => {
+  const Location = useLocation();
+  const redirectPath = Location.state?.path || '/';
   const { login } = UseAuth();
   const onSubmit = (values, { resetForm }) => {
     console.log(values);
@@ -25,6 +28,8 @@ const LogIn = ({ clicked, handleLogInClose }) => {
       .then((response) => {
         console.log(response.data);
         login(response.data);
+        changeUrl(redirectPath);
+        // navigate(redirectPath, { replace: true });
       })
       .catch((error) => {
         console.log(error);
@@ -33,7 +38,6 @@ const LogIn = ({ clicked, handleLogInClose }) => {
     resetForm({ values: '' });
   };
 
-  
   return (
     <Modal
       show={clicked}
@@ -41,15 +45,14 @@ const LogIn = ({ clicked, handleLogInClose }) => {
       backdrop="static"
       className="text-dark "
       centered
-      
     >
-     
-      <Modal.Body
-      
-      >
-        <h3 className="mb-5 p-3" style={{textAlign: "center"}}>goodReads</h3>
-
-      
+      <Modal.Header closeButton onClick={() => changeUrl()}>
+        <Modal.Title>LogIn</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <h3 className="mb-5 p-3" style={{ textAlign: 'center' }}>
+          goodReads
+        </h3>
 
         <Formik
           initialValues={initialValues}
@@ -58,7 +61,9 @@ const LogIn = ({ clicked, handleLogInClose }) => {
         >
           <Form>
             <div className="mb-4 ms-4">
-              <label htmlFor="email" className="ms-4 ps-5">Email Address</label>
+              <label htmlFor="email" className="ms-4 ps-5">
+                Email Address
+              </label>
               <Field
                 type="email"
                 id="email"
@@ -72,19 +77,30 @@ const LogIn = ({ clicked, handleLogInClose }) => {
             </div>
 
             <div className="mb-4 ms-4">
-              <label htmlFor="password" className="ms-4 ps-5">Password</label>
-              <Field type="password" id="password" name="password" className="border-dark rounded-pill ms-2"/>
+              <label htmlFor="password" className="ms-4 ps-5">
+                Password
+              </label>
+              <Field
+                type="password"
+                id="password"
+                name="password"
+                className="border-dark rounded-pill ms-2"
+              />
               <ErrorMessage name="password">
                 {(error) => <div className="error">{error}</div>}
               </ErrorMessage>
             </div>
-            <Button type="submit" variant="primary" onClick={handleLogInClose} className="mb-3">
+            <Button
+              type="submit"
+              variant="primary"
+              onClick={handleLogInClose}
+              className="mb-3"
+            >
               LogIn
             </Button>
           </Form>
         </Formik>
       </Modal.Body>
-      
     </Modal>
   );
 };

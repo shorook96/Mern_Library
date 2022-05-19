@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import LogIn from './LogIn';
 import SignUpComponent from './SignUpComponent';
 
@@ -7,7 +8,11 @@ const BeforeLogging = () => {
   const handleSignUpClose = () => setSignUpShow(false);
   const handleSignUpShow = () => setSignUpShow(true);
   const [showLogIn, setLogInShow] = useState(false);
-  const handleLogInClose = () => setLogInShow(false);
+  const handleLogInClose = () => {
+    console.log('closed fronm  before logged in');
+
+    setLogInShow(false);
+  };
   const handleLogInShow = () => setLogInShow(true);
 
   return (
@@ -15,16 +20,16 @@ const BeforeLogging = () => {
       <div className="w-50 m-auto  ">
         <button
           onClick={handleSignUpShow}
-          className="btn btn-outline-warning btn-success btn-rounded  m-2 btn_logging "
+          className="btn btn-outline-warning btn-success btn-rounded  m-2  btn_logging"
         >
           SignUp
         </button>
-        <button
-          onClick={handleLogInShow}
-          className="btn btn-outline-warning btn-success btn-rounded  m-2  btn_logging"
+        <Link
+          to="/login"
+          className="btn btn-outline-warning btn-success btn-rounded  m-2 btn_logging "
         >
           LogIn
-        </button>
+        </Link>
       </div>
       <SignUpComponent
         clicked={showSignUp}

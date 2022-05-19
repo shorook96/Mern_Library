@@ -65,7 +65,7 @@ const NavComponent = () => {
               <LinkContainer to="" className="custom-nav-link">
                 <Nav.Link className="h5">Categories</Nav.Link>
               </LinkContainer>
-              <LinkContainer to="" className="custom-nav-link">
+              <LinkContainer to="/books/1" className="custom-nav-link">
                 <Nav.Link className="h5">Books</Nav.Link>
               </LinkContainer>
             </Nav>
