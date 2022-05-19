@@ -200,20 +200,28 @@ userRouter.post('/:id/book', authorizedUser, async (req, res, next) => {
     const { id } = req.params;
     console.log('my id is ' + id);
     const { addedBook } = req.body;
-    console.log('dddddddddddddddddddd ' + addedBook);
-    const result = bookModel.findOneAndUpdate(
+    const result = await UserModel.findOneAndUpdate(
       { _id: id },
-      { $push: { books: { book: addedBook.book, state: addedBook.state } } },
+      { $push: { books: { book: addedBook.book } } },
       function (error, success) {
         if (error) {
-          console.log(error);
+          next(error);
         } else {
           console.log(success);
         }
       }
     );
+    const user = await UserModel.findById(id);
+    const userInfo = {
+      id: user._id,
+      fname: user.firstname,
+      lastname: user.lastname,
+      email: user.email,
+      image: user.image,
+      books: user.books,
+    };
     console.log(result);
-    res.send({ success: 'true' });
+    res.send({ success: 'true', userInfo });
   } catch (error) {
     next(error);
   }
