@@ -1,3 +1,5 @@
+//each book has review is a list of different (usernames and their rating below it )
+//each book has a brief 
 const mongoose = require('mongoose');
 const bookSchema = mongoose.Schema({
   _id:{
@@ -7,7 +9,8 @@ const bookSchema = mongoose.Schema({
     auto: true
   },
   bookName: String,
-  rating: Number,
+  brief:{type:String,default:""},
+  rating:{type: Number,default: 0},
   photo: String,
   category: {
     type: mongoose.Schema.Types.ObjectId,
