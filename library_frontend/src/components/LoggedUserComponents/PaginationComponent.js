@@ -32,7 +32,10 @@ const PaginationComponent = ({
 
   return (
     <>
-      <ItemsContainer currentPageContent={Data} RenderComponent={RenderComponent}/>
+      <ItemsContainer
+        currentPageContent={Data}
+        RenderComponent={RenderComponent}
+      />
       <nav aria-label="Page navigation example">
         <ul className="pagination">
           <li className="page-item">
