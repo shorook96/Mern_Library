@@ -19,7 +19,7 @@ const { appendFile } = require('fs');
 const secretKey = 'zahra';
 
 userRouter.post('/signup', async (req, res, next) => {
-  const { Fname, Lname, email, password,URL } = req.body;
+  const { Fname, Lname, email, password, URL } = req.body;
   try {
     const checkUserExisted = await UserModel.findOne({ email });
     if (checkUserExisted) {
@@ -40,7 +40,7 @@ userRouter.post('/signup', async (req, res, next) => {
       lastname: Lname,
       email: email,
       password: hashedPassword,
-      image:URL
+      image: URL,
     });
     res.send({ success: true });
   } catch (error) {

@@ -8,6 +8,20 @@ const HomeAuthorsComponent = () => {
     <>
       <Container>
         <Row>
+          <Col md={7}>
+            <div className="books-header text-white">
+              <p className="font-weight-bolder Header-Title h1">
+                Famous Authors
+              </p>
+              <Container className="text-center">
+                <p className="book-header-desc">
+                  If you want the best of the best, these six star books won’t
+                  disappoint . Here are 6 of all-time favorite books to our
+                  reader to read.
+                </p>
+              </Container>
+            </div>
+          </Col>
           <Col
             md={5}
             className="bg-secondary rounded-circle authors-background-image "
@@ -39,20 +53,6 @@ const HomeAuthorsComponent = () => {
                 <Col sm={3} className="hide-column"></Col>
               </Row>
             </Container>
-          </Col>
-          <Col md={7}>
-            <div className="books-header text-white">
-              <p className="font-weight-bolder Header-Title h1">
-                Famous Authors
-              </p>
-              <Container className="text-center">
-                <p className="book-header-desc">
-                  If you want the best of the best, these six star books won’t
-                  disappoint . Here are 6 of all-time favorite books to our
-                  reader to read.
-                </p>
-              </Container>
-            </div>
           </Col>
         </Row>
       </Container>
