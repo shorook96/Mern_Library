@@ -53,9 +53,9 @@ userRouter.post('/login', async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const user = await UserModel.findOne({ email });
-    // if(!user) throw authError;
+    if(!user) throw customError(405,"Email or Password may be wrong","Email or Password may be wrong");
     const result = await bcrypt.compare(password, user.password);
-    // if(!result)throw authError;
+    if(!result)throw customError(405,"Email or Password may be wrong","Email or Password may be wrong");
     const SecretKey = 'zahra';
     const token = await signAsync(
       {
@@ -171,7 +171,7 @@ userRouter.get(
 
 
 userRouter.get(
-  '/:id/userBooks/:pageNumber',
+  '/:id/myBooks/:pageNumber',
   authorizedUser,
   async (req, res, next) => {
     try {
@@ -185,6 +185,22 @@ userRouter.get(
      
       // const booksCount = await UserModel.find({}).count();
       
+
+      res.send( books );
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+
+userRouter.post(
+  '/:id/book',
+  authorizedUser,
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const { _id, state }= req.body
 
       res.send( books );
     } catch (error) {
