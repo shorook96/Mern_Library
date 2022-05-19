@@ -38,7 +38,7 @@ function App() {
   return (
     <React.Fragment>
       <NavComponent />
-      <div className="d-flex">
+      <div className={user ? 'd-flex' : ''}>
         {user ? <SideBar /> : null}
         <Routes>
           <Route

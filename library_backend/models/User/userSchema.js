@@ -14,7 +14,6 @@ const userSchema = new mongoose.Schema({
       },
       state: {
         type: 'string',
-        enum: ['Read', 'Want To Read', 'CurrentlyReading'],
       },
     },
   ],
