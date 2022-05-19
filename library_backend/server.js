@@ -2,6 +2,8 @@ const express = require('express');
 const adminRouter = require('./controllers/adminRouter');
 const authorRouter = require('./controllers/authorRouter');
 const bookRouter = require('./controllers/bookRouter');
+const homeRouter = require('./controllers/HomeRouter');
+
 require('./db');
 const BookModel = require('./models/bookModel');
 const categoryRouter = require('./controllers/categoryRouter');
@@ -19,41 +21,7 @@ app.use(cors());
 app.use(express.json());
 
 
-
-app.get('/topRatedbooks', async (req, res, next) => {
-  try{
-    const books = (await BookModel.find({}).sort({rating:-1}).limit(8).populate("category").populate("author"));
-
-    res.send({ books})
-  } catch (error) {
-    next(error);
-  }
-  
-})
-app.get('/topRatedcategories', async (req, res, next) => {
-  try{
-    const books = (await BookModel.find({}).sort({rating:-1}).limit(8).populate("category").populate("author"));
-
-
-    res.send({ books})
-  } catch (error) {
-    next(error);
-  }
-  
-})
-
-app.get('/topRatedauthors', async (req, res, next) => {
-  try{
-    const books = (await BookModel.find({}).sort({rating:-1}).limit(8).populate("category").populate("author"));
-
-
-    res.send({ books})
-  } catch (error) {
-    next(error);
-  }
-  
-})
-
+app.use('/', homeRouter);
 
 
 app.use('/user', userRouter);
