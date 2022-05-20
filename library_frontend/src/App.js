@@ -15,7 +15,9 @@ import AllAuthors from './components/LoggedUserComponents/AllAuthors';
 import AllCategories from './components/LoggedUserComponents/AllCategories';
 import SideBar from './components/SideBar';
 import MyBookSlider from './components/LoggedUserComponents/MyBookSlider';
+
 // import Author from './components/Author';
+// import Authors from './components/Authors';
 // import Book from './components/Book';
 
 function App() {
