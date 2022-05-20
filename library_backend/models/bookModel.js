@@ -1,16 +1,19 @@
 //each book has review is a list of different (usernames and their rating below it )
-//each book has a brief 
+//each book has a brief
 const mongoose = require('mongoose');
 const bookSchema = mongoose.Schema({
-  _id:{
+  _id: {
     type: mongoose.Schema.Types.ObjectId,
     index: true,
     required: true,
-    auto: true
+    auto: true,
   },
   bookName: String,
-  brief:{type:String,default:""},
-  rating:{type: Number,default: 0},
+  brief: { type: String, default: '' },
+  rating: {
+    totalRate: { type: Number, default: 0 },
+    numberOfRates: { type: Number, default: 0 },
+  },
   photo: String,
   category: {
     type: mongoose.Schema.Types.ObjectId,
@@ -23,4 +26,3 @@ const bookSchema = mongoose.Schema({
 });
 const bookModel = mongoose.model('book', bookSchema);
 module.exports = bookModel;
-

@@ -267,4 +267,71 @@ userRouter.patch(
     }
   }
 );
+
+userRouter.patch('/:id/mybook/rate/:bookId', async (req, res, next) => {
+  try {
+    const { id, bookId } = req.params;
+    const { rate } = req.body;
+    const user = await UserModel.findOne(
+      {
+        _id: id,
+        'books.book': bookId,
+      },
+      {
+        'books.$': 1,
+      }
+    );
+    //user changed rate to same value
+    if (rate === user.books[0].userRating) {
+      return res.send({ success: 'true ' });
+    }
+    const book = await BookModel.findById(bookId);
+
+    //user changes rate rate to same value
+
+    if (user.books[0].userRating) {
+      const changeCalculateRating =
+        book.rating.totalRate - user.books[0].userRating + rate;
+      const result = await BookModel.findByIdAndUpdate(bookId, {
+        $set: {
+          rating: {
+            totalRate: changeCalculateRating,
+            numberOfRates: book.rating.numberOfRates,
+          },
+        },
+      });
+      const changedUser = await UserModel.updateOne(
+        {
+          _id: id,
+          'books.book': bookId,
+        },
+        { $set: { 'books.$.userRating': rate } }
+      );
+      console.log(user);
+      return res.send({ success: 'true' });
+    }
+    const calculateRating = book.rating.totalRate + rate;
+    const numberOfIncrements = book.rating.numberOfRates + 1;
+    const result = await BookModel.findByIdAndUpdate(bookId, {
+      $set: {
+        rating: {
+          totalRate: calculateRating,
+          numberOfRates: numberOfIncrements,
+        },
+      },
+    });
+
+    const submittedUser = await UserModel.updateOne(
+      {
+        _id: id,
+        'books.book': bookId,
+      },
+      { $set: { 'books.$.userRating': rate } }
+    );
+    res.send({ user });
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = userRouter;

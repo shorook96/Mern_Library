@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import PaginationComponent from './PaginationComponent';
-import BookItemComponent from './BookItemComponent';
 import { UseAuth } from '../Helpers/Auth';
 import MyBookItemComponent from './MyBookItemComponent';
 

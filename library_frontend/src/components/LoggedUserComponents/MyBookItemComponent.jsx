@@ -61,7 +61,7 @@ const MyBookItemComponent = ({ data }) => {
               Read
             </option>
             <option
-              value="Currentle Reading"
+              value="Currently Reading"
               selected={data.state === 'Currently Reading'}
             >
               Currently Reading
