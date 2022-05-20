@@ -174,54 +174,39 @@ userRouter.get(
   }
 );
 
-userRouter.get(
-  '/:id/myBooks/:pageNumber',
-  authorizedUser,
-  async (req, res, next) => {
-    try {
-      const { id, pageNumber } = req.params;
+userRouter.get('/:id/myBooks/:pageNumber', async (req, res, next) => {
+  try {
+    const { id, pageNumber } = req.params;
 
-      const skipNumber =
-        Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
+    const skipNumber =
+      Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
 
-      const books = await UserModel.findById(id);
-
-      // const booksCount = await UserModel.find({}).count();
-
-      res.send(books);
-    } catch (error) {
-      next(error);
-    }
+    const books = await UserModel.findById(id)
+      .populate({
+        path: 'books.book',
+        $options: { limit: 2, skip: skipNumber },
+      })
+      .limit(2)
+      .select('books.state book');
+    console.log(books);
+    booksPerPage = books.books.slice(skipNumber, skipNumber + 2);
+    res.send(booksPerPage);
+  } catch (error) {
+    next(error);
   }
-);
+});
 
-userRouter.post('/:id/book', authorizedUser, async (req, res, next) => {
+userRouter.patch('/:id/book', authorizedUser, async (req, res, next) => {
   try {
     const { id } = req.params;
     console.log('my id is ' + id);
     const { addedBook } = req.body;
-    const result = await UserModel.findOneAndUpdate(
+    const user = await UserModel.findOneAndUpdate(
       { _id: id },
-      { $push: { books: { book: addedBook.book } } },
-      function (error, success) {
-        if (error) {
-          next(error);
-        } else {
-          console.log(success);
-        }
-      }
+      { $push: { books: { book: addedBook.book } } }
     );
-    const user = await UserModel.findById(id);
-    const userInfo = {
-      id: user._id,
-      fname: user.firstname,
-      lastname: user.lastname,
-      email: user.email,
-      image: user.image,
-      books: user.books,
-    };
-    console.log(result);
-    res.send({ success: 'true', userInfo });
+
+    res.send({ success: 'true' });
   } catch (error) {
     next(error);
   }

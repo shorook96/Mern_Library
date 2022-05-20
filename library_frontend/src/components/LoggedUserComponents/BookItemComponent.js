@@ -16,7 +16,7 @@ const BookItemComponent = ({ data }) => {
     const addedBook = { book: data._id, state: 'Want To Read' };
     console.log(addedBook);
     axios
-      .post(
+      .patch(
         `http://localhost:5000/user/${user.userInfo.id}/book`,
         { addedBook },
         {
@@ -27,13 +27,14 @@ const BookItemComponent = ({ data }) => {
       )
       .then((response) => {
         console.log(response);
-        const newUser = response.data.userInfo;
-        console.log(newUser);
-        login({ ...user, ...newUser });
-        console.log(user);
+        // const newUser = response.data.userInfo;
+        const books = user.userInfo.books.push(addedBook);
+        const newuser = { ...user, books };
+
+        login(newuser);
       })
       .catch((error) => {
-        console.log('errrrrrrrrrrrrrrrrrrrrrrr ' + error);
+        console.log('error ' + error);
       });
   };
   return (

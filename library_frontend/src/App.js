@@ -41,6 +41,8 @@ function App() {
       <div className={user ? 'd-flex' : ''}>
         {user ? <SideBar /> : null}
         <Routes>
+          <Route path="*" element={<PageNotFoundComponent />} />
+
           <Route
             path="/login"
             element={
@@ -59,7 +61,6 @@ function App() {
               )
             }
           />
-
           <Route
             path="/books/:pagenumber"
             element={
