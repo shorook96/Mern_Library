@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import React from 'react';
 import AdminNavBar from './AdminNavBar';
-import CategoriesPanel from './componenets/CategoriesPanel';
+import ItemsPanel from './ItemsPanel';
 import AuthorsPanel from './componenets/AuthorsPanel';
 import BooksPanel from './componenets/BooksPanel';
 
@@ -14,10 +14,12 @@ const adminSubPanelsIDs = {
 }
 
 
+const idToSubpanelName = ['category', 'book', 'author']
+
 export default function ({logOut}){
     const [activeSubPanelID, setActiveSubPanelID] = useState(adminSubPanelsIDs.categories);
     
-    const getCurrentActivePanel = () => {
+    /* const getCurrentActivePanel = () => {
         let activeSubPanel = null;
         switch(activeSubPanelID){
             case adminSubPanelsIDs.categories:
@@ -37,7 +39,7 @@ export default function ({logOut}){
         }
 
         return activeSubPanel;
-    }
+    } */
     const handleSubPanelChange = (tabID) => {setActiveSubPanelID(tabID)};
 
     return (
@@ -45,7 +47,7 @@ export default function ({logOut}){
             <AdminNavBar logOut = {logOut} activeSubPanelID = {activeSubPanelID} changeTab = {handleSubPanelChange} />
             <br />
             <div className='container'>
-                {getCurrentActivePanel()}
+                <ItemsPanel activeSubPanel = {idToSubpanelName[activeSubPanelID]}/>
             </div>
         </>
     )

@@ -1,0 +1,116 @@
+import { useState, useEffect } from 'react';
+import CRUD_services from '../../../services/CRUD_services';
+import getItemAttributes from '../../../itemAttributes';
+
+
+const subPanelName = 'author'
+
+export default function AuthorItem({data, editedItemID, index, closeEditMode, editAction, reloadList}){
+    
+    const [newItemData, setNewItemData] = useState({...data});
+
+    useEffect(() => {
+        setNewItemData(data);
+    }, [editedItemID])
+    
+
+    const deleteAction = async (itemID) => {
+        const confirmaed = window.confirm('Do you want to delete item with id = ' + itemID + '?');
+        if(!confirmaed){
+            //Early return
+            return;
+        }
+
+        const res = await CRUD_services.deleteAuthor(itemID);
+        if(res.status == 200){
+            alert(`Deleted Item with id = ${itemID}`);
+        }else{
+            alert(res.data.message);
+        }
+        reloadList();
+    }
+
+
+    const submitEditedItem = async (newItemData) => {
+        const newItemDataWithoutId = {};
+
+        getItemAttributes(subPanelName).forEach((attribute) => {
+            if(attribute.key !== '_id'){
+                newItemDataWithoutId[attribute.key] = newItemData[attribute.key];
+            }
+        })
+
+        const itemID = newItemData._id;
+        try{
+            const res = await CRUD_services.updateAuthor(itemID, newItemDataWithoutId);
+            if(res.status === 200){
+                reloadList();
+                alert('Success');
+                closeEditMode();
+            }else{
+                alert(res.data.message);
+            }
+            
+        }catch(error){
+            alert(error.response.data.message);
+        }
+        
+        
+    }
+
+    const updateNewData = (attributeKey, attributeValue) => {
+        const temp = {...newItemData};
+        temp[attributeKey] = attributeValue;
+        setNewItemData(temp);
+    }
+
+    const handleEditAction = () => {
+        editAction(data._id);
+    }
+    
+    const handleDeleteAction = () => {
+        deleteAction(data._id)
+    }
+
+    const getRepresentation = () => {
+        if(editedItemID === data._id){
+            return(
+
+                <tr key={data._id} className="table-warning">
+                    <td className='indexCell'>{index + 1}</td>
+                    <td className='idCell'>{data._id}</td>
+                    <td key={'firstname'} className='firstnameCell'><input type="text" value={newItemData.firstname} onChange={e => updateNewData('firstName', e.target.value)} onKeyDown={(e) => {if(e.key === "Enter") submitEditedItem(newItemData)}}/></td>
+                    <td key={'lastname'} className='lastnameCell'><input type="text" value={newItemData.lastname} onChange={e => updateNewData('lastname', e.target.value)} onKeyDown={(e) => {if(e.key === "Enter") submitEditedItem(newItemData)}}/></td>
+                    <td key={'DOB'} className='DOBCell'><input type="date" value={newItemData.DOB} onChange={e => updateNewData('DOB', e.target.value)} onKeyDown={(e) => {if(e.key === "Enter") submitEditedItem(newItemData)}}/></td>
+                    <td key={'bio'} className='bioCell'><input type="text" value={newItemData.bio} onChange={e => updateNewData('bio', e.target.value)} onKeyDown={(e) => {if(e.key === "Enter") submitEditedItem(newItemData)}}/></td>
+                    <td key={'photo'} className='photoCell'><input type="text" value={newItemData.photo} onChange={e => updateNewData('photo', e.target.value)} onKeyDown={(e) => {if(e.key === "Enter") submitEditedItem(newItemData)}}/></td>
+                    <td className='actionButtonCell' style={{textAlign:'center'}}> 
+                        <img className="hoverableImage" src="https://cdn-icons-png.flaticon.com/512/5219/5219192.png" alt="submit" width={20} onClick={() => {submitEditedItem(newItemData)}}/>
+                    </td>
+                    <td className='actionButtonCell' style={{textAlign:'center'}}>
+                        <img className="hoverableImage" src="https://cdn-icons-png.flaticon.com/512/1828/1828843.png" alt="cancel" width={20} onClick={closeEditMode} />
+                    </td>
+                </tr>
+            )
+        }else{
+            return(
+                <tr key={data._id} className={index % 2 == 1 ? "table-secondary" : ""} onDoubleClick={handleEditAction}>
+                    <td>{index + 1}</td>
+                    {
+                        getItemAttributes(subPanelName).map((attribute) => <td className='itemCell'>{data[attribute.key]}</td>)
+                    }
+                    <td style={{textAlign:'center'}}> 
+                        <img className="hoverableImage" src="https://cdn-icons-png.flaticon.com/512/650/650194.png" alt="edit" width={20} onClick={handleEditAction}/>
+                    </td>
+                    <td style={{textAlign:'center'}}>
+                        <img className="hoverableImage" src="https://cdn-icons-png.flaticon.com/512/3141/3141684.png" alt="delete" width={20} onClick={handleDeleteAction}/>
+                    </td>
+                </tr>
+            )
+        }
+    }
+
+    return (
+        getRepresentation()
+    );
+}

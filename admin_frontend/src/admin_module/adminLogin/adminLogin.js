@@ -4,9 +4,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./adminLogin.css"
 // import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './../../../App.css';
+//import './../../../App.css';
 import axios from 'axios';
-import {adminTokenKey} from '../../globalVariables'
+import {setAdminToken} from '../globalVariablesAndFunctions'
 
 
 
@@ -50,7 +50,7 @@ const AdminLogin = ({ logIn }) => {
       console.log(res.data);
       if(res.status === 200){
         const adminToken = res.data;
-        sessionStorage.setItem(adminTokenKey, adminToken);
+        setAdminToken(adminToken);
         resetForm();
         logIn();
       }else{

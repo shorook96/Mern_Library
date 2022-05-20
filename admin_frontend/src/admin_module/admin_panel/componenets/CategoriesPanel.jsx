@@ -213,9 +213,7 @@ export default function CategoriesPanel(){
 
                 </tbody>
             </table>
-            {addingNewItem? <></> : 
-                <ControlBar pagesCount = {Math.ceil(categoriesList.length / numberOfRowsPerPage)} changeDisplayedPage = {changeDisplayedPage} reloadList = {reloadList}/>
-            }
+            {addingNewItem? <></> : <ControlBar pagesCount = {Math.ceil(categoriesList.length / numberOfRowsPerPage)} changeDisplayedPage = {changeDisplayedPage} reloadList = {reloadList}/>}
             <img className="position-fixed bottom-0 end-0 addNewItemButton" src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" alt="Add New Item" width={70} onClick = {enterAddingMode}/>
         </>
             

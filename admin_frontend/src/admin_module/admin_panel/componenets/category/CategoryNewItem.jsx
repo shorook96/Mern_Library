@@ -1,8 +1,43 @@
 
 import { useState, useEffect } from 'react';
-export default function CategoryNewItem({index, closeAddingNewItemMode, addNewData}){
+import axios from 'axios';
+import getItemAttributes from '../../../itemAttributes';
+import CRUD_services from '../../../services/CRUD_services';
+
+const subPanelName = 'category'
+
+
+export default function CategoryNewItem({index, closeAddingNewItemMode, reloadList}){
     
     const [newCategoryData, setNewCategoryData] = useState({_id: '' ,categoryName: ''});    
+
+
+    const addNewData = async (newItemData) => {
+        const newItemDataWithoutId = {};
+
+        getItemAttributes(subPanelName).forEach((attribute) => {
+            if(attribute.key !== '_id'){
+                ///Ignore the key
+                newItemDataWithoutId[attribute.key] = newItemData[attribute.key];
+            }
+        })
+        console.log(newItemDataWithoutId);
+        try{
+            const res = await CRUD_services.createCategory(newItemDataWithoutId);
+            if(res.status === 200){
+                reloadList();
+                alert('Success');
+                closeAddingNewItemMode();
+            }else{
+                alert(res.data.message);
+            }
+            
+        }catch(error){
+            alert(error.response.data.message);
+        }
+        
+        
+    }
 
     const submitNewData = (e) => {
         const temp = {...newCategoryData};

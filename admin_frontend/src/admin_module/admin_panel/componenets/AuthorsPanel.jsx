@@ -5,9 +5,11 @@ import React from 'react';
 
 
 export default function AuthorsPanel(){
+
+    const content = (<h1>Authors Panel</h1>);
     return (
         <>
-            <h1>Authors Panel</h1>
+            {content}
         </>
     );
 }
