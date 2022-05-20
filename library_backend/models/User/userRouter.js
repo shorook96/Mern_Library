@@ -188,8 +188,9 @@ userRouter.get('/:id/myBooks/:pageNumber', async (req, res, next) => {
       })
       .limit(2)
       .select('books.state book');
-    console.log(books);
     booksPerPage = books.books.slice(skipNumber, skipNumber + 2);
+    console.log(booksPerPage);
+
     res.send(booksPerPage);
   } catch (error) {
     next(error);

@@ -14,6 +14,7 @@ import LogIn from './components/LogIn';
 import AllAuthors from './components/LoggedUserComponents/AllAuthors';
 import AllCategories from './components/LoggedUserComponents/AllCategories';
 import SideBar from './components/SideBar';
+import MyBookSlider from './components/LoggedUserComponents/MyBookSlider';
 // import Author from './components/Author';
 // import Book from './components/Book';
 
@@ -96,7 +97,10 @@ function App() {
             }
           />
 
-          <Route path="/" element={user ? <UserHome /> : <HomeComponent />} />
+          <Route
+            path="/"
+            element={user ? <MyBookSlider /> : <HomeComponent />}
+          />
         </Routes>
       </div>
       {/* <Footer /> */}
