@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 
 const ItemsContainer = ({ currentPageContent, RenderComponent }) => {
   return (
-    <Container className="text-center  ">
+    <Container className="text-center m-auto ">
       <Row>
         {currentPageContent.map((item, idx) => (
-          <Col key={idx}>
+          <Col key={idx} md={6}>
             <RenderComponent data={item} />
           </Col>
         ))}

@@ -15,6 +15,9 @@ import AllAuthors from './components/LoggedUserComponents/AllAuthors';
 import AllCategories from './components/LoggedUserComponents/AllCategories';
 import SideBar from './components/SideBar';
 import MyBookSlider from './components/LoggedUserComponents/MyBookSlider';
+import MyReadBooks from './components/LoggedUserComponents/MyReadBooks';
+import MyCurrentlyReadingBooks from './components/LoggedUserComponents/MyCurrentlyReadingBooks';
+import MyWantToReadBooks from './components/LoggedUserComponents/MyWantToReadBooks';
 
 // import Author from './components/Author';
 // import Authors from './components/Authors';
@@ -99,15 +102,42 @@ function App() {
             }
           />
           <Route
-            path="/user/myBooks"
+            path="/user/myBooks/All"
             element={
               <CheckAuth>
                 <MyBookSlider />
               </CheckAuth>
             }
           />
+          <Route
+            path="/user/myBooks/Read"
+            element={
+              <CheckAuth>
+                <MyReadBooks />
+              </CheckAuth>
+            }
+          />
+          <Route
+            path="/user/myBooks/CurrentlyReading"
+            element={
+              <CheckAuth>
+                <MyCurrentlyReadingBooks />
+              </CheckAuth>
+            }
+          />
+          <Route
+            path="/user/myBooks/WantToRead"
+            element={
+              <CheckAuth>
+                <MyWantToReadBooks />
+              </CheckAuth>
+            }
+          />
 
-          <Route path="/" element={user ? <UserHome /> : <HomeComponent />} />
+          <Route
+            path="/"
+            element={user ? <MyBookSlider /> : <HomeComponent />}
+          />
         </Routes>
       </div>
       {/* <Footer /> */}

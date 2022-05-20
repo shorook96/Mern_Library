@@ -176,32 +176,28 @@ userRouter.get(
   }
 );
 
-userRouter.get(
-  '/:id/myBooks/:pageNumber',
-  authorizedUser,
-  async (req, res, next) => {
-    try {
-      const { id, pageNumber } = req.params;
+userRouter.get('/:id/myBooks/', authorizedUser, async (req, res, next) => {
+  try {
+    const { id, pageNumber } = req.params;
 
-      const skipNumber =
-        Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
+    // const skipNumber =
+    //   Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
 
-      const books = await UserModel.findById(id)
-        .populate({
-          path: 'books.book',
-          $options: { limit: 2, skip: skipNumber },
-        })
-        .limit(2)
-        .select('books.state book');
-      booksPerPage = books.books.slice(skipNumber, skipNumber + 2);
-      // console.log(booksPerPage.length);
-      const booksCount = books.books.length;
-      res.send({ booksPerPage, booksCount });
-    } catch (error) {
-      next(error);
-    }
+    const user = await UserModel.findById(id)
+      .populate({
+        path: 'books.book',
+      })
+      .limit(2)
+      .select('books.state book');
+    const allMybooks = user.books;
+    // booksPerPage = books.books.slice(skipNumber, skipNumber + 2);
+    // console.log(booksPerPage.length);
+    const booksCount = user.books.length;
+    res.send({ allMybooks, booksCount });
+  } catch (error) {
+    next(error);
   }
-);
+});
 // /**************************** */
 // userRouter.get('/:id/myReadBooks/:pageNumber', async (req, res, next) => {
 //   try {

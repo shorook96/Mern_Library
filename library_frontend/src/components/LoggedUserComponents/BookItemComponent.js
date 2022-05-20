@@ -40,7 +40,22 @@ const BookItemComponent = ({ data }) => {
   return (
     <>
       <Card style={{ width: '18rem' }} className="text-black m-auto">
-        <Card.Img variant="top" src={data.photo} width={100} height={300} />
+        <div className="ui-card d-flex">
+          <Card.Img
+            variant="top"
+            src={data.photo}
+            width={100}
+            height={300}
+            className="custom-card-img"
+          />
+          <div className="info">
+            <h3>some info about the book</h3>
+            <p>sbjvcbj basjbcbbba naknkjndakj </p>
+            <Button variant="primary" onClick={goToDetails}>
+              Go somewhere
+            </Button>
+          </div>
+        </div>
         <Card.Body>
           <Card.Title>{data.bookName}</Card.Title>
           <Card.Text>{data.bookName}</Card.Text>
@@ -48,11 +63,15 @@ const BookItemComponent = ({ data }) => {
             Go somewhere
           </Button>
           {book ? (
-            <Button variant="secondary" disabled>
+            <Button variant="secondary" disabled className=" mt-1">
               Already Have It
             </Button>
           ) : (
-            <Button variant="primary" onClick={addToMyBooks}>
+            <Button
+              variant="primary"
+              className="px-5 mt-1"
+              onClick={addToMyBooks}
+            >
               Add
             </Button>
           )}

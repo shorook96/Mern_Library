@@ -7,12 +7,7 @@ import AuthorsSlider from './AuthorsSlider';
 const AllAuthors = () => {
   return (
     <>
-      <div className="d-flex">
-        {/* <SideBar /> */}
-        <Container>
-          <AuthorsSlider />
-        </Container>
-      </div>
+      <AuthorsSlider />
     </>
   );
 };

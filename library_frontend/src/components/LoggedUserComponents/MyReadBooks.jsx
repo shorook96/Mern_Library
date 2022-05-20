@@ -5,7 +5,7 @@ import BookItemComponent from './BookItemComponent';
 import { UseAuth } from '../Helpers/Auth';
 import MyBookItemComponent from './MyBookItemComponent';
 
-const MyBookSlider = () => {
+const MyReadBooks = () => {
   const [res, setRes] = useState({});
 
   const { user } = UseAuth();
@@ -13,30 +13,21 @@ const MyBookSlider = () => {
   const changeCurrent = (pageNumber) => {
     const skipNumber =
       Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
-    const booksPerPage = user.userBooks.allMybooks.slice(
-      skipNumber,
-      skipNumber + 2
+    const readBooks = user.userBooks.allMybooks.filter(
+      (book) => book.state === 'Read'
     );
+    console.log(readBooks);
+
+    const booksPerPage = readBooks.slice(skipNumber, skipNumber + 2);
     setRes({
       currentPage: pageNumber,
       booksPerPage: booksPerPage,
-      booksCount: user.userBooks.booksCount,
+      booksCount: readBooks.length,
     });
   };
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/user/${user.userInfo.id}/myBooks`, {
-        headers: {
-          authorization: user.userInfo.authorization,
-        },
-      })
-      .then((response) => {
-        user.userBooks = response.data;
-        // setRes(response.data);
-        changeCurrent(1);
-      })
-      .catch((error) => {});
+    changeCurrent(1);
   }, []);
   return (
     <>
@@ -59,4 +50,4 @@ const MyBookSlider = () => {
   );
 };
 
-export default MyBookSlider;
+export default MyReadBooks;
