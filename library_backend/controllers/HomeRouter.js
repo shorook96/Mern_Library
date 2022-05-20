@@ -8,19 +8,12 @@ const mongoose = require('mongoose');
 
 homeRouter.get('/topRatedCategories', async (req, res, next) => {
   try {
-    const categoriesIds = await bookModel
+    const result = await bookModel
       .find({})
-      .sort({ rating: -1 })
+      .sort({ 'rating': -1 })
       .limit(5)
-      .distinct('category');
-    const categoryObjectIds = categoriesIds.map((val) =>
-      mongoose.Types.ObjectId(val)
-    );
-    const result = await categoryModel.find({
-      _id: {
-        $in: categoryObjectIds,
-      },
-    });
+      .populate('category')
+      .select('category');
     res.send(result);
   } catch (error) {
     return next(error);

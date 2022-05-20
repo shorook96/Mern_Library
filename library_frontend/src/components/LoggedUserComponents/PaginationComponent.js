@@ -29,7 +29,7 @@ const PaginationComponent = ({
     siblingCount,
     currentPageNumber,
   });
-  console.log(pageRange);
+  console.log("aaaaaaaaaaaa"+pageRange);
   return (
     <>
       <div className="d-flex flex-column w-100 m-auto">
@@ -52,7 +52,7 @@ const PaginationComponent = ({
                   <span className="sr-only">Previous</span>
                 </button>
               </li>
-              {/* {pageRange.map((val) => {
+              {pageRange.map((val) => {
             return (
               <li className="page-item" key={val}>
                 <button
@@ -67,7 +67,7 @@ const PaginationComponent = ({
                 </button>
               </li>
             );
-          })} */}
+          })}
 
               <li className="page-item">
                 <button
