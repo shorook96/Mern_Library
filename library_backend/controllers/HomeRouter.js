@@ -6,8 +6,6 @@ const authorModel = require('../models/authorModel');
 const BookModel = require('../models/bookModel');
 const mongoose = require('mongoose');
 
-
-
 homeRouter.get('/topRatedCategories', async (req, res, next) => {
   try {
     const categoriesIds = await bookModel
@@ -28,7 +26,6 @@ homeRouter.get('/topRatedCategories', async (req, res, next) => {
     return next(error);
   }
 });
-
 
 homeRouter.get('/topRatedAuthors', async (req, res, next) => {
   try {
@@ -57,7 +54,7 @@ homeRouter.get('/topRatedbooks', async (req, res, next) => {
       .limit(6)
       .populate('category')
       .populate('author');
-    res.send( books );
+    res.send(books);
   } catch (error) {
     next(error);
   }

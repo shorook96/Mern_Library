@@ -38,68 +38,65 @@ function App() {
   return (
     <React.Fragment>
       <NavComponent />
-      <div className='d-flex'>
-      {user ?  <SideBar /> : null}
-      <Routes>
-        <Route path="*" element={<PageNotFoundComponent />} />
+      <div className={user ? 'd-flex' : ''}>
+        {user ? <SideBar /> : null}
+        <Routes>
+          <Route
+            path="/login"
+            element={
+              user ? (
+                <UserHome />
+              ) : (
+                <>
+                  <HomeComponent />
+                  <LogIn
+                    clicked={showLogIn}
+                    handleLogInClose={handleLogInClose}
+                    changeUrl={changeUrl}
+                    state={{ path: Location.pathname }}
+                  />
+                </>
+              )
+            }
+          />
 
-        <Route
-          path="/login"
-          element={
-            user ? (
-              <UserHome />
-            ) : (
-              <>
-                <HomeComponent />
-                <LogIn
-                  clicked={showLogIn}
-                  handleLogInClose={handleLogInClose}
-                  changeUrl={changeUrl}
-                  state={{ path: Location.pathname }}
-                />
-              </>
-            )
-          }
-        />
+          <Route
+            path="/books/:pagenumber"
+            element={
+              <CheckAuth>
+                <BooksSlider />
+              </CheckAuth>
+            }
+          />
 
-        <Route
-          path="/books/:pagenumber"
-          element={
-            <CheckAuth>
-              <BooksSlider />
-            </CheckAuth>
-          }
-        />
+          <Route
+            path="/authors/:pagenumber"
+            element={
+              <CheckAuth>
+                <AllAuthors />
+              </CheckAuth>
+            }
+          />
 
-      <Route
-          path="/authors/:pagenumber"
-          element={
-            <CheckAuth>
-              <AllAuthors />
-            </CheckAuth>
-          }
-        />
+          <Route
+            path="/categories/:pagenumber"
+            element={
+              <CheckAuth>
+                <AllCategories />
+              </CheckAuth>
+            }
+          />
+          <Route
+            path="/myprofile"
+            element={
+              <CheckAuth>
+                <UserProfile />
+              </CheckAuth>
+            }
+          />
 
-      <Route
-          path="/categories/:pagenumber"
-          element={
-            <CheckAuth>
-              <AllCategories />
-            </CheckAuth>
-          }
-        />
-        <Route
-          path="/myprofile"
-          element={
-            <CheckAuth>
-              <UserProfile />
-            </CheckAuth>
-          }
-        />
-    
-        <Route path="/" element={user ? <UserHome /> : <HomeComponent />} />
-        
-      </Routes>
+          <Route path="/" element={user ? <UserHome /> : <HomeComponent />} />
+        </Routes>
       </div>
       {/* <Footer /> */}
     </React.Fragment>
