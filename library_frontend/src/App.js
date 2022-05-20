@@ -96,10 +96,18 @@ function App() {
               </CheckAuth>
             }
           />
+          <Route
+            path="/user/myBooks"
+            element={
+              <CheckAuth>
+                <MyBookSlider />
+              </CheckAuth>
+            }
+          />
 
           <Route
             path="/"
-            element={user ? <MyBookSlider /> : <HomeComponent />}
+            element={user ? <UserHome /> : <HomeComponent />}
           />
         </Routes>
       </div>

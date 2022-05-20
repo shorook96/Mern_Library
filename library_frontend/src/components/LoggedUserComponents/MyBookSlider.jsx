@@ -6,7 +6,7 @@ import { UseAuth } from '../Helpers/Auth';
 import MyBookItemComponent from './MyBookItemComponent';
 
 const MyBookSlider = () => {
-  const [res, setRes] = useState([]);
+  const [res, setRes] = useState({});
 
   const [currentPage, setCurrentPage] = useState(1);
   const { user } = UseAuth();
@@ -14,19 +14,39 @@ const MyBookSlider = () => {
   const changeCurrent = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-  useEffect(() => {}, [currentPage]);
+
+  useEffect(() => {
+    axios
+      .get(
+        `http://localhost:5000/user/${user.userInfo.id}/myBooks/${currentPage}`,
+        {
+          headers: {
+            authorization: user.userInfo.authorization,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+
+        setRes(response.data);
+      })
+      .catch((error) => {
+        console.log('errrrrrrrrrrrrrrrrrrrrrrr ' + error);
+      });
+  }, [currentPage]);
   return (
     <>
-      {res.lenght ? (
+      {res.booksCount ? (
         <PaginationComponent
-          Data={res}
-          itemsCount={Number(user.userInfo.books.lenght)}
-          totalPageCount={Math.ceil(Number(user.userInfo.books.lenght) / 2)}
+          Data={res.booksPerPage}
+          itemsCount={Number(res.booksCount)}
+          totalPageCount={Math.ceil(Number(res.booksCount) / 2)}
           RenderComponent={MyBookItemComponent}
           changeCurrent={changeCurrent}
           currentPageNumber={currentPage}
         />
       ) : (
+        // <h1>zahra</h1>
         // <h1>Data</h1>
         <h1>loading...</h1>
       )}

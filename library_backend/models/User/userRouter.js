@@ -7,7 +7,9 @@ const { customError } = require('../../utils/customError');
 const UserModel = require('./userModel');
 const BookModel = require('../bookModel');
 const AuthorModel = require('../authorModel');
+
 const categoryModel = require('../categoryModel');
+const mongoose = require('mongoose');
 
 const jwt = require('jsonwebtoken');
 const signAsync = util.promisify(jwt.sign);
@@ -189,9 +191,9 @@ userRouter.get('/:id/myBooks/:pageNumber', async (req, res, next) => {
       .limit(2)
       .select('books.state book');
     booksPerPage = books.books.slice(skipNumber, skipNumber + 2);
-    console.log(booksPerPage);
-
-    res.send({ booksPerPage });
+    // console.log(booksPerPage.length);
+    const booksCount = books.books.length;
+    res.send({ booksPerPage, booksCount });
   } catch (error) {
     next(error);
   }
@@ -202,6 +204,7 @@ userRouter.patch('/:id/book', authorizedUser, async (req, res, next) => {
     const { id } = req.params;
     console.log('my id is ' + id);
     const { addedBook } = req.body;
+
     const user = await UserModel.findOneAndUpdate(
       { _id: id },
       { $push: { books: { book: addedBook.book } } }

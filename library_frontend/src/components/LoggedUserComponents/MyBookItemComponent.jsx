@@ -31,10 +31,10 @@ const MyBookItemComponent = ({ data }) => {
   return (
     <>
       <Card style={{ width: '18rem' }} className="text-black m-auto">
-        <Card.Img variant="top" src={data.photo} width={100} height={300} />
+        <Card.Img variant="top" src={data.book.photo} width={100} height={300} />
         <Card.Body>
-          <Card.Title>{data.bookName}</Card.Title>
-          <Card.Text>{data.bookName}</Card.Text>
+          <Card.Title>{data.book.bookName}</Card.Title>
+          
           <Button variant="primary" onClick={goToDetails}>
             Go somewhere
           </Button>
