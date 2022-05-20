@@ -90,7 +90,8 @@ export default function Author () {
        
         <div class="parentContainer">
         
-        <div><Card name={AuthorsInfo.FirstName} />
+        <div class="all">
+          <Card class="card" im={AuthorsInfo.photo} name={AuthorsInfo.FirstName} />
             <div class="beside">
                 <h3 class="i">{AuthorsInfo.FirstName } {AuthorsInfo.LastName}</h3>
                 <small>{AuthorsInfo.DateofBirth}</small>

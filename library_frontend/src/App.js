@@ -15,6 +15,8 @@ import AllAuthors from './components/LoggedUserComponents/AllAuthors';
 import AllCategories from './components/LoggedUserComponents/AllCategories';
 import SideBar from './components/SideBar';
 import MyBookSlider from './components/LoggedUserComponents/MyBookSlider';
+import Author from './components/LoggedUserComponents/Author';
+import Book from './components/LoggedUserComponents/Book';
 
 // import Author from './components/Author';
 // import Authors from './components/Authors';
@@ -103,6 +105,22 @@ function App() {
             element={
               <CheckAuth>
                 <MyBookSlider />
+              </CheckAuth>
+            }
+          />
+          <Route
+            path="/Author/:id"
+            element={
+              <CheckAuth>
+                <Author />
+              </CheckAuth>
+            }
+          />
+          <Route
+            path="/Book/:id"
+            element={
+              <CheckAuth>
+                <Book />
               </CheckAuth>
             }
           />
