@@ -14,6 +14,7 @@ import LogIn from './components/LogIn';
 import AllAuthors from './components/LoggedUserComponents/AllAuthors';
 import AllCategories from './components/LoggedUserComponents/AllCategories';
 import SideBar from './components/SideBar';
+import MyBookSlider from './components/LoggedUserComponents/MyBookSlider';
 // import Author from './components/Author';
 // import Book from './components/Book';
 
@@ -41,6 +42,8 @@ function App() {
       <div className={user ? 'd-flex' : ''}>
         {user ? <SideBar /> : null}
         <Routes>
+          <Route path="*" element={<PageNotFoundComponent />} />
+
           <Route
             path="/login"
             element={
@@ -59,7 +62,6 @@ function App() {
               )
             }
           />
-
           <Route
             path="/books/:pagenumber"
             element={
@@ -94,8 +96,19 @@ function App() {
               </CheckAuth>
             }
           />
+          <Route
+            path="/user/myBooks"
+            element={
+              <CheckAuth>
+                <MyBookSlider />
+              </CheckAuth>
+            }
+          />
 
-          <Route path="/" element={user ? <UserHome /> : <HomeComponent />} />
+          <Route
+            path="/"
+            element={user ? <UserHome /> : <HomeComponent />}
+          />
         </Routes>
       </div>
       {/* <Footer /> */}

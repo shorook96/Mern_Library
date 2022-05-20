@@ -11,11 +11,11 @@ const UserProfile = () => {
       <Container className="w-50 text-center bg-white mt-5 rounded">
         <Container>
           <Image
-            roundedCircle
-            src={userlogo}
-            width={100}
-            height={100}
-            className="img-fluid"
+            rounded
+            src={user.userInfo.image}
+            width={150}
+            height={50}
+            className="img-fluid mt-2"
           />
         </Container>
         <Container>

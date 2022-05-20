@@ -21,7 +21,7 @@ const SideBar = () => {
 
           <CDBSidebarContent>
             <CDBSidebarMenu>
-              <NavLink to="/" className="side-bar-hover custom-nav-link">
+              <NavLink to="/user/myBooks" className="side-bar-hover custom-nav-link">
                 <CDBSidebarMenuItem
                   icon="fa-solid fa-book-bookmark"
                   title="All"

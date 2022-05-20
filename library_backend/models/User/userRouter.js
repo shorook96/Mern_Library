@@ -179,46 +179,44 @@ userRouter.get(
   }
 );
 
-userRouter.get(
-  '/:id/myBooks/:pageNumber',
-  authorizedUser,
-  async (req, res, next) => {
-    try {
-      const { id, pageNumber } = req.params;
+userRouter.get('/:id/myBooks/:pageNumber', async (req, res, next) => {
+  try {
+    const { id, pageNumber } = req.params;
 
-      const skipNumber =
-        Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
+    const skipNumber =
+      Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
 
-      const books = await UserModel.findById(id);
+    const books = await UserModel.findById(id)
+      .populate({
+        path: 'books.book',
+        $options: { limit: 2, skip: skipNumber },
+      })
+      .limit(2)
+      .select('books.state book');
+    booksPerPage = books.books.slice(skipNumber, skipNumber + 2);
+    // console.log(booksPerPage.length);
+    const booksCount = books.books.length
 
-      // const booksCount = await UserModel.find({}).count();
-
-      res.send(books);
-    } catch (error) {
-      next(error);
-    }
+    res.send({booksPerPage, booksCount});
+  } catch (error) {
+    next(error);
   }
-);
+});
 
 
-userRouter.post('/:id/book', authorizedUser, async (req, res, next) => {
+userRouter.patch('/:id/book', authorizedUser, async (req, res, next) => {
+
   try {
     const { id } = req.params;
     console.log('my id is ' + id);
     const { addedBook } = req.body;
-    console.log('dddddddddddddddddddd ' + addedBook);
-    const result = UserModel.findOneAndUpdate(
+
+    const user = await UserModel.findOneAndUpdate(
+
       { _id: id },
-      { $push: { books: { book: addedBook.book, state: addedBook.state } } },
-      function (error, success) {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log(success);
-        }
-      }
+      { $push: { books: { book: addedBook.book } } }
     );
-    console.log(result);
+
     res.send({ success: 'true' });
   } catch (error) {
     next(error);
