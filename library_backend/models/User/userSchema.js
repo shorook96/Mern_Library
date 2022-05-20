@@ -18,7 +18,6 @@ const userSchema = new mongoose.Schema({
         default: 'Want To Read',
       },
       _id: false,
-
     },
   ],
 });

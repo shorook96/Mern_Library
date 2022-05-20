@@ -29,7 +29,7 @@ const PaginationComponent = ({
     siblingCount,
     currentPageNumber,
   });
-
+  console.log(pageRange);
   return (
     <>
       <ItemsContainer
@@ -50,7 +50,7 @@ const PaginationComponent = ({
               <span className="sr-only">Previous</span>
             </button>
           </li>
-          {pageRange.map((val) => {
+          {/* {pageRange.map((val) => {
             return (
               <li className="page-item" key={val}>
                 <button
@@ -65,7 +65,7 @@ const PaginationComponent = ({
                 </button>
               </li>
             );
-          })}
+          })} */}
 
           <li className="page-item">
             <button

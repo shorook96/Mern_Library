@@ -105,10 +105,7 @@ function App() {
             }
           />
 
-          <Route
-            path="/"
-            element={user ? <UserHome /> : <HomeComponent />}
-          />
+          <Route path="/" element={user ? <UserHome /> : <HomeComponent />} />
         </Routes>
       </div>
       {/* <Footer /> */}

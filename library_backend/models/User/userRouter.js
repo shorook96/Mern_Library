@@ -176,29 +176,62 @@ userRouter.get(
   }
 );
 
-userRouter.get('/:id/myBooks/:pageNumber', async (req, res, next) => {
-  try {
-    const { id, pageNumber } = req.params;
+userRouter.get(
+  '/:id/myBooks/:pageNumber',
+  authorizedUser,
+  async (req, res, next) => {
+    try {
+      const { id, pageNumber } = req.params;
 
-    const skipNumber =
-      Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
+      const skipNumber =
+        Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
 
-    const books = await UserModel.findById(id)
-      .populate({
-        path: 'books.book',
-        $options: { limit: 2, skip: skipNumber },
-      })
-      .limit(2)
-      .select('books.state book');
-    booksPerPage = books.books.slice(skipNumber, skipNumber + 2);
-    // console.log(booksPerPage.length);
-    const booksCount = books.books.length;
-    res.send({ booksPerPage, booksCount });
-  } catch (error) {
-    next(error);
+      const books = await UserModel.findById(id)
+        .populate({
+          path: 'books.book',
+          $options: { limit: 2, skip: skipNumber },
+        })
+        .limit(2)
+        .select('books.state book');
+      booksPerPage = books.books.slice(skipNumber, skipNumber + 2);
+      // console.log(booksPerPage.length);
+      const booksCount = books.books.length;
+      res.send({ booksPerPage, booksCount });
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
+// /**************************** */
+// userRouter.get('/:id/myReadBooks/:pageNumber', async (req, res, next) => {
+//   try {
+//     const { id, pageNumber } = req.params;
 
+//     const skipNumber =
+//       Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
+
+//     const books = await UserModel.findOne({
+//       _id: id,
+//     })
+//       .where('books')
+//       .elemMatch('books', {
+//         state: 'Want To Read',
+//       });
+//     // .populate({
+//     //   path: 'books.book',
+//     //   $options: { limit: 2, skip: skipNumber },
+//     // })
+//     // .limit(2)
+//     // .select('books.state book');
+//     // booksPerPage = books.books.slice(skipNumber, skipNumber + 2);
+//     // console.log(booksPerPage);
+//     // const booksCount = books.books.length;
+//     res.send({ books });
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+/************************************** */
 userRouter.patch('/:id/book', authorizedUser, async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -215,5 +248,27 @@ userRouter.patch('/:id/book', authorizedUser, async (req, res, next) => {
     next(error);
   }
 });
-
+userRouter.patch(
+  '/:id/mybook/:bookId',
+  authorizedUser,
+  async (req, res, next) => {
+    try {
+      const { id, bookId } = req.params;
+      const { state } = req.body;
+      console.log(state);
+      console.log('my id is ' + id);
+      const user = await UserModel.updateOne(
+        {
+          _id: id,
+          'books.book': bookId,
+        },
+        { $set: { 'books.$.state': state } }
+      );
+      console.log(user);
+      res.send({ success: 'true' });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 module.exports = userRouter;

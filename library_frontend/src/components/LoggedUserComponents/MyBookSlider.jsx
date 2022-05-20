@@ -26,13 +26,9 @@ const MyBookSlider = () => {
         }
       )
       .then((response) => {
-        console.log(response.data);
-
         setRes(response.data);
       })
-      .catch((error) => {
-        console.log('errrrrrrrrrrrrrrrrrrrrrrr ' + error);
-      });
+      .catch((error) => {});
   }, [currentPage]);
   return (
     <>
@@ -46,6 +42,7 @@ const MyBookSlider = () => {
           currentPageNumber={currentPage}
         />
       ) : (
+        // <h1>hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii</h1>
         // <h1>zahra</h1>
         // <h1>Data</h1>
         <h1>loading...</h1>
