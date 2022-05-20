@@ -14,9 +14,9 @@ import LogIn from './components/LogIn';
 import AllAuthors from './components/LoggedUserComponents/AllAuthors';
 import AllCategories from './components/LoggedUserComponents/AllCategories';
 
-import Author from './components/Author';
-import Authors from './components/Authors';
-import Book from './components/Book';
+// import Author from './components/Author';
+// import Authors from './components/Authors';
+// import Book from './components/Book';
 
 function App() {
   const { user } = UseAuth();
@@ -74,9 +74,9 @@ function App() {
         <Route path="/" element={user ? <UserHome /> : <HomeComponent />} />
         {/* <Route path="/" element={user ? <AllAuthors /> : <HomeComponent />} /> */}
         {/* <Route path="/" element={user ? <AllCategories /> : <HomeComponent />} /> */}
-        <Route path='/Authors' element={<Authors/>}/>
+        {/* <Route path='/Authors' element={<Authors/>}/>
         <Route path="/Authors/:id" element={<Author/>}></Route>
-        <Route path="/book" element={<Book/>}></Route>
+        <Route path="/book" element={<Book/>}></Route> */}
       </Routes>
       <Footer />
     </React.Fragment>

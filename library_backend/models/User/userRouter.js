@@ -7,7 +7,9 @@ const { customError } = require('../../utils/customError');
 const UserModel = require('./userModel');
 const BookModel = require('../bookModel');
 const AuthorModel = require('../authorModel');
-const categoryModel = require('../categoryModel')
+
+const categoryModel = require('../categoryModel');
+const mongoose = require('mongoose');
 
 const jwt = require('jsonwebtoken');
 const signAsync = util.promisify(jwt.sign);
@@ -16,6 +18,7 @@ const {
   authorizedUser,
 } = require('../../middle_wares/authorization_middleware');
 const { appendFile } = require('fs');
+const bookModel = require('../bookModel');
 
 const secretKey = 'zahra';
 
@@ -53,9 +56,19 @@ userRouter.post('/login', async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const user = await UserModel.findOne({ email });
-    // if(!user) throw authError;
+    if (!user)
+      throw customError(
+        405,
+        'Email or Password may be wrong',
+        'Email or Password may be wrong'
+      );
     const result = await bcrypt.compare(password, user.password);
-    // if(!result)throw authError;
+    if (!result)
+      throw customError(
+        405,
+        'Email or Password may be wrong',
+        'Email or Password may be wrong'
+      );
     const SecretKey = 'zahra';
     const token = await signAsync(
       {
@@ -110,13 +123,12 @@ userRouter.get(
   async (req, res, next) => {
     try {
       const { pageNumber } = req.params;
-      
 
       const skipNumber =
         Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
       const books = (await BookModel.find({}).skip(skipNumber).limit(2)) || [];
       const booksCount = await BookModel.find({}).count();
-      
+
       res.send({ books, booksCount });
     } catch (error) {
       next(error);
@@ -124,20 +136,18 @@ userRouter.get(
   }
 );
 
-
 userRouter.get(
   '/:id/categories/:pageNumber',
   authorizedUser,
   async (req, res, next) => {
     try {
       const { pageNumber } = req.params;
-      
 
       const skipNumber =
         Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
-      const categories = (await categoryModel.find({}).skip(skipNumber).limit(2)) || [];
+      const categories =
+        (await categoryModel.find({}).skip(skipNumber).limit(2)) || [];
       const CategoriesCount = await categoryModel.find({}).count();
-      
 
       res.send({ categories, CategoriesCount });
     } catch (error) {
@@ -146,20 +156,18 @@ userRouter.get(
   }
 );
 
-
 userRouter.get(
   '/:id/authors/:pageNumber',
   authorizedUser,
   async (req, res, next) => {
     try {
       const { pageNumber } = req.params;
-      
 
       const skipNumber =
         Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
-      const authors = (await AuthorModel.find({}).skip(skipNumber).limit(2)) || [];
+      const authors =
+        (await AuthorModel.find({}).skip(skipNumber).limit(2)) || [];
       const authorsCount = await AuthorModel.find({}).count();
-      
 
       res.send({ authors, authorsCount });
     } catch (error) {
@@ -168,32 +176,44 @@ userRouter.get(
   }
 );
 
+userRouter.get('/:id/myBooks/:pageNumber', async (req, res, next) => {
+  try {
+    const { id, pageNumber } = req.params;
 
+    const skipNumber =
+      Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
 
-userRouter.get(
-  '/:id/userBooks/:pageNumber',
-  authorizedUser,
-  async (req, res, next) => {
-    try {
-      const { id, pageNumber } = req.params;
-    
-
-      const skipNumber =
-        Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
-        
-      const books = (await UserModel.findById(id));
-     
-      // const booksCount = await UserModel.find({}).count();
-      
-
-      res.send( books );
-    } catch (error) {
-      next(error);
-    }
+    const books = await UserModel.findById(id)
+      .populate({
+        path: 'books.book',
+        $options: { limit: 2, skip: skipNumber },
+      })
+      .limit(2)
+      .select('books.state book');
+    booksPerPage = books.books.slice(skipNumber, skipNumber + 2);
+    // console.log(booksPerPage.length);
+    const booksCount = books.books.length;
+    res.send({ booksPerPage, booksCount });
+  } catch (error) {
+    next(error);
   }
-);
+});
 
+userRouter.patch('/:id/book', authorizedUser, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    console.log('my id is ' + id);
+    const { addedBook } = req.body;
 
+    const user = await UserModel.findOneAndUpdate(
+      { _id: id },
+      { $push: { books: { book: addedBook.book } } }
+    );
 
+    res.send({ success: 'true' });
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = userRouter;
