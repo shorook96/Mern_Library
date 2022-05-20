@@ -334,4 +334,48 @@ userRouter.patch('/:id/mybook/rate/:bookId', async (req, res, next) => {
   }
 });
 
+userRouter.get(
+  '/:id/booksofCategory/:categoryId/:pageNumber',
+  authorizedUser,
+  async (req, res, next) => {
+    try {
+      const { categoryId, pageNumber } = req.params;
+
+      const skipNumber =
+        Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
+      const books =
+        (await BookModel.find({ category: categoryId })
+          .skip(skipNumber)
+          .limit(2)) || [];
+      const booksCount = await BookModel.find({ category: categoryId }).count();
+
+      res.send({ books, booksCount });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+userRouter.get(
+  '/:id/booksofAuthor/:authorId/:pageNumber',
+  authorizedUser,
+  async (req, res, next) => {
+    try {
+      const { authorId, pageNumber } = req.params;
+
+      const skipNumber =
+        Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
+      const books =
+        (await BookModel.find({ author: authorId })
+          .skip(skipNumber)
+          .limit(2)) || [];
+      const booksCount = await BookModel.find({ author: authorId }).count();
+
+      res.send({ books, booksCount });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
 module.exports = userRouter;

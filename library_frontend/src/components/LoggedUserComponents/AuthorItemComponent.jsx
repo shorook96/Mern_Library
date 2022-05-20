@@ -1,5 +1,11 @@
 import React from 'react';
 import { Button, Card } from 'react-bootstrap';
+import {Link} from "react-router-dom";
+// function GetAuthors() {
+//   return fetch("http://localhost:5000/"+'authors/')
+//       .then(response => response.json())
+// }
+
 
 const AuthorItemComponent = ({ data }) => {
   return (
@@ -9,7 +15,9 @@ const AuthorItemComponent = ({ data }) => {
         <Card.Body>
           <Card.Title>{data.firstname}</Card.Title>
           <Card.Text>{data.lastname}</Card.Text>
-          <Button variant="primary">Go somewhere</Button>
+          <Button variant="primary">
+          <Link to={'/Author/'+data._id}> More details </Link>
+          </Button>
         </Card.Body>
       </Card>
     </>

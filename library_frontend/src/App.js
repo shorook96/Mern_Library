@@ -15,9 +15,14 @@ import AllAuthors from './components/LoggedUserComponents/AllAuthors';
 import AllCategories from './components/LoggedUserComponents/AllCategories';
 import SideBar from './components/SideBar';
 import MyBookSlider from './components/LoggedUserComponents/MyBookSlider';
+
 import MyReadBooks from './components/LoggedUserComponents/MyReadBooks';
 import MyCurrentlyReadingBooks from './components/LoggedUserComponents/MyCurrentlyReadingBooks';
 import MyWantToReadBooks from './components/LoggedUserComponents/MyWantToReadBooks';
+
+import Author from './components/LoggedUserComponents/Author';
+import Book from './components/LoggedUserComponents/Book';
+
 
 // import Author from './components/Author';
 // import Authors from './components/Authors';
@@ -110,14 +115,24 @@ function App() {
             }
           />
           <Route
+
             path="/user/myBooks/Read"
             element={
               <CheckAuth>
-                <MyReadBooks />
-              </CheckAuth>
-            }
+                <MyReadBooks /></CheckAuth>}
+
           />
           <Route
+           path="/Author/:id"
+            element={
+              <CheckAuth>
+                <Author />
+
+              </CheckAuth>
+            }
+            />
+          <Route
+
             path="/user/myBooks/CurrentlyReading"
             element={
               <CheckAuth>
@@ -129,10 +144,17 @@ function App() {
             path="/user/myBooks/WantToRead"
             element={
               <CheckAuth>
-                <MyWantToReadBooks />
-              </CheckAuth>
-            }
+                <MyWantToReadBooks /></CheckAuth>}
           />
+
+          <Route
+             path="/Book/:id"
+             element={
+               <CheckAuth>
+                 <Book />
+ 
+               </CheckAuth>
+             }/>
 
           <Route
             path="/"

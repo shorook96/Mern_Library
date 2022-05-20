@@ -10,6 +10,7 @@ homeRouter.get('/topRatedCategories', async (req, res, next) => {
   try {
     const result = await bookModel
       .find({})
+<<<<<<< HEAD
       .sort({ 'rating.totalRate': -1 })
       .limit(5)
       .populate('category')
@@ -22,6 +23,12 @@ homeRouter.get('/topRatedCategories', async (req, res, next) => {
     //     $in: categoryObjectIds,
     //   },
     // });
+=======
+      .sort({ 'rating': -1 })
+      .limit(5)
+      .populate('category')
+      .select('category');
+>>>>>>> 620850973bf50b4785265b17f3deb76579779f10
     res.send(result);
   } catch (error) {
     return next(error);

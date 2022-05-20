@@ -43,7 +43,9 @@ const AuthorsSlider = () => {
           changeCurrent={changeCurrent}
           currentPageNumber={currentPage}
         />
-      ) : (
+        // <h1>zahra</h1>
+        ) 
+        : (
         // <h1>Data</h1>
         <h1>loading...</h1>
       )}
