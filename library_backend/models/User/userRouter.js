@@ -191,7 +191,7 @@ userRouter.get('/:id/myBooks/:pageNumber', async (req, res, next) => {
     booksPerPage = books.books.slice(skipNumber, skipNumber + 2);
     console.log(booksPerPage);
 
-    res.send(booksPerPage);
+    res.send({ booksPerPage });
   } catch (error) {
     next(error);
   }

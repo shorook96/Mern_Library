@@ -14,25 +14,7 @@ const MyBookSlider = () => {
   const changeCurrent = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-  useEffect(() => {
-    axios
-      .get(
-        `http://localhost:5000/user/${user.userInfo.id}/myBooks/${currentPage}`,
-        {
-          headers: {
-            authorization: user.userInfo.authorization,
-          },
-        }
-      )
-      .then((response) => {
-        console.log(response.data[0]);
-        const [book1, book2] = [...response.data];
-        setRes([book1, book2]);
-      })
-      .catch((error) => {
-        console.log('errrrrrrrrrrrrrrrrrrrrrrr ' + error);
-      });
-  }, [currentPage]);
+  useEffect(() => {}, [currentPage]);
   return (
     <>
       {res.lenght ? (
