@@ -29,7 +29,7 @@ const PaginationComponent = ({
     siblingCount,
     currentPageNumber,
   });
-  console.log("aaaaaaaaaaaa"+pageRange);
+  
   return (
     <>
       <div className="d-flex flex-column w-100 m-auto">
