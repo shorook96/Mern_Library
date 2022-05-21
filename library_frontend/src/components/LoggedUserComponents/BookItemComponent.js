@@ -3,6 +3,7 @@ import { Button, Card } from 'react-bootstrap';
 import { useNavigate, UserLocation } from 'react-router-dom';
 import axios from 'axios';
 import { UseAuth } from '../Helpers/Auth';
+import {Link} from "react-router-dom";
 
 const BookItemComponent = ({ data }) => {
   const navigate = useNavigate();
@@ -52,15 +53,17 @@ const BookItemComponent = ({ data }) => {
             <h3>some info about the book</h3>
             <p>sbjvcbj basjbcbbba naknkjndakj </p>
             <Button variant="primary" onClick={goToDetails}>
-              Go somewhere
+              Go somewherey
             </Button>
+            
           </div>
         </div>
         <Card.Body>
           <Card.Title>{data.bookName}</Card.Title>
           <Card.Text>{data.bookName}</Card.Text>
-          <Button variant="primary" onClick={goToDetails}>
-            Go somewhere
+          <Button variant="primary">
+          <Link to={'/Book/'+data._id}> Go somewhere </Link>
+
           </Button>
           {book ? (
             <Button variant="secondary" disabled className=" mt-1">
