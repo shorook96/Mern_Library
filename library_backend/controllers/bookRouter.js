@@ -2,8 +2,10 @@ const express = require('express');
 const bookRouter = express.Router();
 const customError = require('../utils/customError');
 const bookModel = require('../models/bookModel');
-const authorModel = require('../models/authorModel');
-const categoryModel = require('../models/categoryModel');
+const UserModel = require('../models/User/userModel');
+const mongoose = require('mongoose');
+
+
 const {
   adminTokenValidatorMiddleware,
 } = require('../middle_wares/adminTokenMiddleware_validator');
@@ -43,6 +45,8 @@ bookRouter.delete('/:id', async (req, res, next) => {
     const id = req.params.id;
     //await bookModel.deleteOne({_id: id});
     //res.send({success: 'OK'})
+    const idObj = mongoose.Types.ObjectId(id);
+    await UserModel.updateMany({}, {$pull: {books: idObj}});
     bookModel.deleteOne(
       {
         _id: id,
@@ -55,6 +59,8 @@ bookRouter.delete('/:id', async (req, res, next) => {
         }
       }
     );
+    
+    
   } catch (err) {
     next(err);
   }

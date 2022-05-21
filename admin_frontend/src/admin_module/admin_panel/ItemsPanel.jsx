@@ -36,6 +36,8 @@ export default function ItemsPanel({activeSubPanel}){
 
 
     useEffect(() => {
+        closeAddingNewItemMode();
+        closeEditMode();
         reloadList();
     }, [activeSubPanel])
 

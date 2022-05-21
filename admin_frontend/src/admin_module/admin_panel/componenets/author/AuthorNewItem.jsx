@@ -48,8 +48,8 @@ export default function AuthorNewItem({index, closeAddingNewItemMode, reloadList
 
     return (
         <tr key={newItemData._id} className="table-warning">
-            <td className='indexCell'>{index + 1}</td>
-            <td className='idCell'>{newItemData._id}</td>
+            <td key={'index'} className='indexCell'>{index + 1}</td>
+            <td key={'id'} className='idCell'>{newItemData._id}</td>
             <td key={'firstname'} className='firstnameCell'><input type="text" value={newItemData.firstname} onChange={e => updateNewData('firstname', e.target.value)} onKeyDown={(e) => {if(e.key === "Enter") addNewData(newItemData)}}/></td>
             <td key={'lastname'} className='lastnameCell'><input type="text" value={newItemData.lastname} onChange={e => updateNewData('lastname', e.target.value)} onKeyDown={(e) => {if(e.key === "Enter") addNewData(newItemData)}}/></td>
             <td key={'DOB'} className='DOBCell'><input type="date" value={newItemData.DOB} onChange={e => updateNewData('DOB', e.target.value)} onKeyDown={(e) => {if(e.key === "Enter") addNewData(newItemData)}}/></td>
