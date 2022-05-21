@@ -28,6 +28,7 @@ const LogIn = ({ clicked, handleLogInClose, changeUrl }) => {
       .then((response) => {
         console.log(response.data);
         login(response.data);
+
         changeUrl(redirectPath);
         // navigate(redirectPath, { replace: true });
       })

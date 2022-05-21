@@ -106,7 +106,7 @@ userRouter.get(
         bookName: { $regex: searchField, $options: '$i' },
       });
       authorsResults = await AuthorModel.find({
-        firstname: { $regex: 'z', $options: '$i' },
+        firstname: { $regex: searchField, $options: '$i' },
       });
       searchResults = [booksResults, authorsResults];
       console.log(searchResults);
@@ -188,7 +188,7 @@ userRouter.get('/:id/myBooks/', authorizedUser, async (req, res, next) => {
         path: 'books.book',
       })
       .limit(2)
-      .select('books.state book');
+      .select('books.state books.userRating book');
     const allMybooks = user.books;
     // booksPerPage = books.books.slice(skipNumber, skipNumber + 2);
     // console.log(booksPerPage.length);

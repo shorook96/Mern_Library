@@ -2,13 +2,15 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { Button, Card, Form } from 'react-bootstrap';
 import { UseAuth } from '../Helpers/Auth';
+import Rating from './rating';
 
 const MyBookItemComponent = ({ data }) => {
   const { user } = UseAuth();
+  console.log(data);
+
   const goToDetails = () => {};
   const changeState = (e) => {
     const state = e.target.value;
-    console.log(state);
     axios
       .patch(
         `http://localhost:5000/user/${user.userInfo.id}/mybook/${data.book._id}`,
@@ -36,23 +38,22 @@ const MyBookItemComponent = ({ data }) => {
             src={data.book.photo}
             width={100}
             height={300}
-            className="custom-card-img"
+            className="/custom-card-img"
           />
           <div className="info">
-            <h3>some info about the book</h3>
-            <p>sbjvcbj basjbcbbba naknkjndakj </p>
+            <h3>{data.book.bookName}</h3>
+            <p>one of the best books ever </p>
             <Button variant="primary" onClick={goToDetails}>
-              Go somewhere
+              Check Details
             </Button>
           </div>
         </div>
 
         <Card.Body>
-          <Card.Title>{data.book.bookName}</Card.Title>
+          <Card.Title>
+            <Rating bookId={data.book._id} currentlyRating={data.userRating} />
+          </Card.Title>
 
-          <Button variant="primary" onClick={goToDetails}>
-            Go somewhere
-          </Button>
           <Form.Select
             aria-label="Default select example"
             onChange={changeState}

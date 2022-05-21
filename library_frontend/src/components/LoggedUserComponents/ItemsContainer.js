@@ -7,7 +7,7 @@ const ItemsContainer = ({ currentPageContent, RenderComponent }) => {
     <Container className="text-center m-auto ">
       <Row>
         {currentPageContent.map((item, idx) => (
-          <Col key={idx} md={6}>
+          <Col key={item.book !== undefined ? item.book._id : item._id} md={6}>
             <RenderComponent data={item} />
           </Col>
         ))}
