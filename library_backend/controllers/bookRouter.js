@@ -38,6 +38,25 @@ bookRouter.get('/:id', async (req, res, next) => {
   }
 });
 
+bookRouter.get('/fulldata/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const book = await bookModel.findById(id);
+    if (!book) throw customError(422, 'ID_NOT_FOUND', 'NO_SUCH_BOOK');
+    console.log(book)
+    const {firstname, lastname}=await authorModel.findById({ _id:book.author})
+    const {categoryName}=await categoryModel.findById({ _id:book.category})
+    // book.category={categoryName,id:book.category}
+    // book.author={firstname,lastname,id:book.author}
+    const newbook={...(book._doc),
+    category: {categoryName,id:book.category},
+    author:{firstname,lastname,id:book.author}} 
+    res.send(newbook);
+  } catch (err) {
+    next(err);
+  }
+});
+
 bookRouter.delete('/:id', async (req, res, next) => {
   try {
     const id = req.params.id;
