@@ -14,14 +14,7 @@ homeRouter.get('/topRatedCategories', async (req, res, next) => {
       .limit(5)
       .populate('category')
       .select('category');
-    // const categoryObjectIds = categoriesIds.map((val) =>
-    //   mongoose.Types.ObjectId(val)
-    // );
-    // const result = await categoryModel.find({
-    //   _id: {
-    //     $in: categoryObjectIds,
-    //   },
-    // });
+
     res.send(result);
   } catch (error) {
     return next(error);

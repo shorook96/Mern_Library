@@ -104,10 +104,10 @@ userRouter.get(
 
       booksResults = await BookModel.find({
         bookName: { $regex: searchField, $options: '$i' },
-      });
+      }).limit(3);
       authorsResults = await AuthorModel.find({
         firstname: { $regex: searchField, $options: '$i' },
-      });
+      }).limit(3);
       searchResults = [booksResults, authorsResults];
       console.log(searchResults);
       res.send(searchResults);
@@ -125,8 +125,8 @@ userRouter.get(
       const { pageNumber } = req.params;
 
       const skipNumber =
-        Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
-      const books = (await BookModel.find({}).skip(skipNumber).limit(2)) || [];
+        Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 6 - 6;
+      const books = (await BookModel.find({}).skip(skipNumber).limit(6)) || [];
       const booksCount = await BookModel.find({}).count();
 
       res.send({ books, booksCount });
@@ -144,9 +144,9 @@ userRouter.get(
       const { pageNumber } = req.params;
 
       const skipNumber =
-        Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
+        Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 6 - 6;
       const categories =
-        (await categoryModel.find({}).skip(skipNumber).limit(2)) || [];
+        (await categoryModel.find({}).skip(skipNumber).limit(6)) || [];
       const CategoriesCount = await categoryModel.find({}).count();
 
       res.send({ categories, CategoriesCount });
@@ -164,9 +164,9 @@ userRouter.get(
       const { pageNumber } = req.params;
 
       const skipNumber =
-        Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
+        Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 6 - 6;
       const authors =
-        (await AuthorModel.find({}).skip(skipNumber).limit(2)) || [];
+        (await AuthorModel.find({}).skip(skipNumber).limit(6)) || [];
       const authorsCount = await AuthorModel.find({}).count();
 
       res.send({ authors, authorsCount });
@@ -187,7 +187,7 @@ userRouter.get('/:id/myBooks/', authorizedUser, async (req, res, next) => {
       .populate({
         path: 'books.book',
       })
-      .limit(2)
+      .limit(6)
       .select('books.state books.userRating book');
     const allMybooks = user.books;
     // booksPerPage = books.books.slice(skipNumber, skipNumber + 2);
@@ -342,11 +342,11 @@ userRouter.get(
       const { categoryId, pageNumber } = req.params;
 
       const skipNumber =
-        Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
+        Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 6 - 6;
       const books =
         (await BookModel.find({ category: categoryId })
           .skip(skipNumber)
-          .limit(2)) || [];
+          .limit(6)) || [];
       const booksCount = await BookModel.find({ category: categoryId }).count();
 
       res.send({ books, booksCount });

@@ -7,12 +7,10 @@ import CategoriesSlider from './CategoriesSlider';
 const AllCategories = () => {
   return (
     <>
-      <div className="d-flex">
-        {/* <SideBar /> */}
-        <Container>
-          <CategoriesSlider />
-        </Container>
-      </div>
+      {/* <SideBar /> */}
+      <Container>
+        <CategoriesSlider />
+      </Container>
     </>
   );
 };

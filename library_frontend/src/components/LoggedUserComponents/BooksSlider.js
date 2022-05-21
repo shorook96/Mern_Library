@@ -3,6 +3,7 @@ import axios from 'axios';
 import PaginationComponent from './PaginationComponent';
 import BookItemComponent from './BookItemComponent';
 import { UseAuth } from '../Helpers/Auth';
+import { Container } from 'react-bootstrap';
 
 const BooksSlider = () => {
   const [res, setRes] = useState({});
@@ -33,17 +34,18 @@ const BooksSlider = () => {
 
   return (
     <>
-
       {res.books && res.booksCount ? (
-        
-        <PaginationComponent
-          Data={res.books}
-          itemsCount={Number(res.booksCount)}
-          totalPageCount={Math.ceil(Number(res.booksCount) / 2)}
-          RenderComponent={BookItemComponent}
-          changeCurrent={changeCurrent}
-          currentPageNumber={currentPage}
-        />
+        <Container>
+          <PaginationComponent
+            Data={res.books}
+            itemsCount={Number(res.booksCount)}
+            totalPageCount={Math.ceil(Number(res.booksCount) / 6)}
+            RenderComponent={BookItemComponent}
+            changeCurrent={changeCurrent}
+            currentPageNumber={currentPage}
+            title="All Books"
+          />
+        </Container>
       ) : (
         // <h1>Data</h1>
         <h1>loading...</h1>
