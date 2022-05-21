@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useState, useEffect } from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
 import HomeStartImages from './HomeStartImages';
 import '../App.css';
@@ -7,7 +7,11 @@ import rightarrow from '../assets/images/right-arrow.webp';
 import HomeAuthorsComponent from './HomeAuthorsComponent';
 import HomeCategoriesComponent from './HomeCategoriesComponent';
 import Footer from './Footer';
+import axios from 'axios';
+
 export default function HomeComponent() {
+ 
+
   return (
     <>
       <div className="d-flex container">
@@ -22,21 +26,26 @@ export default function HomeComponent() {
       </div>
       <div className="mt-5">
         <Container>
-          <HomeCategoriesComponent />
-        </Container>
-        <Container className="text-center mt-2">
-          <img src={rightarrow} width={200} height={200} />
-        </Container>
-        <Container>
-          <HomeStartImages />
-          <Container className="text-center">
+          <Container className='mt-5"'>
+            <HomeCategoriesComponent />
+          </Container>
+          <Container className="text-center mt-5">
             <img src={leftarrow} width={200} height={200} />
           </Container>
+          <Container className="mt-2">
+            <HomeStartImages />
+          </Container>
+          <Container className="text-center mt-5">
+            <img src={rightarrow} width={200} height={200} />
+          </Container>
 
-          <HomeAuthorsComponent />
+          <Container className="mt-2">
+            <HomeAuthorsComponent />
+          </Container>
         </Container>
-        <Footer />
       </div>
     </>
+
+    // <h1>Data</h1>
   );
 }

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PaginationComponent from './PaginationComponent';
-import BookItemComponent from './BookItemComponent';
 import { UseAuth } from '../Helpers/Auth';
+import CategoryItemComponent from './CategoryItemComponent';
 
-const BooksSlider = () => {
+const AuthorsSlider = () => {
   const [res, setRes] = useState({});
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -16,7 +16,7 @@ const BooksSlider = () => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:5000/user/${user.userInfo.id}/books/${currentPage}`,
+        `http://localhost:5000/user/${user.userInfo.id}/categories/${currentPage}`,
         {
           headers: {
             authorization: user.userInfo.authorization,
@@ -24,6 +24,7 @@ const BooksSlider = () => {
         }
       )
       .then((response) => {
+        console.log(' aaaaaaaaaaaaaaaaa ' + response.data.categories);
         setRes(response.data);
       })
       .catch((error) => {
@@ -33,18 +34,17 @@ const BooksSlider = () => {
 
   return (
     <>
-
-      {res.books && res.booksCount ? (
-        
+      {res.CategoriesCount ? (
         <PaginationComponent
-          Data={res.books}
-          itemsCount={Number(res.booksCount)}
-          totalPageCount={Math.ceil(Number(res.booksCount) / 2)}
-          RenderComponent={BookItemComponent}
+          Data={res.categories}
+          itemsCount={Number(res.CategoriesCount)}
+          totalPageCount={Math.ceil(Number(res.CategoriesCount) / 2)}
+          RenderComponent={CategoryItemComponent}
           changeCurrent={changeCurrent}
           currentPageNumber={currentPage}
         />
       ) : (
+        // <h1>zahra</h1>
         // <h1>Data</h1>
         <h1>loading...</h1>
       )}
@@ -52,4 +52,4 @@ const BooksSlider = () => {
   );
 };
 
-export default BooksSlider;
+export default AuthorsSlider;

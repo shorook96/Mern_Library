@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@hapi/joi": "^17.1.1",
-    "create-react-app": "^5.0.1"
+    "create-react-app": "^5.0.1",
+    "react-star-ratings": "^2.3.0"
   }
 }

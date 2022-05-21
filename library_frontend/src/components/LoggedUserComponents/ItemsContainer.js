@@ -1,15 +1,14 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import ItemComponent from './ItemComponent';
 
-const ItemsContainer = ({ currentPageContent }) => {
+const ItemsContainer = ({ currentPageContent, RenderComponent }) => {
   return (
-    <Container>
+    <Container className="text-center m-auto ">
       <Row>
         {currentPageContent.map((item, idx) => (
-          <Col key={idx}>
-            <ItemComponent data={item} />
+          <Col key={item.book !== undefined ? item.book._id : item._id} md={6}>
+            <RenderComponent data={item} />
           </Col>
         ))}
       </Row>

@@ -21,7 +21,10 @@ const SideBar = () => {
 
           <CDBSidebarContent>
             <CDBSidebarMenu>
-              <NavLink to="/" className="side-bar-hover custom-nav-link">
+              <NavLink
+                to="/user/myBooks/All"
+                className="side-bar-hover custom-nav-link"
+              >
                 <CDBSidebarMenuItem
                   icon="fa-solid fa-book-bookmark"
                   title="All"
@@ -30,14 +33,14 @@ const SideBar = () => {
                 </CDBSidebarMenuItem>
               </NavLink>
               <NavLink
-                to="/"
+                to="/user/myBooks/Read"
                 title="Read"
                 className="side-bar-hover custom-nav-link"
               >
                 <CDBSidebarMenuItem icon="book">Read</CDBSidebarMenuItem>
               </NavLink>
               <NavLink
-                to="/"
+                to="/user/myBooks/CurrentlyReading"
                 title="Currently Reading"
                 className="side-bar-hover custom-nav-link"
               >
@@ -46,7 +49,7 @@ const SideBar = () => {
                 </CDBSidebarMenuItem>
               </NavLink>
               <NavLink
-                to="/"
+                to="/user/myBooks/WantToRead"
                 title="Want To Read"
                 className="side-bar-hover custom-nav-link"
               >

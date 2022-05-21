@@ -2,24 +2,166 @@ import Footer from './components/Footer';
 // import { Routers, Router } from 'react-router-dom';
 import NavComponent from './components/NavComponent';
 import HomeComponent from './components/Home';
-import React from 'react';
+import React, { useState } from 'react';
 import { UseAuth } from './components/Helpers/Auth';
 import UserHome from './components/LoggedUserComponents/UserHome';
 import UserProfile from './components/LoggedUserComponents/UserProfile';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import PageNotFoundComponent from './components/PageNotFoundComponent';
+import BooksSlider from './components/LoggedUserComponents/BooksSlider';
+import CheckAuth from './components/Helpers/CheckAuth';
+import LogIn from './components/LogIn';
+import AllAuthors from './components/LoggedUserComponents/AllAuthors';
+import AllCategories from './components/LoggedUserComponents/AllCategories';
+import SideBar from './components/SideBar';
+import MyBookSlider from './components/LoggedUserComponents/MyBookSlider';
+
+import MyReadBooks from './components/LoggedUserComponents/MyReadBooks';
+import MyCurrentlyReadingBooks from './components/LoggedUserComponents/MyCurrentlyReadingBooks';
+import MyWantToReadBooks from './components/LoggedUserComponents/MyWantToReadBooks';
+
+import Author from './components/LoggedUserComponents/Author';
+import Book from './components/LoggedUserComponents/Book';
+
+
+// import Author from './components/Author';
+// import Authors from './components/Authors';
+// import Book from './components/Book';
 
 function App() {
   const { user } = UseAuth();
+  const [showLogIn, setLogInShow] = useState(true);
+  const Location = useLocation();
+  const navigator = useNavigate();
 
+  const handleLogInClose = () => {
+    setLogInShow(false);
+  };
+  const changeUrl = (redirectPath) => {
+    setLogInShow(true);
+    if (!user) {
+      if (redirectPath) {
+        navigator(redirectPath, { replace: true });
+      }
+      navigator('/');
+    }
+  };
   return (
     <React.Fragment>
       <NavComponent />
-      {/* {user ? <div>{<UserHome />}</div> : <HomeComponent />} */}
-      <Routes>
-        <Route path="*" element={<PageNotFoundComponent />} />
-        <Route path="/" element={user ? <UserHome /> : <HomeComponent />} />
-      </Routes>
+      <div className={user ? 'd-flex' : ''}>
+        {user ? <SideBar /> : null}
+        <Routes>
+          <Route path="*" element={<PageNotFoundComponent />} />
+
+          <Route
+            path="/login"
+            element={
+              user ? (
+                <UserHome />
+              ) : (
+                <>
+                  <HomeComponent />
+                  <LogIn
+                    clicked={showLogIn}
+                    handleLogInClose={handleLogInClose}
+                    changeUrl={changeUrl}
+                    state={{ path: Location.pathname }}
+                  />
+                </>
+              )
+            }
+          />
+          <Route
+            path="/books/:pagenumber"
+            element={
+              <CheckAuth>
+                <BooksSlider />
+              </CheckAuth>
+            }
+          />
+
+          <Route
+            path="/authors/:pagenumber"
+            element={
+              <CheckAuth>
+                <AllAuthors />
+              </CheckAuth>
+            }
+          />
+
+          <Route
+            path="/categories/:pagenumber"
+            element={
+              <CheckAuth>
+                <AllCategories />
+              </CheckAuth>
+            }
+          />
+          <Route
+            path="/myprofile"
+            element={
+              <CheckAuth>
+                <UserProfile />
+              </CheckAuth>
+            }
+          />
+          <Route
+            path="/user/myBooks/All"
+            element={
+              <CheckAuth>
+                <MyBookSlider />
+              </CheckAuth>
+            }
+          />
+          <Route
+
+            path="/user/myBooks/Read"
+            element={
+              <CheckAuth>
+                <MyReadBooks /></CheckAuth>}
+
+          />
+          <Route
+           path="/Author/:id"
+            element={
+              <CheckAuth>
+                <Author />
+
+              </CheckAuth>
+            }
+            />
+          <Route
+
+            path="/user/myBooks/CurrentlyReading"
+            element={
+              <CheckAuth>
+                <MyCurrentlyReadingBooks />
+              </CheckAuth>
+            }
+          />
+          <Route
+            path="/user/myBooks/WantToRead"
+            element={
+              <CheckAuth>
+                <MyWantToReadBooks /></CheckAuth>}
+          />
+
+          <Route
+             path="/Book/:id"
+             element={
+               <CheckAuth>
+                 <Book />
+ 
+               </CheckAuth>
+             }/>
+
+          <Route
+            path="/"
+            element={user ? <MyBookSlider /> : <HomeComponent />}
+          />
+        </Routes>
+      </div>
       {/* <Footer /> */}
     </React.Fragment>
   );

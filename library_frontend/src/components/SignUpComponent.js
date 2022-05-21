@@ -11,23 +11,6 @@ const initialValues = {
   email: '',
   password: '',
   confirmPassword: '',
-  img: '',
-};
-
-const onSubmit = (values, { resetForm }) => {
-  console.log(values);
-  axios
-    .post('http://localhost:5000/user/signup', values)
-    .then((response) => {
-      console.log('entered response');
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log('entered error');
-      console.log(error);
-    });
-
-  resetForm({ values: '' });
 };
 
 const validationSchema = Yup.object({
@@ -41,14 +24,13 @@ const validationSchema = Yup.object({
     [Yup.ref('password'), null],
     'Passwords must match'
   ),
-  // img:
 });
 
 const SignUpComponent = ({ clicked, handleSignUpClose }) => {
   const [image, setImage] = useState({});
-  const [uploaded, setUploaded] = useState(false);
+  const [URL, setURL] = useState('');
 
-  const handleUpload = () => {
+  const handleUpload = (values, resetForm) => {
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
     uploadTask.on(
       'state_change',
@@ -59,8 +41,23 @@ const SignUpComponent = ({ clicked, handleSignUpClose }) => {
           .ref('images')
           .child(image.name)
           .getDownloadURL()
-          .then((url) => {
-            console.log(url);
+          .then((URL) => {
+            console.log(URL);
+            const data = { ...values, URL };
+            console.log(data);
+            axios
+              .post('http://localhost:5000/user/signup', data)
+              .then((response) => {
+                console.log('entered response');
+                console.log(response);
+              })
+              .catch((error) => {
+                console.log('entered error');
+                console.log(error);
+              });
+            setImage({});
+            setURL('');
+            resetForm({ values: '' });
           });
       }
     );
@@ -70,6 +67,11 @@ const SignUpComponent = ({ clicked, handleSignUpClose }) => {
       setImage(e.target.files[0]);
       console.log(e.target.files[0]);
     }
+  };
+
+  const onSubmit = (values, { resetForm }) => {
+    // console.log(values);
+    handleUpload(values, resetForm);
   };
   return (
     <Modal
@@ -151,12 +153,7 @@ const SignUpComponent = ({ clicked, handleSignUpClose }) => {
                 {(error) => <div className="error">{error}</div>}
               </ErrorMessage>
             </div>
-            {/* <div className="mb-3">
-            <label htmlFor='img'>Upload Image</label>
-            <Field className="" type="file" id='img' name='img' />
-            <ErrorMessage name='img'>{error => <div className='error'>{error}</div>}</ErrorMessage>
-        
-          </div> */}
+
             <Button type="submit" variant="primary" onClick={handleSignUpClose}>
               SignUp
             </Button>

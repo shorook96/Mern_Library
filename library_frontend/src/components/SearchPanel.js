@@ -46,11 +46,42 @@ const SearchPanel = () => {
         />
         {filteredData.length > 0 ? (
           <div className="d-flex  flex-column dropdown-menu  mt-5 w-100">
-            {filteredData[0].map((field, index) => {
+            <h6 className=" p-3 text-center">
+              <span className="bg-info w-25 p-2 rounded">
+                Books Available...
+              </span>
+            </h6>
+            {filteredData.length > 0 ? (
+              filteredData[0].map((field, index) => {
+                return (
+                  <Link to="" className="dropdown-item w-100 p-1" key={index}>
+                    <div className=" w-100 p-1">
+                      <span className="search-name"> {field.bookName}</span>
+                      <img
+                        src={field.photo}
+                        width={30}
+                        height={30}
+                        className="search-img"
+                      />
+                    </div>
+                  </Link>
+                );
+              })
+            ) : (
+              <h6>--No Books--</h6>
+            )}
+            <h6 className=" p-3 text-center">
+              <span className="bg-info w-25 p-2 rounded">
+                Authors Available...
+              </span>
+            </h6>
+            {filteredData[1].map((field, index) => {
               return (
                 <Link to="" className="dropdown-item w-100 p-1" key={index}>
                   <div className=" w-100 p-1">
-                    <span className="search-name"> {field.bookName}</span>
+                    <span className="search-name">
+                      {`${field.firstname} ${field.lastname}`}
+                    </span>
                     <img
                       src={field.photo}
                       width={30}

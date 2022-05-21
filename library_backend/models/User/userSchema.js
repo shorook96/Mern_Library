@@ -15,7 +15,13 @@ const userSchema = new mongoose.Schema({
       state: {
         type: 'string',
         enum: ['Read', 'Want To Read', 'CurrentlyReading'],
+        default: 'Want To Read',
       },
+      userRating: {
+        type: 'number',
+        default: 0,
+      },
+      _id: false,
     },
   ],
 });
