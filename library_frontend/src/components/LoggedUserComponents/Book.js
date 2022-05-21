@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Card from './Card';
 import Select from './SelectComponent';
-import StarRating from './RatingComponent'
-import './Book.css'
+import StarRating from './RatingComponent';
+import './Book.css';
+import {Link} from "react-router-dom";
+import {UseAuth} from  '../Helpers/Auth';
 
+  
 // const LOCALHOST = 'http://localhost:3000/';
 const AddReview = (data) => {
   console.log(data);
@@ -29,7 +32,7 @@ const GetReview = (data) => {
 }
 
 const  GetBooks = (data) => {
-  return fetch("http://localhost:5000/" + 'books/'+data)
+  return fetch("http://localhost:5000/" + 'books/fulldata/'+data)
       .then(response =>
       response.json())
 }
@@ -41,13 +44,19 @@ export default function Book() {
   const {id} = useParams();
 
   console.log(id);
+  const {user} =UseAuth();
+  // console.log("users"+ user.userInfo.id )
 
 
    const [BooksInfo,  setBooksInfo] = useState({
     BookID: id,
     BookName: '',
-    
-   brief: '',
+    authorName:" ",
+    authorId: ' ',
+    categoryName:" ",
+    categoryId:' ',
+
+    brief: '',
 
     photo: ''
     
@@ -65,6 +74,11 @@ export default function Book() {
      setBooksInfo({
         bookID: data._id,
         bookName: data.bookName,
+        authorName:data.author.firstname+" "+ data.author.lastname,
+        authorId:data.author.id,
+      
+        categoryName:data.category.categoryName,
+        categoryId:data.category.id,
         
         brief: data.brief,
     
@@ -123,8 +137,8 @@ export default function Book() {
         </div>
         <div class="beside">
           <h3 class="bookname"> {BooksInfo.bookName}</h3>
-          <h6 class="authorname"> {BooksInfo.author_fname}  {BooksInfo.author_lname}</h6>
-          <h6 class="category"> {BooksInfo.category}</h6>
+          <h6 class="authorname"> <Link style={{ color: '#FD5' }} to={'/Author/'+BooksInfo.authorId}> {BooksInfo.authorName} </Link>  </h6>
+          <h6 class="category">  {BooksInfo.categoryName}</h6>
           <div class="rating">
             <StarRating stars={BooksInfo.stars} /> <span class="userRatingnum">  {BooksInfo.rate} ratings</span>
           </div>
