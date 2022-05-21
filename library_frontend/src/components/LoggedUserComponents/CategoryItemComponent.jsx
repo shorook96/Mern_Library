@@ -31,7 +31,7 @@ const CategoryItemComponent = ({ data }) => {
               <Card.Body>
                 <Card.Title>
                   <Link
-                    to=""
+                    to={`/user/categories/${data.categoryName}/${data._id}/books`}
                     className="btn category-btn btn-success py-3 px-5"
                   >
                     Check Books

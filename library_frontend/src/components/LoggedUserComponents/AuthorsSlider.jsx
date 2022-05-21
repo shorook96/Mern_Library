@@ -38,10 +38,11 @@ const AuthorsSlider = () => {
         <PaginationComponent
           Data={res.authors}
           itemsCount={Number(res.authorsCount)}
-          totalPageCount={Math.ceil(Number(res.authorsCount) / 2)}
+          totalPageCount={Math.ceil(Number(res.authorsCount) / 6)}
           RenderComponent={AuthorItemComponent}
           changeCurrent={changeCurrent}
           currentPageNumber={currentPage}
+          title="Authors"
         />
       ) : (
         // <h1>Data</h1>

@@ -6,9 +6,9 @@ import { UseAuth } from '../Helpers/Auth';
 import { Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 
-const CategoryBooksSlider = () => {
-  const { id, categoryName } = useParams();
-  const title = Location.state;
+const AuthorsBooksComponent = () => {
+  const { id, authorName } = useParams();
+
   const [res, setRes] = useState({});
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,7 +21,7 @@ const CategoryBooksSlider = () => {
     console.log(id);
     axios
       .get(
-        `http://localhost:5000/user/${user.userInfo.id}/booksofCategory/${id}/${currentPage}`,
+        `http://localhost:5000/user/${user.userInfo.id}/booksofAuthor/${id}/${currentPage}`,
         {
           headers: {
             authorization: user.userInfo.authorization,
@@ -47,7 +47,7 @@ const CategoryBooksSlider = () => {
             RenderComponent={BookItemComponent}
             changeCurrent={changeCurrent}
             currentPageNumber={currentPage}
-            title={`Books of ${categoryName}`}
+            title={authorName}
           />
         </Container>
       ) : (
@@ -58,4 +58,4 @@ const CategoryBooksSlider = () => {
   );
 };
 
-export default CategoryBooksSlider;
+export default AuthorsBooksComponent;

@@ -364,11 +364,11 @@ userRouter.get(
       const { authorId, pageNumber } = req.params;
 
       const skipNumber =
-        Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 2 - 2;
+        Number(pageNumber) === 1 ? 0 : Number(pageNumber) * 6 - 6;
       const books =
         (await BookModel.find({ author: authorId })
           .skip(skipNumber)
-          .limit(2)) || [];
+          .limit(6)) || [];
       const booksCount = await BookModel.find({ author: authorId }).count();
 
       res.send({ books, booksCount });

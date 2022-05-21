@@ -22,7 +22,8 @@ import MyWantToReadBooks from './components/LoggedUserComponents/MyWantToReadBoo
 
 import Author from './components/LoggedUserComponents/Author';
 import Book from './components/LoggedUserComponents/Book';
-
+import CategoryBooksSlider from './components/LoggedUserComponents/CategoryBooksSlider';
+import AuthorsBooksComponent from './components/LoggedUserComponents/AuthorBooksComponent';
 
 // import Author from './components/Author';
 // import Authors from './components/Authors';
@@ -115,24 +116,38 @@ function App() {
             }
           />
           <Route
-
+            path="/user/categories/:categoryName/:id/books"
+            element={
+              <CheckAuth>
+                <CategoryBooksSlider />
+              </CheckAuth>
+            }
+          />
+          <Route
+            path="/user/authors/:authorName/:id/books"
+            element={
+              <CheckAuth>
+                <AuthorsBooksComponent />
+              </CheckAuth>
+            }
+          />
+          <Route
             path="/user/myBooks/Read"
             element={
               <CheckAuth>
-                <MyReadBooks /></CheckAuth>}
-
+                <MyReadBooks />
+              </CheckAuth>
+            }
           />
           <Route
-           path="/Author/:id"
+            path="/Author/:id"
             element={
               <CheckAuth>
                 <Author />
-
               </CheckAuth>
             }
-            />
+          />
           <Route
-
             path="/user/myBooks/CurrentlyReading"
             element={
               <CheckAuth>
@@ -144,17 +159,19 @@ function App() {
             path="/user/myBooks/WantToRead"
             element={
               <CheckAuth>
-                <MyWantToReadBooks /></CheckAuth>}
+                <MyWantToReadBooks />
+              </CheckAuth>
+            }
           />
 
           <Route
-             path="/Book/:id"
-             element={
-               <CheckAuth>
-                 <Book />
- 
-               </CheckAuth>
-             }/>
+            path="/Book/:id"
+            element={
+              <CheckAuth>
+                <Book />
+              </CheckAuth>
+            }
+          />
 
           <Route
             path="/"
