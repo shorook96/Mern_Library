@@ -1,7 +1,9 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Button, Card, Form } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { UseAuth } from '../Helpers/Auth';
+import AverageRating from './AverageRating';
 import Rating from './rating';
 import {Link} from "react-router-dom";
 
@@ -32,32 +34,38 @@ const MyBookItemComponent = ({ data }) => {
   };
   return (
     <>
-      <Card style={{ width: '18rem' }} className="text-black m-auto">
+      <Card style={{ width: '18rem' }} className="text-black mt-3">
         <div className="ui-card d-flex">
           <Card.Img
             variant="top"
             src={data.book.photo}
             width={100}
             height={300}
-            className="/custom-card-img"
+            className="custom-card-img"
           />
           <div className="info">
-            <h3>{data.book.bookName}</h3>
-            <p>one of the best books ever </p>
-            <Button variant="primary" >
-            <Link style={{ color: '#FFF' ,  textDecoration: 'none' }} to={'/Book/'+data.book._id}> Show More Details </Link>
-            </Button>
+            <h3>
+              <AverageRating
+                currentlyRating={Math.floor(
+                  data.book.rating.totalRate / data.book.rating.numberOfRates
+                )}
+              />
+              <h5>Book Rating</h5>
+            </h3>
+            <Link
+              to={'/Book/' + data.book._id}
+              className="btn btn-outline-success details-btn"
+            >
+              Show Details
+            </Link>
           </div>
         </div>
 
         <Card.Body>
-          <Card.Title>
-            <Rating bookId={data.book._id} currentlyRating={data.userRating} />
-          </Card.Title>
-
           <Form.Select
             aria-label="Default select example"
             onChange={changeState}
+            className="bg-success text-white"
           >
             <option value="Read" selected={data.state === 'Read'}>
               Read
@@ -75,6 +83,10 @@ const MyBookItemComponent = ({ data }) => {
               Want To Read
             </option>
           </Form.Select>
+          <Card.Title>
+            <Rating bookId={data.book._id} currentlyRating={data.userRating} />
+            <p className="rate-style text-secondary">Rate this Book</p>
+          </Card.Title>
         </Card.Body>
       </Card>
     </>

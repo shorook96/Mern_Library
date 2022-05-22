@@ -4,8 +4,11 @@ import PaginationComponent from './PaginationComponent';
 import BookItemComponent from './BookItemComponent';
 import { UseAuth } from '../Helpers/Auth';
 import { Container } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 
-const BooksSlider = () => {
+const CategoryBooksSlider = () => {
+  const { id, categoryName } = useParams();
+  const title = Location.state;
   const [res, setRes] = useState({});
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -15,9 +18,10 @@ const BooksSlider = () => {
     setCurrentPage(pageNumber);
   };
   useEffect(() => {
+    console.log(id);
     axios
       .get(
-        `http://localhost:5000/user/${user.userInfo.id}/books/${currentPage}`,
+        `http://localhost:5000/user/${user.userInfo.id}/booksofCategory/${id}/${currentPage}`,
         {
           headers: {
             authorization: user.userInfo.authorization,
@@ -43,7 +47,7 @@ const BooksSlider = () => {
             RenderComponent={BookItemComponent}
             changeCurrent={changeCurrent}
             currentPageNumber={currentPage}
-            title="All Books"
+            title={`Books of ${categoryName}`}
           />
         </Container>
       ) : (
@@ -54,4 +58,4 @@ const BooksSlider = () => {
   );
 };
 
-export default BooksSlider;
+export default CategoryBooksSlider;

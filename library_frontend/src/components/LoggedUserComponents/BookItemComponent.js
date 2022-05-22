@@ -3,7 +3,8 @@ import { Button, Card } from 'react-bootstrap';
 import { useNavigate, UserLocation } from 'react-router-dom';
 import axios from 'axios';
 import { UseAuth } from '../Helpers/Auth';
-import {Link} from "react-router-dom";
+import { Link } from 'react-router-dom';
+import AverageRating from './AverageRating';
 
 const BookItemComponent = ({ data }) => {
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ const BookItemComponent = ({ data }) => {
   };
   return (
     <>
-      <Card style={{ width: '18rem' }} className="text-black m-auto">
+      <Card style={{ width: '18rem' }} className="text-black m-auto mt-3">
         <div className="ui-card d-flex">
           <Card.Img
             variant="top"
@@ -50,33 +51,36 @@ const BookItemComponent = ({ data }) => {
             className="custom-card-img"
           />
           <div className="info">
-            <h3>some info about the book</h3>
-            <p>sbjvcbj basjbcbbba naknkjndakj </p>
-            <Button variant="primary" onClick={goToDetails}>
-              Go somewherey
-            </Button>
-            
+            <h3>
+              <AverageRating
+                currentlyRating={Math.floor(
+                  data.rating.totalRate / data.rating.numberOfRates
+                )}
+              />
+              <h5>Book Rating</h5>
+            </h3>
+            <Link
+              to={'/Book/' + data._id}
+              className="btn btn-outline-success details-btn"
+            >
+              Show Details
+            </Link>
           </div>
         </div>
-        <Card.Body>
+        <Card.Body className="card-body ">
           <Card.Title>{data.bookName}</Card.Title>
-          <Card.Text>{data.bookName}</Card.Text>
-          <Button variant="primary">
-          <Link style={{ color: '#FFF' ,  textDecoration: 'none' }} to={'/Book/'+data._id}> Show More Details </Link>
 
-          </Button>
           {book ? (
             <Button variant="secondary" disabled className=" mt-1">
-              Already Have It
+              Already Added
             </Button>
           ) : (
-            <Button
-              variant="primary"
-              className="px-5 mt-1"
+            <button
+              className="px-5 mt-1 btn btn-outline-success"
               onClick={addToMyBooks}
             >
-              Add
-            </Button>
+              Add To Favourites
+            </button>
           )}
         </Card.Body>
       </Card>
