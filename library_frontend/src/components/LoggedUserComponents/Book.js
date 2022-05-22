@@ -3,13 +3,17 @@ import { useParams } from 'react-router-dom';
 import Card from './Card';
 import Select from './SelectComponent';
 import StarRating from './RatingComponent';
+// import Rating from 'react-simple-star-rating'
+// import Rating from './rating';
 import './Book.css';
 import {Link} from "react-router-dom";
+// import Rating from '@mui/material/Rating';
 import {UseAuth} from  '../Helpers/Auth';
+var Rating = require('react-star-rating-lite');
 
   
 // const LOCALHOST = 'http://localhost:3000/';
-const AddReview = (data) => {
+function AddReview(data) {
   console.log(data);
   return fetch("http://localhost:5000/" + 'review/', {
     body: JSON.stringify(data),
@@ -18,11 +22,10 @@ const AddReview = (data) => {
       "Content-Type": "application/json",
       // "Authorization": new Cookies().get('token'),
     },
-  }).then(response =>
-      response.json()
+  }).then(response => response.json()
   ).catch(error => {
-      console.log('data will be send later');
-  })
+    console.log('data will be send later');
+  });
 }
 
 const GetReview = (data) => {
@@ -58,7 +61,9 @@ export default function Book() {
 
     brief: '',
 
-    photo: ''
+    photo: '',
+    totalrating:' ' ,
+    numberrating: ' '
     
   });
 
@@ -82,7 +87,9 @@ export default function Book() {
         
         brief: data.brief,
     
-        photo: data.photo
+        photo: data.photo,
+        totalrating:data.rating.totalRate,
+         numberrating:data.rating.numberOfRates
     });
   })
 
@@ -140,7 +147,22 @@ export default function Book() {
           <h6 class="authorname"> <Link style={{ color: '#FD5' }} to={'/Author/'+BooksInfo.authorId}> {BooksInfo.authorName} </Link>  </h6>
           <h6 class="category">  {BooksInfo.categoryName}</h6>
           <div class="rating">
-            <StarRating stars={BooksInfo.stars} /> <span class="userRatingnum">  {BooksInfo.rate} ratings</span>
+          {/* <Rating bookId={BooksInfo.BookID} currentlyRating={BooksInfo.totalrating } /> */}
+            
+          <StarRating stars={BooksInfo.totalrating} />
+          {/* <Rating
+        
+        ratingValue={BooksInfo.totalrating}
+        size={20}
+        label
+        transition
+        fillColor='orange'
+        emptyColor='gray'
+        className='foo' 
+      /> */}
+
+      {/* <Rating value="2" readonly/> */}
+      <span class="userRatingnum"> {BooksInfo.totalrating } - {BooksInfo.numberrating} ratings</span>
           </div>
           <div class="description">
             <p>
