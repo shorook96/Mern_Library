@@ -10,7 +10,7 @@ import {
 export default function Card(props) {
   console.log(props.name);
   return (
-    <div class="Card">
+    <div className="Card">
       <MDBCard style={{ width: '18rem' }}>
         <MDBCardImage src={props.im} alt="..." position="top" />
         <MDBCardBody>

@@ -44,12 +44,17 @@ const SearchPanel = () => {
           onChange={(e) => setSearchField(e.target.value)}
           onBlur={(e) => setFilteredData([])}
         />
+        <ul></ul>
         {filteredData.length > 0 ? (
           <div className="d-flex  flex-column dropdown-menu  mt-5 w-100">
             {filteredData.length > 0 ? (
               filteredData[0].map((field, index) => {
                 return (
-                  <Link to="" className="dropdown-item w-100 p-1" key={index}>
+                  <Link
+                    to={'/Book/' + field._id}
+                    className="dropdown-item w-100 p-1"
+                    key={field._id}
+                  >
                     <div className=" w-100 p-1">
                       <img
                         src={field.photo}
@@ -68,7 +73,11 @@ const SearchPanel = () => {
 
             {filteredData[1].map((field, index) => {
               return (
-                <Link to="" className="dropdown-item w-100 p-3" key={index}>
+                <Link
+                  to={'/Author/' + field._id}
+                  className="dropdown-item w-100 p-3"
+                  key={field._id}
+                >
                   <div className=" w-100 p-1">
                     <img
                       src={field.photo}

@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { UseAuth } from '../Helpers/Auth';
 import AverageRating from './AverageRating';
 import Rating from './rating';
-import {Link} from "react-router-dom";
 
 const MyBookItemComponent = ({ data }) => {
   const { user } = UseAuth();
@@ -34,7 +33,7 @@ const MyBookItemComponent = ({ data }) => {
   };
   return (
     <>
-      <Card style={{ width: '18rem' }} className="text-black mt-3">
+      <Card className="text-black mt-3">
         <div className="ui-card d-flex">
           <Card.Img
             variant="top"

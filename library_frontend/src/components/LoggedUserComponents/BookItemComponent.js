@@ -41,7 +41,7 @@ const BookItemComponent = ({ data }) => {
   };
   return (
     <>
-      <Card style={{ width: '18rem' }} className="text-black m-auto mt-3">
+      <Card className="text-black m-auto mt-3">
         <div className="ui-card d-flex">
           <Card.Img
             variant="top"
@@ -54,7 +54,8 @@ const BookItemComponent = ({ data }) => {
             <h3>
               <AverageRating
                 currentlyRating={Math.floor(
-                  data.rating.totalRate / data.rating.numberOfRates
+                  Number(data.rating.totalRate) /
+                    Number(data.rating.numberOfRates)
                 )}
               />
               <h5>Book Rating</h5>
