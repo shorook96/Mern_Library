@@ -10,16 +10,19 @@ import Footer from './Footer';
 import axios from 'axios';
 
 export default function HomeComponent() {
- 
-
   return (
     <>
       <div className="d-flex container">
         <div className="cover-home ">
-          <div className="cover-home-opacity m-0">
-            <Row>
-              <Col>{/* <h1>Meet your next favorite book</h1> */}</Col>
-              <Col></Col>
+          <div className="cover-home-opacity m-0 p-auto">
+            <Row className="">
+              <Col sm={2}></Col>
+              <Col className="home-start rounded" sm={8}>
+                <h1>
+                  A reader lives a thousand lives before he dies The man who
+                  never reads lives only one.
+                </h1>
+              </Col>
             </Row>
           </div>
         </div>

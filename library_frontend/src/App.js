@@ -24,6 +24,7 @@ import Author from './components/LoggedUserComponents/Author';
 import Book from './components/LoggedUserComponents/Book';
 import CategoryBooksSlider from './components/LoggedUserComponents/CategoryBooksSlider';
 import AuthorsBooksComponent from './components/LoggedUserComponents/AuthorBooksComponent';
+import AboutUs from './components/AboutUs';
 
 // import Author from './components/Author';
 // import Authors from './components/Authors';
@@ -54,6 +55,7 @@ function App() {
         {user ? <SideBar /> : null}
         <Routes>
           <Route path="*" element={<PageNotFoundComponent />} />
+          <Route path="Aboutus" element={<AboutUs />} />
 
           <Route
             path="/login"

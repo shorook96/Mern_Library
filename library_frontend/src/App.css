@@ -134,7 +134,7 @@
   background-color: black;
   background-repeat: repeat-x;
   height: 82vh;
-  opacity: 0.6;
+  opacity: 0.8;
   width: 100%;
 }
 .Header-Title {
@@ -195,6 +195,39 @@
     display: none;
   }
 } /***********************Home Books*******************************/
+@keyframes example {
+  0% {
+    margin-top: 0%;
+  }
+
+  100% {
+    margin-top: 15%;
+  }
+}
+.home-start {
+  margin-top: -15%;
+  color: #ffffff;
+  font-family: Lobster;
+  text-align: center;
+  animation-name: example;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  transition: all 0.2s ease;
+  background-color: #505151;
+}
+.custom-carousel {
+  background-image: url('https://us.123rf.com/450wm/neirfy/neirfy1806/neirfy180600295/103601719-flat-lay-frame-of-old-books-on-blue-background-with-copy-space-retro-toned.jpg?ver=6');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: 50vh;
+  padding: 30%;
+  transform: rotate(10deg);
+  border: 8px solid #1a1919;
+}
+.custom-author-carousel {
+  transform: rotate(10deg);
+  border: 8px solid #1a1919;
+}
 .flip-main {
   min-height: 100vh;
   background-color: #dde3f7;
@@ -246,62 +279,6 @@
   transform: rotateY(180deg);
 }
 
-/* 
-.card-middle {
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.home-book-card {
-  width: 100%;
-  height: 100%;
-}
-.front,
-.back {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  backface-visibility: hidden;
-  position: absolute;
-  transition: all 0.6s linear;
-} */
-/* .front img {
-  height: 100%;
-}
-.front {
-  background: #f1f1f1;
-  transform: perspective(600px) rotateY(0deg);
-}
-.back {
-  background: #f1f1f1;
-  transform: perspective(600px) rotateY(180deg);
-}
-.back-content {
-  color: #2c3e50;
-  text-align: center;
-  width: 100%;
-}
-.custom-sm {
-  margin: 20px 0;
-}
-.custom-sm button {
-  display: inline-flex;
-  width: 40px;
-  height: 40px;
-  justify-content: center;
-  align-items: center;
-  color: #2c3e50;
-  font-size: 18px;
-  transition: 0.4s;
-}
-.home-book-card:hover > .front {
-  transform: perspective(600px) rotateY(-180deg);
-}
-.home-book-card:hover > .back {
-  transform: perspective(600px) rotateY(0deg);
-} */
-/****************************************************************/
 /*****************************************************/
 .card-item {
   width: 18rem;
@@ -309,14 +286,15 @@
 
 /*****************************************************/
 .wrapper {
-  height: 300px;
-  width: 300px;
+  height: 120px;
+  width: 120px;
   position: relative;
   border: 5px solid rgb(229, 149, 20);
   border-radius: 50%;
   background: url(./assets/userimages/userlogo.png);
   background-size: 100% 100%;
   overflow: hidden;
+  margin: auto;
 }
 .file-input {
   position: absolute;
@@ -324,7 +302,7 @@
   outline: none;
   width: 100%;
   box-sizing: border-box;
-  padding: 15px 120px;
+  padding: 10px 45px;
   cursor: pointer;
   transition: 0.5s;
   background-color: rgba(0, 0, 0, 0.5);
@@ -336,27 +314,22 @@
 .file-input::before {
   content: '\f030';
   font-family: fontAwesome;
-  font-size: 50px;
+  font-size: 20px;
   color: rgb(229, 149, 20);
   display: inline-block;
   -webkit-user-select: none;
 }
-.file-input::after {
+/* .file-input::after {
   content: 'Upload';
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
   display: block;
-  font-size: larger;
-}
+  font-size: small;
+} */
 .file-input:hover {
   opacity: 1;
 }
 
-.modal-background {
-  /* background: url('./assets/images/44.png');
-  background-repeat: no-repeat;
-  background-size: 100% 100%; */
-}
 /****************************************************/
 
 .custom-card-img {
@@ -394,11 +367,7 @@
   transition: all 0.3s ease-out;
   opacity: 0;
 }
-/* .info p {
-  transform: translateY(30px);
-  transition: all 0.3s ease-out 0.4s;
-  opacity: 0;
-} */
+
 .info .details-btn {
   color: #fff;
   transform: translateY(30px);
@@ -413,10 +382,7 @@
   opacity: 1;
   transform: translateY(0);
 }
-/* .ui-card:hover .info p {
-  opacity: 1;
-  transform: translateY(0);
-} */
+
 /*********************************rating*****************************************/
 .star {
   cursor: pointer;
@@ -433,4 +399,65 @@ input[type='radio'] {
 }
 .card-body {
   background-color: #efefef;
+}
+/****************************************************/
+
+.custom-owner-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  flex-wrap: wrap;
+  padding: auto;
+}
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 1em;
+}
+.owner-card-img {
+  height: 250px;
+  width: 250px;
+  position: absolute;
+  z-index: 1;
+  box-shadow: 1px 1px 4px black;
+  border-radius: 3px;
+  transition: all 0.6s;
+  transform: translateY(0deg);
+}
+
+.owner-back {
+  position: relative;
+  height: 400px;
+  width: 400px;
+  padding: 29px 36px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 9px rgb(139, 135, 135);
+  box-sizing: border-box;
+  text-align: center;
+  transition: all 0.6s;
+}
+.box:hover .owner-back {
+  height: 480px;
+}
+.box:hover .owner-card-img {
+  transform: translateY(150deg);
+  margin-top: 5%;
+}
+@media only screen and (min-width: 320px) and (max-width: 930px) {
+  .box {
+    margin: 50px 0px;
+  }
+  .box:hover {
+    margin: 45px;
+  }
+  .box:hover img {
+    margin-top: 30%;
+    height: 240px;
+  }
+  .custom-owner-container {
+    height: 100%;
+  }
 }
