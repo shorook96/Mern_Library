@@ -1,180 +1,161 @@
-import React, {Component, useEffect, useState} from 'react';
-import {Link} from "react-router-dom";
+import React, { Component, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { useParams } from 'react-router-dom';
 import Card from './Card';
 import Select from './SelectComponent';
 import StarRating from './RatingComponent';
-import ReactStars from 'react-stars'
+import ReactStars from 'react-stars';
 
-import './Author.css'
+import './Author.css';
 
 const AddReview = (data) => {
   console.log(data);
-  return fetch("http://localhost:5000/" + 'review/', {
+  return fetch('http://localhost:5000/' + 'review/', {
     body: JSON.stringify(data),
     method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       // "Authorization": new Cookies().get('token'),
     },
-  }).then(response =>
-      response.json()
-  ).catch(error => {
-      console.log('data will be send later');
   })
-}
+    .then((response) => response.json())
+    .catch((error) => {
+      console.log('data will be send later');
+    });
+};
 
 const GetReview = (data) => {
-  return fetch("http://localhost:5000/" + 'review/'+data)
-      .then(response =>
-      response.json())
-}
+  return fetch('http://localhost:5000/' + 'review/' + data).then((response) =>
+    response.json()
+  );
+};
 
-const  GetAuthor = (data) => {
-  return fetch("http://localhost:5000/" + 'Authors/'+data)
-      .then(response =>
-      response.json())
-}
-const  GetBooks = (data) => {
-  return fetch("http://localhost:5000/" + 'Authors/books/'+data)
-      .then(response =>
-      response.json())
-}
+const GetAuthor = (data) => {
+  return fetch('http://localhost:5000/' + 'Authors/' + data).then((response) =>
+    response.json()
+  );
+};
+const GetBooks = (data) => {
+  return fetch('http://localhost:5000/' + 'Authors/books/' + data).then(
+    (response) => response.json()
+  );
+};
 
-
-export default function Author () {
- 
-  const {id} = useParams();
+export default function Author() {
+  const { id } = useParams();
 
   console.log(id);
 
-
-   const [AuthorsInfo,  setAuthorsInfo] = useState({
+  const [AuthorsInfo, setAuthorsInfo] = useState({
     AuthorID: id,
     FirstName: '',
     LastName: '',
-    authorName:'',
+    authorName: '',
 
-   DateofBirth: '',
-   Bio: '',
+    DateofBirth: '',
+    Bio: '',
 
-    photo: ''
-    
+    photo: '',
   });
-  var books=[]
-  const [BooksInfo,  setBooksInfo] = useState({
+  var books = [];
+  const [BooksInfo, setBooksInfo] = useState({
     // BookID:' ',
     // BookName: '',
     // photo: '',
     // totalrating:' ' ,
     // numberrating: ' '
-    books
-    
-    
+    books,
   });
-  console.log(books)
+  console.log(books);
 
- useEffect(()=>{
-
+  useEffect(() => {
     GetAuthor(AuthorsInfo.AuthorID).then((data) => {
-    console.log(",.,.", );
-  console.log("zzzzzzzzz  ", data);
-   
+      console.log(',.,.');
+      console.log('zzzzzzzzz  ', data);
 
-  
-
-     setAuthorsInfo({
+      setAuthorsInfo({
         AuthorID: data._id,
         FirstName: data.firstname,
         LastName: data.lastname,
-        authorName:data.firstname+" "+ data.lastname,
-    
-       DateofBirth: data.DOB,
-       Bio: data.bio,
-    
-        photo: data.photo
+        authorName: data.firstname + ' ' + data.lastname,
+
+        DateofBirth: data.DOB,
+        Bio: data.bio,
+
+        photo: data.photo,
+      });
     });
-  })
-  
+  }, []);
 
+  useEffect(() => {
+    GetBooks(AuthorsInfo.AuthorID).then((booksdata) => {
+      setBooksInfo({
+        books: booksdata,
+      });
 
+      //  setBooksInfo({
+      //   BookID:booksdata._id,
+      //   BookName: booksdata.bookName,
+      //   photo:booksdata.photo,
+      //   totalrating:booksdata.rating.totalRate ,
+      //   numberrating: booksdata.rating.numberOfRates
 
- },[]);
+      // });
+    });
+  }, []);
 
- useEffect(()=>{
-
- GetBooks(AuthorsInfo.AuthorID).then((booksdata) => {
-  
-  setBooksInfo({
-    books:booksdata
-  })
-    
-
-
-  //  setBooksInfo({
-  //   BookID:booksdata._id,
-  //   BookName: booksdata.bookName,
-  //   photo:booksdata.photo,
-  //   totalrating:booksdata.rating.totalRate ,
-  //   numberrating: booksdata.rating.numberOfRates
-      
-  // });
-})
-},[]);
-
- 
-   console.log("bbbbb  ", AuthorsInfo);
-   var listt=BooksInfo.books.map((li)=>{
-
-          
+  console.log('bbbbb  ', AuthorsInfo);
+  var listt = BooksInfo.books.map((li) => {
     return (
-    <div  class="booksofauthor"><img class=" bookimg" src={li.photo}  width="70px" height="70px"></img> 
-    
-    {/* <div class="selectandrating">
+      <div class="booksofauthor">
+        <img class=" bookimg" src={li.photo} width="70px" height="70px"></img>
+
+        {/* <div class="selectandrating">
         <div><Select/></div>
     <div><StarRating/></div>
     </div> */}
-    <div class="rating">
-        <h6>{li.bookName}</h6>
-        <ReactStars
-        count={5}
-        value={li.rating.totalRate}
-        edit={false}
-        size={24}
-        color2={'#ffd700'} /><span>{li.rating.totalRate} stars - {li.rating.numberOfRates} ratings</span>
-        
-    </div>
-    
-     <hr></hr>
-     
-     </div>);
-  
-    })
-  
-     return (
-       
-        <div class="parentContainer">
-        
-        <div class="all">
-          <Card   class="card" im={AuthorsInfo.photo} name={AuthorsInfo.authorName} />
-            <div class="beside">
-                <h3 class="i">{AuthorsInfo.FirstName } {AuthorsInfo.LastName}</h3>
-                <small>{AuthorsInfo.DateofBirth}</small>
-                <div class="description"><p>
+        <div class="rating">
+          <h6>{li.bookName}</h6>
+          <ReactStars
+            count={5}
+            value={li.rating.totalRate}
+            edit={false}
+            size={24}
+            color2={'#ffd700'}
+          />
+          <span>
+            {li.rating.totalRate} stars - {li.rating.numberOfRates} ratings
+          </span>
+        </div>
 
-                    {AuthorsInfo.Bio}
-                </p>
-                
-                </div>
-            
-            </div>
+        <hr></hr>
+      </div>
+    );
+  });
+
+  return (
+    <div class="parentContainer">
+      <div class="all">
+        <Card
+          class="card"
+          im={AuthorsInfo.photo}
+          name={AuthorsInfo.authorName}
+        />
+        <div class="beside">
+          <h3 class="i">
+            {AuthorsInfo.FirstName} {AuthorsInfo.LastName}
+          </h3>
+          <small>{AuthorsInfo.DateofBirth}</small>
+          <div class="description">
+            <p>{AuthorsInfo.Bio}</p>
+          </div>
         </div>
-        <div class="authorbooks" >
-            <h5 class="s">Author Books</h5>
-            <>{listt}</>
-        </div>
+      </div>
+      <div class="authorbooks">
+        <h5 class="s">Author Books</h5>
+        <>{listt}</>
+      </div>
     </div>
-     );
-   
- };
+  );
+}
