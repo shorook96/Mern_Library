@@ -2,6 +2,7 @@ const express = require('express');
 const authorRouter = express.Router();
 const customError = require('../utils/customError');
 const authorModel = require('../models/authorModel');
+const bookModel = require('../models/bookModel');
 const {
   adminTokenValidatorMiddleware,
 } = require('../middle_wares/adminTokenMiddleware_validator');
@@ -29,6 +30,19 @@ authorRouter.get('/:id', async (req, res, next) => {
     const author = await authorModel.findById(id);
     if (!author) throw customError(422, 'ID_NOT_FOUND', 'NO_SUCH_AUTHOR');
     res.send(author);
+  } catch (err) {
+    next(err);
+  }
+});
+
+authorRouter.get('/books/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const author = await authorModel.findById(id);
+    if (!author) throw customError(422, 'ID_NOT_FOUND', 'NO_SUCH_BOOK');
+    console.log(author)
+    const books= await bookModel.find({author:id})
+    res.send(books);
   } catch (err) {
     next(err);
   }
