@@ -22,7 +22,7 @@ const validationSchema = Yup.object({
     .min(8, 'Password is too short - should be 8 chars minimum.'),
   confirmPassword: Yup.string().oneOf(
     [Yup.ref('password'), null],
-    'Passwords must match'
+    'Passwords does not match'
   ),
 });
 
@@ -65,12 +65,12 @@ const SignUpComponent = ({ clicked, handleSignUpClose }) => {
   const changBackGround = (e) => {
     if (e.target.files[0]) {
       setImage(e.target.files[0]);
-      console.log(e.target.files[0]);
+      console.log("image"+e.target.files[0]);
     }
   };
 
   const onSubmit = (values, { resetForm }) => {
-    // console.log(values);
+    
     handleUpload(values, resetForm);
   };
   return (
@@ -79,16 +79,21 @@ const SignUpComponent = ({ clicked, handleSignUpClose }) => {
       onHide={handleSignUpClose}
       backdrop="static"
       className="text-dark"
+      centered
     >
-      <Modal.Header closeButton>
-        <Modal.Title>Create a free account</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
+      
+      <Modal.Body className='backGroundModal'>
+      
+      
+      
         <Formik
           initialValues={initialValues}
           onSubmit={onSubmit}
           validationSchema={validationSchema}
         >
+          {(formik) => {
+        const { isValid, dirty } = formik;
+        return (
           <Form>
             <div className="mb-3">
               <div
@@ -107,64 +112,73 @@ const SignUpComponent = ({ clicked, handleSignUpClose }) => {
                   onChange={changBackGround}
                 />
               </div>
+              <button type="button" class="btn-close btn-close" aria-label="Close"
+              style={{float:'right', fontSize:"20px",clear: 'both'}} 
+              onClick={handleSignUpClose}></button>
             </div>
-
-            <div className="mb-3">
-              <label htmlFor="Fname">FirstName</label>
-              <Field type="text" id="Fname" name="Fname" autoFocus />
+            <h3 className="mb-4 p-3" style={{ textAlign: 'center' }}>
+          goodReads
+        </h3>
+            <div className="mb-2 ">
+              <label htmlFor="Fname" className='ms-3 ps-5' style = {{ marginRight : '6%' }}>FirstName</label>
+              <Field type="text" id="Fname" name="Fname" className="border-dark rounded-pill ms-4 " />
               <ErrorMessage name="Fname">
-                {(error) => <div className="error">{error}</div>}
+                {(error) => <div className="error" style = {{ marginLeft : '42%' }}>{error}</div>}
               </ErrorMessage>
             </div>
-            <div className="mb-3">
-              <label htmlFor="Lname">LastName</label>
-              <Field type="text" id="Lname" name="Lname" />
+            <div className="mb-2 ">
+              <label htmlFor="Lname" className='ms-3 ps-5'  style = {{ marginRight : '6%' }}>LastName</label>
+              <Field type="text" id="Lname" name="Lname" className="border-dark rounded-pill ms-4 "/>
               <ErrorMessage name="Lname">
-                {(error) => <div className="error">{error}</div>}
+                {(error) => <div className="error" style = {{ marginLeft : '42%' }}>{error}</div>}
               </ErrorMessage>
             </div>
-            <div className="mb-3">
-              <label htmlFor="email">Email address</label>
+            <div className="mb-2 ">
+              <label htmlFor="email" className='ms-3 ps-5'  style = {{ marginRight : '4%' }}>Email address</label>
               <Field
                 type="email"
                 id="email"
                 name="email"
                 placeholder="name@example.com"
+                className="border-dark rounded-pill ms-2 "
               />
               <ErrorMessage name="email">
-                {(error) => <div className="error">{error}</div>}
+                {(error) => <div className="error" style = {{ marginLeft : '42%' }}>{error}</div>}
               </ErrorMessage>
             </div>
-            <div className="mb-3">
-              <label htmlFor="password">Password</label>
-              <Field type="password" id="password" name="password" />
+            <div className="mb-2">
+              <label htmlFor="password" className='ms-3 ps-5' style = {{ marginRight : '11%' }}>Password</label>
+              <Field type="password" id="password" name="password" className="border-dark rounded-pill ms-2 " />
               <ErrorMessage name="password">
-                {(error) => <div className="error">{error}</div>}
+                {(error) => <div className="error" style = {{ marginLeft : '42%' }}>{error}</div>}
               </ErrorMessage>
             </div>
-            <div className="mb-3">
-              <label htmlFor="confirmPassword">Retype Password</label>
+            <div className="mb-2 ">
+              <label htmlFor="confirmPassword" className='ms-3 ps-5'>Retype Password</label>
               <Field
                 type="password"
                 id="confirmPassword"
                 name="confirmPassword"
+                className="border-dark rounded-pill ms-2 mb-3 "
               />
               <ErrorMessage name="confirmPassword">
-                {(error) => <div className="error">{error}</div>}
+                {(error) => <div className="error" style = {{ marginLeft : '42%' }}>{error}</div>}
               </ErrorMessage>
             </div>
 
-            <Button type="submit" variant="primary" onClick={handleSignUpClose}>
+            <button type="submit" variant="primary" 
+            onClick={handleSignUpClose}
+            className={!(dirty && isValid) ? "disabled-btn rounded-pill mb-4 btn-success" : "rounded-pill"}
+            disabled={!(dirty && isValid)}
+            style={{width:'50%', height:'0.1%', marginLeft : '26%',  color:'black'}}
+            >
               SignUp
-            </Button>
+            </button>
           </Form>
+          )}}
         </Formik>
       </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={handleSignUpClose}>
-          Cancel
-        </Button>
-      </Modal.Footer>
+      
     </Modal>
   );
 };

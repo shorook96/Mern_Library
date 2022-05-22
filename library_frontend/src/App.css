@@ -309,14 +309,17 @@
 
 /*****************************************************/
 .wrapper {
-  height: 300px;
-  width: 300px;
+  height: 120px;
+  width: 120px;
   position: relative;
-  border: 5px solid rgb(229, 149, 20);
+  border: 2px solid rgb(229, 149, 20);
   border-radius: 50%;
   background: url(./assets/userimages/userlogo.png);
   background-size: 100% 100%;
   overflow: hidden;
+  margin: auto;
+  margin-top: -15%;
+  
 }
 .file-input {
   position: absolute;
@@ -324,7 +327,7 @@
   outline: none;
   width: 100%;
   box-sizing: border-box;
-  padding: 15px 120px;
+  padding: 10px 45px;
   cursor: pointer;
   transition: 0.5s;
   background-color: rgba(0, 0, 0, 0.5);
@@ -336,26 +339,20 @@
 .file-input::before {
   content: '\f030';
   font-family: fontAwesome;
-  font-size: 50px;
+  font-size: 20px;
   color: rgb(229, 149, 20);
   display: inline-block;
   -webkit-user-select: none;
 }
-.file-input::after {
+/* .file-input::after {
   content: 'Upload';
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
   display: block;
-  font-size: larger;
-}
+  font-size: small;
+} */
 .file-input:hover {
   opacity: 1;
-}
-
-.modal-background {
-  /* background: url('./assets/images/44.png');
-  background-repeat: no-repeat;
-  background-size: 100% 100%; */
 }
 /****************************************************/
 
@@ -433,4 +430,8 @@ input[type='radio'] {
 }
 .card-body {
   background-color: #efefef;
+}
+/******************************* modal ****************************/
+.backGroundModal{
+  background-image: url("");
 }
