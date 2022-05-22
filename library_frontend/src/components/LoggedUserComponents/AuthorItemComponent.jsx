@@ -16,7 +16,7 @@ const AuthorItemComponent = ({ data }) => {
           <Card.Title>{data.firstname}</Card.Title>
           <Card.Text>{data.lastname}</Card.Text>
           <Button variant="primary">
-          <Link to={'/Author/'+data._id}> More details </Link>
+          <Link style={{ color: '#FFF' ,  textDecoration: 'none' }} to={'/Author/'+data._id} > More details </Link>
           </Button>
         </Card.Body>
       </Card>

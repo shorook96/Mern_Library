@@ -62,7 +62,7 @@ const BookItemComponent = ({ data }) => {
           <Card.Title>{data.bookName}</Card.Title>
           <Card.Text>{data.bookName}</Card.Text>
           <Button variant="primary">
-          <Link to={'/Book/'+data._id}> Go somewhere </Link>
+          <Link style={{ color: '#FFF' ,  textDecoration: 'none' }} to={'/Book/'+data._id}> Show More Details </Link>
 
           </Button>
           {book ? (

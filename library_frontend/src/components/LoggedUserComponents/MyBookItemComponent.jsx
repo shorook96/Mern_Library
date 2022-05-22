@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Button, Card, Form } from 'react-bootstrap';
 import { UseAuth } from '../Helpers/Auth';
 import Rating from './rating';
+import {Link} from "react-router-dom";
 
 const MyBookItemComponent = ({ data }) => {
   const { user } = UseAuth();
@@ -43,8 +44,8 @@ const MyBookItemComponent = ({ data }) => {
           <div className="info">
             <h3>{data.book.bookName}</h3>
             <p>one of the best books ever </p>
-            <Button variant="primary" onClick={goToDetails}>
-              Check Details
+            <Button variant="primary" >
+            <Link style={{ color: '#FFF' ,  textDecoration: 'none' }} to={'/Book/'+data.book._id}> Show More Details </Link>
             </Button>
           </div>
         </div>
