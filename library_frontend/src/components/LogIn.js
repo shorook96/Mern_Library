@@ -50,7 +50,7 @@ const LogIn = ({ clicked, handleLogInClose, changeUrl }) => {
       centered
     >
       
-      <Modal.Body>
+      <Modal.Body className='backGroundModalLogin'>
       
       <button type="button" class="btn-close btn-close" aria-label="Close"
       style={{float:'right', fontSize:"20px"}} 

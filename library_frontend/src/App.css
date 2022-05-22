@@ -134,7 +134,7 @@
   background-color: black;
   background-repeat: repeat-x;
   height: 82vh;
-  opacity: 0.6;
+  opacity: 0.8;
   width: 100%;
 }
 .Header-Title {
@@ -148,14 +148,11 @@
   font-size: larger;
   padding-top: 5%;
 }
-/**********************************SearchBar******************/
-/* .search-name {
-  float: left;
+.img-fluid-custom{
+  max-width:100% ;
 }
 
-.search-img {
-  float: right;
-} */
+
 /**************************SideBar****************************/
 
 .side-bar {
@@ -195,6 +192,39 @@
     display: none;
   }
 } /***********************Home Books*******************************/
+@keyframes example {
+  0% {
+    margin-top: 0%;
+  }
+
+  100% {
+    margin-top: 15%;
+  }
+}
+.home-start {
+  margin-top: -15%;
+  color: #ffffff;
+  font-family: Lobster;
+  text-align: center;
+  animation-name: example;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  transition: all 0.2s ease;
+  background-color: #505151;
+}
+.custom-carousel {
+  background-image: url('https://us.123rf.com/450wm/neirfy/neirfy1806/neirfy180600295/103601719-flat-lay-frame-of-old-books-on-blue-background-with-copy-space-retro-toned.jpg?ver=6');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: 50vh;
+  padding: 30%;
+  transform: rotate(10deg);
+  border: 8px solid #1a1919;
+}
+.custom-author-carousel {
+  transform: rotate(10deg);
+  border: 8px solid #1a1919;
+}
 .flip-main {
   min-height: 100vh;
   background-color: #dde3f7;
@@ -246,62 +276,6 @@
   transform: rotateY(180deg);
 }
 
-/* 
-.card-middle {
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.home-book-card {
-  width: 100%;
-  height: 100%;
-}
-.front,
-.back {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  backface-visibility: hidden;
-  position: absolute;
-  transition: all 0.6s linear;
-} */
-/* .front img {
-  height: 100%;
-}
-.front {
-  background: #f1f1f1;
-  transform: perspective(600px) rotateY(0deg);
-}
-.back {
-  background: #f1f1f1;
-  transform: perspective(600px) rotateY(180deg);
-}
-.back-content {
-  color: #2c3e50;
-  text-align: center;
-  width: 100%;
-}
-.custom-sm {
-  margin: 20px 0;
-}
-.custom-sm button {
-  display: inline-flex;
-  width: 40px;
-  height: 40px;
-  justify-content: center;
-  align-items: center;
-  color: #2c3e50;
-  font-size: 18px;
-  transition: 0.4s;
-}
-.home-book-card:hover > .front {
-  transform: perspective(600px) rotateY(-180deg);
-}
-.home-book-card:hover > .back {
-  transform: perspective(600px) rotateY(0deg);
-} */
-/****************************************************************/
 /*****************************************************/
 .card-item {
   width: 18rem;
@@ -344,13 +318,7 @@
   display: inline-block;
   -webkit-user-select: none;
 }
-/* .file-input::after {
-  content: 'Upload';
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: bold;
-  display: block;
-  font-size: small;
-} */
+
 .file-input:hover {
   opacity: 1;
 }
@@ -391,11 +359,7 @@
   transition: all 0.3s ease-out;
   opacity: 0;
 }
-/* .info p {
-  transform: translateY(30px);
-  transition: all 0.3s ease-out 0.4s;
-  opacity: 0;
-} */
+
 .info .details-btn {
   color: #fff;
   transform: translateY(30px);
@@ -410,10 +374,7 @@
   opacity: 1;
   transform: translateY(0);
 }
-/* .ui-card:hover .info p {
-  opacity: 1;
-  transform: translateY(0);
-} */
+
 /*********************************rating*****************************************/
 .star {
   cursor: pointer;
@@ -432,6 +393,30 @@ input[type='radio'] {
   background-color: #efefef;
 }
 /******************************* modal ****************************/
-.backGroundModal{
-  background-image: url("");
+.backGroundModalSignUp{
+  background:
+       
+        linear-gradient(
+          rgba(0, 0, 0, 0.5), 
+          rgba(0, 0, 0, 0.5)
+        ),
+       
+        url('./assets/images/modal.jpg');
+  background-size: 50% 50%;
+  color: #dde3f7;
+  }
+
+
+.backGroundModalLogin{
+
+  background:
+  linear-gradient(
+          rgba(0, 0, 0, 0.5), 
+          rgba(0, 0, 0, 0.5)
+        ),
+       
+        url('./assets/images/modal.jpg');
+  
+  background-size: 50% 100%;
+  color: #dde3f7;
 }

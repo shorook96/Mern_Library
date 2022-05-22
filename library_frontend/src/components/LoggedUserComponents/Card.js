@@ -11,10 +11,10 @@ export default function Card(props) {
   console.log(props.name);
   return (
     <div class="Card">
-      <MDBCard style={{ width: '18rem' }}>
-        <MDBCardImage src={props.im} alt="..." position="top" />
+      <MDBCard style={{ width: '18rem'}}>
+        <MDBCardImage src={props.im} alt="..." position="top" style={{  height: '22.5rem' }} />
         <MDBCardBody>
-          <MDBCardText>{props.name}</MDBCardText>
+          <MDBCardText style={{color: "black" , textAllignement: "center"}}>{props.name}</MDBCardText>
         </MDBCardBody>
       </MDBCard>
     </div>

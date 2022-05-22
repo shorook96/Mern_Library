@@ -82,10 +82,12 @@ const SignUpComponent = ({ clicked, handleSignUpClose }) => {
       centered
     >
       
-      <Modal.Body className='backGroundModal'>
+      <Modal.Body className='backGroundModalSignUp'>
       
       
-      
+      {/* <button type="button" class="btn-close btn-close" aria-label="Close"
+        style={{float:'right', fontSize:"20px"}} 
+        onClick={handleSignUpClose}></button> */}
         <Formik
           initialValues={initialValues}
           onSubmit={onSubmit}

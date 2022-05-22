@@ -29,33 +29,31 @@ export default function HomeStartImages() {
             <Col md={5}>
               <Row>
                 <Col sm={12} md={4} className="text-center">
-                  <img src={data[0].photo} alt="img1" className="img-fluid" />
-                </Col>
-                <Col sm={12} md={4} className="text-center">
-                  <img src={data[1].photo} alt="img2" className="img-fluid" />
-                </Col>
-                <Col sm={12} md={4} className="text-center">
-                  <img src={data[2].photo} alt="img3" className="img-fluid" />
-                </Col>
-              </Row>
-              <Row>
-                <Col className=" ">
                   <img
-                    src={shelf}
-                    alt="img4"
-                    className="img-fluid align-text-top"
+                    src={data[0].photo}
+                    alt="img1"
+                    height={200}
+                    width={200}
+                    className="img-fluid-custom"
                   />
                 </Col>
-              </Row>
-              <Row>
-                <Col sm={12} md={4} className=" text-center">
-                  <img src={data[3].photo} alt="img4" className="img-fluid" />
+                <Col sm={12} md={4} className="text-center">
+                  <img
+                    src={data[1].photo}
+                    alt="img2"
+                    height={200}
+                    width={200}
+                    className="img-fluid-custom"
+                  />
                 </Col>
-                <Col sm={12} md={4} className=" text-center">
-                  <img src={data[4].photo} alt="img5" className="img-fluid" />
-                </Col>
-                <Col sm={12} md={4} className=" text-center">
-                  <img src={book6} alt="img6" className="img-fluid" />
+                <Col sm={12} md={4} className="text-center">
+                  <img
+                    src={data[2].photo}
+                    height={200}
+                    width={200}
+                    alt="img3"
+                    className="img-fluid-custom"
+                  />
                 </Col>
               </Row>
               <Row>
@@ -64,6 +62,46 @@ export default function HomeStartImages() {
                     src={shelf}
                     alt="img4"
                     className="img-fluid align-text-top"
+                    
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col sm={12} md={4} className=" text-center">
+                  <img
+                    src={data[3].photo}
+                    height={200}
+                    width={200}
+                    alt="img4"
+                    className="img-fluid-custom"
+                  />
+                </Col>
+                <Col sm={12} md={4} className=" text-center">
+                  <img
+                    src={data[4].photo}
+                    height={200}
+                    width={200}
+                    alt="img5"
+                    className="img-fluid-custom"
+                  />
+                </Col>
+                <Col sm={12} md={4} className=" text-center">
+                  <img
+                    src={book6}
+                    height={200}
+                    width={200}
+                    alt="img6"
+                    className="img-fluid-custom"
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <img
+                    src={shelf}
+                    alt="img4"
+                    className="img-fluid align-text-top"
+                    
                   />
                 </Col>
               </Row>
