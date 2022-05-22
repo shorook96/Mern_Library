@@ -7,7 +7,9 @@ import AuthorsSlider from './AuthorsSlider';
 const AllAuthors = () => {
   return (
     <>
-      <AuthorsSlider />
+      <Container>
+        <AuthorsSlider />
+      </Container>
     </>
   );
 };

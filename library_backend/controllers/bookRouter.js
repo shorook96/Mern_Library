@@ -2,9 +2,11 @@ const express = require('express');
 const bookRouter = express.Router();
 const customError = require('../utils/customError');
 const bookModel = require('../models/bookModel');
-const UserModel = require('../models/User/userModel');
 const mongoose = require('mongoose');
 
+const authorModel = require('../models/authorModel');
+const categoryModel = require('../models/categoryModel');
+const userModel = require('../models/User/userModel');
 
 const {
   adminTokenValidatorMiddleware,
@@ -58,13 +60,28 @@ bookRouter.get('/fulldata/:id', async (req, res, next) => {
   }
 });
 
+bookRouter.get('/review/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const book = await bookModel.findById(id);
+    if (!book) throw customError(422, 'ID_NOT_FOUND', 'NO_SUCH_BOOK');
+    console.log(book)
+    const koky=await userModel.find({$and: [{books: {$elemMatch: {book:id}}},{books: {$elemMatch: {userRating:{ $ne: 0 }}}}]})
+    
+    
+    res.send(koky);
+  } catch (err) {
+    next(err);
+  }
+});
+
 bookRouter.delete('/:id', async (req, res, next) => {
   try {
     const id = req.params.id;
     //await bookModel.deleteOne({_id: id});
     //res.send({success: 'OK'})
     const idObj = mongoose.Types.ObjectId(id);
-    await UserModel.updateMany({}, {$pull: {books: idObj}});
+    await userModel.updateMany({}, {$pull: {books: idObj}});
     bookModel.deleteOne(
       {
         _id: id,

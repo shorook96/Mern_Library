@@ -3,33 +3,16 @@ import { useParams } from 'react-router-dom';
 import Card from './Card';
 import Select from './SelectComponent';
 import StarRating from './RatingComponent';
+
 import './Book.css';
 import {Link} from "react-router-dom";
-import {UseAuth} from  '../Helpers/Auth';
+
+
+
 
   
-// const LOCALHOST = 'http://localhost:3000/';
-const AddReview = (data) => {
-  console.log(data);
-  return fetch("http://localhost:5000/" + 'review/', {
-    body: JSON.stringify(data),
-    method: 'POST',
-    headers: {
-      "Content-Type": "application/json",
-      // "Authorization": new Cookies().get('token'),
-    },
-  }).then(response =>
-      response.json()
-  ).catch(error => {
-      console.log('data will be send later');
-  })
-}
 
-const GetReview = (data) => {
-  return fetch("http://localhost:5000/" + 'review/'+data)
-      .then(response =>
-      response.json())
-}
+
 
 const  GetBooks = (data) => {
   return fetch("http://localhost:5000/" + 'books/fulldata/'+data)
@@ -44,8 +27,7 @@ export default function Book() {
   const {id} = useParams();
 
   console.log(id);
-  const {user} =UseAuth();
-  // console.log("users"+ user.userInfo.id )
+  
 
 
    const [BooksInfo,  setBooksInfo] = useState({
@@ -58,9 +40,13 @@ export default function Book() {
 
     brief: '',
 
-    photo: ''
+    photo: '',
+    totalrating:2 ,
+    numberrating: 2
     
   });
+  
+
 
  useEffect(()=>{
 
@@ -82,7 +68,9 @@ export default function Book() {
         
         brief: data.brief,
     
-        photo: data.photo
+        photo: data.photo,
+        totalrating:data.rating.totalRate,
+         numberrating:data.rating.numberOfRates
     });
   })
 
@@ -90,36 +78,39 @@ export default function Book() {
 
  },[]);
 
+ var list = [
+  {
+    username: 'Mohamed',
+    rating: 5,
+  },
+  {
+    username: 'Khaled',
+    rating: 4.5,
+  },
+  {
+    username: 'Leena',
+    rating: 3.5,
+  },
+];
+var listt = list.map((li) => {
+  return (
+    <div class="booksofauthor">
+      <img
+        class=" userimg"
+        src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+        width="70px"
+        height="70px"
+      ></img>
 
+      {li.username}
+      <div class="userRating">
+        <StarRating stars={li.rating} /> <span class="userRatingnum">{li.rating}</span>{' '}
+      </div>
 
-
-
-
-  // console.log("bbbbb  ", BookInfo);
-
-  // var list = ReviewInfo.review.map((data)=>{
-
-  //   return (
-  //     <div  class="booksofauthor"><img class=" bookimg" src="https://www.clipartmax.com/png/middle/72-722180_these-are-some-cats-avatar-i-drew-during-my-free-time-black.png" width="70px" height="70px"></img> 
-      
-  //     <div class="selectandrating">
-  //         <div><Select/></div>
-  //     <div><StarRating stars={data.rating}/></div>
-  //     </div>
-  //     <div class="rating">
-  //         <h6>{data.user.fName} { data.user.lName}</h6>
-          
-  //         <strong>{data.review}</strong>
-  //         <br></br>
-  //         <strong>{data.created_at}</strong>
-          
-  //     </div>
-      
-  //      <hr></hr>
-  //      </div>)
-
-
-  // })
+      <hr></hr>
+    </div>
+  );
+});
 
   return (
     
@@ -128,19 +119,23 @@ export default function Book() {
       <div>
         <div class="cardAndrateAndselect">
           <Card name={BooksInfo.bookName} im={BooksInfo.photo} />
-          <div class="selectt">
+          {/* <div class="selectt">
             <Select />
           </div>
           <div class="ratingg">
             <StarRating />
-          </div>
+          </div> */}
         </div>
         <div class="beside">
           <h3 class="bookname"> {BooksInfo.bookName}</h3>
           <h6 class="authorname"> <Link style={{ color: '#FD5' }} to={'/Author/'+BooksInfo.authorId}> {BooksInfo.authorName} </Link>  </h6>
-          <h6 class="category">  {BooksInfo.categoryName}</h6>
+          <h6 class="category"> {BooksInfo.categoryName}</h6>
           <div class="rating">
-            <StarRating stars={BooksInfo.stars} /> <span class="userRatingnum">  {BooksInfo.rate} ratings</span>
+          
+            
+          <StarRating stars={BooksInfo.totalrating} />
+         
+      <span class="userRatingnum"> {BooksInfo.totalrating } stars - {BooksInfo.numberrating} ratings</span>
           </div>
           <div class="description">
             <p>
@@ -151,7 +146,7 @@ export default function Book() {
       </div>
       <div class="authorbooks">
         <h5 class="s">Reviews</h5>
-        {/* <>{list}</> */}
+        <>{listt}</>
       </div>
     </div>
 

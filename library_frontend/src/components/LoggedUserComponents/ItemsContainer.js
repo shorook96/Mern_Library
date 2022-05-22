@@ -4,10 +4,14 @@ import { Link } from 'react-router-dom';
 
 const ItemsContainer = ({ currentPageContent, RenderComponent }) => {
   return (
-    <Container className="text-center m-auto ">
+    <Container className="text-center m-auto mt-2 ">
       <Row>
         {currentPageContent.map((item, idx) => (
-          <Col key={item.book !== undefined ? item.book._id : item._id} md={6}>
+          <Col
+            sm={6}
+            md={currentPageContent.length === 2 ? { span: 4 } : 4}
+            key={item.book !== undefined ? item.book._id : item._id}
+          >
             <RenderComponent data={item} />
           </Col>
         ))}

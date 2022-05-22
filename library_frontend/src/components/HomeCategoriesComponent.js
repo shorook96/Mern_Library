@@ -23,7 +23,7 @@ const HomeCategoriesComponent = () => {
             <Col md={7} className="">
               <div className="books-header">
                 <p className="font-weight-bolder Header-Title h1">
-                  Top Rated Books
+                  Top Rated Categories
                 </p>
                 <Container className="text-center">
                   <p className="book-header-desc">
@@ -35,36 +35,24 @@ const HomeCategoriesComponent = () => {
               </div>
             </Col>
             <Col md={5}>
-              <Carousel className="">
+              <Carousel
+                className="text-dark custom-carousel text-center rounded mt-5"
+                variant="dark"
+              >
                 <Carousel.Item interval={1100}>
-                  <img
-                    className="d-block w-100 rounded-circle"
-                    src="https://media.gettyimages.com/photos/giza-egypt-pyramids-in-sunset-scene-wonders-of-the-world-picture-id1085205362?s=612x612"
-                    alt="First slide"
-                  />
-                  <Carousel.Caption>
-                    <h3>{data[0].category.categoryName}</h3>
-                  </Carousel.Caption>
+                  <h3 className="d-block w-100 rounded-circle cutome-category-home">
+                    {data[0].category.categoryName}
+                  </h3>
                 </Carousel.Item>
                 <Carousel.Item interval={1100}>
-                  <img
-                    className="d-block w-100 rounded-circle"
-                    src="https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__340.jpg"
-                    alt="Second slide"
-                  />
-                  <Carousel.Caption>
-                    <h3>{data[1].category.categoryName}</h3>
-                  </Carousel.Caption>
+                  <h3 className="d-block w-100 rounded-circle cutome-category-home">
+                    {data[1].category.categoryName}
+                  </h3>
                 </Carousel.Item>
                 <Carousel.Item interval={1100}>
-                  <img
-                    className="d-block w-100 rounded-circle"
-                    src="https://media.gettyimages.com/photos/woman-standing-on-the-terrace-on-the-background-of-giza-pyramids-picture-id1306141437?s=612x612"
-                    alt="Third slide"
-                  />
-                  <Carousel.Caption>
-                    <h3>{data[2].category.categoryName}</h3>
-                  </Carousel.Caption>
+                  <h3 className="d-block w-100 rounded-circle cutome-category-home">
+                    {data[2].category.categoryName}
+                  </h3>
                 </Carousel.Item>
               </Carousel>
             </Col>

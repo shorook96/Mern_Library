@@ -11,6 +11,7 @@ const PaginationComponent = ({
   RenderComponent,
   changeCurrent,
   currentPageNumber,
+  title,
 }) => {
   console.log(`zzzz${currentPageNumber}`);
 
@@ -29,61 +30,65 @@ const PaginationComponent = ({
     siblingCount,
     currentPageNumber,
   });
-  
+
   return (
     <>
-      <div className="d-flex flex-column w-100 m-auto">
+      <div className="d-flex flex-column w-100 m-auto mt-4">
+        <h1 className="custom-title">{title}</h1>
+
         <ItemsContainer
           currentPageContent={Data}
           RenderComponent={RenderComponent}
         />
-        <div className="m-auto mt-5 text-center">
-          <nav aria-label="Page navigation example">
-            <ul className="pagination">
-              <li className="page-item">
-                <button
-                  className="page-link"
-                  href="#"
-                  aria-label="Previous"
-                  disabled={currentPageNumber === 1}
-                  onClick={gotToPreviousPage}
-                >
-                  <span aria-hidden="true">&laquo;</span>
-                  <span className="sr-only">Previous</span>
-                </button>
-              </li>
-              {pageRange.map((val) => {
-            return (
-              <li className="page-item" key={val}>
-                <button
-                  className={
-                    currentPageNumber === val
-                      ? 'active btn-primary page-link'
-                      : 'page-link'
-                  }
-                  onClick={() => changeCurrent(val)}
-                >
-                  {val}
-                </button>
-              </li>
-            );
-          })}
+        {totalPageCount > 1 ? (
+          <div className="m-auto mt-5  text-center">
+            <nav aria-label="Page navigation example">
+              <ul className="pagination">
+                <li className="page-item">
+                  <button
+                    className="page-link"
+                    href="#"
+                    aria-label="Previous"
+                    disabled={currentPageNumber === 1}
+                    onClick={gotToPreviousPage}
+                  >
+                    <span aria-hidden="true">&laquo;</span>
+                    <span className="sr-only">Previous</span>
+                  </button>
+                </li>
+                {pageRange.map((val) => {
+                  return (
+                    <li className="page-item" key={val}>
+                      <button
+                        className={
+                          currentPageNumber === val
+                            ? 'active btn-primary page-link'
+                            : 'page-link'
+                        }
+                        onClick={() => changeCurrent(val)}
+                      >
+                        {val}
+                      </button>
+                    </li>
+                  );
+                })}
 
-              <li className="page-item">
-                <button
-                  className="page-link"
-                  href="#"
-                  aria-label="Next"
-                  disabled={currentPageNumber === totalPageCount}
-                  onClick={goToNextPage}
-                >
-                  <span aria-hidden="true">&raquo;</span>
-                  <span className="sr-only">Next</span>
-                </button>
-              </li>
-            </ul>
-          </nav>
-        </div>
+                <li className="page-item">
+                  <button
+                    className="page-link"
+                    href="#"
+                    aria-label="Next"
+                    disabled={currentPageNumber === totalPageCount}
+                    onClick={goToNextPage}
+                  >
+                    <span aria-hidden="true">&raquo;</span>
+                    <span className="sr-only">Next</span>
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        ) : null}
       </div>
     </>
   );
