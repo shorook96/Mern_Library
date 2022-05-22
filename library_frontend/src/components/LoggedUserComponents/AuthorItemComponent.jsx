@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 const AuthorItemComponent = ({ data }) => {
   return (
     <>
-      <Card className="text-black mt-3">
+      <Card className="text-black mt-3 book-card-item">
         <div className="ui-card d-flex">
           <Card.Img
             variant="top"

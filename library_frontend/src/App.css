@@ -383,6 +383,15 @@
   transform: translateY(0);
 }
 
+@media only screen and (min-width: 1203px) {
+  .book-card-item {
+    width: 18rem;
+  }
+  .btn-category {
+    padding: 1rem 2rem;
+  }
+}
+
 /*********************************rating*****************************************/
 .star {
   cursor: pointer;
@@ -400,6 +409,7 @@ input[type='radio'] {
 .card-body {
   background-color: #efefef;
 }
+
 /****************************************************/
 
 .custom-owner-container {
@@ -418,6 +428,7 @@ input[type='radio'] {
   margin-top: 1em;
 }
 .owner-card-img {
+  margin-top: -1em;
   height: 250px;
   width: 250px;
   position: absolute;
@@ -451,13 +462,20 @@ input[type='radio'] {
     margin: 50px 0px;
   }
   .box:hover {
-    margin: 45px;
+    margin: 50px;
   }
   .box:hover img {
-    margin-top: 30%;
+    margin-top: 50%;
     height: 240px;
+    /* width: 100px; */
   }
   .custom-owner-container {
     height: 100%;
   }
+}
+.owner-link {
+  font-size: 50px;
+  text-decoration: none;
+  color: #61dafb;
+  padding: 10px;
 }

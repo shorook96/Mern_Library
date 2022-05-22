@@ -86,7 +86,7 @@ export default function Author() {
         photo: data.photo,
       });
     });
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     GetBooks(AuthorsInfo.AuthorID).then((booksdata) => {

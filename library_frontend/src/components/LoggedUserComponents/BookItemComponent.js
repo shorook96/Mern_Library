@@ -41,7 +41,7 @@ const BookItemComponent = ({ data }) => {
   };
   return (
     <>
-      <Card className="text-black m-auto mt-3">
+      <Card className="text-black m-auto mt-3 book-card-item">
         <div className="ui-card d-flex">
           <Card.Img
             variant="top"

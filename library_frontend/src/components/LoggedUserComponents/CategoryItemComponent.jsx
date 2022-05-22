@@ -12,8 +12,7 @@ const CategoryItemComponent = ({ data }) => {
               bg={'white'}
               key={'primary'}
               text={'dark'}
-              style={{ width: '18rem' }}
-              className="mt-5 rounded "
+              className="mt-5 rounded book-card-item "
             >
               <Card.Body>
                 <Card.Title> {data.categoryName} </Card.Title>
@@ -25,14 +24,13 @@ const CategoryItemComponent = ({ data }) => {
               bg={'white'}
               key={'primary'}
               text={'dark'}
-              style={{ width: '18rem' }}
-              className="mt-5 rounded "
+              className="mt-5 rounded book-card-item "
             >
               <Card.Body>
                 <Card.Title>
                   <Link
                     to={`/user/categories/${data.categoryName}/${data._id}/books`}
-                    className="btn category-btn btn-success py-3 px-5"
+                    className="btn category-btn btn-success btn-category"
                   >
                     Check Books
                   </Link>
