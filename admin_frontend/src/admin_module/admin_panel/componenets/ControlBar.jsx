@@ -12,8 +12,6 @@ export default function ControlBar({pagesCount, changeDisplayedPage, reloadList}
         setCurrentPage(pageNumber);
     }
 
-
-
     return (
         <div className="d-flex justify-content-between controlBarContainer">
             <div className="d-flex justify-content-between controlBar">

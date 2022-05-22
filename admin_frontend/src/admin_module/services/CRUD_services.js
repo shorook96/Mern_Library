@@ -1,9 +1,6 @@
 import {getAdminToken, hostname} from '../globalVariablesAndFunctions'; 
 import axios from 'axios';
 
-
-
-
 const createCategory = async (category) => {
     const res = await axios({
         method: 'post',

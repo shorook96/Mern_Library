@@ -1,5 +1,3 @@
-
-
 export default function AdminNavBar({activeSubPanelID, changeTab, logOut}) {
     const navItems = [
         {tabID: 0, name: 'Categories'},

@@ -13,10 +13,6 @@ import AuthorNewItem from './componenets/author/AuthorNewItem';
 import BookItem from './componenets/book/BookItem';
 import BookNewItem from './componenets/book/BookNewItem'
 
-//const itemAttributes = ['categoryName'];
-
-
-
 
 export default function ItemsPanel({activeSubPanel}){
     const [itemsList, setItemsList] = useState([]);
@@ -59,7 +55,6 @@ export default function ItemsPanel({activeSubPanel}){
         if(editedItemID === ''){
             setEditedItemID(itemID);
         }
-        //setEditedItemID(itemID);
     }
     
     const closeEditMode = () => {
@@ -70,7 +65,6 @@ export default function ItemsPanel({activeSubPanel}){
     const changeDisplayedPage = (pageNumber) => {
         setDisplayedPage(pageNumber);
     }
-
 
     const getAddingNewItemStructure = () => {
         let ret;
@@ -94,6 +88,7 @@ export default function ItemsPanel({activeSubPanel}){
                     />
                 )
                 break;
+                
             case 'book':
                 ret =   (
                     <BookNewItem 
@@ -165,10 +160,7 @@ export default function ItemsPanel({activeSubPanel}){
             for(let i = displayedPage * numberOfRowsPerPage; i < Math.min(itemsList.length, (displayedPage + 1) * numberOfRowsPerPage); i++){
                 diplayedList.push(itemsList[i]);
             }
-            
-            return diplayedList.map((item, index) => getItem(item._id, item, index + displayedPage * numberOfRowsPerPage, editedItemID, closeEditMode, editAction, reloadList))
-                //{itemData, editedItemID, index, closeEditMode, editAction, deleteAction}
-            ;
+            return diplayedList.map((item, index) => getItem(item._id, item, index + displayedPage * numberOfRowsPerPage, editedItemID, closeEditMode, editAction, reloadList));
         }
     }
 
@@ -186,7 +178,6 @@ export default function ItemsPanel({activeSubPanel}){
 
     return (
         <>
-            
             <table className="table table-striped table-hover itemsTable">
                 <thead>
                     <tr className="table-primary">
@@ -209,8 +200,6 @@ export default function ItemsPanel({activeSubPanel}){
             </table>
             {addingNewItem? <></> : <ControlBar pagesCount = {Math.ceil(itemsList.length / numberOfRowsPerPage)} changeDisplayedPage = {changeDisplayedPage} reloadList = {reloadList}/>}
             <img className="position-fixed bottom-0 end-0 addNewItemButton" src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" alt="Add New Item" width={70} onClick = {enterAddingMode}/>
-        </>
-            
-        
+        </>        
     );
 }

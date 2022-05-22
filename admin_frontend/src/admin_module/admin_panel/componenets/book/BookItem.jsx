@@ -8,8 +8,6 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup'
 const subPanelName = 'book'
 
 
-
-
 export default function BookItem({data, editedItemID, index, closeEditMode, editAction, reloadList}){
     
     const [newItemData, setNewItemData] = useState({...data});
@@ -68,13 +66,10 @@ export default function BookItem({data, editedItemID, index, closeEditMode, edit
                 closeEditMode();
             }else{
                 alert(res.data.message);
-            }
-            
+            }   
         }catch(error){
             alert(error.response.data.message);
         }
-        
-        
     }
 
     const updateNewData = (attributeKey, attributeValue) => {
@@ -127,7 +122,6 @@ export default function BookItem({data, editedItemID, index, closeEditMode, edit
             </DropdownButton>
         )
     }
-
 
     const getAuthorDropDownList = () => {
         return (

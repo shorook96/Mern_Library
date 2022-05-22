@@ -117,9 +117,7 @@ export default function BookNewItem({index, reloadList, closeAddingNewItemMode})
             
         }catch(error){
             alert(error.response.data.message);
-        }
-        
-        
+        }   
     }
 
     const getRepresentation = () => {

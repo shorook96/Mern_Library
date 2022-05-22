@@ -1,26 +1,24 @@
 
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState} from 'react';
 import getItemAttributes from '../../../itemAttributes';
 import CRUD_services from '../../../services/CRUD_services';
 
 const subPanelName = 'category'
 
-
 export default function CategoryNewItem({index, closeAddingNewItemMode, reloadList}){
-    
     const [newCategoryData, setNewCategoryData] = useState({_id: '' ,categoryName: ''});    
-
 
     const addNewData = async (newItemData) => {
         const newItemDataWithoutId = {};
 
+        //Deep Copy the Object but ignore the id
         getItemAttributes(subPanelName).forEach((attribute) => {
             if(attribute.key !== '_id'){
                 ///Ignore the key
                 newItemDataWithoutId[attribute.key] = newItemData[attribute.key];
             }
-        })
+        });
+
         console.log(newItemDataWithoutId);
         try{
             const res = await CRUD_services.createCategory(newItemDataWithoutId);
@@ -35,8 +33,6 @@ export default function CategoryNewItem({index, closeAddingNewItemMode, reloadLi
         }catch(error){
             alert(error.response.data.message);
         }
-        
-        
     }
 
     const submitNewData = (e) => {
@@ -44,7 +40,6 @@ export default function CategoryNewItem({index, closeAddingNewItemMode, reloadLi
         temp.categoryName = e.target.value;
         setNewCategoryData(temp);
     }
-
 
     return (
         <tr key={newCategoryData._id} className="table-warning">

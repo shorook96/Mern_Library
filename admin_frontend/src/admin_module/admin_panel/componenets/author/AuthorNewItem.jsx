@@ -5,11 +5,8 @@ import CRUD_services from '../../../services/CRUD_services';
 
 const subPanelName = 'author'
 
-
 export default function AuthorNewItem({index, closeAddingNewItemMode, reloadList}){
-    
     const [newItemData, setNewItemData] = useState({_id: '' ,firstname: '', lastname: '', DOB: Date.now(), bio: '', photo: ''});    
-
 
     const addNewData = async (newItemData) => {
         const newItemDataWithoutId = {};
@@ -33,8 +30,6 @@ export default function AuthorNewItem({index, closeAddingNewItemMode, reloadList
         }catch(error){
             alert(error.response.data.message);
         }
-        
-        
     }
 
     const updateNewData = (attributeKey, attributeValue) => {

@@ -3,11 +3,9 @@ import { useState, useEffect } from 'react';
 import CRUD_services from '../../../services/CRUD_services';
 import getItemAttributes from '../../../itemAttributes';
 
-
 const subPanelName = 'category'
 
 export default function CategoryItem({data: categoryData, editedItemID, index, closeEditMode, editAction, reloadList}){
-    
     const [newCategoryData, setNewCategoryData] = useState({...categoryData});
 
     useEffect(() => {
@@ -16,7 +14,6 @@ export default function CategoryItem({data: categoryData, editedItemID, index, c
         }
     }, [editedItemID])
     
-
     const deleteAction = async (itemID) => {
         const confirmaed = window.confirm('Do you want to delete item with id = ' + itemID + '?');
         if(!confirmaed){
@@ -32,7 +29,6 @@ export default function CategoryItem({data: categoryData, editedItemID, index, c
         }
         reloadList();
     }
-
 
     const submitEditedItem = async (newItemData) => {
         const newItemDataWithoutId = {};
@@ -52,13 +48,10 @@ export default function CategoryItem({data: categoryData, editedItemID, index, c
                 closeEditMode();
             }else{
                 alert(res.data.message);
-            }
-            
+            }            
         }catch(error){
             alert(error.response.data.message);
         }
-        
-        
     }
 
     const updateNewData = (e) => {
@@ -78,7 +71,6 @@ export default function CategoryItem({data: categoryData, editedItemID, index, c
     const getRepresentation = () => {
         if(editedItemID === categoryData._id){
             return(
-
                 <tr key={categoryData._id} className="table-warning">
                     <td>{index + 1}</td>
                     <td>{categoryData._id}</td>

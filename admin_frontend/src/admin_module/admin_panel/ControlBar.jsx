@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 
 export default function ControlBar({pagesCount, changeDisplayedPage, reloadList}){
@@ -14,7 +13,7 @@ export default function ControlBar({pagesCount, changeDisplayedPage, reloadList}
 
 
 
-    return (
+    return(
         <div className="d-flex justify-content-between controlBarContainer">
             <div className="d-flex justify-content-between controlBar">
                 <span className="controlBarBadge badge bg-info text-dark">Current Page: {currentPage + 1}</span>

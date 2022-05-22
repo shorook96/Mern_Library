@@ -15,7 +15,6 @@ export default function AuthorItem({data, editedItemID, index, closeEditMode, ed
         }
     }, [editedItemID])
     
-
     const deleteAction = async (itemID) => {
         const confirmaed = window.confirm('Do you want to delete item with id = ' + itemID + '?');
         if(!confirmaed){
@@ -31,7 +30,6 @@ export default function AuthorItem({data, editedItemID, index, closeEditMode, ed
         }
         reloadList();
     }
-
 
     const submitEditedItem = async (newItemData) => {
         const newItemDataWithoutId = {};
@@ -51,13 +49,10 @@ export default function AuthorItem({data, editedItemID, index, closeEditMode, ed
                 closeEditMode();
             }else{
                 alert(res.data.message);
-            }
-            
+            }  
         }catch(error){
             alert(error.response.data.message);
-        }
-        
-        
+        } 
     }
 
     const updateNewData = (attributeKey, attributeValue) => {
