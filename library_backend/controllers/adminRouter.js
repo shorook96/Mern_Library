@@ -1,8 +1,9 @@
 const Express = require('express');
-const util = require('util');
 const bcrypt = require('bcrypt');
 const adminModel = require('./../models/adminModel');
 const { jwtSignAsync, jwtVerifyAsync } = require('./../utils/jwtAsync');
+const customError = require('../utils/customError');
+
 
 const adminRouter = Express.Router();
 
@@ -27,26 +28,25 @@ adminRouter.post('/login', async (req, res, next) => {
   let admin = null;
   try {
     admin = await getAdminByUsernameOrEmail(username, email);
+    if (!admin) {
+      //Can't find an admin with this username or eamil
+      throw customError(401, 'UNAUTHRIZED', 'Wrong Email/Username or password');
+    }
+    const authized = await bcrypt.compare(password, admin.hashedPassword);
+    if (!authized) {
+      //Return not authrized
+      throw customError(401, 'UNAUTHRIZED', 'Wrong Email/Username or password');
+    }
+  
+    //Authrized
+    const token = { id: admin._id, username: admin.username, isAdmin: true };
+    const signedToken = await jwtSignAsync(token, secretKey);
+    res.status(200).send(signedToken);
   } catch (err) {
     //Database connection error
     //Return internal server error
+    next(err);
   }
-  if (!admin) {
-    //Can't find an admin with this username or eamil
-    //Return not authrized
-  }
-
-  const authized = await bcrypt.compare(password, admin.hashedPassword);
-  if (!authized) {
-    //Return not authrized
-    res.status(403).send({ success: false });
-    return;
-  }
-
-  //Authrized
-  const token = { id: admin._id, username: admin.username, isAdmin: true };
-  const signedToken = await jwtSignAsync(token, secretKey);
-  res.status(200).send(signedToken);
 });
 
 module.exports = adminRouter;

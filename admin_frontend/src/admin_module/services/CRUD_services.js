@@ -73,6 +73,7 @@ const deleteAuthor = async (itemID) => {
     return res;
 }
 
+
 const updateAuthor = async (itemID, newAuthorData) => {
     const res = await axios({
         method: 'patch',
@@ -87,7 +88,57 @@ const updateAuthor = async (itemID, newAuthorData) => {
 }
 
 
+const deleteBook = async (itemID) => {
+    const res = await axios({
+        method: 'delete',
+        url: hostname + '/books/' + itemID,
+        responseType: 'json',
+        headers: {
+            token: getAdminToken()
+        }
+    });
+
+    return res;
+}
 
 
-export default {createCategory, deleteCategory, updateCategory, createAuthor, deleteAuthor, updateAuthor};
+const createBook = async (book) => {
+    const res = await axios({
+        method: 'post',
+        url: hostname + '/books/',
+        responseType: 'json',
+        data: book,
+        headers: {
+            token: getAdminToken()
+        }
+    });
+
+    return res;
+}
+
+
+
+const updateBook = async (itemID, newBookData) => {
+    const res = await axios({
+        method: 'patch',
+        url: hostname + '/books/' + itemID,
+        responseType: 'json',
+        data: newBookData,
+        headers: {
+            token: getAdminToken()
+        }
+    });
+    return res;
+}
+
+const getCategories = () => {
+    return fetch(hostname + '/categories').then(res => res.json());
+}
+
+const getAuthors = () => {
+    return fetch(hostname + '/authors').then(res => res.json());
+}
+
+
+export default {getCategories, getAuthors, createCategory, deleteCategory, updateCategory, createAuthor, deleteAuthor, updateAuthor, createBook, deleteBook, updateBook};
 

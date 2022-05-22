@@ -27,7 +27,9 @@ const bookJoiValidator_middleWare = async (req, res, next) => {
 
 const uniqueBookNameValidator = async (req, res, next) => {
     //Done on POST mehtod only
-    if(!(req.method === 'POST' ||  req.method === 'PATCH')){
+
+    //if(!(req.method === 'POST' ||  req.method === 'PATCH')){
+    if(!(req.method === 'POST')){
         next();
         return; // Early return;
     }

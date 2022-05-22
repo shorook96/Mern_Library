@@ -10,7 +10,8 @@ import {getList} from '../services/dataFetchService'
 import getItemAttributes from '../itemAttributes'
 import AuthorItem from './componenets/author/AuthorItem';
 import AuthorNewItem from './componenets/author/AuthorNewItem';
-
+import BookItem from './componenets/book/BookItem';
+import BookNewItem from './componenets/book/BookNewItem'
 
 //const itemAttributes = ['categoryName'];
 
@@ -22,6 +23,7 @@ export default function ItemsPanel({activeSubPanel}){
     const [editedItemID, setEditedItemID] = useState('');
     const [addingNewItem, setAddingNewItem] = useState(false);
     const [displayedPage, setDisplayedPage] = useState(0);
+    
 
     const reloadList = () => {
         getList(activeSubPanel).then( (list) => {
@@ -39,6 +41,9 @@ export default function ItemsPanel({activeSubPanel}){
         closeAddingNewItemMode();
         closeEditMode();
         reloadList();
+        if(activeSubPanel === 'book'){
+
+        }
     }, [activeSubPanel])
 
 
@@ -51,7 +56,10 @@ export default function ItemsPanel({activeSubPanel}){
     }
 
     const editAction = (itemID) => {
-        setEditedItemID(itemID);
+        if(editedItemID === ''){
+            setEditedItemID(itemID);
+        }
+        //setEditedItemID(itemID);
     }
     
     const closeEditMode = () => {
@@ -87,7 +95,12 @@ export default function ItemsPanel({activeSubPanel}){
                 )
                 break;
             case 'book':
-
+                ret =   (
+                    <BookNewItem 
+                        index={0}
+                        closeAddingNewItemMode = {closeAddingNewItemMode}
+                        reloadList = {reloadList}                    
+                    />)
                 break;
 
         }
@@ -124,7 +137,17 @@ export default function ItemsPanel({activeSubPanel}){
                 )
                 break;
             case 'book':
-
+                ret = (
+                    <BookItem 
+                            key={key}
+                            data={data}
+                            index={index}
+                            editedItemID = {editedItemID}
+                            closeEditMode = {closeEditMode}
+                            editAction = {editAction}
+                            reloadList = {reloadList}
+                    />
+                );
                 break;
 
         }
@@ -152,7 +175,7 @@ export default function ItemsPanel({activeSubPanel}){
     const getPaddingData = () => {
         let paddingArray = [];
         const numberOfRowsInLastPage = itemsList.length % numberOfRowsPerPage;
-        const numberOfRowsToPutPadding = numberOfRowsPerPage - numberOfRowsInLastPage;
+        const numberOfRowsToPutPadding = (numberOfRowsPerPage - numberOfRowsInLastPage) % numberOfRowsPerPage;
         for(let i = 0; i < numberOfRowsToPutPadding; i++){
             paddingArray.push(<tr key={i} className='dummyRow'><th className='dummyRow'>s</th></tr>);
         }
@@ -166,7 +189,7 @@ export default function ItemsPanel({activeSubPanel}){
             
             <table className="table table-striped table-hover itemsTable">
                 <thead>
-                    <tr className="table-dark">
+                    <tr className="table-primary">
                         <th>#</th>
                         {
                             getItemAttributes(activeSubPanel).map(attribute => <th className='itemCell' key={attribute.key}>{attribute.alias}</th>)
@@ -179,7 +202,7 @@ export default function ItemsPanel({activeSubPanel}){
                         getTableBody()
                     }
                     {
-                        displayedPage === (Math.ceil(itemsList.length / numberOfRowsPerPage) - 1)? getPaddingData() : <></>
+                        displayedPage == (Math.ceil(itemsList.length / numberOfRowsPerPage) - 1)? getPaddingData() : <></>
                     }
 
                 </tbody>

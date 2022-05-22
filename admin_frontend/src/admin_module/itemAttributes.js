@@ -13,7 +13,6 @@ const itemAttributes = {
     book: [            {key: '_id', alias: 'ID'},
                         {key: 'bookName', alias: 'book Name'},
                         {key: 'brief', alias: 'Brief'},
-                        {key: 'rating', alias: 'Rating'},
                         {key: 'photo', alias: 'Photo'},
                         {key: 'category', alias: 'Category'},
                         {key: 'author', alias: 'Author'}]

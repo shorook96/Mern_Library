@@ -17,7 +17,7 @@ async function connectDb() {
   }
 }
 
-//connectDb();
+connectDb();
 
 /* const createAdmin = async () => {
   await connectDb();
@@ -60,7 +60,7 @@ userRating
 0
 */
 
-const updateUsersRatings = async () => {
+/* const updateUsersRatings = async () => {
   await connectDb();
 
   const result = await UserModel.updateMany({}, {
@@ -78,4 +78,4 @@ const updateUsersRatings = async () => {
   console.log(result);
 }
 
-updateUsersRatings();
+updateUsersRatings(); */

@@ -13,7 +13,6 @@ const adminTokenValidatorMiddleware = async (req, res, next) => {
     const token = req.headers.token;
     try{
         const decoded = await jwtVerifyAsync(token, secretKey);
-        console.log(decoded);
         if(decoded.isAdmin){
             next();
         }else{

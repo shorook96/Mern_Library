@@ -11,7 +11,9 @@ export default function CategoryItem({data: categoryData, editedItemID, index, c
     const [newCategoryData, setNewCategoryData] = useState({...categoryData});
 
     useEffect(() => {
-        setNewCategoryData(categoryData);
+        if(categoryData._id === editedItemID){
+            setNewCategoryData(categoryData);
+        }
     }, [editedItemID])
     
 

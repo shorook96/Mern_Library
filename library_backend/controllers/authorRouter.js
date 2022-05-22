@@ -15,10 +15,8 @@ authorRouter.use(authorJoiValidator_middleWare);
 authorRouter.get('/', async (req, res, next) => {
   try {
     const authors = await authorModel.find({});
-    console.log("authordfgvhbjnkmlkjhgfds")
     res.send(authors);
   } catch (err) {
-    console.log(err);
     next(customError(522, 'Server_Error', 'something went wrong'));
   }
 });
