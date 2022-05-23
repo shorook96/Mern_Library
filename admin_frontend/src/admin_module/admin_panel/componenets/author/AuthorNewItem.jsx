@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import getItemAttributes from '../../../itemAttributes';
+import { authorSchema } from '../../../Joi_validation/author_validation';
 import CRUD_services from '../../../services/CRUD_services';
 import uploadImage from '../../../services/fileUpload'
 
@@ -18,7 +19,15 @@ export default function AuthorNewItem({index, closeAddingNewItemMode, reloadList
                 ///Ignore the key
                 newItemDataWithoutId[attribute.key] = newItemData[attribute.key];
             }
-        })
+        });
+        
+        try{
+            await authorSchema.validateAsync(newItemDataWithoutId)
+        }catch(validationError){
+            alert(`Error! \n${validationError.message}`);
+            return;
+        }
+
         try{
             const res = await CRUD_services.createAuthor(newItemDataWithoutId);
             if(res.status === 200){

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import CRUD_services from '../../../services/CRUD_services';
 import getItemAttributes from '../../../itemAttributes';
 import uploadImage from '../../../services/fileUpload'
+import { authorSchema } from '../../../Joi_validation/author_validation';
 
 
 
@@ -43,6 +44,14 @@ export default function AuthorItem({data, editedItemID, index, closeEditMode, ed
                 newItemDataWithoutId[attribute.key] = newItemData[attribute.key];
             }
         })
+
+        try{
+            await authorSchema.validateAsync(newItemDataWithoutId)
+        }catch(validationError){
+            alert(`Error! \n${validationError.message}`);
+            return;
+        }
+
 
         const itemID = newItemData._id;
         try{
