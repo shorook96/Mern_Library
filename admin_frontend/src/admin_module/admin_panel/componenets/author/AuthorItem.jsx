@@ -3,6 +3,7 @@ import CRUD_services from '../../../services/CRUD_services';
 import getItemAttributes from '../../../itemAttributes';
 import uploadImage from '../../../services/fileUpload'
 import { authorSchema } from '../../../Joi_validation/author_validation';
+import { iconSrcs } from '../../../globalVariablesAndFunctions';
 
 
 
@@ -99,10 +100,10 @@ export default function AuthorItem({data, editedItemID, index, closeEditMode, ed
                     <td key={'bio'} className='bioCell'><input type="text" value={newItemData.bio} onChange={e => updateNewData('bio', e.target.value)} onKeyDown={(e) => {if(e.key === "Enter") submitEditedItem(newItemData)}}/></td>
                     <td key={'photo'} className='photoCell'><input type="file" value=""  onChange={(e) => {uploadImage(e.target.files[0], handleFileUpload)}} /></td>
                     <td key={'submit'} className='actionButtonCell' style={{textAlign:'center'}}> 
-                        <img className="hoverableImage" src="https://cdn-icons-png.flaticon.com/512/5219/5219192.png" alt="submit" width={20} onClick={() => {submitEditedItem(newItemData)}}/>
+                        <img className="hoverableImage" src={iconSrcs.save} alt="submit" width={20} onClick={() => {submitEditedItem(newItemData)}}/>
                     </td>
                     <td key={'cancel'} className='actionButtonCell' style={{textAlign:'center'}}>
-                        <img className="hoverableImage" src="https://cdn-icons-png.flaticon.com/512/1828/1828843.png" alt="cancel" width={20} onClick={closeEditMode} />
+                        <img className="hoverableImage" src={iconSrcs.cancel} alt="cancel" width={20} onClick={closeEditMode} />
                     </td>
                 </tr>
             )
@@ -114,10 +115,10 @@ export default function AuthorItem({data, editedItemID, index, closeEditMode, ed
                         getItemAttributes(subPanelName).map((attribute) => <td key={attribute.key} className='itemCell'>{data[attribute.key]}</td>)
                     }
                     <td key={'edit'} style={{textAlign:'center'}}> 
-                        <img className="hoverableImage" src="https://cdn-icons-png.flaticon.com/512/650/650194.png" alt="edit" width={20} onClick={handleEditAction}/>
+                        <img className="hoverableImage" src={iconSrcs.edit} alt="edit" width={20} onClick={handleEditAction}/>
                     </td>
                     <td key={'delete'} style={{textAlign:'center'}}>
-                        <img className="hoverableImage" src="https://cdn-icons-png.flaticon.com/512/3141/3141684.png" alt="delete" width={20} onClick={handleDeleteAction}/>
+                        <img className="hoverableImage" src={iconSrcs.delete} alt="delete" width={20} onClick={handleDeleteAction}/>
                     </td>
                 </tr>
             )

@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import { iconSrcs } from '../../../globalVariablesAndFunctions';
 import getItemAttributes from '../../../itemAttributes';
 import { authorSchema } from '../../../Joi_validation/author_validation';
 import CRUD_services from '../../../services/CRUD_services';
@@ -63,10 +64,10 @@ export default function AuthorNewItem({index, closeAddingNewItemMode, reloadList
             <td key={'bio'} className='bioCell'><input type="text" value={newItemData.bio} onChange={e => updateNewData('bio', e.target.value)} onKeyDown={(e) => {if(e.key === "Enter") addNewData(newItemData)}}/></td>
             <td key={'photo'} className='photoCell'><input type="file" value=""  onChange={(e) => {uploadImage(e.target.files[0], handleFileUpload)}} /></td>
             <td className='actionButtonCell' style={{textAlign:'center'}}> 
-                <img className="hoverableImage" src="https://cdn-icons-png.flaticon.com/512/5219/5219192.png" alt="submit" width={20} onClick={() => {addNewData(newItemData)}}/>
+                <img className="hoverableImage" src={iconSrcs.save} alt="submit" width={20} onClick={() => {addNewData(newItemData)}}/>
             </td>
             <td className='actionButtonCell' style={{textAlign:'center'}}>
-                <img className="hoverableImage" src="https://cdn-icons-png.flaticon.com/512/1828/1828843.png" alt="cancel" width={20} onClick={closeAddingNewItemMode} />
+                <img className="hoverableImage" src={iconSrcs.cancel} alt="cancel" width={20} onClick={closeAddingNewItemMode} />
             </td>
         </tr>
     );

@@ -6,6 +6,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import uploadImage from '../../../services/fileUpload'
 import { bookSchema } from '../../../Joi_validation/book_validation';
+import { iconSrcs } from '../../../globalVariablesAndFunctions';
 const subPanelName = 'book'
 
 
@@ -166,10 +167,10 @@ export default function BookItem({data, editedItemID, index, closeEditMode, edit
                     <td key={'author'} className=''>{getAuthorDropDownList()}</td>
                     
                     <td key={'submit'} className='actionButtonCell' style={{textAlign:'center'}}> 
-                        <img className="hoverableImage" src="https://cdn-icons-png.flaticon.com/512/5219/5219192.png" alt="submit" width={20} onClick={() => {submitEditedItem(newItemData)}}/>
+                        <img className="hoverableImage" src={iconSrcs.save} alt="submit" width={20} onClick={() => {submitEditedItem(newItemData)}}/>
                     </td>
                     <td key={'cancel'} className='actionButtonCell' style={{textAlign:'center'}}>
-                        <img className="hoverableImage" src="https://cdn-icons-png.flaticon.com/512/1828/1828843.png" alt="cancel" width={20} onClick={closeEditMode} />
+                        <img className="hoverableImage" src={iconSrcs.cancel} alt="cancel" width={20} onClick={closeEditMode} />
                     </td>
                 </tr>
             )
@@ -181,10 +182,10 @@ export default function BookItem({data, editedItemID, index, closeEditMode, edit
                         getItemAttributes(subPanelName).map((attribute) => <td key={attribute.key} className='itemCell'>{data[attribute.key]}</td>)
                     }
                     <td key={'edit'} style={{textAlign:'center'}}> 
-                        <img className="hoverableImage" src="https://cdn-icons-png.flaticon.com/512/650/650194.png" alt="edit" width={20} onClick={handleEditAction}/>
+                        <img className="hoverableImage" src={iconSrcs.edit} alt="edit" width={20} onClick={handleEditAction}/>
                     </td>
                     <td key={'delete'} style={{textAlign:'center'}}>
-                        <img className="hoverableImage" src="https://cdn-icons-png.flaticon.com/512/3141/3141684.png" alt="delete" width={20} onClick={handleDeleteAction}/>
+                        <img className="hoverableImage" src={iconSrcs.delete} alt="delete" width={20} onClick={handleDeleteAction}/>
                     </td>
                 </tr>
             )

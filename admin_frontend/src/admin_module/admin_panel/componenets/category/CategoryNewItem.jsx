@@ -1,5 +1,6 @@
 
 import { useState} from 'react';
+import { iconSrcs } from '../../../globalVariablesAndFunctions';
 import getItemAttributes from '../../../itemAttributes';
 import { categorySchema } from '../../../Joi_validation/category_validation';
 import CRUD_services from '../../../services/CRUD_services';
@@ -54,10 +55,10 @@ export default function CategoryNewItem({index, closeAddingNewItemMode, reloadLi
             <td>{newCategoryData._id}</td>
             <td><input type="text" value={newCategoryData.categoryName} onChange={e => submitNewData(e)} onKeyDown={(e) => {if(e.key === "Enter") addNewData(newCategoryData)}}/></td>
             <td style={{textAlign:'center'}}> 
-                <img className="hoverableImage" src="https://cdn-icons-png.flaticon.com/512/5219/5219192.png" alt="submit" width={20} onClick={() => {addNewData(newCategoryData)}}/>
+                <img className="hoverableImage" src={iconSrcs.save} alt="submit" width={20} onClick={() => {addNewData(newCategoryData)}}/>
             </td>
             <td style={{textAlign:'center'}}>
-                <img className="hoverableImage" src="https://cdn-icons-png.flaticon.com/512/1828/1828843.png" alt="cancel" width={20} onClick={closeAddingNewItemMode} />
+                <img className="hoverableImage" src={iconSrcs.delete} alt="cancel" width={20} onClick={closeAddingNewItemMode} />
             </td>
         </tr>
     );

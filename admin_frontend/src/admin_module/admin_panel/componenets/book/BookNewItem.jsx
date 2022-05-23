@@ -6,6 +6,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import uploadImage from '../../../services/fileUpload'
 import { bookSchema } from '../../../Joi_validation/book_validation';
+import { iconSrcs } from '../../../globalVariablesAndFunctions';
 
 const subPanelName = 'book'
 
@@ -147,10 +148,10 @@ export default function BookNewItem({index, reloadList, closeAddingNewItemMode})
                     <td key={'author'} className=''>{getAuthorDropDownList()}</td>
                     
                     <td className='actionButtonCell' style={{textAlign:'center'}}> 
-                        <img className="hoverableImage" src="https://cdn-icons-png.flaticon.com/512/5219/5219192.png" alt="submit" width={20} onClick={() => {addNewData(newItemData)}}/>
+                        <img className="hoverableImage" src={iconSrcs.save} alt="submit" width={20} onClick={() => {addNewData(newItemData)}}/>
                     </td>
                     <td className='actionButtonCell' style={{textAlign:'center'}}>
-                        <img className="hoverableImage" src="https://cdn-icons-png.flaticon.com/512/1828/1828843.png" alt="cancel" width={20} onClick={closeAddingNewItemMode} />
+                        <img className="hoverableImage" src={iconSrcs.cancel} alt="cancel" width={20} onClick={closeAddingNewItemMode} />
                     </td>
                 </tr>
             )
