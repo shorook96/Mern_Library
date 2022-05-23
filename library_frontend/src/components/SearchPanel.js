@@ -32,6 +32,11 @@ const SearchPanel = () => {
       .catch((error) => {});
   }, [searchField]);
 
+  // const handleClick = () => {
+  //   setFilteredData([]);
+
+  //   searchField('');
+  // };
   return (
     <div className="d-flex ">
       <form className="input-group ">
@@ -42,14 +47,20 @@ const SearchPanel = () => {
           aria-label="Search"
           value={searchField}
           onChange={(e) => setSearchField(e.target.value)}
-          onBlur={(e) => setFilteredData([])}
+          // onBlur={(e) => setFilteredData([])}
         />
+        <ul></ul>
         {filteredData.length > 0 ? (
           <div className="d-flex  flex-column dropdown-menu  mt-5 w-100">
             {filteredData.length > 0 ? (
               filteredData[0].map((field, index) => {
                 return (
-                  <Link to="" className="dropdown-item w-100 p-1" key={index}>
+                  <Link
+                    to={'/Book/' + field._id}
+                    className="dropdown-item w-100 p-1"
+                    key={field._id}
+                    onClick={() => setSearchField('')}
+                  >
                     <div className=" w-100 p-1">
                       <img
                         src={field.photo}
@@ -68,7 +79,12 @@ const SearchPanel = () => {
 
             {filteredData[1].map((field, index) => {
               return (
-                <Link to="" className="dropdown-item w-100 p-3" key={index}>
+                <Link
+                  to={'/Author/' + field._id}
+                  className="dropdown-item w-100 p-3"
+                  key={field._id}
+                  onClick={() => setSearchField('')}
+                >
                   <div className=" w-100 p-1">
                     <img
                       src={field.photo}

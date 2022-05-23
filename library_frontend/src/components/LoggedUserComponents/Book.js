@@ -119,12 +119,6 @@ var listt = list.map((li) => {
       <div>
         <div class="cardAndrateAndselect">
           <Card name={BooksInfo.bookName} im={BooksInfo.photo} />
-          {/* <div class="selectt">
-            <Select />
-          </div>
-          <div class="ratingg">
-            <StarRating />
-          </div> */}
         </div>
         <div class="beside">
           <h3 class="bookname"> {BooksInfo.bookName}</h3>

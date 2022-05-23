@@ -34,7 +34,7 @@ const PaginationComponent = ({
   return (
     <>
       <div className="d-flex flex-column w-100 m-auto mt-4">
-        <h1 className="custom-title">{title}</h1>
+        <h1 className="custom-title" style={{fontFamily:"Brush Script MT, Brush Script Std, cursive"}}>{title}</h1>
 
         <ItemsContainer
           currentPageContent={Data}

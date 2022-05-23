@@ -21,6 +21,7 @@ const LogIn = ({ clicked, handleLogInClose, changeUrl }) => {
   const Location = useLocation();
   const redirectPath = Location.state?.path || '/';
   const { login } = UseAuth();
+  // const [err, setErr] = useState('')
 
 
   const onSubmit = (values, { resetForm }) => {
@@ -34,7 +35,9 @@ const LogIn = ({ clicked, handleLogInClose, changeUrl }) => {
         
       })
       .catch((error) => {
-        console.log(error);
+        // setErr(error.response.data.message)
+        alert(error.response.data.message)
+
         changeUrl('/');
       });
 
@@ -51,11 +54,12 @@ const LogIn = ({ clicked, handleLogInClose, changeUrl }) => {
     >
       
       <Modal.Body className='backGroundModalLogin'>
-      
-      <button type="button" class="btn-close btn-close" aria-label="Close"
+      <div >
+      <button type="button" class="btn-close btn-close-white" aria-label="Close"
       style={{float:'right', fontSize:"20px"}} 
       onClick={() => changeUrl()}></button>
-        <h3 className="mb-4 p-3" style={{ textAlign: 'center' }}>
+      </div >
+        <h3 className="mb-4 p-3 goodreads" style={{ textAlign: 'center', marginTop:"7%"}}>
           goodReads
         </h3>
 
@@ -68,8 +72,8 @@ const LogIn = ({ clicked, handleLogInClose, changeUrl }) => {
         const { isValid, dirty } = formik;
         return (
           <Form>
-            <div className="mb-2 ms-4">
-              <label htmlFor="email" className="ms-4 ps-5">
+            <div className="mb-2 ">
+              <label htmlFor="email" className="ms-4 ps-5" style={{fontFamily:"Snell Roundhand, cursive"}}>
                 Email Address
               </label>
               <Field
@@ -78,14 +82,15 @@ const LogIn = ({ clicked, handleLogInClose, changeUrl }) => {
                 name="email"
                 placeholder="name@example.com"
                 className="border-dark rounded-pill ms-2"
+                style ={{width:'50%'}}
               />
               <ErrorMessage name="email">
                 {(error) => <div className="error" style = {{ marginLeft : '42%' }}>{error}</div>}
               </ErrorMessage>
             </div>
 
-            <div className="mb-2 ms-4 px-3">
-              <label htmlFor="password" className="ms-4 ps-5">
+            <div className="mb-2 px-3">
+              <label htmlFor="password" className="ms-4 ps-5" style={{fontFamily:"Snell Roundhand, cursive"}}>
                 Password
               </label>
               <Field
@@ -93,6 +98,7 @@ const LogIn = ({ clicked, handleLogInClose, changeUrl }) => {
                 id="password"
                 name="password"
                 className="border-dark rounded-pill ms-4"
+                style ={{width:'54%'}}
               />
               <ErrorMessage name="password">
                 {(error) => <div className="error " style = {{ marginLeft : '41%' }}>{error}</div>}
@@ -100,11 +106,11 @@ const LogIn = ({ clicked, handleLogInClose, changeUrl }) => {
             </div>
             <button
               type="submit"
-              variant="primary"
               onClick={handleLogInClose}
-              style={{width:'40%', height:'0.1%', marginLeft : '35%',  color:'black'}}
-              className={!(dirty && isValid) ? "disabled-btn rounded-pill mb-4 btn-success" : "rounded-pill"}
+              style={{width:'40%', height:'0.1%', marginLeft : '30%', fontFamily:"Snell Roundhand, cursive"}}
+              className={!(dirty && isValid) ? "disabled-btn rounded-pill mb-4 submit" : "rounded-pill submit"}
               disabled={!(dirty && isValid)}
+              
             >
               LogIn
             </button>

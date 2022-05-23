@@ -45,9 +45,8 @@ const AuthorsSlider = () => {
           title="Categories"
         />
       ) : (
-        // <h1>zahra</h1>
-        // <h1>Data</h1>
-        <h1>loading...</h1>
+        <h1 className='noBooks' style={{fontFamily:"Brush Script MT, Brush Script Std, cursive"}}>No Categories...</h1>
+        
       )}
     </>
   );

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
+
 import BooksSlider from './BooksSlider';
 
 const UserHome = () => {
@@ -10,6 +11,7 @@ const UserHome = () => {
         
         <Container>
           <BooksSlider />
+          
         </Container>
       </div>
     </>

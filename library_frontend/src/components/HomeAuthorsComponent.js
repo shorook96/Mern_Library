@@ -51,7 +51,7 @@ const HomeAuthorsComponent = () => {
 
                   />
                   <Carousel.Caption className="info mb-3">
-                    <h3>{`${data[2].author.firstname} ${data[2].author.firstname}`}</h3>
+                    <h3>{`${data[0].author.firstname} ${data[0].author.lastname}`}</h3>
                   </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item interval={500} className="ui-card">
@@ -63,7 +63,7 @@ const HomeAuthorsComponent = () => {
                     height={300}
                   />
                   <Carousel.Caption className="info mb-3">
-                    <h3>{`${data[2].author.firstname} ${data[2].author.firstname}`}</h3>
+                    <h3>{`${data[1].author.firstname} ${data[1].author.lastname}`}</h3>
                   </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item className="ui-card">
@@ -75,7 +75,7 @@ const HomeAuthorsComponent = () => {
                     height={300}
                   />
                   <Carousel.Caption className="info mb-3">
-                    <h3>{`${data[2].author.firstname} ${data[2].author.firstname}`}</h3>
+                    <h3>{`${data[2].author.firstname} ${data[2].author.lastname}`}</h3>
                   </Carousel.Caption>
                 </Carousel.Item>
               </Carousel>

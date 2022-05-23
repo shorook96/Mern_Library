@@ -1,5 +1,4 @@
 import Footer from './components/Footer';
-// import { Routers, Router } from 'react-router-dom';
 import NavComponent from './components/NavComponent';
 import HomeComponent from './components/Home';
 import React, { useState } from 'react';
@@ -26,9 +25,6 @@ import CategoryBooksSlider from './components/LoggedUserComponents/CategoryBooks
 import AuthorsBooksComponent from './components/LoggedUserComponents/AuthorBooksComponent';
 import AboutUs from './components/AboutUs';
 
-// import Author from './components/Author';
-// import Authors from './components/Authors';
-// import Book from './components/Book';
 
 function App() {
   const { user } = UseAuth();

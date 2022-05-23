@@ -28,7 +28,7 @@ export default function HomeComponent() {
         </div>
       </div>
       <div className="mt-5">
-        <Container>
+        <Container className='mb-5'>
           <Container className='mt-5"'>
             <HomeCategoriesComponent />
           </Container>
@@ -42,13 +42,14 @@ export default function HomeComponent() {
             <img src={rightarrow} width={200} height={200} />
           </Container>
 
-          <Container className="mt-2">
+          <Container className="mt-2 ">
             <HomeAuthorsComponent />
           </Container>
         </Container>
+        <Footer/>
       </div>
     </>
 
-    // <h1>Data</h1>
+   
   );
 }
