@@ -2,6 +2,8 @@ const express = require('express');
 const bookRouter = express.Router();
 const customError = require('../utils/customError');
 const bookModel = require('../models/bookModel');
+const mongoose = require('mongoose');
+
 const authorModel = require('../models/authorModel');
 const categoryModel = require('../models/categoryModel');
 const userModel = require('../models/User/userModel');
@@ -45,7 +47,6 @@ bookRouter.get('/fulldata/:id', async (req, res, next) => {
     const { id } = req.params;
     const book = await bookModel.findById(id);
     if (!book) throw customError(422, 'ID_NOT_FOUND', 'NO_SUCH_BOOK');
-    console.log(book)
     const {firstname, lastname}=await authorModel.findById({ _id:book.author})
     const {categoryName}=await categoryModel.findById({ _id:book.category})
     // book.category={categoryName,id:book.category}
@@ -79,6 +80,8 @@ bookRouter.delete('/:id', async (req, res, next) => {
     const id = req.params.id;
     //await bookModel.deleteOne({_id: id});
     //res.send({success: 'OK'})
+    const idObj = mongoose.Types.ObjectId(id);
+    await userModel.updateMany({}, {$pull: {books: idObj}});
     bookModel.deleteOne(
       {
         _id: id,
@@ -91,6 +94,8 @@ bookRouter.delete('/:id', async (req, res, next) => {
         }
       }
     );
+    
+    
   } catch (err) {
     next(err);
   }
@@ -99,8 +104,8 @@ bookRouter.delete('/:id', async (req, res, next) => {
 bookRouter.post('/', async (req, res, next) => {
   const bookData = req.body;
   try {
-    const { bookName, rating, photo, category, author } = bookData;
-    await bookModel.create({ bookName, rating, photo, category, author });
+    const { bookName, rating, photo, category, author, brief } = bookData;
+    await bookModel.create({ bookName, rating, photo, category, author, brief});
     res.send({ success: 'book created successfully' });
     return;
   } catch (error) {

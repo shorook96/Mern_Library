@@ -2,8 +2,6 @@ import { React, useState, useEffect } from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
 import axios from 'axios';
 import '../App.css';
-
-import book6 from '../assets/images/7.png';
 import shelf from '../assets/images/shelf.png';
 
 export default function HomeStartImages() {
@@ -12,13 +10,13 @@ export default function HomeStartImages() {
     axios
       .get('http://localhost:5000/topRatedbooks', {})
       .then((response) => {
-        // console.log(response)
+        
         console.log(response.data);
 
         setData(response.data);
       })
       .catch((error) => {
-        console.log('errrrrrrrrrrrrrrrrrrrrrrr ' + error);
+        
       });
   }, []);
   return (
@@ -87,7 +85,7 @@ export default function HomeStartImages() {
                 </Col>
                 <Col sm={12} md={4} className=" text-center">
                   <img
-                    src={book6}
+                    src={data[5].photo}
                     height={200}
                     width={200}
                     alt="img6"

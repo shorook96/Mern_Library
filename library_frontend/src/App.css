@@ -122,9 +122,7 @@
 /***************************Home ***********************************/
 .cover-home {
   width: 100%;
-  /* background-color: #61dafb; */
   background: url(./assets/images/HomeCover.jpg);
-  /* background-image: url(./assets/images/HomeCover.jpg); */
   background-color: black;
   background-repeat: no-repeat;
   background-size: cover;
@@ -171,14 +169,13 @@
   color: red;
 }
 /**************************************HomeAuthors***************/
-.author-container-Home {
+/* .author-container-Home {
   text-align: center;
   width: 100%;
   height: 5rem;
 }
 
 .authors-background-image {
-  /* background-image: url(./assets/images/HomeCover.jpg); */
   background-image: url(./assets/images/AuthorsCover2.jpg);
   background-size: cover;
   background-repeat: no-repeat;
@@ -191,7 +188,8 @@
   .hide-column {
     display: none;
   }
-} /***********************Home Books*******************************/
+}  */
+/***********************Home Books*******************************/
 @keyframes example {
   0% {
     margin-top: 0%;

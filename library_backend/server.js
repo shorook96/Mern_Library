@@ -42,7 +42,7 @@ app.use('/admin', adminRouter);
 app.use('/categories', categoryRouter);
 
 app.use((error, req, res, next) => {
-  console.log("entered"+error.code)
+  
   if (!error.code) {
     console.log("enteredssss"+error.code)
     res.statusCode = 500;
@@ -53,9 +53,9 @@ app.use((error, req, res, next) => {
   res.statusCode = error.status;
   res.send({ message: error.code});
   return next();
-});
+}); 
 
-// app.use(errorHandling_middleware);
+app.use(errorHandling_middleware);
 
 // app.use(errorHandling_middleware);
 

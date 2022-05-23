@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+.dummyRow{
+  visibility: hidden;
+}
+
 
 .navListHover:hover{
   cursor: pointer;

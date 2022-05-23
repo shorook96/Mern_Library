@@ -1,13 +1,65 @@
 
 import { useState, useEffect } from 'react';
-export default function CategoryItem({categoryData, editedItemID, index, closeEditMode, editAction, deleteAction, submitEditedItem}){
+import CRUD_services from '../../../services/CRUD_services';
+import getItemAttributes from '../../../itemAttributes';
+
+
+const subPanelName = 'category'
+
+export default function CategoryItem({data: categoryData, editedItemID, index, closeEditMode, editAction, reloadList}){
     
     const [newCategoryData, setNewCategoryData] = useState({...categoryData});
 
     useEffect(() => {
-        setNewCategoryData(categoryData);
+        if(categoryData._id === editedItemID){
+            setNewCategoryData(categoryData);
+        }
     }, [editedItemID])
     
+
+    const deleteAction = async (itemID) => {
+        const confirmaed = window.confirm('Do you want to delete item with id = ' + itemID + '?');
+        if(!confirmaed){
+            //Early return
+            return;
+        }
+
+        const res = await CRUD_services.deleteCategory(itemID);
+        if(res.status == 200){
+            alert(`Deleted Item with id = ${itemID}`);
+        }else{
+            alert(res.data.message);
+        }
+        reloadList();
+    }
+
+
+    const submitEditedItem = async (newItemData) => {
+        const newItemDataWithoutId = {};
+
+        getItemAttributes(subPanelName).forEach((attribute) => {
+            if(attribute.key !== '_id'){
+                newItemDataWithoutId[attribute.key] = newItemData[attribute.key];
+            }
+        })
+
+        const itemID = newItemData._id;
+        try{
+            const res = await CRUD_services.updateCategory(itemID, newItemDataWithoutId);
+            if(res.status === 200){
+                reloadList();
+                alert('Success');
+                closeEditMode();
+            }else{
+                alert(res.data.message);
+            }
+            
+        }catch(error){
+            alert(error.response.data.message);
+        }
+        
+        
+    }
 
     const updateNewData = (e) => {
         const temp = {...newCategoryData};

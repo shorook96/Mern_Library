@@ -16,10 +16,8 @@ authorRouter.use(authorJoiValidator_middleWare);
 authorRouter.get('/', async (req, res, next) => {
   try {
     const authors = await authorModel.find({});
-    console.log("authordfgvhbjnkmlkjhgfds")
     res.send(authors);
   } catch (err) {
-    console.log(err);
     next(customError(522, 'Server_Error', 'something went wrong'));
   }
 });
@@ -50,8 +48,8 @@ authorRouter.get('/books/:id', async (req, res, next) => {
 
 authorRouter.post('/', async (req, res, next) => {
   try {
-    const { firstname, lastname, DOB, photo } = req.body;
-    await authorModel.create({ firstname, lastname, DOB, photo });
+    const { firstname, lastname, DOB, photo, bio } = req.body;
+    await authorModel.create({ firstname, lastname, DOB, photo, bio });
     res.send({ succes: 'author added successfully' });
   } catch (err) {
     next(err);

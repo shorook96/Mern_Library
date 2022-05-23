@@ -9,7 +9,7 @@ const bookSchema = mongoose.Schema({
     auto: true,
   },
   bookName: String,
-  brief: { type: String, default: '' },
+  brief: String,
   rating: {
     totalRate: { type: Number, default: 0 },
     numberOfRates: { type: Number, default: 0 },
@@ -26,3 +26,5 @@ const bookSchema = mongoose.Schema({
 });
 const bookModel = mongoose.model('book', bookSchema);
 module.exports = bookModel;
+
+
