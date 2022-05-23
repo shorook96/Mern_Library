@@ -193,6 +193,12 @@ export default function ItemsPanel({activeSubPanel}){
                         getTableBody()
                     }
                     {
+                        addingNewItem? getPaddingData() : <></> 
+                    }
+                    {
+                        addingNewItem? getPaddingData() : <></> 
+                    }
+                    {
                         displayedPage == (Math.ceil(itemsList.length / numberOfRowsPerPage) - 1)? getPaddingData() : <></>
                     }
 

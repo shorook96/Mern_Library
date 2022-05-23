@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import getItemAttributes from '../../../itemAttributes';
 import CRUD_services from '../../../services/CRUD_services';
+import uploadImage from '../../../services/fileUpload'
+
 
 const subPanelName = 'author'
 
@@ -35,10 +37,11 @@ export default function AuthorNewItem({index, closeAddingNewItemMode, reloadList
     const updateNewData = (attributeKey, attributeValue) => {
         const temp = {...newItemData};
         temp[attributeKey] = attributeValue;
-        console.log(attributeKey);
-        console.log(attributeValue);
-        console.log(temp);
         setNewItemData(temp);
+    }
+
+    const handleFileUpload = (url) => {
+        updateNewData('photo', url);
     }
 
     return (
@@ -49,7 +52,7 @@ export default function AuthorNewItem({index, closeAddingNewItemMode, reloadList
             <td key={'lastname'} className='lastnameCell'><input type="text" value={newItemData.lastname} onChange={e => updateNewData('lastname', e.target.value)} onKeyDown={(e) => {if(e.key === "Enter") addNewData(newItemData)}}/></td>
             <td key={'DOB'} className='DOBCell'><input type="date" value={newItemData.DOB} onChange={e => updateNewData('DOB', e.target.value)} onKeyDown={(e) => {if(e.key === "Enter") addNewData(newItemData)}}/></td>
             <td key={'bio'} className='bioCell'><input type="text" value={newItemData.bio} onChange={e => updateNewData('bio', e.target.value)} onKeyDown={(e) => {if(e.key === "Enter") addNewData(newItemData)}}/></td>
-            <td key={'photo'} className='photoCell'><input type="text" value={newItemData.photo} onChange={e => updateNewData('photo', e.target.value)} onKeyDown={(e) => {if(e.key === "Enter") addNewData(newItemData)}}/></td>
+            <td key={'photo'} className='photoCell'><input type="file" value=""  onChange={(e) => {uploadImage(e.target.files[0], handleFileUpload)}} /></td>
             <td className='actionButtonCell' style={{textAlign:'center'}}> 
                 <img className="hoverableImage" src="https://cdn-icons-png.flaticon.com/512/5219/5219192.png" alt="submit" width={20} onClick={() => {addNewData(newItemData)}}/>
             </td>

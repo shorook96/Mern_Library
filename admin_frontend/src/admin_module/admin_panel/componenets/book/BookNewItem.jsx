@@ -4,6 +4,7 @@ import getItemAttributes from '../../../itemAttributes';
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import uploadImage from '../../../services/fileUpload'
 
 const subPanelName = 'book'
 
@@ -37,6 +38,10 @@ export default function BookNewItem({index, reloadList, closeAddingNewItemMode})
         const temp = {...newItemData};
         temp[attributeKey] = attributeValue;
         setNewItemData(temp);
+    }
+
+    const handleFileUpload = (url) => {
+        updateNewData('photo', url);
     }
 
 
@@ -128,7 +133,7 @@ export default function BookNewItem({index, reloadList, closeAddingNewItemMode})
                     
                     <td key={'bookName'} className=''><input type="text" value={newItemData.bookName} onChange={e => updateNewData('bookName', e.target.value)} onKeyDown={(e) => {if(e.key === "Enter") addNewData(newItemData)}}/></td>
                     <td key={'brief'} className=''><input type="text" value={newItemData.brief} onChange={e => updateNewData('brief', e.target.value)} onKeyDown={(e) => {if(e.key === "Enter") addNewData(newItemData)}}/></td>
-                    <td key={'photo'} className=''><input type="text" value={newItemData.photo} onChange={e => updateNewData('photo', e.target.value)} onKeyDown={(e) => {if(e.key === "Enter") addNewData(newItemData)}}/></td>
+                    <td key={'photo'} className=''><input type="file" value=""  onChange={(e) => {uploadImage(e.target.files[0], handleFileUpload)}} /></td>
                     <td key={'category'} className=''>{getCategoryDropDownList()}</td>
                     <td key={'author'} className=''>{getAuthorDropDownList()}</td>
                     
