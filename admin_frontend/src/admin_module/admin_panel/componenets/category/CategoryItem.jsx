@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import CRUD_services from '../../../services/CRUD_services';
 import getItemAttributes from '../../../itemAttributes';
+import { categorySchema } from '../../../Joi_validation/category_validation';
 
 
 const subPanelName = 'category'
@@ -41,7 +42,14 @@ export default function CategoryItem({data: categoryData, editedItemID, index, c
             if(attribute.key !== '_id'){
                 newItemDataWithoutId[attribute.key] = newItemData[attribute.key];
             }
-        })
+        });
+
+        try{
+            await categorySchema.validateAsync(newItemDataWithoutId)
+        }catch(validationError){
+            alert(`Error! \n${validationError.message}`);
+            return;
+        }
 
         const itemID = newItemData._id;
         try{

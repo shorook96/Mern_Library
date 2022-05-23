@@ -1,6 +1,7 @@
 
 import { useState} from 'react';
 import getItemAttributes from '../../../itemAttributes';
+import { categorySchema } from '../../../Joi_validation/category_validation';
 import CRUD_services from '../../../services/CRUD_services';
 
 const subPanelName = 'category'
@@ -19,7 +20,13 @@ export default function CategoryNewItem({index, closeAddingNewItemMode, reloadLi
             }
         });
 
-        console.log(newItemDataWithoutId);
+        try{
+            await categorySchema.validateAsync(newItemDataWithoutId)
+        }catch(validationError){
+            alert(`Error! \n${validationError.message}`);
+            return;
+        }
+
         try{
             const res = await CRUD_services.createCategory(newItemDataWithoutId);
             if(res.status === 200){
