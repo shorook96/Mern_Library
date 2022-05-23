@@ -15,7 +15,7 @@ function AverageRating({ currentlyRating }) {
             />
             <FaStar
               size={22}
-              color={ratingValue <= currentlyRating ? '#ffc107' : '#e4e5e9'}
+              color={ratingValue <= currentlyRating ? '#ffc107' : '#ccccb3'}
             />
           </label>
         );

@@ -44,7 +44,9 @@ const MyBookItemComponent = ({ data }) => {
             className="custom-card-img"
           />
           <div className="info">
+            
             <h3>
+              <h4>{data.book.bookName}</h4>
               <AverageRating
                 currentlyRating={Math.floor(
                   data.book.rating.totalRate / data.book.rating.numberOfRates

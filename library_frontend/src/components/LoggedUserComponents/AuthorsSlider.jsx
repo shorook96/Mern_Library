@@ -45,8 +45,8 @@ const AuthorsSlider = () => {
           title="Authors"
         />
       ) : (
-        // <h1>Data</h1>
-        <h1>loading...</h1>
+        <h1 className='noBooks' style={{fontFamily:"Brush Script MT, Brush Script Std, cursive"}}>No Authors...</h1>
+        
       )}
     </>
   );

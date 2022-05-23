@@ -16,7 +16,7 @@ const AddReview = (data) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      // "Authorization": new Cookies().get('token'),
+      
     },
   })
     .then((response) => response.json())
@@ -44,8 +44,9 @@ const GetBooks = (data) => {
 
 export default function Author() {
   const { id } = useParams();
+  
 
-  console.log(id);
+
 
   const [AuthorsInfo, setAuthorsInfo] = useState({
     AuthorID: id,
@@ -60,19 +61,14 @@ export default function Author() {
   });
   var books = [];
   const [BooksInfo, setBooksInfo] = useState({
-    // BookID:' ',
-    // BookName: '',
-    // photo: '',
-    // totalrating:' ' ,
-    // numberrating: ' '
+    
     books,
   });
   console.log(books);
 
   useEffect(() => {
     GetAuthor(AuthorsInfo.AuthorID).then((data) => {
-      console.log(',.,.');
-      console.log('zzzzzzzzz  ', data);
+      
 
       setAuthorsInfo({
         AuthorID: data._id,
@@ -85,8 +81,9 @@ export default function Author() {
 
         photo: data.photo,
       });
+      
     });
-  }, [id]);
+  }, []);
 
   useEffect(() => {
     GetBooks(AuthorsInfo.AuthorID).then((booksdata) => {
@@ -94,27 +91,18 @@ export default function Author() {
         books: booksdata,
       });
 
-      //  setBooksInfo({
-      //   BookID:booksdata._id,
-      //   BookName: booksdata.bookName,
-      //   photo:booksdata.photo,
-      //   totalrating:booksdata.rating.totalRate ,
-      //   numberrating: booksdata.rating.numberOfRates
-
-      // });
+      
     });
+    
   }, []);
 
-  console.log('bbbbb  ', AuthorsInfo);
+  
   var listt = BooksInfo.books.map((li) => {
     return (
       <div class="booksofauthor">
         <img class=" bookimg" src={li.photo} width="70px" height="70px"></img>
 
-        {/* <div class="selectandrating">
-        <div><Select/></div>
-    <div><StarRating/></div>
-    </div> */}
+       
         <div class="rating">
           <h6>{li.bookName}</h6>
           <ReactStars

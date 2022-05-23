@@ -54,7 +54,7 @@ function Rating({ bookId, currentlyRating }) {
             />
             <FaStar
               size={22}
-              color={ratingValue <= (hover || rate) ? '#ffc107' : '#e4e5e9'}
+              color={ratingValue <= (hover || rate) ? '#ffc107' : '#ccccb3'}
               onMouseEnter={() => setHover(ratingValue)}
               onMouseLeave={() => setHover(null)}
             />

@@ -46,9 +46,12 @@ const HomeAuthorsComponent = () => {
                     className="w-100 custom-card-img"
                     src={data[0].author.photo}
                     alt="First slide"
+                    width={500}
+                    height={300}
+
                   />
                   <Carousel.Caption className="info mb-3">
-                    <h3>{`${data[2].author.firstname} ${data[2].author.firstname}`}</h3>
+                    <h3>{`${data[0].author.firstname} ${data[0].author.lastname}`}</h3>
                   </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item interval={500} className="ui-card">
@@ -56,9 +59,11 @@ const HomeAuthorsComponent = () => {
                     className=" w-100 custom-card-img"
                     src={data[1].author.photo}
                     alt="Second slide"
+                    width={500}
+                    height={300}
                   />
                   <Carousel.Caption className="info mb-3">
-                    <h3>{`${data[2].author.firstname} ${data[2].author.firstname}`}</h3>
+                    <h3>{`${data[1].author.firstname} ${data[1].author.lastname}`}</h3>
                   </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item className="ui-card">
@@ -66,45 +71,15 @@ const HomeAuthorsComponent = () => {
                     className=" w-100 custom-card-img "
                     src={data[2].author.photo}
                     alt="Third slide"
+                    width={500}
+                    height={300}
                   />
                   <Carousel.Caption className="info mb-3">
-                    <h3>{`${data[2].author.firstname} ${data[2].author.firstname}`}</h3>
+                    <h3>{`${data[2].author.firstname} ${data[2].author.lastname}`}</h3>
                   </Carousel.Caption>
                 </Carousel.Item>
               </Carousel>
-              {/* <Container className="text-center authors-conten p-1">
-                <Row>
-                  <Col sm={3} className="hide-column"></Col>
-
-                  <Col sm={9} className="p-3">
-                    <AuthorHomePart isImgRight={true} author={data[0].author} />
-                  </Col>
-                </Row>
-                <Row>
-                  <Col sm={9} className="p-3">
-                    <AuthorHomePart
-                      isImgRight={false}
-                      author={data[0].author}
-                    />
-                  </Col>
-                  <Col sm={3} className="hide-column"></Col>
-                </Row>
-                <Row>
-                  <Col sm={3} className="hide-column"></Col>
-                  <Col sm={9} className="p-3">
-                    <AuthorHomePart isImgRight={true} author={data[0].author} />
-                  </Col>
-                </Row>
-                <Row>
-                  <Col sm={9} className="p-3">
-                    <AuthorHomePart
-                      isImgRight={false}
-                      author={data[0].author}
-                    />
-                  </Col>
-                  <Col sm={3} className="hide-column"></Col>
-                </Row>
-              </Container> */}
+              
             </Col>
           </Row>
         </Container>

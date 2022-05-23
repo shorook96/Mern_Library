@@ -3,7 +3,7 @@ const express = require('express');
 const userRouter = express.Router();
 const bcrypt = require('bcrypt');
 const path = require('path');
-const { customError } = require('../../utils/customError');
+const  customError  = require('../../utils/customError');
 const UserModel = require('./userModel');
 const BookModel = require('../bookModel');
 const AuthorModel = require('../authorModel');
@@ -27,13 +27,12 @@ userRouter.post('/signup', async (req, res, next) => {
   try {
     const checkUserExisted = await UserModel.findOne({ email });
     if (checkUserExisted) {
+      console.log("zahraaaaaa")
       const error = customError(
         410,
         'User Already Exist ',
         'User Already Exist'
       );
-      // throw error;
-
       return next(error);
     }
     const saltRounds = 12;

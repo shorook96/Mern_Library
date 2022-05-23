@@ -29,7 +29,6 @@ const BookItemComponent = ({ data }) => {
       )
       .then((response) => {
         console.log(response);
-        // const newUser = response.data.userInfo;
         const books = user.userInfo.books.push(addedBook);
         const newuser = { ...user, books };
 

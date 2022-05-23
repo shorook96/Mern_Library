@@ -2,8 +2,6 @@ import { React, useState, useEffect } from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
 import axios from 'axios';
 import '../App.css';
-
-import book6 from '../assets/images/7.png';
 import shelf from '../assets/images/shelf.png';
 
 export default function HomeStartImages() {
@@ -12,13 +10,13 @@ export default function HomeStartImages() {
     axios
       .get('http://localhost:5000/topRatedbooks', {})
       .then((response) => {
-        // console.log(response)
+        
         console.log(response.data);
 
         setData(response.data);
       })
       .catch((error) => {
-        console.log('errrrrrrrrrrrrrrrrrrrrrrr ' + error);
+        
       });
   }, []);
   return (
@@ -34,7 +32,7 @@ export default function HomeStartImages() {
                     alt="img1"
                     height={200}
                     width={200}
-                    className="img-fluid"
+                    className="img-fluid-custom"
                   />
                 </Col>
                 <Col sm={12} md={4} className="text-center">
@@ -43,7 +41,7 @@ export default function HomeStartImages() {
                     alt="img2"
                     height={200}
                     width={200}
-                    className="img-fluid"
+                    className="img-fluid-custom"
                   />
                 </Col>
                 <Col sm={12} md={4} className="text-center">
@@ -52,7 +50,7 @@ export default function HomeStartImages() {
                     height={200}
                     width={200}
                     alt="img3"
-                    className="img-fluid"
+                    className="img-fluid-custom"
                   />
                 </Col>
               </Row>
@@ -62,6 +60,7 @@ export default function HomeStartImages() {
                     src={shelf}
                     alt="img4"
                     className="img-fluid align-text-top"
+                    
                   />
                 </Col>
               </Row>
@@ -72,7 +71,7 @@ export default function HomeStartImages() {
                     height={200}
                     width={200}
                     alt="img4"
-                    className="img-fluid"
+                    className="img-fluid-custom"
                   />
                 </Col>
                 <Col sm={12} md={4} className=" text-center">
@@ -81,16 +80,16 @@ export default function HomeStartImages() {
                     height={200}
                     width={200}
                     alt="img5"
-                    className="img-fluid"
+                    className="img-fluid-custom"
                   />
                 </Col>
                 <Col sm={12} md={4} className=" text-center">
                   <img
-                    src={book6}
+                    src={data[5].photo}
                     height={200}
                     width={200}
                     alt="img6"
-                    className="img-fluid"
+                    className="img-fluid-custom"
                   />
                 </Col>
               </Row>
@@ -100,6 +99,7 @@ export default function HomeStartImages() {
                     src={shelf}
                     alt="img4"
                     className="img-fluid align-text-top"
+                    
                   />
                 </Col>
               </Row>
