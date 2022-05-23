@@ -5,6 +5,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import uploadImage from '../../../services/fileUpload'
+import { bookSchema } from '../../../Joi_validation/book_validation';
 
 const subPanelName = 'book'
 
@@ -109,7 +110,15 @@ export default function BookNewItem({index, reloadList, closeAddingNewItemMode})
                 ///Ignore the key
                 newItemDataWithoutId[attribute.key] = newItemData[attribute.key];
             }
-        })
+        });
+
+        try{
+            await bookSchema.validateAsync(newItemDataWithoutId)
+        }catch(validationError){
+            alert(`Error! \n${validationError.message}`);
+            return;
+        }
+
         try{
             const res = await CRUD_services.createBook(newItemDataWithoutId);
             if(res.status === 200){

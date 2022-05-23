@@ -37,9 +37,6 @@ export default function ItemsPanel({activeSubPanel}){
         closeAddingNewItemMode();
         closeEditMode();
         reloadList();
-        if(activeSubPanel === 'book'){
-
-        }
     }, [activeSubPanel])
 
 
@@ -166,7 +163,10 @@ export default function ItemsPanel({activeSubPanel}){
 
     const getPaddingData = () => {
         let paddingArray = [];
-        const numberOfRowsInLastPage = itemsList.length % numberOfRowsPerPage;
+        let numberOfRowsInLastPage = itemsList.length % numberOfRowsPerPage;
+        if(addingNewItem){
+            numberOfRowsInLastPage = 1;
+        }
         const numberOfRowsToPutPadding = (numberOfRowsPerPage - numberOfRowsInLastPage) % numberOfRowsPerPage;
         for(let i = 0; i < numberOfRowsToPutPadding; i++){
             paddingArray.push(<tr key={i} className='dummyRow'><th className='dummyRow'>s</th></tr>);

@@ -136,6 +136,6 @@ const getAuthors = () => {
     return fetch(hostname + '/authors').then(res => res.json());
 }
 
+const CRUD_services = {getCategories, getAuthors, createCategory, deleteCategory, updateCategory, createAuthor, deleteAuthor, updateAuthor, createBook, deleteBook, updateBook};
 
-export default {getCategories, getAuthors, createCategory, deleteCategory, updateCategory, createAuthor, deleteAuthor, updateAuthor, createBook, deleteBook, updateBook};
-
+export default CRUD_services;
