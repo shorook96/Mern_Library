@@ -26,7 +26,7 @@ export default function CategoryItem({data: categoryData, editedItemID, index, c
         }
 
         const res = await CRUD_services.deleteCategory(itemID);
-        if(res.status == 200){
+        if(res.status === 200){
             alert(`Deleted Item with id = ${itemID}`);
         }else{
             alert(res.data.message);
@@ -101,7 +101,7 @@ export default function CategoryItem({data: categoryData, editedItemID, index, c
             )
         }else{
             return(
-                <tr key={categoryData._id} className={index % 2 == 1 ? "table-secondary" : ""} onDoubleClick={handleEditAction}>
+                <tr key={categoryData._id} className={index % 2 === 1 ? "table-secondary" : ""} onDoubleClick={handleEditAction}>
                     <td>{index + 1}</td>
                     <td>{categoryData._id}</td>
                     <td>{categoryData.categoryName}</td>

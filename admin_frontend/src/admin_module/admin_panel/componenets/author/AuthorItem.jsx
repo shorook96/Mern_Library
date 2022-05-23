@@ -28,7 +28,7 @@ export default function AuthorItem({data, editedItemID, index, closeEditMode, ed
         }
 
         const res = await CRUD_services.deleteAuthor(itemID);
-        if(res.status == 200){
+        if(res.status === 200){
             alert(`Deleted Item with id = ${itemID}`);
         }else{
             alert(res.data.message);
@@ -108,7 +108,7 @@ export default function AuthorItem({data, editedItemID, index, closeEditMode, ed
             )
         }else{
             return(
-                <tr key={data._id} className={index % 2 == 1 ? "table-secondary" : ""} onDoubleClick={handleEditAction}>
+                <tr key={data._id} className={index % 2 === 1 ? "table-secondary" : ""} onDoubleClick={handleEditAction}>
                     <td>{index + 1}</td>
                     {
                         getItemAttributes(subPanelName).map((attribute) => <td key={attribute.key} className='itemCell'>{data[attribute.key]}</td>)

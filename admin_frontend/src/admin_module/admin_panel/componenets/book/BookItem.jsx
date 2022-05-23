@@ -175,7 +175,7 @@ export default function BookItem({data, editedItemID, index, closeEditMode, edit
             )
         }else{
             return(
-                <tr key={data._id} className={index % 2 == 1 ? "table-secondary" : ""} onDoubleClick={handleEditAction}>
+                <tr key={data._id} className={index % 2 === 1 ? "table-secondary" : ""} onDoubleClick={handleEditAction}>
                     <td>{index + 1}</td>
                     {
                         getItemAttributes(subPanelName).map((attribute) => <td key={attribute.key} className='itemCell'>{data[attribute.key]}</td>)

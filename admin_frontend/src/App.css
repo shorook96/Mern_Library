@@ -40,6 +40,7 @@
 .itemsTable{
   table-layout: auto;
   overflow: hidden;
+  min-height: 550px;
 }
 
 .firstnameCell{

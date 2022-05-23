@@ -39,6 +39,9 @@ export default function ItemsPanel({activeSubPanel}){
         reloadList();
     }, [activeSubPanel])
 
+    useEffect(() => {
+        closeEditMode();
+    },[addingNewItem])
 
     const enterAddingMode = () => {
         setAddingNewItem(true);
@@ -94,6 +97,8 @@ export default function ItemsPanel({activeSubPanel}){
                         reloadList = {reloadList}                    
                     />)
                 break;
+            default:
+                break;
 
         }
         return ret;
@@ -141,6 +146,8 @@ export default function ItemsPanel({activeSubPanel}){
                     />
                 );
                 break;
+            default:
+                break;
 
         }
         return ret;
@@ -165,7 +172,7 @@ export default function ItemsPanel({activeSubPanel}){
         let paddingArray = [];
         let numberOfRowsInLastPage = itemsList.length % numberOfRowsPerPage;
         if(addingNewItem){
-            numberOfRowsInLastPage = 1;
+            numberOfRowsInLastPage = 10;
         }
         const numberOfRowsToPutPadding = (numberOfRowsPerPage - numberOfRowsInLastPage) % numberOfRowsPerPage;
         for(let i = 0; i < numberOfRowsToPutPadding; i++){
@@ -192,12 +199,7 @@ export default function ItemsPanel({activeSubPanel}){
                     {
                         getTableBody()
                     }
-                    {
-                        addingNewItem? getPaddingData() : <></> 
-                    }
-                    {
-                        addingNewItem? getPaddingData() : <></> 
-                    }
+
                     {
                         displayedPage == (Math.ceil(itemsList.length / numberOfRowsPerPage) - 1)? getPaddingData() : <></>
                     }
