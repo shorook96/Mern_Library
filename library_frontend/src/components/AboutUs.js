@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import leaderphoto from '../assets/TeamPhotos/leader.jpeg';
+
 const AboutUs = () => {
   return (
     <>
@@ -37,10 +38,26 @@ const AboutUs = () => {
             </div>
           </div>
           <div className="box">
-            <img src={leaderphoto} className="owner-card-img" />
+            <img src='../assets/TeamPhotos/shorook.jpg' className="owner-card-img" />
             <div className="owner-back">
-              <h5>Mina Kameel Nashed</h5>
-              {/*<h5>Software Developer</h5> */}
+              <h5>Shorook Abdelbaqi</h5>
+              <h5>Software Developer</h5>
+              <div className="links-container ">
+                <a
+                  href="https://github.com/shorook96"
+                  target="_blank"
+                  className="owner-link"
+                >
+                  <i class="fa-brands fa-github"></i>
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/shorook-abdelbaqi/"
+                  target="_blank"
+                  className="owner-link "
+                >
+                  <i class="fa-brands fa-linkedin"></i>
+                </a>
+              </div>
             </div>
           </div>
           <div className="box">
