@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Container, Image, Row } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import leaderphoto from '../assets/TeamPhotos/leader.jpeg';
 const AboutUs = () => {
   return (

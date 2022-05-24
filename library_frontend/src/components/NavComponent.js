@@ -40,18 +40,21 @@ const NavComponent = () => {
           <LinkContainer to="" className="mb-2">
             <Navbar.Brand>
               <Image
-                width={70}
+                width={50}
                 height={40}
                 className="App-logo "
                 roundedCircle
                 src={booklogo}
               />
-              <Image
+              {/* <Image
                 width={100}
                 height={20}
                 className="m-2"
                 src={goodreadslogo}
-              />
+              /> */}
+              <span className="goodreadsFooter goodreadsNav ml-1">
+                goodReads
+              </span>
             </Navbar.Brand>
           </LinkContainer>
           <Navbar.Collapse id="basic-navbar-nav">

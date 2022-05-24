@@ -25,7 +25,6 @@ import CategoryBooksSlider from './components/LoggedUserComponents/CategoryBooks
 import AuthorsBooksComponent from './components/LoggedUserComponents/AuthorBooksComponent';
 import AboutUs from './components/AboutUs';
 
-
 function App() {
   const { user } = UseAuth();
   const [showLogIn, setLogInShow] = useState(true);
@@ -98,7 +97,7 @@ function App() {
             }
           />
           <Route
-            path="/myprofile"
+            path="/user/myprofile"
             element={
               <CheckAuth>
                 <UserProfile />
@@ -177,7 +176,7 @@ function App() {
           />
         </Routes>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </React.Fragment>
   );
 }

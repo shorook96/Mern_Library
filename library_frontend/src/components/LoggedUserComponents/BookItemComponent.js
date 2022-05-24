@@ -1,18 +1,13 @@
 import React from 'react';
 import { Button, Card } from 'react-bootstrap';
-import { useNavigate, UserLocation } from 'react-router-dom';
 import axios from 'axios';
 import { UseAuth } from '../Helpers/Auth';
 import { Link } from 'react-router-dom';
 import AverageRating from './AverageRating';
 
 const BookItemComponent = ({ data }) => {
-  const navigate = useNavigate();
   const { user, login } = UseAuth();
   const book = user.userInfo.books.find((element) => element.book === data._id);
-  const goToDetails = () => {
-    navigate('/books/:bookid', { state: { book: data } });
-  };
 
   const addToMyBooks = () => {
     const addedBook = { book: data._id, state: 'Want To Read' };

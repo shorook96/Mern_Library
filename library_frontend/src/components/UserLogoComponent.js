@@ -8,8 +8,13 @@ const UserLogoComponent = () => {
 
   return (
     <div className="d-flex m-2">
-      <Link to="/myprofile">
-        <Image roundedCircle src={user.userInfo.image} width={50} height={50} />
+      <Link to="/user/myprofile">
+        <Image
+          roundedCircle
+          src={user.userInfo.image || userlogo}
+          width={50}
+          height={50}
+        />
       </Link>
       <button
         className="btn btn-outline-success m-2"

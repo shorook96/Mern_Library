@@ -28,9 +28,9 @@ const HomeAuthorsComponent = () => {
                 </p>
                 <Container className="text-center">
                   <p className="book-header-desc">
-                    If you want the best of the best, these six star books won’t
-                    disappoint . Here are 6 of all-time favorite books to our
-                    reader to read.
+                    If you want the best of the best, these three star authors
+                    won’t disappoint . Here are 3 of all-time favorite authors
+                    to our reader to pick books of theirs to read.
                   </p>
                 </Container>
               </div>
@@ -48,7 +48,6 @@ const HomeAuthorsComponent = () => {
                     alt="First slide"
                     width={500}
                     height={300}
-
                   />
                   <Carousel.Caption className="info mb-3">
                     <h3>{`${data[0].author.firstname} ${data[0].author.lastname}`}</h3>
@@ -79,7 +78,6 @@ const HomeAuthorsComponent = () => {
                   </Carousel.Caption>
                 </Carousel.Item>
               </Carousel>
-              
             </Col>
           </Row>
         </Container>

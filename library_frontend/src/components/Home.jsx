@@ -28,7 +28,7 @@ export default function HomeComponent() {
         </div>
       </div>
       <div className="mt-5">
-        <Container className='mb-5'>
+        <Container className="mb-5">
           <Container className='mt-5"'>
             <HomeCategoriesComponent />
           </Container>
@@ -46,10 +46,7 @@ export default function HomeComponent() {
             <HomeAuthorsComponent />
           </Container>
         </Container>
-        <Footer/>
       </div>
     </>
-
-   
   );
 }

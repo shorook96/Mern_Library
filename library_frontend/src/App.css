@@ -146,10 +146,9 @@
   font-size: larger;
   padding-top: 5%;
 }
-.img-fluid-custom{
-  max-width:100% ;
+.img-fluid-custom {
+  max-width: 100%;
 }
-
 
 /**************************SideBar****************************/
 
@@ -292,7 +291,6 @@
   margin: auto;
   margin-top: -15%;
   margin-left: 40%;
-  
 }
 .file-input {
   position: absolute;
@@ -394,7 +392,6 @@ input[type='radio'] {
 .custom-title {
   color: rgb(229, 149, 20);
   font-size: 59px;
-
 }
 .rate-style {
   font-size: small;
@@ -403,30 +400,17 @@ input[type='radio'] {
   background-color: #efefef;
 }
 /******************************* modal ****************************/
-.backGroundModalSignUp{
-  background:
-       
-        linear-gradient(
-          rgba(0, 0, 0, 0.5), 
-          rgba(0, 0, 0, 0.5)
-        ),
-       
-        url('./assets/images/hercover.jpg');
+.backGroundModalSignUp {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('./assets/images/hercover.jpg');
   background-size: 100% 100%;
   color: #dde3f7;
-  }
+}
 
+.backGroundModalLogin {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('./assets/images/hercover.jpg');
 
-.backGroundModalLogin{
-
-  background:
-  linear-gradient(
-          rgba(0, 0, 0, 0.5), 
-          rgba(0, 0, 0, 0.5)
-        ),
-       
-        url('./assets/images/hercover.jpg');
-  
   background-size: 100% 100%;
   color: #dde3f7;
 }
@@ -446,28 +430,26 @@ input[type='radio'] {
   color: white;
   text-shadow: 0 0 0.05em #fff, 0 0 0.2em #ff8000, 0 0 0.3em #ff8000;
   transform: rotate(-5deg);
-
 }
 
-.submit{
+.submit {
   cursor: pointer;
   background-color: #114b27fd;
   color: white;
 }
 .submit:hover {
-  
   background-color: rgb(189, 135, 21);
   border-color: #505151;
 }
 /********************************** Loading **********************/
-.noBooks{
+.noBooks {
   color: rgb(229, 149, 20);
   font-size: 100px;
   margin-top: 15%;
   margin-left: 30%;
 }
 /**************************** footer *********************/
-.goodreadsFooter{
+.goodreadsFooter {
   font-family: 'Mr Dafoe';
   margin: 0;
   font-size: 3em;
@@ -477,4 +459,79 @@ input[type='radio'] {
   /* transform: rotate(-5deg); */
   display: inline-block;
   margin-right: 1em;
+}
+.goodreadsNav {
+  font-size: 1em;
+  font-weight: bolder;
+  margin-top: 0em;
+}
+/*******************************************************/
+/****************************************************/
+
+.custom-owner-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  flex-wrap: wrap;
+  padding: auto;
+}
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 1em;
+}
+.owner-card-img {
+  margin-top: -1em;
+  height: 250px;
+  width: 250px;
+  position: absolute;
+  z-index: 1;
+  box-shadow: 1px 1px 4px black;
+  border-radius: 3px;
+  transition: all 0.6s;
+  transform: translateY(0deg);
+}
+
+.owner-back {
+  position: relative;
+  height: 400px;
+  width: 400px;
+  padding: 29px 36px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 9px rgb(139, 135, 135);
+  box-sizing: border-box;
+  text-align: center;
+  transition: all 0.6s;
+}
+.box:hover .owner-back {
+  height: 480px;
+}
+.box:hover .owner-card-img {
+  transform: translateY(150deg);
+  margin-top: 5%;
+}
+@media only screen and (min-width: 320px) and (max-width: 930px) {
+  .box {
+    margin: 50px 0px;
+  }
+  .box:hover {
+    margin: 50px;
+  }
+  .box:hover img {
+    margin-top: 50%;
+    height: 240px;
+    /* width: 100px; */
+  }
+  .custom-owner-container {
+    height: 100%;
+  }
+}
+.owner-link {
+  font-size: 50px;
+  text-decoration: none;
+  color: #61dafb;
+  padding: 10px;
 }

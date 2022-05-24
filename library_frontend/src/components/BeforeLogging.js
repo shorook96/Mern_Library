@@ -13,20 +13,19 @@ const BeforeLogging = () => {
 
     setLogInShow(false);
   };
-  const handleLogInShow = () => setLogInShow(true);
 
   return (
     <>
       <div className="w-50 m-auto  ">
         <button
           onClick={handleSignUpShow}
-          className="btn btn-outline-warning btn-success btn-rounded  m-2  btn_logging"
+          className="text-white btn btn-outline-warning btn-success btn-rounded  m-2  btn_logging"
         >
           SignUp
         </button>
         <Link
           to="/login"
-          className="btn btn-outline-warning btn-success btn-rounded  m-2 btn_logging "
+          className="text-white  btn btn-outline-warning btn-success btn-rounded  m-2 btn_logging "
         >
           LogIn
         </Link>

@@ -27,9 +27,9 @@ const HomeCategoriesComponent = () => {
                 </p>
                 <Container className="text-center">
                   <p className="book-header-desc">
-                    If you want the best of the best, these six star books won’t
-                    disappoint . Here are 6 of all-time favorite books to our
-                    reader to read.
+                    If you want the best of the best, these 3 star categories
+                    won’t disappoint . Here are 3 of all-time favorite
+                    categories to our reader to pick books of theirs to read.
                   </p>
                 </Container>
               </div>
