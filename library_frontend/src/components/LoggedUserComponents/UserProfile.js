@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Col, Container, Image, Row } from 'react-bootstrap';
+import { Container, Image } from 'react-bootstrap';
 import userlogo from '../../assets/userimages/userlogo.png';
 import { UseAuth } from '../Helpers/Auth';
 

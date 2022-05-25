@@ -1,29 +1,30 @@
 import Footer from './components/Footer';
-import NavComponent from './components/NavComponent';
-import HomeComponent from './components/Home';
 import React, { useState } from 'react';
 import { UseAuth } from './components/Helpers/Auth';
+
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+
+import CheckAuth from './components/Helpers/CheckAuth';
+
+import AboutUs from './components/AboutUs';
+import NavComponent from './components/NavBarComponents/NavComponent';
+import LogIn from './components/NavBarComponents/LogIn';
+import HomeComponent from './components/HomeComponents/Home';
+import SideBar from './components/LoggedUserComponents/SideBar';
 import UserHome from './components/LoggedUserComponents/UserHome';
 import UserProfile from './components/LoggedUserComponents/UserProfile';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import BooksSlider from './components/LoggedUserComponents/Books/BooksSlider';
+import Author from './components/LoggedUserComponents/AuthorDetails/Author';
+import Book from './components/LoggedUserComponents/BookDetails/Book';
+import AllAuthors from './components/LoggedUserComponents/Authors/AllAuthors';
+import AllCategories from './components/LoggedUserComponents/CategoriesComponents/AllCategories';
+import CategoryBooksSlider from './components/LoggedUserComponents/CategoriesComponents/CategoryBooksSlider';
+import MyBookSlider from './components/LoggedUserComponents/MYBooksComponent/MyBookSlider';
+import MyReadBooks from './components/LoggedUserComponents/MYBooksComponent/MyReadBooks';
+import MyCurrentlyReadingBooks from './components/LoggedUserComponents/MYBooksComponent/MyCurrentlyReadingBooks';
+import MyWantToReadBooks from './components/LoggedUserComponents/MYBooksComponent/MyWantToReadBooks';
+import AuthorsBooksComponent from './components/LoggedUserComponents/Authors/AuthorBooksComponent';
 import PageNotFoundComponent from './components/PageNotFoundComponent';
-import BooksSlider from './components/LoggedUserComponents/BooksSlider';
-import CheckAuth from './components/Helpers/CheckAuth';
-import LogIn from './components/LogIn';
-import AllAuthors from './components/LoggedUserComponents/AllAuthors';
-import AllCategories from './components/LoggedUserComponents/AllCategories';
-import SideBar from './components/SideBar';
-import MyBookSlider from './components/LoggedUserComponents/MyBookSlider';
-
-import MyReadBooks from './components/LoggedUserComponents/MyReadBooks';
-import MyCurrentlyReadingBooks from './components/LoggedUserComponents/MyCurrentlyReadingBooks';
-import MyWantToReadBooks from './components/LoggedUserComponents/MyWantToReadBooks';
-
-import Author from './components/LoggedUserComponents/Author';
-import Book from './components/LoggedUserComponents/Book';
-import CategoryBooksSlider from './components/LoggedUserComponents/CategoryBooksSlider';
-import AuthorsBooksComponent from './components/LoggedUserComponents/AuthorBooksComponent';
-import AboutUs from './components/AboutUs';
 
 function App() {
   const { user } = UseAuth();

@@ -486,7 +486,7 @@ input[type='radio'] {
 .owner-card-img {
   margin-top: -1em;
   height: 250px;
-  width: 250px;
+  width: 20%;
   position: absolute;
   z-index: 1;
   box-shadow: 1px 1px 4px black;
@@ -498,7 +498,7 @@ input[type='radio'] {
 .owner-back {
   position: relative;
   height: 400px;
-  width: 400px;
+  width: 100%;
   padding: 29px 36px;
   border-radius: 5px;
   box-shadow: 2px 2px 9px rgb(139, 135, 135);
@@ -527,6 +527,10 @@ input[type='radio'] {
   }
   .custom-owner-container {
     height: 100%;
+  }
+  .owner-card-img {
+    width: 38%;
+    height: 270px;
   }
 }
 .owner-link {
