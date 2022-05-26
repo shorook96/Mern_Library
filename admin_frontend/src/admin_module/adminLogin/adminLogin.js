@@ -6,7 +6,7 @@ import "./adminLogin.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 //import './../../../App.css';
 import axios from 'axios';
-import {setAdminToken} from '../globalVariablesAndFunctions'
+import {setAdminToken, setActivationToken} from '../globalVariablesAndFunctions'
 
 
 
@@ -26,7 +26,7 @@ const validate = values => {
 }
 
 
-const AdminLogin = ({ logIn }) => {
+const AdminLogin = ({ logIn, setAccountActiveStatus }) => {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState(initialValues);
 
@@ -49,8 +49,14 @@ const AdminLogin = ({ logIn }) => {
       });
       console.log(res.data);
       if(res.status === 200){
-        const adminToken = res.data;
-        setAdminToken(adminToken);
+        const adminToken = res.data.token;
+        const isActive = res.data.isActive;
+        setAccountActiveStatus(isActive);
+        if(isActive){
+          setAdminToken(adminToken);
+        }else{
+          setActivationToken(adminToken);
+        }
         resetForm();
         logIn();
       }else{

@@ -15,7 +15,12 @@ const itemAttributes = {
                         {key: 'brief', alias: 'Brief'},
                         {key: 'photo', alias: 'Photo'},
                         {key: 'category', alias: 'Category'},
-                        {key: 'author', alias: 'Author'}]
+                        {key: 'author', alias: 'Author'}],
+
+    admin: [            {key: '_id', alias: 'ID'},
+                        {key: 'email', alias: 'Email'},
+                        {key: 'username', alias: 'username'},
+                        {key: 'isActive', alias: 'isActive'}]
 }
 
 const getItemAttributes = (subPanelName) => {

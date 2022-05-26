@@ -12,6 +12,8 @@ import AuthorItem from './componenets/author/AuthorItem';
 import AuthorNewItem from './componenets/author/AuthorNewItem';
 import BookItem from './componenets/book/BookItem';
 import BookNewItem from './componenets/book/BookNewItem'
+import AdminItem from './componenets/admin/AdminItem'
+import AdminNewItem from './componenets/admin/AdminNewItem'
 
 
 export default function ItemsPanel({activeSubPanel}){
@@ -23,6 +25,7 @@ export default function ItemsPanel({activeSubPanel}){
 
     const reloadList = () => {
         getList(activeSubPanel).then( (list) => {
+            console.log(list);
             setItemsList(list);
         })
     }
@@ -97,6 +100,14 @@ export default function ItemsPanel({activeSubPanel}){
                         reloadList = {reloadList}                    
                     />)
                 break;
+            case 'admin':
+                ret =   (
+                    <AdminNewItem 
+                        index={0}
+                        closeAddingNewItemMode = {closeAddingNewItemMode}
+                        reloadList = {reloadList}                    
+                    />)
+                break;
             default:
                 break;
 
@@ -142,6 +153,16 @@ export default function ItemsPanel({activeSubPanel}){
                             editedItemID = {editedItemID}
                             closeEditMode = {closeEditMode}
                             editAction = {editAction}
+                            reloadList = {reloadList}
+                    />
+                );
+                break;
+            case 'admin':
+                ret = (
+                    <AdminItem 
+                            key={key}
+                            data={data}
+                            index={index}
                             reloadList = {reloadList}
                     />
                 );

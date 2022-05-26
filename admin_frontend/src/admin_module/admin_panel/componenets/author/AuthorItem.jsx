@@ -4,6 +4,7 @@ import getItemAttributes from '../../../itemAttributes';
 import uploadImage from '../../../services/fileUpload'
 import { authorSchema } from '../../../Joi_validation/author_validation';
 import { iconSrcs } from '../../../globalVariablesAndFunctions';
+import './authorStyle.css';
 
 
 
@@ -90,7 +91,6 @@ export default function AuthorItem({data, editedItemID, index, closeEditMode, ed
     const getRepresentation = () => {
         if(editedItemID === data._id){
             return(
-
                 <tr key={data._id} className="table-warning">
                     <td key={'index'} className='indexCell'>{index + 1}</td>
                     <td key={'id'} className='idCell'>{data._id}</td>
@@ -112,7 +112,7 @@ export default function AuthorItem({data, editedItemID, index, closeEditMode, ed
                 <tr key={data._id} className={index % 2 === 1 ? "table-secondary" : ""} onDoubleClick={handleEditAction}>
                     <td>{index + 1}</td>
                     {
-                        getItemAttributes(subPanelName).map((attribute) => <td key={attribute.key} className='itemCell'>{data[attribute.key]}</td>)
+                        getItemAttributes(subPanelName).map((attribute) => <td key={attribute.key} className={`author_${attribute.key}_Cell_Class`}>{data[attribute.key]}</td>)
                     }
                     <td key={'edit'} style={{textAlign:'center'}}> 
                         <img className="hoverableImage" src={iconSrcs.edit} alt="edit" width={20} onClick={handleEditAction}/>

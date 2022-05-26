@@ -3,6 +3,7 @@ export default function AdminNavBar({activeSubPanelID, changeTab, logOut}) {
         {tabID: 0, name: 'Categories'},
         {tabID: 1, name: 'Books'},
         {tabID: 2, name: 'Authors'},
+        {tabID: 3, name: 'Admins'}
     ];
     const activeTabClasses = 'nav-link active';
     const nonActiveTabClasses = 'nav-link';

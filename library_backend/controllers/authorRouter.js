@@ -10,7 +10,7 @@ const {
   authorJoiValidator_middleWare,
 } = require('../middle_wares/handling_author_middleware');
 
-// authorRouter.use(adminTokenValidatorMiddleware);
+authorRouter.use(adminTokenValidatorMiddleware);
 authorRouter.use(authorJoiValidator_middleWare);
 
 authorRouter.get('/', async (req, res, next) => {
@@ -48,6 +48,9 @@ authorRouter.get('/books/:id', async (req, res, next) => {
 
 authorRouter.post('/', async (req, res, next) => {
   try {
+    if(!req.isActive){
+      throw customError(404, 'FORBIDDEN', "Account is inactive, activate your account first");
+    }
     const { firstname, lastname, DOB, photo, bio } = req.body;
     await authorModel.create({ firstname, lastname, DOB, photo, bio });
     res.send({ succes: 'author added successfully' });
@@ -58,6 +61,9 @@ authorRouter.post('/', async (req, res, next) => {
 
 authorRouter.delete('/:id', async (req, res, next) => {
   try {
+    if(!req.isActive){
+      throw customError(404, 'FORBIDDEN', "Account is inactive, activate your account first");
+    }
     const id = req.params.id;
     authorModel.deleteOne(
       {
@@ -80,6 +86,9 @@ authorRouter.patch('/:id', async (req, res, next) => {
   let _id = req.params.id;
   const newAuthorData = req.body;
   try {
+    if(!req.isActive){
+      throw customError(404, 'FORBIDDEN', "Account is inactive, activate your account first");
+    }
     const exists = await authorModel.findById({ _id });
     if (!exists) {
       throw customError(400, 'NOT_FOUND', 'No such Author');

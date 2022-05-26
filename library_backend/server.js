@@ -5,6 +5,7 @@ const bookRouter = require('./controllers/bookRouter');
 const homeRouter = require('./controllers/HomeRouter');
 
 require('./db');
+const mailer = require('./utils/mailer');
 const BookModel = require('./models/bookModel');
 const categoryRouter = require('./controllers/categoryRouter');
 const {
@@ -47,6 +48,13 @@ app.use((error, req, res, next) => {
     console.log("enteredssss"+error.code)
     res.statusCode = 500;
     res.send({ message: 'something went wrong mina' });
+    mailer.sendEmail({
+      to: mailer.officialEmailCredentials.user,
+      subject: 'Good Reads | Emergency | Internal Server Error!',
+      text:     `URL: ${req.originalUrl}\n \n` 
+              + `Error message:\n \n`
+              + error.message   
+    })
     return next();
   }
   console.log(error.message);

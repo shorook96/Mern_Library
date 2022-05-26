@@ -9,7 +9,12 @@ const adminSchema = new mongoose.Schema({
   },
   username: 'string',
   email: 'string',
-  hashedPassword: 'string',
+  isActive: {
+    type: Boolean,
+    required: false,
+    default: true
+  },
+  hashedPassword: 'string'
 });
 
 const adminModel = mongoose.model('Admin', adminSchema);

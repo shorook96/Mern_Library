@@ -38,10 +38,12 @@
 }
 
 .itemsTable{
-  table-layout: auto;
+  table-layout: fixed;
   overflow: hidden;
   min-height: 550px;
 }
+
+
 
 .firstnameCell{
   width: 5%;
@@ -81,6 +83,18 @@
 .indexCell{
   width: 5%;
   overflow: hidden;
+}
+
+.ActivateAdminAccount{
+  margin-top: 16%;
+  width: 100%;
+}
+
+.activationForm{
+  background-color: #bbbbbb;
+  width: 20%;
+  border-radius: 10px;
+  padding: 2%;
 }
 
 

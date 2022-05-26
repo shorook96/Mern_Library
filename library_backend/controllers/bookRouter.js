@@ -17,7 +17,7 @@ const {
   references_middleware_validator,
 } = require('../middle_wares/handling_book_middleware');
 
-// bookRouter.use(adminTokenValidatorMiddleware);
+bookRouter.use(adminTokenValidatorMiddleware);
 bookRouter.use(bookJoiValidator_middleWare);
 bookRouter.use(references_middleware_validator);
 bookRouter.use(uniqueBookNameValidator);
@@ -77,6 +77,9 @@ bookRouter.get('/review/:id', async (req, res, next) => {
 
 bookRouter.delete('/:id', async (req, res, next) => {
   try {
+    if(!req.isActive){
+      throw customError(404, 'FORBIDDEN', "Account is inactive, activate your account first");
+    }
     const id = req.params.id;
     //await bookModel.deleteOne({_id: id});
     //res.send({success: 'OK'})
@@ -104,6 +107,9 @@ bookRouter.delete('/:id', async (req, res, next) => {
 bookRouter.post('/', async (req, res, next) => {
   const bookData = req.body;
   try {
+    if(!req.isActive){
+      throw customError(404, 'FORBIDDEN', "Account is inactive, activate your account first");
+    }
     const { bookName, rating, photo, category, author, brief } = bookData;
     await bookModel.create({ bookName, rating, photo, category, author, brief});
     res.send({ success: 'book created successfully' });
@@ -117,6 +123,9 @@ bookRouter.patch('/:id', async (req, res, next) => {
   let _id = req.params.id;
   const newBookData = req.body;
   try {
+    if(!req.isActive){
+      throw customError(404, 'FORBIDDEN', "Account is inactive, activate your account first");
+    }
     const exists = await bookModel.findById({ _id });
     if (!exists) {
       throw customError(400, 'NOT_FOUND', 'No such Book');

@@ -1,4 +1,5 @@
 const adminTokenKey = 'GoodReads_AdminToken';
+const activationTokenKey = 'GoodReads_ActivationToken';
 const numberOfRowsPerPage = 10;
 const hostname = 'http://localhost:5000';
 
@@ -9,6 +10,18 @@ const getAdminToken = () => {
 
 const setAdminToken = (token) => {
     sessionStorage.setItem(adminTokenKey, token)
+}
+
+const getActivationToken = () => {
+    return sessionStorage.getItem(activationTokenKey);
+}
+
+const setActivationToken = (token) => {
+    sessionStorage.setItem(activationTokenKey, token)
+}
+
+const removeActivationToken = (token) => {
+    sessionStorage.removeItem(activationTokenKey)
 }
 
 const removeAdminToken = () => {
@@ -30,4 +43,4 @@ const iconSrcs = {
     cancel: publicDirectorySrc + '/assets/icons/cancel.png'
 }
 
-module.exports = {adminTokenKey, numberOfRowsPerPage, getAdminToken, setAdminToken, removeAdminToken, hostname, iconSrcs};
+module.exports = {adminTokenKey, numberOfRowsPerPage, getAdminToken, setAdminToken, removeAdminToken, hostname, iconSrcs, getActivationToken, setActivationToken, removeActivationToken};

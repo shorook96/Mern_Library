@@ -6,14 +6,17 @@ const secretKey = "I am a secret key";
 
 const adminTokenValidatorMiddleware = async (req, res, next) => {
     //Apply on any method except for GET method
-    if(req.method == 'GET'){
+    if(req.method == 'GET' && req.originalUrl !== '/admin'){
         next();
         return;
     }
     const token = req.headers.token;
     try{
         const decoded = await jwtVerifyAsync(token, secretKey);
+        req.adminId = decoded.id;
         if(decoded.isAdmin){
+            req.isAdmin = true;
+            req.isActive = decoded.isActive;
             next();
         }else{
             throw customError(401, '401 Unauthorized', 'Not Authrized');

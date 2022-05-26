@@ -7,11 +7,12 @@ import ItemsPanel from './ItemsPanel';
 const adminSubPanelsIDs = {
     categories: 0,
     books: 1,
-    authors: 2
+    authors: 2,
+    admin: 3
 }
 
 
-const idToSubpanelName = ['category', 'book', 'author']
+const idToSubpanelName = ['category', 'book', 'author', 'admin']
 
 export default function ({logOut}){
     const [activeSubPanelID, setActiveSubPanelID] = useState(adminSubPanelsIDs.categories);

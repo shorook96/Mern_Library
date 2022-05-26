@@ -1,4 +1,4 @@
-import {getAdminToken, hostname} from '../globalVariablesAndFunctions'; 
+import {getActivationToken, getAdminToken, hostname} from '../globalVariablesAndFunctions'; 
 import axios from 'axios';
 
 const createCategory = async (category) => {
@@ -99,6 +99,7 @@ const deleteBook = async (itemID) => {
 }
 
 
+
 const createBook = async (book) => {
     const res = await axios({
         method: 'post',
@@ -112,6 +113,8 @@ const createBook = async (book) => {
 
     return res;
 }
+
+
 
 
 
@@ -136,6 +139,61 @@ const getAuthors = () => {
     return fetch(hostname + '/authors').then(res => res.json());
 }
 
-const CRUD_services = {getCategories, getAuthors, createCategory, deleteCategory, updateCategory, createAuthor, deleteAuthor, updateAuthor, createBook, deleteBook, updateBook};
+
+const createAdmin = async (admin) => {
+    const res = await axios({
+        method: 'post',
+        url: hostname + '/admin/',
+        responseType: 'json',
+        data: admin,
+        headers: {
+            token: getAdminToken()
+        }
+    });
+
+    return res;
+}
+
+const deleteAdmin = async (itemID) => {
+    let res;
+    try{
+        res = await axios({
+            method: 'delete',
+            url: hostname + '/admin/' + itemID,
+            responseType: 'json',
+            headers: {
+                token: getAdminToken()
+            }
+        });
+    }catch(error){
+        res = error.response;
+    }finally{
+        return res;
+    }
+
+}
+
+const avtivateAdminAccount = async (password) => {
+    let res;
+    try{
+        res = await axios({
+            method: 'post',
+            url: hostname + '/admin/activate',
+            responseType: 'json',
+            data: {
+                password
+            },
+            headers: {
+                token: getActivationToken()
+            }
+        });
+    }catch(error){
+        res = error.response;
+    }finally{
+        return res;
+    }
+}
+
+const CRUD_services = {getCategories, getAuthors, createCategory, deleteCategory, updateCategory, createAuthor, deleteAuthor, updateAuthor, createBook, deleteBook, updateBook, createAdmin, deleteAdmin, avtivateAdminAccount};
 
 export default CRUD_services;

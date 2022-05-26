@@ -11,7 +11,7 @@ const {
 } = require('./../middle_wares/adminTokenMiddleware_validator');
 const req = require('express/lib/request');
 
-// categoryRouter.use(adminTokenValidatorMiddleware);
+categoryRouter.use(adminTokenValidatorMiddleware);
 categoryRouter.use(categoryJoiValidator_middleWare);
 categoryRouter.use(uniqueCategoryNameValidator);
 
@@ -37,6 +37,9 @@ categoryRouter.get('/:id', async (req, res, next) => {
 
 categoryRouter.post('/', async (req, res, next) => {
   try {
+    if(!req.isActive){
+      throw customError(404, 'FORBIDDEN', "Account is inactive, activate your account first");
+    }
     const { categoryName } = req.body;
     await categoryModel.create({ categoryName });
     res.send({ succes: 'category created successfully' });
@@ -46,6 +49,9 @@ categoryRouter.post('/', async (req, res, next) => {
 });
 categoryRouter.patch('/:id', async (req, res, next) => {
   try {
+    if(!req.isActive){
+      throw customError(404, 'FORBIDDEN', "Account is inactive, activate your account first");
+    }
     const { id: _id } = req.params;
     const { categoryName } = req.body;
     await categoryModel.findByIdAndUpdate({ _id }, { $set: { categoryName } });
@@ -58,6 +64,9 @@ categoryRouter.patch('/:id', async (req, res, next) => {
 categoryRouter.delete('/:id', async (req, res, next) => {
   const { id: _id } = req.params;
   try {
+    if(!req.isActive){
+      throw customError(404, 'FORBIDDEN', "Account is inactive, activate your account first");
+    }
     await categoryModel.deleteOne({ _id });
     res.send({ success: 'Category deleted successfully' });
   } catch (error) {
