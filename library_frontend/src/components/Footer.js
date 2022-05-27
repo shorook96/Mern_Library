@@ -5,32 +5,30 @@ import {
   MDBIcon,
   MDBCol,
   MDBRow,
-  
 } from 'mdb-react-ui-kit';
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
     <MDBFooter className=" mt-2" color="white" bgColor="dark">
       <MDBContainer className="p-4">
-      
         <section className="mb-4">
-                <p className='goodreadsFooter' >goodReads</p>
+          <p className="goodreadsFooter">goodReads</p>
         </section>
-      
-        <hr/>
-        
+
+        <hr />
+
         <section className="mb-5">
           <MDBRow>
             <MDBCol lg="3" md="6" className="mb-4 mb-md-0">
-            
               <h5 className="text-uppercase">About</h5>
 
               <ul className="list-unstyled mb-0">
                 <li>
-                  <a href="#!" className="text-white">
+                  <Link to="/aboutus" className="text-white">
                     about us
-                  </a>
-                </li>  
+                  </Link>
+                </li>
               </ul>
             </MDBCol>
 
@@ -39,18 +37,16 @@ export default function Footer() {
 
               <ul className="list-unstyled mb-0">
                 <li>
-                  <a href="#!" className="text-white">
+                  <Link to="" className="text-white">
                     Terms
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </MDBCol>
           </MDBRow>
         </section>
 
-
-        <section className="" style={{marginLeft:'35%'}}>
-          
+        <section className="" style={{ marginLeft: '35%' }}>
           <a
             className="btn btn-outline-light btn-floating m-1"
             href="#!"
@@ -100,8 +96,6 @@ export default function Footer() {
           </a>
         </section>
       </MDBContainer>
-
-      
     </MDBFooter>
   );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Col, Container, Image, Row } from 'react-bootstrap';
+import { Container, Image } from 'react-bootstrap';
 import userlogo from '../../assets/userimages/userlogo.png';
 import { UseAuth } from '../Helpers/Auth';
 
@@ -12,7 +12,7 @@ const UserProfile = () => {
         <Container>
           <Image
             rounded
-            src={user.userInfo.image}
+            src={user.userInfo.image || userlogo}
             width={150}
             height={50}
             className="img-fluid mt-2"
@@ -36,12 +36,6 @@ const UserProfile = () => {
               <tr>
                 <th>Number of Books </th>
                 <th>{user.userInfo.books.length}</th>
-              </tr>
-              <tr>
-                <th colSpan={2}>
-                  {' '}
-                  <Button className="w-25">Edit</Button>
-                </th>
               </tr>
             </tbody>
           </table>
