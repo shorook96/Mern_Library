@@ -4,7 +4,6 @@ const numberOfRowsPerPage = 10;
 
 const hostname = window.env.hostname;
 
-
 const getAdminToken = () => {
     return sessionStorage.getItem(adminTokenKey);
 }

@@ -28,7 +28,7 @@ export default function AdminItem({data, index, reloadList}){
             }
             reloadList();
         }catch(error){
-            console.log(error);
+            alert(error.message)
         }
     }
 

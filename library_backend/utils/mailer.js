@@ -1,8 +1,9 @@
 const nodemailer = require('nodemailer');
 
+
 const officialEmailCredentials = {
-    user: 'goodreads.library.official@gmail.com',
-    pass: 'hpfnffpivzmlnmsp'
+    user: process.env.officialEmail,
+    pass: process.env.officialEmailPassword
 }
 
 

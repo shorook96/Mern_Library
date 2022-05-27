@@ -13,7 +13,6 @@ export default function AdminNewItem({index, closeAddingNewItemMode, reloadList}
     const addNewData = async (newItemData) => {
         const {email, username} = newItemData;
         const newItemDataWithoutId = {email, username};
-        console.log(newItemData);
         try{
             await newAdminSchema.validateAsync(newItemDataWithoutId)
         }catch(validationError){

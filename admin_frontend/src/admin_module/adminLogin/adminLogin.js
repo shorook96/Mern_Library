@@ -163,7 +163,7 @@ const AdminLogin = ({ logIn, setAccountActiveStatus }) => {
             <input type="text" name='email'
               value={values.email}
               onChange={handleChange}
-              placeholder='example@gmail.com'></input>
+              placeholder='email'></input>
             <input type="password" name="password" placeholder="Password" 
             value={values.password}
             onChange={handleChange}></input><br></br>

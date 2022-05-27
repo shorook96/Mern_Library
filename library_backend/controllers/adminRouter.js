@@ -6,12 +6,12 @@ const { jwtSignAsync } = require('./../utils/jwtAsync');
 const customError = require('../utils/customError');
 const { adminTokenValidatorMiddleware } = require('../middle_wares/adminTokenMiddleware_validator');
 const mailer = require('../utils/mailer');
-
-
+const {secretKey, saltRounds} = require('../utils/globalVariablesAndFunctions');
+const {adminFrontEndhostname} = require('../utils/globalVariablesAndFunctions');
+const {adminActivateMiddlewareValidator, adminCreateMiddlewareValidator} = require('../middle_wares/adminMiddleWareValidators')
 const adminRouter = Express.Router();
 
-const secretKey = 'I am a secret key';
-const saltRounds = 12;
+
 
 
 const getAdminByUsernameOrEmail = async (username, email) => {
@@ -62,12 +62,19 @@ adminRouter.post('/login', async (req, res, next) => {
 
 adminRouter.use('/', adminTokenValidatorMiddleware);
 
+adminRouter.use('/', adminCreateMiddlewareValidator);
 adminRouter.post('/', async (req, res, next) => {
   try{
     if(!req.isActive){
       throw customError(401, 'INACTIVE_ADMIN', 'Please activate your account first');
     }
     const body = req.body;
+    const {email, username} = body;
+    const adminsWithSameData = await adminModel.countDocuments({$or: [{email}, {username}]});
+    if(adminsWithSameData > 0){
+      //an admin with same username or password exists
+      throw customError(409, 'CONFLICT', 'An admin exists with smae email or password.');
+    }
     const tempPassword = passwordGenerator.generate({
       length: 10,
       numbers: true,
@@ -85,7 +92,7 @@ adminRouter.post('/', async (req, res, next) => {
     });
     const msg =     `Greetings, ${body.username}\n\n` 
                   + `Your admin account have been created but needs to be activated.\n`
-                  + `Use this password:"${tempPassword}" to activate it.\n\n`
+                  + `Use this password:"${tempPassword}" to activate it. go to ${adminFrontEndhostname} and login using this password then activate your account.\n\n`
                   + `PS: the password is without the double quets ""\n\n\n`
                   + 'Good Reads Team.\n';
   
@@ -103,6 +110,7 @@ adminRouter.post('/', async (req, res, next) => {
   }
 });
 
+adminRouter.use('/activate', adminActivateMiddlewareValidator);
 adminRouter.post('/activate', async (req, res, next) => {
   try{
     if(req.isActive){

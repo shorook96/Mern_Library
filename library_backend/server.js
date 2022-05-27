@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const adminRouter = require('./controllers/adminRouter');
 const authorRouter = require('./controllers/authorRouter');
@@ -45,6 +46,7 @@ app.use('/categories', categoryRouter);
 app.use((error, req, res, next) => {
   
   if (!error.code) {
+    console.log(error);
     console.log("enteredssss"+error.code)
     res.statusCode = 500;
     res.send({ message: 'something went wrong mina' });

@@ -1,7 +1,7 @@
 const {jwtVerifyAsync} = require('./../utils/jwtAsync');
 const customError = require('../utils/customError');
+const {secretKey} = require('../utils/globalVariablesAndFunctions');
 
-const secretKey = "I am a secret key";
 
 
 const adminTokenValidatorMiddleware = async (req, res, next) => {
