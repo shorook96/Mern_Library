@@ -44,11 +44,11 @@ export default function ActivateAdminAccount({logOut}){
                 <form className="d-grid gap-3 activationForm">
                     <div className="form-group p-2">
                         <label htmlFor="formGroupExampleInput">Password</label>
-                        <input type="text" value={password} className="form-control" id="formGroupExampleInput" placeholder="Password" onChange={(e) => handelPasswordChange(e.target.value)}/>
+                        <input type="password" value={password} className="form-control" id="formGroupExampleInput" placeholder="Password" onChange={(e) => handelPasswordChange(e.target.value)}/>
                     </div>
                     <div className="form-group p-2">
                         <label htmlFor="formGroupExampleInput2">Confirm Password</label>
-                        <input type="text" value={confirmPassword} className="form-control" id="formGroupExampleInput2" placeholder="Confirm Password" onChange={(e) => handelConfirmPasswordChange(e.target.value)}/>
+                        <input type="password" value={confirmPassword} className="form-control" id="formGroupExampleInput2" placeholder="Confirm Password" onChange={(e) => handelConfirmPasswordChange(e.target.value)}/>
                     </div>
                     <button type="submit" className="btn btn-primary p-2 m-2" onClick={(e) => {handleActivateBtnPress(e)}}>Activate</button>
                 </form>

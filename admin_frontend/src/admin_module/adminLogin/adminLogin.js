@@ -6,7 +6,8 @@ import "./adminLogin.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 //import './../../../App.css';
 import axios from 'axios';
-import {setAdminToken, setActivationToken} from '../globalVariablesAndFunctions'
+import {setAdminToken, setActivationToken, hostname} from '../globalVariablesAndFunctions';
+
 
 
 
@@ -38,16 +39,13 @@ const AdminLogin = ({ logIn, setAccountActiveStatus }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(values);
     try{
       const res = await axios({
           method: 'post',
-          url: 'http://localhost:5000/admin/login',
+          url: `${hostname}/admin/login`,
           responseType: 'json',
           data: values,
-         
       });
-      console.log(res.data);
       if(res.status === 200){
         const adminToken = res.data.token;
         const isActive = res.data.isActive;

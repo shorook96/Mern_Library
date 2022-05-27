@@ -1,7 +1,8 @@
 const adminTokenKey = 'GoodReads_AdminToken';
 const activationTokenKey = 'GoodReads_ActivationToken';
 const numberOfRowsPerPage = 10;
-const hostname = 'http://localhost:5000';
+
+const hostname = window.env.hostname;
 
 
 const getAdminToken = () => {
@@ -20,7 +21,7 @@ const setActivationToken = (token) => {
     sessionStorage.setItem(activationTokenKey, token)
 }
 
-const removeActivationToken = (token) => {
+const removeActivationToken = () => {
     sessionStorage.removeItem(activationTokenKey)
 }
 

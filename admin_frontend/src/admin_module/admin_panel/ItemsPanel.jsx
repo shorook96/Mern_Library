@@ -25,7 +25,6 @@ export default function ItemsPanel({activeSubPanel}){
 
     const reloadList = () => {
         getList(activeSubPanel).then( (list) => {
-            console.log(list);
             setItemsList(list);
         })
     }
@@ -206,27 +205,29 @@ export default function ItemsPanel({activeSubPanel}){
 
     return (
         <>
-            <table className="table table-striped table-hover itemsTable">
-                <thead>
-                    <tr className="table-primary">
-                        <th>#</th>
+            <div className="horizontal-scroll">
+                <table className="table table-striped table-hover itemsTable">
+                    <thead>
+                        <tr className="table-primary">
+                            <th>#</th>
+                            {
+                                getItemAttributes(activeSubPanel).map(attribute => <th className='itemCell' key={attribute.key}>{attribute.alias}</th>)
+                            }
+                            <th colSpan={"2"} style={{textAlign:'center'}}>Database Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         {
-                            getItemAttributes(activeSubPanel).map(attribute => <th className='itemCell' key={attribute.key}>{attribute.alias}</th>)
+                            getTableBody()
                         }
-                        <th colSpan={"2"} style={{textAlign:'center'}}>Database Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        getTableBody()
-                    }
 
-                    {
-                        displayedPage == (Math.ceil(itemsList.length / numberOfRowsPerPage) - 1)? getPaddingData() : <></>
-                    }
+                        {
+                            displayedPage == (Math.ceil(itemsList.length / numberOfRowsPerPage) - 1)? getPaddingData() : <></>
+                        }
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
             {addingNewItem? <></> : <ControlBar pagesCount = {Math.ceil(itemsList.length / numberOfRowsPerPage)} changeDisplayedPage = {changeDisplayedPage} reloadList = {reloadList}/>}
             <img className="position-fixed bottom-0 end-0 addNewItemButton" src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" alt="Add New Item" width={70} onClick = {enterAddingMode}/>
         </>        

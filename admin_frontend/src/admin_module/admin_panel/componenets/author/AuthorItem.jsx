@@ -109,10 +109,10 @@ export default function AuthorItem({data, editedItemID, index, closeEditMode, ed
             )
         }else{
             return(
-                <tr key={data._id} className={index % 2 === 1 ? "table-secondary" : ""} onDoubleClick={handleEditAction}>
+                <tr key={data._id} className={index % 2 === 1 ? "table-secondary rowData" : "rowData"} onDoubleClick={handleEditAction}>
                     <td>{index + 1}</td>
                     {
-                        getItemAttributes(subPanelName).map((attribute) => <td key={attribute.key} className={`author_${attribute.key}_Cell_Class`}>{data[attribute.key]}</td>)
+                        getItemAttributes(subPanelName).map((attribute) => <td key={attribute.key} className="cellHeight">{data[attribute.key]}</td>)
                     }
                     <td key={'edit'} style={{textAlign:'center'}}> 
                         <img className="hoverableImage" src={iconSrcs.edit} alt="edit" width={20} onClick={handleEditAction}/>
