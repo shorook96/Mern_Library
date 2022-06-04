@@ -1,6 +1,5 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import leaderphoto from '../assets/TeamPhotos/leader.jpeg';
 import zahra from '../assets/TeamPhotos/zahra.jpg';
 import kholoud from '../assets/TeamPhotos/kholoud.jpg';
 import islam from '../assets/TeamPhotos/islam.jpg';
@@ -9,21 +8,21 @@ const AboutUs = () => {
     <>
       <Container className="mt-5">
         <div className="custom-owner-container ">
-          <div className="box ">
-            <img src={leaderphoto} className="owner-card-img" />
+    <div className="box">
+            <img src='../assets/TeamPhotos/shorook.jpg' className="owner-card-img" />
             <div className="owner-back">
-              <h5>Mina Kameel Nashed</h5>
-              <h5>Team Leader of goodReads Project</h5>
+              <h5>Shorook Abdelbaqi</h5>
+              <h5>Team Member of goodReads Project</h5>
               <div className="links-container ">
                 <a
-                  href="https://github.com/mina2508"
+                  href="https://github.com/shorook96"
                   target="_blank"
                   className="owner-link"
                 >
                   <i class="fa-brands fa-github"></i>
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/mina-kameel-019728145/"
+                  href="https://www.linkedin.com/in/shorook-abdelbaqi/"
                   target="_blank"
                   className="owner-link "
                 >
@@ -55,6 +54,7 @@ const AboutUs = () => {
               </div>
             </div>
           </div>
+           
           <div className="box">
             <img src={kholoud} className="owner-card-img" />
             <div className="owner-back">
